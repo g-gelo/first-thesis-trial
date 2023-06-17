@@ -20,7 +20,7 @@
             <slot />
         </v-main>
         <v-footer class="sticky-bottom" color="bg200">
-            <v-row justify="center" no-gutters>
+            <v-row justify="center" align="center" no-gutters>
                 <v-btn
                     v-for="(item, index) in navItem"
                     :key="item.text"

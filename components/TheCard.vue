@@ -1,46 +1,37 @@
 <template>
     <div>
-        <v-container fluid>
-            <v-row justify="center">
-                <v-col
-                    :cols="cardCols"
-                    :sm="cardCols"
-                    :md="cardCols"
-                    :lg="cardCols"
+        <v-container>
+            <div>
+                <v-card
+                    fluid
+                    density="compact"
+                    class="mx-auto rounded-xl rounded-be-xl"
+                    :class="{
+                        flipped: isFlipped,
+                    }"
+                    color="bg200"
+                    max-width="90%"
+                    :style="{ height: cardHeight }"
+                    :prepend-icon="`${logo}`"
+                    :title="isFlipped ? `${tagalogTitle}` : `${englishTitle}`"
+                    @click="toggleFlip"
                 >
-                    <v-card
-                        fluid
-                        density="compact"
-                        class="mx-auto rounded-b-xl"
-                        :class="{
-                            flipped: isFlipped,
-                        }"
-                        color="bg200"
-                        max-width="90%"
-                        :style="{ height: cardHeight }"
-                        :prepend-icon="`${logo}`"
-                        :title="
-                            isFlipped ? `${tagalogTitle}` : `${englishTitle}`
-                        "
-                        @click="toggleFlip"
-                    >
-                        <div class="custom-text">
-                            <v-list>
-                                <v-card-text class="indent ma-3 text-body-1">
-                                    <span v-if="!isFlipped"
-                                        >{{ englishContent }}
-                                    </span>
-                                    <span v-else>
-                                        <div class="backside">
-                                            {{ tagalogContent }}
-                                        </div>
-                                    </span>
-                                </v-card-text>
-                            </v-list>
-                        </div>
-                    </v-card>
-                </v-col>
-            </v-row>
+                    <div class="custom-text">
+                        <v-list>
+                            <span
+                                v-if="!isFlipped"
+                                class="indent ma-3 text-body-1"
+                                >{{ englishContent }}
+                            </span>
+                            <span v-else>
+                                <div class="backside indent ma-3">
+                                    {{ tagalogContent }}
+                                </div>
+                            </span>
+                        </v-list>
+                    </div>
+                </v-card>
+            </div>
         </v-container>
     </div>
 </template>
@@ -63,29 +54,6 @@ const cardCols = ref(12);
 const toggleFlip = () => {
     isFlipped.value = !isFlipped.value;
 };
-
-const updateCardCols = () => {
-    const screenSize = window.innerWidth;
-
-    if (screenSize < 600) {
-        // Extra small devices (phones)
-        cardCols.value = 12;
-    } else if (screenSize < 960) {
-        // Small devices (tablets)
-        cardCols.value = 6;
-    } else if (screenSize < 1280) {
-        // Medium devices (desktops)
-        cardCols.value = 4;
-    } else {
-        // Large devices (large desktops)
-        cardCols.value = 3;
-    }
-};
-
-onMounted(() => {
-    updateCardCols();
-    window.addEventListener("resize", updateCardCols);
-});
 </script>
 
 <style scoped>
