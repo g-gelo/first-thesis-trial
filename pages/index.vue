@@ -1,10 +1,8 @@
 <template>
     <div>
-        <v-img
-            aspect-ratio="16/9"
-            src="/img/CvSULogo.jpg"
-            class="top-image"
-        ></v-img>
+        <v-img aspect-ratio="16/9" src="/img/CvSULogo.jpg" class="top-image">
+            <date-time />
+        </v-img>
         <marquee
             width="100%"
             behavior="scroll"
@@ -13,32 +11,36 @@
         >
             Cavite State University - Imus Campus
         </marquee>
-
-        <v-container>
-            <div>
-                <the-card
-                    class="custom-card card"
-                    logo="fa-regular fa-eye"
-                    @click="toggleFlipped"
-                    :cardHeight="isFlipped ? '35vh' : '35vh'"
-                    englishTitle="Vision"
-                    englishContent="The premier university in historic Cavite recognized for excellence in the development of globally competitive and morally upright individuals."
-                    tagalogTitle="niiʜɈiM"
-                    tagalogContent="Ang nangungunang pamantasan sa makasaysayang Kabite na kinikilala sa kahusayan sa paghubog ng mga indibidwal na may pandaigdigang kakayahan at kagandahang asal."
-                />
-
-                <the-card
-                    class="custom-card card"
-                    logo="fa-solid fa-bullseye"
-                    @click="toggleFlipped"
-                    :cardHeight="isFlipped ? '55vh' : '55vh'"
-                    englishTitle="Mission"
-                    englishContent="Cavite State University shall provide excellent, equitable and relevant educational opportunities in the arts, sciences and technology through quality instruction and responsive research and development activities. It shall produce professional, skilled and morally upright individuals for global competitiveness."
-                    tagalogTitle="niɿɒϱnɒH"
-                    tagalogContent="Ang Cavite State university ay makapagbigay ng mahusay, pantay at makabuluhang edukasyon sa sining, agham at teknolohiya sa pamamagitan ng may kalidad na pagtuturo at tumutugon sa pangangailangang pananaliksik at mga gawaing pangkaunlaran. Makalikha ito ng mga indibidwal ng dalubhasa, may kasaysayan at kagandahan-asal sa pandaigdigang kakayahan."
-                />
-            </div>
-        </v-container>
+        <v-carousel hide-delimiters show-arrows="hover" class="card">
+            <v-container>
+                <div>
+                    <v-carousel-item>
+                        <the-card
+                            class="custom-card card"
+                            logo="fa-solid fa-bullseye"
+                            @click="toggleFlipped"
+                            :cardHeight="isFlipped ? '45vh' : '45vh'"
+                            englishTitle="Mission"
+                            englishContent="Cavite State University shall provide excellent, equitable and relevant educational opportunities in the arts, sciences and technology through quality instruction and responsive research and development activities. It shall produce professional, skilled and morally upright individuals for global competitiveness."
+                            tagalogTitle="niɿɒϱnɒH"
+                            tagalogContent="Ang Cavite State university ay makapagbigay ng mahusay, pantay at makabuluhang edukasyon sa sining, agham at teknolohiya sa pamamagitan ng may kalidad na pagtuturo at tumutugon sa pangangailangang pananaliksik at mga gawaing pangkaunlaran. Makalikha ito ng mga indibidwal ng dalubhasa, may kasaysayan at kagandahan-asal sa pandaigdigang kakayahan."
+                        />
+                    </v-carousel-item>
+                    <v-carousel-item>
+                        <the-card
+                            class="custom-card card"
+                            logo="fa-regular fa-eye"
+                            @click="toggleFlipped"
+                            :cardHeight="isFlipped ? '30vh' : '30vh'"
+                            englishTitle="Vision"
+                            englishContent="The premier university in historic Cavite recognized for excellence in the development of globally competitive and morally upright individuals."
+                            tagalogTitle="niiʜɈiM"
+                            tagalogContent="Ang nangungunang pamantasan sa makasaysayang Kabite na kinikilala sa kahusayan sa paghubog ng mga indibidwal na may pandaigdigang kakayahan at kagandahang asal."
+                        />
+                    </v-carousel-item>
+                </div>
+            </v-container>
+        </v-carousel>
         <div class="bg">
             <the-title
                 class="card"
@@ -121,6 +123,7 @@ import TheCard from "@/components/TheCard.vue";
 import TheTitle from "@/components/TheTitle.vue";
 import TheOsas from "@/components/TheOsas.vue";
 import TheBox from "@/components/TheBox.vue";
+import DateTime from "@/components/DateTime.vue";
 import "animate.css";
 import "intersection-observer";
 

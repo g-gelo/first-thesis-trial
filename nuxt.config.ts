@@ -3,10 +3,7 @@ import { defineNuxtConfig } from "nuxt/config";
 export default defineNuxtConfig({
     modules: ["@vite-pwa/nuxt"],
     devtools: { enabled: false },
-    css: [
-        "vuetify/lib/styles/main.sass",
-        "@fortawesome/fontawesome-free/css/all.min.css",
-    ],
+    css: ["vuetify/lib/styles/main.sass", "~/assets/css/all.min.css"],
     build: {
         transpile: ["vuetify"],
     },
