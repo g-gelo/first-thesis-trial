@@ -5,14 +5,22 @@
             src="/img/CvSULogo.jpg"
             class="top-image"
         ></v-img>
+        <marquee
+            width="100%"
+            behavior="scroll"
+            direction="left"
+            scrollamount="5"
+        >
+            Cavite State University - Imus Campus
+        </marquee>
+
         <v-container>
             <div>
                 <the-card
-                    class="custom-card"
+                    class="custom-card card"
                     logo="fa-regular fa-eye"
                     @click="toggleFlipped"
-                    :cardHeight="isFlipped ? '37vh' : '30vh'"
-                    :position="1"
+                    :cardHeight="isFlipped ? '35vh' : '35vh'"
                     englishTitle="Vision"
                     englishContent="The premier university in historic Cavite recognized for excellence in the development of globally competitive and morally upright individuals."
                     tagalogTitle="niiʜɈiM"
@@ -20,11 +28,10 @@
                 />
 
                 <the-card
-                    class="custom-card"
+                    class="custom-card card"
                     logo="fa-solid fa-bullseye"
                     @click="toggleFlipped"
-                    :cardHeight="isFlipped ? '67vh' : '52vh'"
-                    :position="2"
+                    :cardHeight="isFlipped ? '55vh' : '55vh'"
                     englishTitle="Mission"
                     englishContent="Cavite State University shall provide excellent, equitable and relevant educational opportunities in the arts, sciences and technology through quality instruction and responsive research and development activities. It shall produce professional, skilled and morally upright individuals for global competitiveness."
                     tagalogTitle="niɿɒϱnɒH"
@@ -34,6 +41,7 @@
         </v-container>
         <div class="bg">
             <the-title
+                class="card"
                 title="Office Of Student Affairs And Services"
                 backgroundImage="/img/osas.png"
                 svgBlob="/img/osasBlob.svg"
@@ -43,6 +51,7 @@
             <the-osas />
         </v-container>
         <the-title
+            class="card"
             title="Guidance and Counseling Office"
             backgroundImage="/img/GCO.png"
             svgBlob="/img/gcoBlob.svg"
@@ -50,6 +59,7 @@
         <div>
             <v-container>
                 <the-box
+                    class="card"
                     title=""
                     subtitle=""
                     :items="[
@@ -66,6 +76,7 @@
         <div>
             <v-container>
                 <the-box
+                    class="card"
                     title="Services Offered"
                     subtitle="The Guidance and Counseling Unit (GCU) offers the following services:"
                     :items="[
@@ -110,31 +121,62 @@ import TheCard from "@/components/TheCard.vue";
 import TheTitle from "@/components/TheTitle.vue";
 import TheOsas from "@/components/TheOsas.vue";
 import TheBox from "@/components/TheBox.vue";
-import { ref } from "vue";
+import "animate.css";
+import "intersection-observer";
+
+import { ref, onMounted } from "vue";
 const isFlipped = ref(false);
 
 const toggleFlipped = () => {
     isFlipped.value = !isFlipped.value;
 };
+
+onMounted(() => {
+    if (process.client) {
+        const sliders = document.querySelectorAll(".card");
+
+        const appearOptions = {
+            threshold: 0.5, // Adjust the threshold value as needed
+        };
+
+        const appearOnScroll = new IntersectionObserver(
+            (entries, appearOnScroll) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add(
+                            "animate__animated",
+                            "animate__slideInUp"
+                        );
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            },
+            appearOptions
+        );
+
+        sliders.forEach((slider) => {
+            appearOnScroll.observe(slider);
+        });
+    }
+});
 </script>
 
 <style scoped>
+body {
+    overflow-x: hidden;
+}
+
+marquee {
+    background-color: #8bc34a;
+    color: #286400;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
 .bg .svgBlob {
     position: relative;
     bottom: 0;
     right: 0;
-}
-/* .justify-text {
-    display: flex;
-    justify-content: center;
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: auto;
-} */
-.custom-card {
-    font-size: 14px; /* Adjust the font size as needed */
-}
-.custom-card englishTitle {
-    font-size: 20px; /* Adjust the font size as needed */
 }
 </style>

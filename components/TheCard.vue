@@ -11,11 +11,9 @@
                     <v-card
                         fluid
                         density="compact"
-                        class="mx-auto"
+                        class="mx-auto rounded-b-xl"
                         :class="{
                             flipped: isFlipped,
-                            'rounded-be-xl': position === 1,
-                            'rounded-ts-xl': position === 2,
                         }"
                         color="bg200"
                         max-width="90%"
@@ -26,16 +24,20 @@
                         "
                         @click="toggleFlip"
                     >
-                        <v-card-text class="text-h6">
-                            <template v-if="!isFlipped"
-                                >{{ englishContent }}
-                            </template>
-                            <template v-else>
-                                <div class="backside">
-                                    {{ tagalogContent }}
-                                </div>
-                            </template>
-                        </v-card-text>
+                        <div class="custom-text">
+                            <v-list>
+                                <v-card-text class="indent ma-3 text-body-1">
+                                    <span v-if="!isFlipped"
+                                        >{{ englishContent }}
+                                    </span>
+                                    <span v-else>
+                                        <div class="backside">
+                                            {{ tagalogContent }}
+                                        </div>
+                                    </span>
+                                </v-card-text>
+                            </v-list>
+                        </div>
                     </v-card>
                 </v-col>
             </v-row>
@@ -48,7 +50,6 @@ import { ref, computed, onMounted } from "vue";
 
 defineProps<{
     logo: string;
-    position: number;
     cardHeight: string;
     englishTitle: string;
     tagalogTitle: string;
@@ -95,6 +96,14 @@ onMounted(() => {
     width: 90%;
     height: 60vh;
 }
+.custom-text {
+    text-align: justify;
+}
+
+.indent {
+    display: inline-block;
+    text-indent: 2em;
+}
 .v-card .v-card-text {
     line-height: 1.2;
 }
@@ -106,11 +115,6 @@ onMounted(() => {
     opacity: 1;
     pointer-events: auto;
 }
-
-.v-card .title {
-    writing-mode: horizontal-tb;
-}
-
 .backside {
     transform: rotateY(180deg);
     height: 100%;

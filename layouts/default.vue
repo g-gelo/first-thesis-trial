@@ -82,7 +82,8 @@ const isActive = (index) => activeIndex.value === index;
 
 <style scoped>
 body {
-    font-family: "Courier New", Courier, monospace;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
 }
 .sticky-bottom {
     position: fixed;

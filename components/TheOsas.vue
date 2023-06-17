@@ -4,11 +4,11 @@
             <v-img
                 aspect-ratio="16/9"
                 src="/img/osas-personnel.jpg"
-                class="top-image"
+                class="top-image card"
             ></v-img>
         </div>
         <div>
-            <v-card class="mt-4 rounded-xl rounded-be-xl" color="bg200">
+            <v-card class="mt-4 rounded-xl rounded-be-xl color=bg200 card">
                 <div class="custom-text">
                     <v-list>
                         <span class="indent ma-3"
@@ -26,7 +26,7 @@
         <div>
             <v-card
                 title="Goal"
-                class="mt-4 rounded-xl rounded-be-xl"
+                class="mt-4 rounded-xl rounded-be-xl card"
                 color="bg200"
             >
                 <div class="custom-text">
@@ -47,7 +47,7 @@
         <div>
             <v-card
                 title="Functions"
-                class="mt-4 rounded-xl rounded-be-xl"
+                class="mt-4 rounded-xl rounded-be-xl card"
                 color="bg200"
             >
                 <div class="custom-text">
@@ -102,6 +102,41 @@
         </div>
     </div>
 </template>
+
+<script setup>
+import "animate.css";
+import { ref, onMounted } from "vue";
+
+onMounted(() => {
+    if (process.client) {
+        const sliders = document.querySelectorAll(".card");
+
+        const appearOptions = {
+            threshold: 0,
+            rootMargin: "-100px 0px -50px 0px",
+        };
+
+        const appearOnScroll = new IntersectionObserver(
+            (entries, appearOnScroll) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add(
+                            "animate__animated",
+                            "animate__slideInUp"
+                        );
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            },
+            appearOptions
+        );
+
+        sliders.forEach((slider) => {
+            appearOnScroll.observe(slider);
+        });
+    }
+});
+</script>
 
 <style scoped>
 .top-image {
