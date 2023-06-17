@@ -8,9 +8,9 @@ const myCustomLightTheme: ThemeDefinition = {
     colors: {
         //Pickle green
         primary100: "#8BC34A",
-        primary200: "#69a822", //changes as #6cb519 if #69a822 doesn't work
+        primary200: "#6da52d",
         primary300: "#286400",
-        accent100: "#421a3a",
+        accent100: "#FFC107",
         accent200: "#916400",
         text100: "#333333",
         text200: "#5c5c5c",

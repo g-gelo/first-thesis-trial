@@ -11,7 +11,7 @@
                     <v-card
                         fluid
                         density="compact"
-                        class="mx-auto rounded-xl rounded-be-xl"
+                        class="mx-auto rounded-b-xl"
                         :class="{
                             flipped: isFlipped,
                         }"

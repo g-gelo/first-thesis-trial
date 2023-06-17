@@ -11,8 +11,7 @@
         <h1
             class="custom-title custom-center"
             :style="{
-                color: $vuetify.theme.themes.myCustomLightTheme.colors
-                    .accent100,
+                color: $vuetify.theme.themes.myCustomLightTheme.colors.text100,
             }"
         >
             {{ title }}
