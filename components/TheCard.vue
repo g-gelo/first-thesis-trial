@@ -6,27 +6,15 @@
                     fluid
                     density="compact"
                     class="mx-auto rounded-xl rounded-be-xl"
-                    :class="{
-                        flipped: isFlipped,
-                    }"
                     color="bg200"
                     max-width="90%"
-                    :style="{ height: cardHeight }"
                     :prepend-icon="`${logo}`"
-                    :title="isFlipped ? `${tagalogTitle}` : `${englishTitle}`"
-                    @click="toggleFlip"
+                    :title="`${title}`"
                 >
                     <div class="custom-text">
                         <v-list>
-                            <span
-                                v-if="!isFlipped"
-                                class="indent ma-3 text-body-1"
-                                >{{ englishContent }}
-                            </span>
-                            <span v-else>
-                                <div class="backside indent ma-3">
-                                    {{ tagalogContent }}
-                                </div>
+                            <span class="indent ma-3 text-body-1"
+                                >{{ content }}
                             </span>
                         </v-list>
                     </div>
@@ -41,29 +29,12 @@ import { ref, computed, onMounted } from "vue";
 
 defineProps<{
     logo: string;
-    cardHeight: string;
-    englishTitle: string;
-    tagalogTitle: string;
-    englishContent: string;
-    tagalogContent: string;
+    title: string;
+    content: string;
 }>();
-
-const isFlipped = ref(false);
-const cardCols = ref(12);
-
-const toggleFlip = () => {
-    isFlipped.value = !isFlipped.value;
-};
 </script>
 
 <style scoped>
-.v-card {
-    position: relative;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-    width: 90%;
-    height: 60vh;
-}
 .custom-text {
     text-align: justify;
 }

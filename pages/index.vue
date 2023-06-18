@@ -11,31 +11,39 @@
         >
             Cavite State University - Imus Campus
         </marquee>
-        <v-carousel hide-delimiters show-arrows="hover">
+        <v-carousel class="card" hide-delimiters show-arrows="hover">
             <v-container>
                 <div>
                     <v-carousel-item>
                         <the-card
                             class="custom-card card"
                             logo="fa-solid fa-bullseye"
-                            @click="toggleFlipped"
-                            :cardHeight="isFlipped ? '55vh' : '45vh'"
-                            englishTitle="Mission"
-                            englishContent="Cavite State University shall provide excellent, equitable and relevant educational opportunities in the arts, sciences and technology through quality instruction and responsive research and development activities. It shall produce professional, skilled and morally upright individuals for global competitiveness."
-                            tagalogTitle="niɿɒϱnɒH"
-                            tagalogContent="Ang Cavite State university ay makapagbigay ng mahusay, pantay at makabuluhang edukasyon sa sining, agham at teknolohiya sa pamamagitan ng may kalidad na pagtuturo at tumutugon sa pangangailangang pananaliksik at mga gawaing pangkaunlaran. Makalikha ito ng mga indibidwal ng dalubhasa, may kasaysayan at kagandahan-asal sa pandaigdigang kakayahan."
+                            title="Mission"
+                            content="Cavite State University shall provide excellent, equitable and relevant educational opportunities in the arts, sciences and technology through quality instruction and responsive research and development activities. It shall produce professional, skilled and morally upright individuals for global competitiveness."
+                        />
+                    </v-carousel-item>
+                    <v-carousel-item>
+                        <the-card
+                            class="custom-card card"
+                            logo="fa-solid fa-bullseye"
+                            title="Hangarin"
+                            content="Ang Cavite State university ay makapagbigay ng mahusay, pantay at makabuluhang edukasyon sa sining, agham at teknolohiya sa pamamagitan ng may kalidad na pagtuturo at tumutugon sa pangangailangang pananaliksik at mga gawaing pangkaunlaran. Makalikha ito ng mga indibidwal ng dalubhasa, may kasaysayan at kagandahan-asal sa pandaigdigang kakayahan."
                         />
                     </v-carousel-item>
                     <v-carousel-item>
                         <the-card
                             class="custom-card card"
                             logo="fa-regular fa-eye"
-                            @click="toggleFlipped"
-                            :cardHeight="isFlipped ? '35vh' : '35vh'"
-                            englishTitle="Vision"
-                            englishContent="The premier university in historic Cavite recognized for excellence in the development of globally competitive and morally upright individuals."
-                            tagalogTitle="niiʜɈiM"
-                            tagalogContent="Ang nangungunang pamantasan sa makasaysayang Kabite na kinikilala sa kahusayan sa paghubog ng mga indibidwal na may pandaigdigang kakayahan at kagandahang asal."
+                            title="Vision"
+                            content="The Premier University in historic Cavite globally recognized for excellence in character development, academics, research, innovation and sustainable community engagement."
+                        />
+                    </v-carousel-item>
+                    <v-carousel-item>
+                        <the-card
+                            class="custom-card card"
+                            logo="fa-regular fa-eye"
+                            title="Mithiin"
+                            content="Ang nangungunang pamantasan sa makasaysayang Kabite na kinikilala sa kahusayan sa paghubog ng mga indibidwal na may pandaigdigang kakayahan at kagandahang asal."
                         />
                     </v-carousel-item>
                 </div>
