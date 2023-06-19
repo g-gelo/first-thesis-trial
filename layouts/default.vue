@@ -9,16 +9,30 @@
                 class="mx-auto"
             ></v-img>
         </v-app-bar>
+
         <v-main
-            density="compact"
             :style="{
                 backgroundColor:
                     $vuetify.theme.themes.myCustomLightTheme.colors.bg100,
             }"
             class="scrollable-content"
         >
-            <slot />
+            <template v-if="!isLargeScreen">
+                <!-- Main Content -->
+                <slot />
+            </template>
+            <template v-else>
+                <!-- Alternative Content for Large Screens -->
+                <div class="alternative-content">
+                    <h1>Welcome to our App!</h1>
+                    <p>
+                        Thank you for visiting our app on a larger screen.
+                        Please use a mobile device to access the main content.
+                    </p>
+                </div>
+            </template>
         </v-main>
+
         <v-footer class="sticky-bottom" color="bg200">
             <v-row justify="center" align="center" no-gutters>
                 <v-btn
@@ -55,18 +69,16 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
+
 const navItem = ref([
     { icon: "fa-solid fa-house", text: "Home", route: "/" },
-    { icon: "fa-solid fa-bullhorn", text: "News", route: "/news" },
+    { icon: "fa-solid fa-bullhorn", text: "News", route: "/announcement" },
     { icon: "fa-solid fa-comments", text: "Chatbot", route: "/chat" },
-    {
-        icon: "fa-solid fa-briefcase",
-        text: "Office",
-        route: "/office",
-    },
+    { icon: "fa-solid fa-briefcase", text: "Office", route: "/office" },
 ]);
 
+const isLargeScreen = ref(false);
 const activeIndex = ref(false);
 
 const toggleActive = (index) => {
@@ -78,6 +90,15 @@ const toggleActive = (index) => {
 };
 
 const isActive = (index) => activeIndex.value === index;
+
+const checkScreenSize = () => {
+    isLargeScreen.value = window.innerWidth >= 960; // Adjust the breakpoint as needed
+};
+
+onMounted(() => {
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+});
 </script>
 
 <style scoped>
@@ -85,6 +106,7 @@ body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
 }
+
 .sticky-bottom {
     position: fixed;
     bottom: 0;
@@ -102,11 +124,22 @@ body {
     transform: translateY(-2rem);
     transition: transform 0.3s ease;
 }
+
 .content-container {
-    height: 500vh; /* viewport height adjust for scrolling */
+    height: 500vh; /* Adjust for the desired height */
 }
 
 .scrollable-content {
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-y: hidden; /* Enable vertical scrolling */
+}
+
+.alternative-content {
+    height: 100vh; /* Adjust for the desired height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
 }
 </style>
