@@ -12,5 +12,5 @@ definePageMeta({
   },
 });
 
-const { signIn } = useSession();
+const { signIn } = useAuth();
 </script>
