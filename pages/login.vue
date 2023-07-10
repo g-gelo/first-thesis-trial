@@ -3,7 +3,7 @@
         <v-card class="login-card rounded-lg">
             <v-card-title class="login-card-title">Login</v-card-title>
             <v-card-text class="login-card-form rounded-xl">
-                <v-btn color="bg300" @click="loginWithGoogle">
+                <v-btn color="bg300" @click="signIn('google')">
                     <v-icon start>fa-brands fa-google</v-icon> Login with
                     Google</v-btn
                 >
@@ -13,9 +13,15 @@
 </template>
 
 <script setup>
-const loginWithGoogle = () => {
-    //
-};
+definePageMeta({
+    layout: "custom",
+    auth: {
+        unauthenticatedOnly: true,
+        navigateAuthenticatedTo: "/",
+    },
+});
+
+const { signIn } = useSession();
 </script>
 
 <style scoped>
