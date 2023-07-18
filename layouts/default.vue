@@ -64,11 +64,6 @@
                     </v-slide-y-transition>
                 </v-btn>
             </v-row>
-            <!-- Messenger Chat Plugin Code -->
-            <div id="fb-root"></div>
-
-            <!-- Your Chat Plugin code -->
-            <div id="fb-customer-chat" class="fb-customerchat"></div>
         </v-footer>
     </v-app>
 </template>
