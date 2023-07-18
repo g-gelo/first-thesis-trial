@@ -6,7 +6,7 @@ import Vuetify from "vuetify";
 const myCustomLightTheme: ThemeDefinition = {
     dark: false,
     colors: {
-        //Pickle green
+        // Pickle green
         primary100: "#8BC34A",
         primary200: "#6da52d",
         primary300: "#286400",
@@ -22,7 +22,7 @@ const myCustomLightTheme: ThemeDefinition = {
 const myCustomDarkTheme: ThemeDefinition = {
     dark: true,
     colors: {
-        //dark green theme
+        // dark green theme
         primary100: "#4A4A4A",
         primary200: "#767676",
         primary300: "#d6d6d6",

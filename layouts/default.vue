@@ -46,7 +46,6 @@
                         active: isActive(index),
                         'pop-icon': isActive(index),
                     }"
-                    @click="toggleActive(index)"
                     :color="isActive(index) ? 'primary300' : 'transparent'"
                     :style="{
                         display: 'flex',
@@ -56,6 +55,7 @@
                         textAlign: 'center',
                         pointerEvents: isActive(index) ? 'none' : 'auto',
                     }"
+                    @click="toggleActive(index)"
                 >
                     <v-slide-y-transition>
                         <v-icon :key="item.icon" color="primary300" size="26">
@@ -69,7 +69,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 
 const navItem = ref([
     { icon: "fa-solid fa-house", text: "Home", route: "/" },
@@ -125,9 +125,9 @@ body {
     transition: transform 0.3s ease;
 }
 
-.content-container {
-    height: 500vh; /* Adjust for the desired height */
-}
+/* .content-container {
+    height: 500vh; 
+} */
 
 .scrollable-content {
     overflow-y: hidden; /* Enable vertical scrolling */

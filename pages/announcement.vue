@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import TheTitle from "@/components/TheTitle.vue";
 import "intersection-observer";
 import "animate.css";

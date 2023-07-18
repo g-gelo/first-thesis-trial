@@ -127,6 +127,8 @@
     </div>
 </template>
 <script setup>
+import { onMounted } from "vue";
+
 import TheCard from "@/components/TheCard.vue";
 import TheTitle from "@/components/TheTitle.vue";
 import TheOsas from "@/components/TheOsas.vue";
@@ -134,13 +136,6 @@ import TheBox from "@/components/TheBox.vue";
 import DateTime from "@/components/DateTime.vue";
 import "animate.css";
 import "intersection-observer";
-
-import { ref, onMounted } from "vue";
-const isFlipped = ref(false);
-
-const toggleFlipped = () => {
-    isFlipped.value = !isFlipped.value;
-};
 
 onMounted(() => {
     if (process.client) {

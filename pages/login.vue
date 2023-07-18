@@ -3,10 +3,12 @@
         <v-card class="login-card rounded-lg">
             <v-card-title class="login-card-title">Login</v-card-title>
             <v-card-text class="login-card-form rounded-xl">
-                <v-btn color="bg300" @click="signIn('google')">
-                    <v-icon start>fa-brands fa-google</v-icon> Login with
-                    Google</v-btn
-                >
+                <div class="button-container">
+                    <v-btn class="mid" color="bg300" @click="signIn('google')">
+                        <v-icon start>fa-brands fa-google</v-icon> Login with
+                        Google
+                    </v-btn>
+                </div>
             </v-card-text>
         </v-card>
     </div>
@@ -55,5 +57,10 @@ const { signIn } = useAuth();
     background-color: #e8f5e9;
     padding: 20px;
     margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
 }
 </style>
