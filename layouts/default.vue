@@ -125,9 +125,9 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* .content-container {
-    height: 500vh; 
-} */
+.content-container {
+    height: 500vh;
+}
 
 .scrollable-content {
     overflow-y: hidden; /* Enable vertical scrolling */
