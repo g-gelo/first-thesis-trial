@@ -161,11 +161,22 @@
                 </v-col>
             </v-row>
         </v-container>
+        <v-btn class="rounded-xl shadow-xl p-2 m-2" @click="signOut()">
+            sign out
+        </v-btn>
     </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+
+useHead({
+    title: "Admin",
+});
+
+definePageMeta({ middleware: "auth" });
+
+const { signOut } = useAuth();
 
 const showModal = ref(false);
 

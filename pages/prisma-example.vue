@@ -33,6 +33,9 @@ const { data: seminars } = useFetch("/api/seminars");
 
 <template>
     <div>
+        Prisma ORM Data from the database, received
+        {{ seminars?.length || 0 }} records:
+        <pre>{{ seminars }}</pre>
         <div>
             <v-table density="compact">
                 <thead>

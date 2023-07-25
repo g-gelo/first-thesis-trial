@@ -128,7 +128,6 @@
 </template>
 <script setup>
 import { onMounted } from "vue";
-
 import TheCard from "@/components/TheCard.vue";
 import TheTitle from "@/components/TheTitle.vue";
 import TheOsas from "@/components/TheOsas.vue";

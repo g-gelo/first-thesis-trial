@@ -1,10 +1,13 @@
 <template>
-  <div>
-    <div>I'm protected! Session data: {{ data }}</div>
-    <v-btn class="rounded-xl shadow-xl p-2 m-2" @click="signOut()">
-      sign out
-    </v-btn>
-  </div>
+    <div>
+        <div>
+            I'm protected! Session data:
+            <pre>{{ data }}</pre>
+        </div>
+        <v-btn class="rounded-xl shadow-xl p-2 m-2" @click="signOut()">
+            sign out
+        </v-btn>
+    </div>
 </template>
 
 <script setup lang="ts">

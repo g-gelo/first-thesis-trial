@@ -1,50 +1,47 @@
 <template>
     <div class="seminar-component">
-        <v-card class="hierarchy-text rounded-xl rounded-be-xl" color="bg200">
+        <v-card
+            v-for="seminar in seminars"
+            :key="seminar.id"
+            class="hierarchy-text rounded-xl rounded-be-xl"
+            color="bg200"
+        >
             <h1 class="text-h6 ma-3 custom-opacity">
-                Upcoming Event with <span class="highlight">{{ guest }}</span>
+                Upcoming Event with
+                <span class="highlight">{{ seminar.description }}</span>
             </h1>
             <v-list class="seminar-details">
                 <div class="ma-3">
                     <div class="seminar-info">
-                        <span class="info-label">What:</span>
-                        <span class="info-value"> {{ what }} </span>
+                        <span class="info-label">What: </span>
+                        <span class="info-value"> {{ seminar.title }} </span>
                     </div>
                     <div class="seminar-info">
-                        <span class="info-label">When:</span>
-                        <span class="info-value"> {{ when }} </span>
+                        <span class="info-label">When: </span>
+                        <span class="info-value"> {{ seminar.date }} </span>
                     </div>
                     <div class="seminar-info">
-                        <span class="info-label">Where:</span>
-                        <span class="info-value"> {{ where }} </span>
+                        <span class="info-label">Where: </span>
+                        <span class="info-value"> {{ seminar.location }} </span>
                     </div>
                     <div class="seminar-info">
-                        <span class="info-label">Time:</span>
-                        <span class="info-value"> {{ time }} </span>
+                        <span class="info-label">Time: </span>
+                        <span class="info-value"> {{ seminar.time }} </span>
                     </div>
                 </div>
             </v-list>
         </v-card>
-        <!-- Rest of the seminar component content -->
     </div>
 </template>
 <script setup lang="ts">
-defineProps<{
-    guest: string;
-    what: string;
-    when: string;
-    where: string;
-    time: string;
-}>();
+const { data: seminars } = useFetch("/api/seminars");
 </script>
 
 <style scoped>
 .highlight {
     font-weight: bold;
 }
-.seminar-component {
-    /* Add styling for the seminar component container */
-}
+
 .announcement-text {
     font-size: clamp(1rem, -0.25rem + 4vw, 2rem);
 }

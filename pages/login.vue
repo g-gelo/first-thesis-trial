@@ -15,11 +15,14 @@
 </template>
 
 <script setup>
+useHead({
+    title: "Log In",
+});
 definePageMeta({
     layout: "custom",
     auth: {
         unauthenticatedOnly: true,
-        navigateAuthenticatedTo: "/",
+        navigateAuthenticatedTo: "/admin",
     },
 });
 

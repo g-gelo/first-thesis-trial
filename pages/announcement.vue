@@ -32,22 +32,7 @@
         />
         <v-container>
             <div>
-                <TheSeminars
-                    class="card"
-                    guest="Jervin D. Quicho"
-                    what=" Mental Health Matter"
-                    when=" April 03, 2023"
-                    where=" Covered Court"
-                    time=" 08:00 AM - 12:00 PM"
-                />
-                <TheSeminars
-                    class="card"
-                    guest="Kyle Russelle P. Paredes"
-                    what=" Suicide Prevention"
-                    when=" April 06, 2023"
-                    where=" Covered Court"
-                    time=" 01:00 PM - 04:00 PM"
-                />
+                <TheSeminars class="card" />
             </div>
         </v-container>
     </div>
