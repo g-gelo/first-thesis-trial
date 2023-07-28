@@ -1,5 +1,5 @@
 <template>
-    <v-app dark class="content-container">
+    <v-app dark>
         <v-app-bar fixed app color="primary100">
             <v-img
                 src="/img/GuidanceConnect.png"
@@ -9,7 +9,6 @@
                 class="mx-auto"
             ></v-img>
         </v-app-bar>
-
         <v-main
             :style="{
                 backgroundColor:
@@ -17,10 +16,7 @@
             }"
             class="scrollable-content"
         >
-            <template v-if="!isLargeScreen">
-                <!-- Main Content -->
-                <slot />
-            </template>
+            <template v-if="!isLargeScreen"> <slot /> </template>
             <template v-else>
                 <!-- Alternative Content for Large Screens -->
                 <div class="alternative-content">
@@ -32,7 +28,6 @@
                 </div>
             </template>
         </v-main>
-
         <v-footer class="sticky-bottom" color="bg200">
             <v-row justify="center" align="center" no-gutters>
                 <v-btn
@@ -123,10 +118,6 @@ body {
 .pop-icon {
     transform: translateY(-2rem);
     transition: transform 0.3s ease;
-}
-
-.content-container {
-    height: 500vh;
 }
 
 .scrollable-content {

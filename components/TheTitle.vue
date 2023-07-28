@@ -39,14 +39,6 @@ defineProps<{
     background-repeat: no-repeat;
     background-position: right bottom;
 }
-
-.svg-blob {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    /* Add any other styles for the SVG blob here */
-}
-
 .custom-title {
     font-size: 24px;
     font-weight: bold;

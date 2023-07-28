@@ -11,6 +11,5 @@ definePageMeta({
         navigateAuthenticatedTo: "/admin",
     },
 });
-
 const { signIn } = useAuth();
 </script>

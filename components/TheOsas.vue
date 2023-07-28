@@ -145,7 +145,6 @@ onMounted(() => {
     opacity: 0.9;
     filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
 }
-
 .top-image::before {
     content: "";
     position: absolute;
@@ -154,12 +153,10 @@ onMounted(() => {
     width: 100%;
     height: 100%;
 }
-
 .custom-text {
     text-align: justify;
     text-justify: inter-word;
 }
-
 .indent {
     display: inline-block;
     text-indent: 2em; /* Adjust the indentation value as needed */

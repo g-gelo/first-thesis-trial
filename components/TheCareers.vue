@@ -220,7 +220,6 @@ const deleteCareer = async (id) => {
     align-items: center;
     justify-content: center;
 }
-
 .modal > .v-card {
     max-width: 400px;
     width: 100%;

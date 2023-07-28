@@ -60,11 +60,9 @@ import "animate.css";
 onMounted(() => {
     if (process.client) {
         const sliders = document.querySelectorAll(".card");
-
         const appearOptions = {
             threshold: 0.5, // Adjust the threshold value as needed
         };
-
         const appearOnScroll = new IntersectionObserver(
             (entries, appearOnScroll) => {
                 entries.forEach((entry) => {
@@ -79,7 +77,6 @@ onMounted(() => {
             },
             appearOptions
         );
-
         sliders.forEach((slider) => {
             appearOnScroll.observe(slider);
         });
@@ -88,13 +85,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.opacity {
-    opacity: 0.8;
-}
 .image-container {
     position: relative;
 }
-
 .text-overlay {
     position: absolute;
     top: 0;
@@ -106,24 +99,23 @@ onMounted(() => {
     padding: 20px;
     box-sizing: border-box;
 }
-
 .announcement-text,
 .events-text {
     font-size: clamp(1rem, -0.25rem + 4vw, 2rem);
 }
-
 .hierarchy-text {
     margin: 2%;
 }
-
 .main-title {
     font-size: clamp(1.5rem, -0.25rem + 5vw, 3rem);
     font-weight: bold;
     margin-bottom: 10px;
 }
-
 .subtitle {
     font-size: clamp(1rem, -0.25rem + 4vw, 2rem);
     line-height: 1.4;
+}
+.content-container {
+    height: 500vh;
 }
 </style>

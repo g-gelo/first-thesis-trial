@@ -10,7 +10,6 @@
                 <v-card>
                     <v-card-title>Edit Seminar</v-card-title>
                     <v-card-text>
-                        <!-- Input fields to edit the seminar data -->
                         <v-text-field
                             v-model="title"
                             label="Title"
@@ -37,11 +36,9 @@
                         ></v-text-field>
                     </v-card-text>
                     <v-card-actions>
-                        <!-- Button to save the edited data -->
                         <v-btn color="primary" @click="showModal = false"
                             >Save</v-btn
                         >
-                        <!-- Button to cancel and close the modal without saving changes -->
                         <v-btn color="error" @click="showModal = false"
                             >Cancel</v-btn
                         >
@@ -55,7 +52,6 @@
 <script setup>
 import { ref } from "vue";
 
-// Define the refs to control the modal visibility and input values
 const showModal = ref(false);
 const title = ref("");
 const description = ref("");
@@ -65,7 +61,6 @@ const location = ref("");
 </script>
 
 <style scoped>
-/* Style the modal */
 .modal {
     position: fixed;
     top: 0;

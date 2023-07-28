@@ -38,11 +38,9 @@ onMounted(() => {
     font-size: 18px;
     padding: 20px;
 }
-
 .date {
     margin-bottom: 10px;
 }
-
 .time {
     font-weight: bold;
 }

@@ -6,7 +6,6 @@
         }"
     >
         <template v-if="isLargeScreen">
-            <!-- Alternative Page Content for Large Screens -->
             <div class="alternative-page">
                 <h1>Welcome to our App!</h1>
                 <p>
@@ -16,7 +15,6 @@
             </div>
         </template>
         <template v-else>
-            <!-- Main Page Content -->
             <slot />
         </template>
     </div>
