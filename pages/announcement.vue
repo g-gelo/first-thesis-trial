@@ -32,7 +32,18 @@
         />
         <v-container>
             <div>
-                <TheSeminars class="card" />
+                <TheSeminar class="card" />
+            </div>
+        </v-container>
+        <TheTitle
+            class="card"
+            title="Career / Job Opportunities"
+            backgroundImage="/img/career.png"
+            svgBlob="/img/careerBlob.svg"
+        />
+        <v-container>
+            <div>
+                <TheCareer class="card" />
             </div>
         </v-container>
     </div>
@@ -41,6 +52,8 @@
 <script setup>
 import { onMounted } from "vue";
 import TheTitle from "@/components/TheTitle.vue";
+import TheSeminar from "@/components/TheSeminar.vue";
+import TheCareer from "~/components/TheCareer.vue";
 import "intersection-observer";
 import "animate.css";
 

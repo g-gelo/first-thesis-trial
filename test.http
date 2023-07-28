@@ -1,11 +1,27 @@
-PUT http://localhost:3000/api/seminars
+# PUT http://localhost:3000/api/seminars
+# Content-Type: application/json
+
+# {
+#     "id": "clkc9iqk70001hs3cqjit7v3x",
+#     "title": "Seminar Title number 1",
+#     "description": "Updated Description",
+#     "date": "2023-07-31",
+#     "time": "15:00",
+#     "location": "Updated Location"
+# }
+
+PUT http://localhost:3000/api/careers
 Content-Type: application/json
 
 {
-    "id": "clkc9iqk70001hs3cqjit7v3x",
+    "id": "clkhydqvr0001hsc0jneleb1x",
     "title": "Seminar Title number 1",
-    "description": "Updated Description",
     "date": "2023-07-31",
     "time": "15:00",
-    "location": "Updated Location"
+    "location": "Updated "
 }
+
+
+
+
+

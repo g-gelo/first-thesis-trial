@@ -1,28 +1,19 @@
 <template>
     <div>
         <v-container>
-            <h1>Seminar Form</h1>
-            <v-form @submit.prevent="addSeminar(seminar)">
+            <h1>Job Career Form</h1>
+            <v-form @submit.prevent="addCareer(career)">
                 <v-row>
                     <v-col cols="12" sm="6">
                         <v-text-field
-                            v-model="seminar.title"
+                            v-model="career.title"
                             label="Title"
                             required
                         ></v-text-field>
                     </v-col>
-                    <v-col cols="12">
-                        <v-text-field
-                            v-model="seminar.description"
-                            label="Guest Speaker"
-                            auto-grow
-                        ></v-text-field>
-                    </v-col>
                     <v-col cols="12" sm="6">
                         <v-text-field
-                            id="date"
-                            v-model="seminar.date"
-                            type="text"
+                            v-model="career.date"
                             label="Date"
                             required
                         ></v-text-field>
@@ -30,9 +21,7 @@
                     </v-col>
                     <v-col>
                         <v-text-field
-                            id="time"
-                            v-model="seminar.time"
-                            type="text"
+                            v-model="career.time"
                             label="Time"
                             required
                         ></v-text-field>
@@ -40,7 +29,7 @@
                     </v-col>
                     <v-col cols="12" sm="6">
                         <v-text-field
-                            v-model="seminar.location"
+                            v-model="career.location"
                             label="Location"
                             required
                         ></v-text-field>
@@ -51,30 +40,25 @@
             <v-container>
                 <div v-if="showModal" class="modal">
                     <v-card>
-                        <v-card-title>Edit Seminar</v-card-title>
+                        <v-card-title>Edit Career</v-card-title>
                         <v-card-text>
-                            <!-- Input fields to edit the seminar data -->
                             <v-text-field
-                                v-model="editedSeminar.title"
+                                v-model="editedCareer.title"
                                 label="Title"
                                 required
                             ></v-text-field>
                             <v-text-field
-                                v-model="editedSeminar.description"
-                                label="Guest Speaker"
-                            ></v-text-field>
-                            <v-text-field
-                                v-model="editedSeminar.date"
+                                v-model="editedCareer.date"
                                 label="Date"
                                 required
                             ></v-text-field>
                             <v-text-field
-                                v-model="editedSeminar.time"
+                                v-model="editedCareer.time"
                                 label="Time"
                                 required
                             ></v-text-field>
                             <v-text-field
-                                v-model="editedSeminar.location"
+                                v-model="editedCareer.location"
                                 label="Location"
                                 required
                             ></v-text-field>
@@ -82,7 +66,7 @@
                         <v-card-actions>
                             <v-btn
                                 color="primary"
-                                @click="($event) => editSeminar(editedSeminar)"
+                                @click="($event) => editCareer(editedCareer)"
                                 >Save</v-btn
                             >
                             <v-btn color="error" @click="showModal = false"
@@ -96,14 +80,13 @@
                 <v-col>
                     <div>
                         The database received
-                        {{ seminars?.length || 0 }} records:
+                        {{ careers?.length || 0 }} records:
                     </div>
                     <div>
                         <v-table density="compact">
                             <thead>
                                 <tr>
                                     <th class="text-left">Title</th>
-                                    <th class="text-left">Description</th>
                                     <th class="text-left">Date</th>
                                     <th class="text-left">Time</th>
                                     <th class="text-left">Location</th>
@@ -112,33 +95,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    v-for="meeting in seminars"
-                                    :key="meeting.id"
-                                >
-                                    <td>{{ meeting.title }}</td>
-                                    <td>{{ meeting.description }}</td>
-                                    <td>{{ meeting.date }}</td>
-                                    <td>{{ meeting.time }}</td>
-                                    <td>{{ meeting.location }}</td>
+                                <tr v-for="job in careers" :key="job.id">
+                                    <td>{{ job.title }}</td>
+                                    <td>{{ job.date }}</td>
+                                    <td>{{ job.time }}</td>
+                                    <td>{{ job.location }}</td>
                                     <td>
                                         <v-btn
                                             v-if="!showModal"
                                             variant="tonal"
                                             @click="
                                                 ($event) => {
-                                                    editedSeminar.id =
-                                                        meeting.id;
-                                                    editedSeminar.title =
-                                                        meeting.title;
-                                                    editedSeminar.description =
-                                                        meeting.description;
-                                                    editedSeminar.date =
-                                                        meeting.date;
-                                                    editedSeminar.time =
-                                                        meeting.time;
-                                                    editedSeminar.location =
-                                                        meeting.location;
+                                                    editedCareer.id = job.id;
+                                                    editedCareer.title =
+                                                        job.title;
+                                                    editedCareer.date =
+                                                        job.date;
+                                                    editedCareer.time =
+                                                        job.time;
+                                                    editedCareer.location =
+                                                        job.location;
                                                     showModal = true;
                                                 }
                                             "
@@ -147,11 +123,10 @@
                                         </v-btn>
                                     </td>
                                     <td>
-                                        <!-- Show the Delete button only if the modal is not open -->
                                         <v-btn
                                             v-if="!showModal"
                                             variant="tonal"
-                                            @click="deleteSeminar(meeting.id)"
+                                            @click="deleteCareer(job.id)"
                                         >
                                             Delete
                                         </v-btn>
@@ -163,109 +138,77 @@
                 </v-col>
             </v-row>
         </v-container>
-        <div>
-            <TheCareers />
-        </div>
-        <v-btn
-            v-if="!showModal"
-            class="rounded-xl shadow-xl p-2 m-2"
-            @click="signOut()"
-        >
-            sign out
-        </v-btn>
     </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import TheCareers from "~/components/TheCareers.vue";
+const { data: careers } = useFetch("/api/careers");
 
-useHead({
-    title: "Admin",
-});
-
-definePageMeta({ middleware: "auth" });
-
-const { signOut } = useAuth();
-
-const showModal = ref(false);
-
-const { data: seminars } = useFetch("/api/seminars");
-
-const seminar = ref({
+const career = ref({
     title: "",
-    description: "",
     date: "",
     time: "",
     location: "",
 });
 
-const addSeminar = async (seminar) => {
-    return await $fetch("/api/seminars", {
+const addCareer = async (career) => {
+    return await $fetch("/api/careers", {
         method: "POST",
         body: {
-            title: seminar.title,
-            description: seminar.description,
-            date: seminar.date,
-            time: seminar.time,
-            location: seminar.location,
+            title: career.title,
+            date: career.date,
+            time: career.time,
+            location: career.location,
         },
     });
 };
+const showModal = ref(false);
 
-const editedSeminar = ref({
+const editedCareer = ref({
     id: null,
     title: null,
-    description: null,
     date: null,
     time: null,
     location: null,
 });
 
-const editSeminar = async (editedSeminar) => {
-    let seminar = null;
+const editCareer = async (editedCareer) => {
+    let career = null;
 
     if (
-        editedSeminar.id &&
-        editedSeminar.title &&
-        editedSeminar.description &&
-        editedSeminar.date &&
-        editedSeminar.time &&
-        editedSeminar.location
+        editedCareer.id &&
+        editedCareer.title &&
+        editedCareer.date &&
+        editedCareer.time &&
+        editedCareer.location
     )
-        seminar = await $fetch("/api/seminars", {
+        career = await $fetch("/api/careers", {
             method: "PUT",
             body: {
-                id: editedSeminar.id,
-                title: editedSeminar.title,
-                description: editedSeminar.description,
-                date: editedSeminar.date,
-                time: editedSeminar.time,
-                location: editedSeminar.location,
+                id: editedCareer.id,
+                title: editedCareer.title,
+                date: editedCareer.date,
+                time: editedCareer.time,
+                location: editedCareer.location,
             },
         });
-    if (seminar) seminar.value = await getSeminars();
+    if (career) career.value = await getCareers();
 };
 
-const deleteSeminar = async (id) => {
+const deleteCareer = async (id) => {
     if (id)
-        return await $fetch("/api/seminars", {
+        return await $fetch("/api/careers", {
             method: "DELETE",
             body: {
                 id,
             },
         });
 
-    if (seminar.value) seminar.value = await getSeminar;
+    if (career.value) career.value = await getCareer;
 };
 </script>
 
 <style scoped>
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
 .modal {
     position: fixed;
     top: 0;
