@@ -261,11 +261,6 @@ const deleteSeminar = async (id) => {
 </script>
 
 <style scoped>
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
 .modal {
     position: fixed;
     top: 0;
@@ -277,7 +272,6 @@ const deleteSeminar = async (id) => {
     align-items: center;
     justify-content: center;
 }
-
 .modal > .v-card {
     max-width: 400px;
     width: 100%;

@@ -1,7 +1,6 @@
 <template>
     <v-card v-for="career in careers" :key="career.id" class="mb-6 rounded-xl">
         <v-row class="content-center-left">
-            <!-- Column for the rounded element -->
             <v-col
                 cols="4"
                 class="border-left rounded-tl-xl rounded-bl-xl space-on-left"
@@ -16,7 +15,6 @@
                         ></v-img
                     ></v-img>
                 </div>
-                <!-- Content for the rounded element goes here -->
                 <div class="ml-3">
                     <div class="seminar-info">
                         <v-icon class="ml-6 icon-small"
@@ -36,16 +34,12 @@
                     </div>
                 </div>
             </v-col>
-
-            <!-- Column for the seminar details -->
             <v-col cols="7">
-                <!-- Seminar details content -->
                 <v-list class="seminar-details">
                     <v-list-item-group>
                         <v-list-item>
                             <v-list-item-content>
                                 <div class="mt-1 seminar-info">
-                                    <!-- Styling for the Title -->
                                     <span
                                         class="info-value main-title highlight"
                                         >{{ career.title }}</span
@@ -77,41 +71,32 @@ const { data: careers } = useFetch("/api/careers");
 </script>
 
 <style scoped>
-/* Custom class to center content to the left */
 .content-center-left {
     justify-content: flex-start;
 }
-
 .border-left {
     border-right: 1px solid red;
 }
-
 .highlight {
     font-weight: bold;
 }
-
 .main-title {
     font-size: clamp(1.2rem, -0.25rem + 5vw, 3rem);
     font-weight: bold;
     margin-bottom: 10px;
 }
-
 .space-on-left {
     padding-left: 10px;
-    margin-right: 10px; /* Adjust the margin-right value as needed */
+    margin-right: 10px;
 }
-
 .seminar-details {
     margin-top: 10px;
 }
-
 .seminar-info {
     margin-bottom: 5px;
 }
-
-/* Custom class for smaller font size */
 .info-small {
-    font-size: 14px; /* Adjust the font size as needed */
+    font-size: 14px;
 }
 .icon-small {
     font-size: 20px;

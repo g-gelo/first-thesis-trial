@@ -25,8 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
-
 defineProps<{
     logo: string;
     title: string;
@@ -42,40 +40,5 @@ defineProps<{
 .indent {
     display: inline-block;
     text-indent: 2em;
-}
-.v-card .v-card-text {
-    line-height: 1.2;
-}
-.flipped {
-    transform: rotateY(180deg);
-}
-
-.flipped .v-card-text::before {
-    opacity: 1;
-    pointer-events: auto;
-}
-.backside {
-    transform: rotateY(180deg);
-    height: 100%;
-    text-align: end;
-    letter-spacing: 0.0131rem;
-}
-
-@media (max-width: 960px) {
-    .auto-fit-text {
-        font-size: 12px;
-    }
-}
-
-@media (min-width: 961px) {
-    .auto-fit-text {
-        font-size: 16px;
-    }
-}
-
-@media (min-width: 1280px) {
-    .auto-fit-text {
-        font-size: 20px;
-    }
 }
 </style>

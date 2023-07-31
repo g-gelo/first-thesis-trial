@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="content-container">
         <v-img aspect-ratio="16/9" src="/img/CvSULogo.jpg" class="top-image"
             ><date-time
         /></v-img>
@@ -177,7 +177,9 @@ marquee {
     font-weight: bold;
     padding: 0.5rem;
 }
-
+.content-container {
+    height: 500vh;
+}
 .bg .svgBlob {
     position: relative;
     bottom: 0;

@@ -1,7 +1,6 @@
 <template>
     <div class="chat-container">
         <v-container class="chat-content" fluid>
-            <!-- chat messages -->
             <div>
                 <div v-for="(message, index) in messages" :key="index">
                     <div
@@ -101,13 +100,17 @@
         </v-container>
         <div class="pls">
             <div class="chat-input">
-                <v-textarea
+                <v-text-field
                     v-model="newMessage"
                     placeholder="Type your message..."
                     rows="1"
                     auto-grow
-                ></v-textarea>
-                <v-btn color="primary" @click="sendMessage">Send</v-btn>
+                ></v-text-field>
+                <v-btn color="bg200" @click="sendMessage"
+                    ><v-icon color="primary300"
+                        >fa-solid fa-paper-plane</v-icon
+                    ></v-btn
+                >
             </div>
         </div>
     </div>
@@ -175,7 +178,7 @@ const sendMessage = () => {
         };
         messages.value.push(userMessage);
 
-        const keywords = ["counselor", "guidance", "problem", "gamutin"]; // Add more keywords as needed
+        const keywords = ["counselor", "guidance", "problem"]; // Add more keywords as needed
 
         let foundKeyword = false; // Flag to track if a keyword is found
 
@@ -223,9 +226,6 @@ const getAnswer = (keyword) => {
             return "Guidance refers to the process of advising or providing support and direction in making decisions or solving problems.";
         case "problem":
             return "A problem is a matter or situation that requires attention, consideration, or resolution.";
-        case "gamutin":
-            return "gamutin mo tanginamo";
-
         default:
             return "I'm sorry, I don't have information about that.";
     }
@@ -281,20 +281,17 @@ onMounted(() => {
 .background {
     background-color: #afe3a8;
 }
-
 .chat-container {
     display: flex;
     flex-direction: column;
     height: 85vh;
 }
-
 .chat-content {
     flex: 1;
     overflow-y: auto;
     display: flex;
     flex-direction: column-reverse;
 }
-
 .chat-input {
     display: flex;
     gap: 8px;
@@ -302,19 +299,16 @@ onMounted(() => {
     padding: 8px;
     background-color: #f1f1f1;
 }
-
 .pls {
     overflow-y: auto;
     display: flex;
     flex-direction: column-reverse;
 }
-
 .loading-animation {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .dot {
     width: 8px;
     height: 8px;
@@ -323,15 +317,12 @@ onMounted(() => {
     background-color: #aaa;
     animation: dots 1.4s infinite ease-in-out both;
 }
-
 .dot:nth-child(1) {
     animation-delay: -0.32s;
 }
-
 .dot:nth-child(2) {
     animation-delay: -0.16s;
 }
-
 @keyframes dots {
     0%,
     80%,
