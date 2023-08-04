@@ -28,7 +28,6 @@
                 </div>
             </template>
         </v-main>
-        <facebook-chat />
         <v-footer class="sticky-bottom" color="bg200">
             <v-row justify="center" align="center" no-gutters>
                 <v-btn
@@ -66,7 +65,6 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import FacebookChat from "~/components/FacebookChat.vue";
 
 const navItem = ref([
     { icon: "fa-solid fa-house", text: "Home", route: "/" },

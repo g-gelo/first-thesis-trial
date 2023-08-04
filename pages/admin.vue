@@ -1,5 +1,5 @@
 <template>
-    <div class="content-container">
+    <div>
         <v-container>
             <h1>Seminar Form</h1>
             <v-form @submit.prevent="addSeminar(seminar)">
@@ -275,8 +275,5 @@ const deleteSeminar = async (id) => {
 .modal > .v-card {
     max-width: 400px;
     width: 100%;
-}
-.content-container {
-    height: 500vh;
 }
 </style>
