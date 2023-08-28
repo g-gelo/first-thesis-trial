@@ -53,7 +53,10 @@
                         textAlign: 'center',
                         pointerEvents: isActive(index) ? 'none' : 'auto',
                     }"
-                    @click="toggleActive(index)"
+                    @click="
+                        toggleActive(index);
+                        item.route();
+                    "
                 >
                     <v-slide-y-transition>
                         <v-icon :key="item.icon" color="primary300" size="26">
@@ -70,11 +73,21 @@
 import { ref, onMounted } from "vue";
 import FacebookChat from "~/components/FacebookChat.vue";
 
+const generateCoohomLink = () => {
+    const coohomLink =
+        "https://www.coohom.com/pub/tool/panorama/aiwalking?obsPlanId=3FO3VCSHBSNT&utm_source=smart720_share&uri=%2Fpub%2Fsaas%2Fapps%2Fproject%2Fdetail%2F3FO3VCSHBSNT%3Fuid%3D3FO4MK887FQ4%26fromTool%3Dtrue&utm_content=3FO3VCSHBSNT&utm_medium=linkcopy&locale=en_US";
+    window.location.href = coohomLink;
+};
+
 const navItem = ref([
     { icon: "fa-solid fa-house", text: "Home", route: "/" },
     { icon: "fa-solid fa-bullhorn", text: "News", route: "/announcement" },
     { icon: "fa-solid fa-comments", text: "Chatbot", route: "/chat" },
-    { icon: "fa-solid fa-briefcase", text: "Office", route: "/office" },
+    {
+        icon: "fa-solid fa-briefcase",
+        text: "Office",
+        route: generateCoohomLink,
+    },
 ]);
 
 const isLargeScreen = ref(false);

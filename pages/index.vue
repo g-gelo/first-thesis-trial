@@ -135,6 +135,10 @@ import DateTime from "@/components/DateTime.vue";
 import "animate.css";
 import "intersection-observer";
 
+useHead({
+    title: "Home",
+});
+
 onMounted(() => {
     if (process.client) {
         const sliders = document.querySelectorAll(".card");
