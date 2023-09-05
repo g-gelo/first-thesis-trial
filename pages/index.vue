@@ -123,6 +123,36 @@
                 />
             </v-container>
         </div>
+        <the-title
+            class="card"
+            title="Emergency Hotline"
+            backgroundImage="/img/emergencyHotline.png"
+            svgBlob="/img/emergencyBlob.svg"
+        />
+        <div>
+            <v-container>
+                <the-emergency
+                    class="card"
+                    logo="/img/policeLogo.png"
+                    name="Philippine National Police"
+                    contact="0998 598 5601"
+                    address="9WVC+F57, Imus, Cavite"
+                    info="For more police station number, just tap the message icon and type 'Police'."
+                />
+            </v-container>
+        </div>
+        <div>
+            <v-container>
+                <the-emergency
+                    class="card"
+                    logo="/img/mentalHealthLogo.png"
+                    name="Mental Health Resources"
+                    contact="1553 (Luzon-wide and landline toll-free)"
+                    address="Philippines"
+                    info="For more information, just tap the message icon and type 'Mental'."
+                />
+            </v-container>
+        </div>
     </div>
 </template>
 <script setup>
@@ -132,6 +162,7 @@ import TheTitle from "@/components/TheTitle.vue";
 import TheOsas from "@/components/TheOsas.vue";
 import TheBox from "@/components/TheBox.vue";
 import DateTime from "@/components/DateTime.vue";
+import TheEmergency from "@/components/TheEmergency.vue";
 import "animate.css";
 import "intersection-observer";
 

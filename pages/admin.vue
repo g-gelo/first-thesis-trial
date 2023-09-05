@@ -164,7 +164,7 @@
             </v-row>
         </v-container>
         <div>
-            <TheCareers />
+            <CareerForm />
         </div>
         <v-btn
             v-if="!showModal"
@@ -178,7 +178,7 @@
 
 <script setup>
 import { ref } from "vue";
-import TheCareers from "~/components/TheCareers.vue";
+import CareerForm from "~/components/CareerForm.vue";
 
 useHead({
     title: "Admin",

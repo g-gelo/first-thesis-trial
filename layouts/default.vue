@@ -82,7 +82,7 @@ const generateCoohomLink = () => {
 const navItem = ref([
     { icon: "fa-solid fa-house", text: "Home", route: "/" },
     { icon: "fa-solid fa-bullhorn", text: "News", route: "/announcement" },
-    { icon: "fa-solid fa-comments", text: "Chatbot", route: "/chat" },
+    { icon: "fa-solid fa-comment", text: "Chatbot", route: "/chat" },
     {
         icon: "fa-solid fa-briefcase",
         text: "Office",
