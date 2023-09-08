@@ -183,6 +183,8 @@ const sendMessage = () => {
             "problem",
             "police",
             "mental",
+            "hi",
+            "hello",
         ]; // Add more keywords as needed
 
         let foundKeyword = false; // Flag to track if a keyword is found
@@ -231,45 +233,48 @@ const getAnswer = (keyword) => {
             return "Guidance refers to the process of advising or providing support and direction in making decisions or solving problems.";
         case "problem":
             return "A problem is a matter or situation that requires attention, consideration, or resolution.";
+        case "hello":
+        case "hi":
+            return "hello";
         case "police":
             return `
-        Cavite Police Stations:--------------------
-            Cavite City: 0998-967-3349 ------------
-            Kawit: 0998-967-3356 -------------------
-            Noveleta: 0998-967-3357 ---------------
-            Rosario: 0998-967-3358 ------------------
-            City of Bacoor: 0998-967-3348 ---------
-            City of Dasmarinas: 0998-967-3350 --
-            Carmona: 0998-967-3359 ---------------
-            GMA: 0998-967-3360 ---------------------
-            Silang: 0998-598-5622 ------------------
-            Gen. Trias: 0998-967-3361 --------------
-            Amadeo: 0998-967-3365 -----------------
-            Indang: 0998-967-3367 -------------------
-            Tanza: 0998-967-3362 --------------------
-            Trece Martires City: 0998-967-3354 --
-            Alfonso: 0998-967-3364 ------------------
+        Cavite Police Stations:
+            Cavite City: 0998-967-3349 
+            Kawit: 0998-967-3356 
+            Noveleta: 0998-967-3357 
+            Rosario: 0998-967-3358 
+            City of Bacoor: 0998-967-3348 
+            City of Dasmarinas: 0998-967-3350 
+            Carmona: 0998-967-3359 
+            GMA: 0998-967-3360 
+            Silang: 0998-598-5622 
+            Gen. Trias: 0998-967-3361 
+            Amadeo: 0998-967-3365 
+            Indang: 0998-967-3367 
+            Tanza: 0998-967-3362 
+            Trece Martires City: 0998-967-3354 
+            Alfonso: 0998-967-3364 
             Gen. Emilio Aguinaldo: 0998-967-3512
-            Magallanes: 0998-967-3368 -------------
-            Maragondon: 0998-967-3369 ------------
-            Mendez: 0998-967-3370 ------------------
-            Naic: 0998-967-3371 -----------------------
-            Tagaytay City: 0998-967-3352 ----------
-            Ternate: 0998-967-3374 ------------------
+            Magallanes: 0998-967-3368 
+            Maragondon: 0998-967-3369 
+            Mendez: 0998-967-3370 
+            Naic: 0998-967-3371 
+            Tagaytay City: 0998-967-3352 
+            Ternate: 0998-967-3374 
         
     `;
         case "mental":
             return `
-            National Center for Mental Health ------
-            - Psychiatric emergencies ----------------
-            - Suicidal thoughts ---------------------------
-            - Depression ----------------------------------
-            - Grief and loss ------------------------------
-            - Relationship issues ------------------------
-            - Sexual orientation issues ----------------
-            - School and career issues ----------------
+            National Center for Mental Health 
+            - Psychiatric emergencies 
+            - Suicidal thoughts 
+            - Depression 
+            - Grief and loss 
+            - Relationship issues 
+            - Sexual orientation issues 
+            - School and career issues 
             - referral to other agencies that can provide specific mental services in the 
-            Philippines. ----------------------------------
+            Philippines. 
             GLOBE/TM Subscribers: 0966-351-4518 & 0917-899-8727
             SMART/SUN/TNT Subscribers: 0908-639-2672
             `;

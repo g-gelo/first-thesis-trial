@@ -18,8 +18,8 @@
                 <p class="subtitle">
                     Stay informed about the upcoming seminars, memos, and
                     important announcements. Get ready to experience an all-new
-                    offline mobile application that keeps you updated on the
-                    latest events! Empowering you with knowledge and
+                    offline mobile application that can still help you whenever
+                    you need help. Empowering you with knowledge and
                     opportunities for growth.
                 </p>
             </div>

@@ -153,6 +153,18 @@
                 />
             </v-container>
         </div>
+        <div>
+            <v-container>
+                <the-emergency
+                    class="card"
+                    logo="/img/pdrrmoLogo.png"
+                    name="PDRRMO"
+                    contact="Telephone: (046) 424-0203 Cellphone No.: 0917-858-8263 && 0919-061-6584"
+                    address="Cavite, Philippines"
+                    info="For more information, visit this link"
+                />
+            </v-container>
+        </div>
     </div>
 </template>
 <script setup>
@@ -213,7 +225,7 @@ marquee {
     padding: 0.5rem;
 }
 .content-container {
-    height: 500vh;
+    height: 550vh;
 }
 .bg .svgBlob {
     position: relative;
