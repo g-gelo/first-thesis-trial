@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="show">
         <v-container>
             <h1>Job Career Form</h1>
             <v-form @submit.prevent="addCareer(career)">

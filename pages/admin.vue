@@ -49,7 +49,7 @@
                 <v-btn type="submit" color="primary">Submit</v-btn>
             </v-form>
             <v-container>
-                <div v-if="showModal" class="modal">
+                <div v-if="showModal" class="modal career">
                     <v-card>
                         <v-card-title>Edit Seminar</v-card-title>
                         <v-card-text>
@@ -261,6 +261,13 @@ const deleteSeminar = async (id) => {
 </script>
 
 <style scoped>
+.career {
+    z-index: 1;
+}
+.show {
+    z-index: -1;
+}
+
 .modal {
     position: fixed;
     top: 0;

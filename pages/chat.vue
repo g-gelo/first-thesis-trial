@@ -185,6 +185,8 @@ const sendMessage = () => {
             "mental",
             "hi",
             "hello",
+            "academic calendar",
+            "calendar",
         ]; // Add more keywords as needed
 
         let foundKeyword = false; // Flag to track if a keyword is found
@@ -217,7 +219,6 @@ const sendMessage = () => {
         setTimeout(() => {
             const chatbotResponse = {
                 sender: "Guidance Connect",
-                // text: "This is the response from the chatbot.",
             };
             messages.value.push(chatbotResponse);
             loading.value = false;
@@ -235,7 +236,9 @@ const getAnswer = (keyword) => {
             return "A problem is a matter or situation that requires attention, consideration, or resolution.";
         case "hello":
         case "hi":
-            return "hello";
+            return `Hello! 👋 Welcome to our offline chatbot. While I'm offline, I can still provide you
+            with useful information. Feel free to ask about emergency hotlines, school calendar, mental health
+            support hotline, or anything else you'd like to know. Just type your question, and I'll do my best to assist you!`;
         case "police":
             return `
         Cavite Police Stations:
@@ -280,6 +283,24 @@ const getAnswer = (keyword) => {
             `;
         default:
             return "I'm sorry, I don't have information about that.";
+        case "academic calendar":
+        case "calendar":
+            return `Academic Calendar | A.Y. 2023-2024
+            First Semester_________________
+            September 05 - Beginning of Classes
+            November 20 - 25 - Midterm Examination
+            December 23 - January 02 - Christmas Break
+            January 22 - 27 - Final Examination (Graduating)
+            January 29 - February 03 - Final Examination (Non-Graduating)
+            Graduation Day - TBA -------------
+            February 05 - 24 Semestral Break
+            Second Semester___________________
+            February 26 - Beginning of Classes
+            April 22 - 27 - Midterm Examination
+            June 17 - 22 - Final Examination (Graduating)
+            June 24 - 29 - Final Examination (Non-Graduating)
+            Graduation Day - TBA --------------------
+            July 01 - Start of Vacation`;
     }
 };
 

@@ -225,7 +225,7 @@ marquee {
     padding: 0.5rem;
 }
 .content-container {
-    height: 550vh;
+    height: 600vh;
 }
 .bg .svgBlob {
     position: relative;
