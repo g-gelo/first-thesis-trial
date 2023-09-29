@@ -54,6 +54,7 @@ export default defineNuxtConfig({
     css: [
         "vuetify/lib/styles/main.sass",
         "@fortawesome/fontawesome-free/css/all.min.css",
+        "@fortawesome/fontawesome-free/css/fontawesome.min.css",
     ],
     build: {
         transpile: ["vuetify"],
