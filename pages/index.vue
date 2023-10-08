@@ -169,18 +169,14 @@
 </template>
 <script setup>
 import { onMounted } from "vue";
-import TheCard from "@/components/TheCard.vue";
-import TheTitle from "@/components/TheTitle.vue";
-import TheOsas from "@/components/TheOsas.vue";
-import TheBox from "@/components/TheBox.vue";
-import DateTime from "@/components/DateTime.vue";
-import TheEmergency from "@/components/TheEmergency.vue";
 import "animate.css";
 import "intersection-observer";
 
 useHead({
     title: "Home",
 });
+
+// definePageMeta({ middleware: "auth" });
 
 onMounted(() => {
     if (process.client) {

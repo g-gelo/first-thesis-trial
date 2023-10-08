@@ -22,7 +22,6 @@ definePageMeta({
     layout: "custom",
     auth: {
         unauthenticatedOnly: true,
-        navigateAuthenticatedTo: "/admin",
     },
 });
 

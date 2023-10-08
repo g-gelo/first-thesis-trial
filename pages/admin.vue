@@ -178,7 +178,6 @@
 
 <script setup>
 import { ref } from "vue";
-import CareerForm from "~/components/CareerForm.vue";
 
 useHead({
     title: "Admin",
