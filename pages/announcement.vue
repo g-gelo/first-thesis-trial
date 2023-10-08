@@ -51,10 +51,11 @@
 
 <script setup>
 import { onMounted } from "vue";
+import TheTitle from "@/components/TheTitle.vue";
+import TheSeminar from "@/components/TheSeminar.vue";
+import TheCareer from "~/components/TheCareer.vue";
 import "intersection-observer";
 import "animate.css";
-
-// definePageMeta({ middleware: "auth" });
 
 onMounted(() => {
     if (process.client) {

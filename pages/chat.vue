@@ -120,8 +120,6 @@ import { ref } from "vue";
 import "animate.css";
 import "intersection-observer";
 
-// definePageMeta({ middleware: "auth" });
-
 const showBusinessHours = ref(false);
 const loadingBusinessHours = ref(false);
 const showLocation = ref(false);
