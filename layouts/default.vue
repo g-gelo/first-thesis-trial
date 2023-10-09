@@ -12,7 +12,7 @@
         <v-main
             :style="{
                 backgroundColor:
-                    $vuetify.theme.themes.myCustomLightTheme.colors.bg100,
+                    $vuetify.theme.themes.myCustomLightTheme.colors.bg200,
             }"
             class="scrollable-content"
         >

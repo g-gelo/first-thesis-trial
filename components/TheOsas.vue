@@ -8,7 +8,7 @@
             ></v-img>
         </div>
         <div>
-            <v-card class="mt-4 rounded-xl rounded-be-xl color=bg200 card">
+            <v-card class="mt-4 rounded-xl rounded-be-xl color=bg100 card">
                 <div class="custom-text">
                     <v-list>
                         <span class="indent ma-3"
@@ -27,7 +27,7 @@
             <v-card
                 title="Goal"
                 class="mt-4 rounded-xl rounded-be-xl card"
-                color="bg200"
+                color="bg100"
             >
                 <div class="custom-text">
                     <v-list>
@@ -48,7 +48,7 @@
             <v-card
                 title="Functions"
                 class="mt-4 rounded-xl rounded-be-xl card"
-                color="bg200"
+                color="bg100"
             >
                 <div class="custom-text">
                     <span class="indent ma-3 mt-0"

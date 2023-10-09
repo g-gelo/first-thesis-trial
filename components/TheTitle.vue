@@ -4,7 +4,7 @@
         class="custom-container"
         :style="{
             backgroundColor:
-                $vuetify.theme.themes.myCustomLightTheme.colors.bg200,
+                $vuetify.theme.themes.myCustomLightTheme.colors.bg100,
             backgroundImage: `url(${backgroundImage}), url(${svgBlob})`,
         }"
     >
