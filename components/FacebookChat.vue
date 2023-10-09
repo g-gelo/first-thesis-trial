@@ -15,7 +15,7 @@ export default {
     methods: {
         loadFacebookSDK() {
             var chatbox = document.getElementById("fb-customer-chat");
-            chatbox.setAttribute("page_id", "225591027631621");
+            chatbox.setAttribute("page_id", "132095129993246");
             chatbox.setAttribute("attribution", "biz_inbox");
 
             window.fbAsyncInit = function () {

@@ -2,7 +2,7 @@
     <v-app dark>
         <v-app-bar fixed app color="bg100">
             <v-img
-                src="/img/GuidanceConnect.png"
+                src="/img/GuidanceConnectName.png"
                 alt="Logo"
                 :style="{ width: '150%', height: '150%' }"
                 contain
