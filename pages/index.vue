@@ -218,8 +218,8 @@ body {
 }
 
 marquee {
-    background-color: #8bc34a;
-    color: #286400;
+    background-color: #5c946e;
+    color: #003b1b;
     font-size: 1.5rem;
     font-weight: bold;
     padding: 0.5rem;
