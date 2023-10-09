@@ -4,6 +4,7 @@
             ><date-time
         /></v-img>
         <marquee
+            class="border-bottom"
             width="100%"
             behavior="scroll"
             direction="left"
@@ -218,11 +219,15 @@ body {
 }
 
 marquee {
-    background-color: #8bc34a;
-    color: #286400;
+    background-color: #bdf5a8;
+    color: #003b1b;
     font-size: 1.5rem;
     font-weight: bold;
     padding: 0.5rem;
+}
+
+.border-bottom {
+    box-shadow: 0px 10px 10px -15px #111;
 }
 .content-container {
     height: 600vh;

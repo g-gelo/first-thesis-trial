@@ -1,6 +1,6 @@
 <template>
     <v-app dark>
-        <v-app-bar fixed app color="primary100">
+        <v-app-bar fixed app color="bg100">
             <v-img
                 src="/img/GuidanceConnect.png"
                 alt="Logo"
@@ -31,7 +31,7 @@
         <div>
             <FacebookChat />
         </div>
-        <v-footer class="sticky-bottom" color="bg200">
+        <v-footer class="sticky-bottom border-top" color="bg100">
             <v-row justify="center" align="center" no-gutters>
                 <v-btn
                     v-for="(item, index) in navItem"
@@ -117,6 +117,10 @@ onMounted(() => {
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
+}
+
+.border-top {
+    border-top: 1px solid #7f7f7f;
 }
 
 .sticky-bottom {
