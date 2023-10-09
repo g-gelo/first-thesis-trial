@@ -7,16 +7,16 @@ const myCustomLightTheme: ThemeDefinition = {
     dark: false,
     colors: {
         // Pickle green
-        primary100: "#5C946E",
+        primary100: "#8BC34A",
         primary200: "#6da52d",
         primary300: "#286400",
         accent100: "#FFC107",
         accent200: "#916400",
         text100: "#333333",
         text200: "#5c5c5c",
-        bg100: "#D9EAD3",
-        bg200: "#cfe0c9",
-        bg300: "#003b1b",
+        bg100: "#C7E5C3",
+        bg200: "#bde5c5",
+        bg300: "#96bc9e",
     },
 };
 const myCustomDarkTheme: ThemeDefinition = {

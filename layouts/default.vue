@@ -31,7 +31,7 @@
         <div>
             <FacebookChat />
         </div>
-        <v-footer class="sticky-bottom" color="primary100">
+        <v-footer class="sticky-bottom" color="bg200">
             <v-row justify="center" align="center" no-gutters>
                 <v-btn
                     v-for="(item, index) in navItem"
@@ -44,7 +44,7 @@
                         active: isActive(index),
                         'pop-icon': isActive(index),
                     }"
-                    :color="isActive(index) ? 'bg300' : 'transparent'"
+                    :color="isActive(index) ? 'primary300' : 'transparent'"
                     :style="{
                         display: 'flex',
                         flexDirection: 'column',
@@ -59,7 +59,7 @@
                     "
                 >
                     <v-slide-y-transition>
-                        <v-icon :key="item.icon" color="bg300" size="26">
+                        <v-icon :key="item.icon" color="primary300" size="26">
                             {{ item.icon }}
                         </v-icon>
                     </v-slide-y-transition>
