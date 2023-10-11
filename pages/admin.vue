@@ -184,8 +184,6 @@ useHead({
     title: "Admin",
 });
 
-definePageMeta({ middleware: "auth" });
-
 const { signOut } = useAuth();
 
 const showModal = ref(false);

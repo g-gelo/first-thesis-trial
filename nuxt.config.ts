@@ -50,6 +50,7 @@ export default defineNuxtConfig({
     devtools: { enabled: false },
     auth: {
         origin: process.env.AUTH_ORIGIN,
+        enableGlobalAppMiddleware: true,
     },
     css: [
         "vuetify/lib/styles/main.sass",

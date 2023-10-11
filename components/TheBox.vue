@@ -4,7 +4,7 @@
             <v-card
                 :title="`${title}`"
                 class="mt-4 rounded-xl rounded-be-xl"
-                color="bg200"
+                color="bg100"
             >
                 <div class="custom-text">
                     <span class="indent ma-3 mt-0">{{ subtitle }}</span>

@@ -6,7 +6,7 @@
                     fluid
                     density="compact"
                     class="mx-auto rounded-xl rounded-be-xl"
-                    color="bg200"
+                    color="bg100"
                     max-width="90%"
                     :prepend-icon="`${logo}`"
                     :title="`${title}`"

@@ -349,10 +349,10 @@ onMounted(() => {
     font-weight: bold;
 }
 .answer {
-    background-color: #95ed8a;
+    background-color: #c7ffb2;
 }
 .background {
-    background-color: #afe3a8;
+    background-color: #95ed8a;
 }
 .chat-container {
     display: flex;
