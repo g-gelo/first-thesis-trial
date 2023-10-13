@@ -7,8 +7,12 @@
                 class="top-image"
             >
                 <div class="text-overlay card">
-                    <span class="announcement-text">Events</span>
-                    <span class="events-text">Career</span>
+                    <span class="announcement-text"
+                        ><a href="#event" class="event">Events</a></span
+                    >
+                    <span class="events-text"
+                        ><a href="#career" class="event">Career</a></span
+                    >
                 </div>
             </v-img>
         </div>
@@ -25,6 +29,7 @@
             </div>
         </v-container>
         <TheTitle
+            id="event"
             class="card"
             title="Amazing Seminars & Guest Speakers"
             backgroundImage="/img/seminar.png"
@@ -36,6 +41,7 @@
             </div>
         </v-container>
         <TheTitle
+            id="career"
             class="card"
             title="Career / Job Opportunities"
             backgroundImage="/img/career.png"
@@ -88,6 +94,17 @@ onMounted(() => {
 .image-container {
     position: relative;
 }
+.event {
+    text-decoration: none;
+    color: #333;
+    padding: 0.3em;
+    border-radius: 25px;
+    box-shadow: 1px 1px 5px #808080;
+}
+.event a:visited {
+    color: #333;
+}
+
 .text-overlay {
     position: absolute;
     top: 0;
