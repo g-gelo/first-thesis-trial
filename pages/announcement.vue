@@ -7,14 +7,18 @@
                 class="top-image"
             >
                 <div class="text-overlay card">
-                    <span class="announcement-text">Events</span>
-                    <span class="events-text">Career</span>
+                    <span class="announcement-text event"
+                        ><a href="#Event">Events</a></span
+                    >
+                    <span class="events-text event"
+                        ><a href="#Career">Career</a></span
+                    >
                 </div>
             </v-img>
         </div>
         <v-container>
             <div class="hierarchy-text card">
-                <h1 class="main-title">Announcement and Events</h1>
+                <h1 class="main-title font-display">Announcement and Events</h1>
                 <p class="subtitle">
                     Stay informed about the upcoming seminars, memos, and
                     important announcements. Get ready to experience an all-new
@@ -25,6 +29,7 @@
             </div>
         </v-container>
         <TheTitle
+            id="Event"
             class="card"
             title="Amazing Seminars & Guest Speakers"
             backgroundImage="/img/seminar.png"
@@ -36,6 +41,7 @@
             </div>
         </v-container>
         <TheTitle
+            id="Career"
             class="card"
             title="Career / Job Opportunities"
             backgroundImage="/img/career.png"
@@ -85,6 +91,23 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.font-display {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+}
+
+.event a {
+    text-decoration: none;
+    color: #333;
+    background-color: transparent;
+    padding: 0.3em;
+    border-radius: 25px;
+    box-shadow: 1px 1px 5px #808080;
+}
+
+.event a:visited {
+    color: #333;
+}
 .image-container {
     position: relative;
 }
