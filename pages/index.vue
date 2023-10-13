@@ -12,6 +12,13 @@
         >
             Cavite State University - Imus Campus
         </marquee>
+        <div class="category">
+            <ul>
+                <li><a href="#Osas" class="font-display">OSAS</a></li>
+                <li><a href="#GCO" class="font-display">GCO</a></li>
+                <li><a href="#Contact" class="font-display">Contact</a></li>
+            </ul>
+        </div>
         <v-carousel class="card" hide-delimiters show-arrows="hover">
             <v-container>
                 <div>
@@ -52,6 +59,7 @@
         </v-carousel>
         <div class="bg">
             <the-title
+                id="Osas"
                 class="card"
                 title="Office Of Student Affairs And Services"
                 backgroundImage="/img/osas.png"
@@ -62,6 +70,7 @@
             <the-osas />
         </v-container>
         <the-title
+            id="GCO"
             class="card"
             title="Guidance and Counseling Office"
             backgroundImage="/img/GCO.png"
@@ -125,6 +134,7 @@
             </v-container>
         </div>
         <the-title
+            id="Contact"
             class="card"
             title="Emergency Hotline"
             backgroundImage="/img/emergencyHotline.png"
@@ -224,6 +234,40 @@ marquee {
     font-size: 1.5rem;
     font-weight: bold;
     padding: 0.5rem;
+}
+.font-display {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+}
+.category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+.category ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1rem;
+}
+.category ul li {
+    font-size: 1.2rem;
+    background-color: #d9facd;
+    border-radius: 50px;
+    box-shadow: 1px 1px 5px #808080;
+}
+.category ul li a {
+    margin: 0 1rem;
+    text-decoration: none;
+}
+.category ul li a:visited {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: inherit;
 }
 
 .border-bottom {
