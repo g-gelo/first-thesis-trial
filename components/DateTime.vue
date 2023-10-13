@@ -41,7 +41,4 @@ onMounted(() => {
 .date {
     margin-bottom: 10px;
 }
-.time {
-    font-weight: bold;
-}
 </style>

@@ -263,6 +263,7 @@ marquee {
 .category ul li a {
     margin: 0 1rem;
     text-decoration: none;
+    color: #333;
 }
 .category ul li a:visited {
     margin: 0 1rem;

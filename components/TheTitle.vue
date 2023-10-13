@@ -9,7 +9,7 @@
         }"
     >
         <h1
-            class="custom-title custom-center"
+            class="custom-title custom-center font-display"
             :style="{
                 color: $vuetify.theme.themes.myCustomLightTheme.colors
                     .primary300,
@@ -29,6 +29,10 @@ defineProps<{
 </script>
 
 <style scoped>
+.font-display {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+}
 .custom-container {
     height: 20vh;
     width: 100vw;
