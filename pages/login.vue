@@ -15,8 +15,6 @@
 </template>
 
 <script setup>
-// import { User } from "@prisma/client";
-
 useHead({
     title: "Log In",
 });
