@@ -1,7 +1,17 @@
 import { defineNuxtConfig } from "nuxt/config";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: ["@sidebase/nuxt-auth", "@kevinmarrec/nuxt-pwa"],
+    modules: [
+        "@sidebase/nuxt-auth",
+        "@kevinmarrec/nuxt-pwa",
+        "@nuxtjs/google-fonts",
+    ],
+    googleFonts: {
+        families: {
+            Poppins: [300, 500, 700],
+            Lato: [300, 500, 700],
+        },
+    },
     pwa: {
         manifest: {
             name: "Guidance Connect",
