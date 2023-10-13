@@ -116,7 +116,7 @@ onMounted(() => {
 <style scoped>
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .border-top {

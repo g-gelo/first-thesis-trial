@@ -12,6 +12,13 @@
         >
             Cavite State University - Imus Campus
         </marquee>
+        <div class="category">
+            <ul>
+                <li><a href="#Osas" class="font-display">OSAS</a></li>
+                <li><a href="#GCO" class="font-display">GCO</a></li>
+                <li><a href="#Contact" class="font-display">Contact</a></li>
+            </ul>
+        </div>
         <v-carousel class="card" hide-delimiters show-arrows="hover">
             <v-container>
                 <div>
@@ -50,7 +57,7 @@
                 </div>
             </v-container>
         </v-carousel>
-        <div class="bg">
+        <div class="bg" id="Osas">
             <the-title
                 class="card"
                 title="Office Of Student Affairs And Services"
@@ -61,12 +68,14 @@
         <v-container>
             <the-osas />
         </v-container>
-        <the-title
-            class="card"
-            title="Guidance and Counseling Office"
-            backgroundImage="/img/GCO.png"
-            svgBlob="/img/gcoBlob.svg"
-        />
+        <div id="GCO">
+            <the-title
+                class="card"
+                title="Guidance and Counseling Office"
+                backgroundImage="/img/GCO.png"
+                svgBlob="/img/gcoBlob.svg"
+            />
+        </div>
         <div>
             <v-container>
                 <the-box
@@ -124,12 +133,14 @@
                 />
             </v-container>
         </div>
-        <the-title
-            class="card"
-            title="Emergency Hotline"
-            backgroundImage="/img/emergencyHotline.png"
-            svgBlob="/img/emergencyBlob.svg"
-        />
+        <div id="Contact">
+            <the-title
+                class="card"
+                title="Emergency Hotline"
+                backgroundImage="/img/emergencyHotline.png"
+                svgBlob="/img/emergencyBlob.svg"
+            />
+        </div>
         <div>
             <v-container>
                 <the-emergency
@@ -215,7 +226,7 @@ onMounted(() => {
 
 <style scoped>
 body {
-    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 marquee {
@@ -224,6 +235,45 @@ marquee {
     font-size: 1.5rem;
     font-weight: bold;
     padding: 0.5rem;
+}
+
+.font-display {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+}
+.category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.category ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1rem;
+}
+
+.category ul li {
+    font-size: 1.2rem;
+    background-color: #d9facd;
+    border-radius: 50px;
+    box-shadow: 1px 1px 5px #808080;
+}
+
+.category ul li a {
+    margin: 0 1rem;
+    text-decoration: none;
+}
+
+.category ul li a:visited {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: inherit;
 }
 
 .border-bottom {
