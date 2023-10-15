@@ -1,8 +1,10 @@
 <template>
     <div class="content-container">
-        <v-img aspect-ratio="16/9" src="/img/CvSULogo.jpg" class="top-image"
-            ><date-time
-        /></v-img>
+        <v-img
+            aspect-ratio="16/9"
+            src="/img/CvSULogo.jpg"
+            class="top-image"
+        ></v-img>
         <marquee
             class="border-bottom"
             width="100%"
@@ -263,11 +265,12 @@ marquee {
 .category ul li a {
     margin: 0 1rem;
     text-decoration: none;
+    color: #333;
 }
 .category ul li a:visited {
     margin: 0 1rem;
     text-decoration: none;
-    color: inherit;
+    color: #333;
 }
 
 .border-bottom {

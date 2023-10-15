@@ -4,10 +4,13 @@
             <v-img
                 src="/img/GuidanceConnectName.png"
                 alt="Logo"
-                :style="{ width: '150%', height: '150%' }"
+                :style="{ width: '50%', height: '80%' }"
                 contain
-                class="mx-auto"
+                class="ml-13"
             ></v-img>
+            <v-btn icon color="bg300" @click.stop="drawer = !drawer">
+                <v-icon>fa-solid fa-bars</v-icon>
+            </v-btn>
         </v-app-bar>
         <v-main
             :style="{
@@ -16,7 +19,53 @@
             }"
             class="scrollable-content"
         >
-            <template v-if="!isLargeScreen"> <slot /> </template>
+            <template v-if="!isLargeScreen">
+                <slot />
+                <div>
+                    <FacebookChat />
+                </div>
+                <v-navigation-drawer
+                    v-model="drawer"
+                    temporary
+                    color="bg200"
+                    location="right"
+                >
+                    <div class="avatar-container">
+                        <div class="text-center">
+                            <v-avatar
+                                class="mt-3"
+                                color="surface-variant"
+                                size="140"
+                            >
+                                <img
+                                    src="https://randomuser.me/api/portraits/men/78.jpg"
+                                    alt="Avatar"
+                                />
+                            </v-avatar>
+                        </div>
+                        <v-list-item-title class="text-center pt-5"
+                            >Angelo Gabriel</v-list-item-title
+                        >
+                    </div>
+                    <v-divider></v-divider>
+                    <v-list density="compact" nav>
+                        <v-list-item
+                            class="ma-2"
+                            v-for="(item, index) in navItem"
+                            :class="{
+                                active: isActive(index),
+                                'pop-icon': isActive(index),
+                            }"
+                            :prepend-icon="item.icon"
+                            @click="
+                                toggleActive(index);
+                                createNavigationButton(item.route);
+                            "
+                            >{{ item.text }}</v-list-item
+                        >
+                    </v-list>
+                </v-navigation-drawer>
+            </template>
             <template v-else>
                 <!-- Alternative Content for Large Screens -->
                 <div class="alternative-content">
@@ -28,44 +77,6 @@
                 </div>
             </template>
         </v-main>
-        <div>
-            <FacebookChat />
-        </div>
-        <v-footer class="sticky-bottom border-top" color="bg100">
-            <v-row justify="center" align="center" no-gutters>
-                <v-btn
-                    v-for="(item, index) in navItem"
-                    :key="item.text"
-                    variant="text"
-                    class="mx-2 rounds"
-                    :to="item.route"
-                    exact
-                    :class="{
-                        active: isActive(index),
-                        'pop-icon': isActive(index),
-                    }"
-                    :color="isActive(index) ? 'primary300' : 'transparent'"
-                    :style="{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        textAlign: 'center',
-                        pointerEvents: isActive(index) ? 'none' : 'auto',
-                    }"
-                    @click="
-                        toggleActive(index);
-                        item.route();
-                    "
-                >
-                    <v-slide-y-transition>
-                        <v-icon :key="item.icon" color="primary300" size="26">
-                            {{ item.icon }}
-                        </v-icon>
-                    </v-slide-y-transition>
-                </v-btn>
-            </v-row>
-        </v-footer>
     </v-app>
 </template>
 
@@ -79,9 +90,22 @@ const generateCoohomLink = () => {
     window.location.href = coohomLink;
 };
 
+const createNavigationButton = (route) => {
+    if (typeof route === "function") {
+        route();
+    } else {
+        const router = useRouter();
+        router.push(route);
+    }
+};
+
 const navItem = ref([
     { icon: "fa-solid fa-house", text: "Home", route: "/" },
-    { icon: "fa-solid fa-bullhorn", text: "News", route: "/announcement" },
+    {
+        icon: "fa-solid fa-bullhorn",
+        text: "Announcement",
+        route: "/announcement",
+    },
     { icon: "fa-solid fa-comment", text: "Chatbot", route: "/chat" },
     {
         icon: "fa-solid fa-briefcase",
@@ -90,6 +114,7 @@ const navItem = ref([
     },
 ]);
 
+const drawer = ref(false);
 const isLargeScreen = ref(false);
 const activeIndex = ref(false);
 
@@ -119,10 +144,6 @@ body {
     overflow-x: hidden;
 }
 
-.border-top {
-    border-top: 1px solid #7f7f7f;
-}
-
 .sticky-bottom {
     position: fixed;
     bottom: 0;
@@ -137,8 +158,8 @@ body {
 }
 
 .pop-icon {
-    transform: translateY(-2rem);
-    transition: transform 0.3s ease;
+    background-color: #bdbdbd;
+    color: #003b1b;
 }
 
 .scrollable-content {

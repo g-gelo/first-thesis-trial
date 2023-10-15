@@ -97,20 +97,16 @@
                 <span> How else can I contact you? </span>
             </div>
         </v-container>
-        <div class="pls">
-            <div class="chat-input">
-                <v-text-field
-                    v-model="newMessage"
-                    placeholder="Type your message..."
-                    rows="1"
-                    auto-grow
-                ></v-text-field>
-                <v-btn color="bg200" @click="sendMessage"
-                    ><v-icon color="primary300"
-                        >fa-solid fa-paper-plane</v-icon
-                    ></v-btn
-                >
-            </div>
+        <div class="chat-input">
+            <v-text-field
+                v-model="newMessage"
+                placeholder="Type your message..."
+                rows="1"
+                auto-grow
+            ></v-text-field>
+            <v-btn color="bg200" @click="sendMessage"
+                ><v-icon color="bg300">fa-solid fa-paper-plane</v-icon></v-btn
+            >
         </div>
     </div>
 </template>
@@ -357,7 +353,8 @@ onMounted(() => {
 .chat-container {
     display: flex;
     flex-direction: column;
-    height: 85vh;
+    justify-content: space-between;
+    height: 100%;
 }
 .chat-content {
     flex: 1;
@@ -366,17 +363,14 @@ onMounted(() => {
     flex-direction: column-reverse;
 }
 .chat-input {
+    flex-shrink: 0; /* Keeps this part from growing and stays at the bottom */
     display: flex;
-    gap: 8px;
-    align-items: center;
-    padding: 8px;
-    background-color: #f1f1f1;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background-color: #d9facd;
+    border-top: 1px solid #333;
 }
-.pls {
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column-reverse;
-}
+
 .loading-animation {
     display: flex;
     justify-content: center;
