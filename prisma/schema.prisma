@@ -16,13 +16,6 @@ datasource db {
   relationMode = "prisma"
 }
 
-model Example {
-  id        String   @id @default(cuid())
-  details   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 // These are for Authentication
 model Account {
   id                String  @id @default(cuid())
@@ -91,4 +84,51 @@ model Career {
   time      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model UniversityMissionVission {
+  id          String   @id @default(cuid())
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model OSASProfile {
+  id          String   @id @default(cuid())
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model OSASFunctions {
+  id        String   @id @default(cuid())
+  function  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GCOProfile {
+  id          String   @id @default(cuid())
+  title       String?
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model GCOServices {
+  id        String   @id @default(cuid())
+  service   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EmegergencyHotline {
+  id           String   @id @default(cuid())
+  organization String
+  number       Int
+  location     String
+  description  String?
+  image        String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

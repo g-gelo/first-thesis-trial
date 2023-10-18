@@ -10,15 +10,11 @@
 #     "location": "Updated Location"
 # }
 
-PUT http://localhost:3000/api/careers
+GET  http://localhost:3000/api/user
 Content-Type: application/json
 
 {
-    "id": "clkhydqvr0001hsc0jneleb1x",
-    "title": "Seminar Title number 1",
-    "date": "2023-07-31",
-    "time": "15:00",
-    "location": "Updated "
+
 }
 
 

@@ -44,7 +44,7 @@
                             </v-avatar>
                         </div>
                         <v-list-item-title class="text-center pt-5"
-                            >Angelo Gabriel</v-list-item-title
+                            >John Doe</v-list-item-title
                         >
                     </div>
                     <v-divider></v-divider>
@@ -83,6 +83,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import FacebookChat from "~/components/FacebookChat.vue";
+
+const { data: user } = useFetch("/api/user");
 
 const generateCoohomLink = () => {
     const coohomLink =
