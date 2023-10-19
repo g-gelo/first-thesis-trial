@@ -21,7 +21,7 @@
                         }
                     "
                 >
-                    <v-icon>fa-solid fa-plus</v-icon> Create a Seminar
+                    <v-icon>fa-solid fa-plus</v-icon> Hide Job Career Event
                 </button>
             </div>
             <div v-if="showModalCareer">

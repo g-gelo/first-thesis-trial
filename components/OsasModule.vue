@@ -64,6 +64,29 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="btn">
+                <button
+                    v-if="!showOsasForm"
+                    @click="
+                        ($event) => {
+                            showOsasForm = true;
+                        }
+                    "
+                >
+                    <v-icon>fa-solid fa-plus</v-icon> Create Osas Card
+                </button>
+                <button
+                    v-if="showOsasForm"
+                    @click="
+                        ($event) => {
+                            showOsasForm = false;
+                        }
+                    "
+                >
+                    Cancel Creating Osas Card
+                </button>
+            </div>
+            <div v-if="showOsasForm"></div>
         </div>
     </div>
 </template>
@@ -71,6 +94,7 @@
 <script setup>
 const showOsasModule = ref(false);
 const showOsasEdit = ref(false);
+const showOsasForm = ref(false);
 
 const { data: osas } = useFetch("/api/osas");
 

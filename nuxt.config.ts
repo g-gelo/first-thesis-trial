@@ -1,7 +1,11 @@
 import { defineNuxtConfig } from "nuxt/config";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: ["@sidebase/nuxt-auth", "@kevinmarrec/nuxt-pwa"],
+    modules: [
+        "@sidebase/nuxt-auth",
+        "@kevinmarrec/nuxt-pwa",
+        "@nuxtjs/tailwindcss",
+    ],
     pwa: {
         manifest: {
             name: "Guidance Connect",
