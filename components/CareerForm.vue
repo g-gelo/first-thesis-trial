@@ -1,42 +1,66 @@
 <template>
     <div class="show">
         <v-container>
-            <h1>Job Career Form</h1>
-            <v-form @submit.prevent="addCareer(career)">
-                <v-row>
-                    <v-col cols="12" sm="6">
-                        <v-text-field
-                            v-model="career.title"
-                            label="Title"
-                            required
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6">
-                        <v-text-field
-                            v-model="career.date"
-                            label="Date"
-                            required
-                        ></v-text-field>
-                        <span class="text-overline">ex. July 18</span>
-                    </v-col>
-                    <v-col>
-                        <v-text-field
-                            v-model="career.time"
-                            label="Time"
-                            required
-                        ></v-text-field>
-                        <span class="text-overline">ex. 08:00AM - 10:00AM</span>
-                    </v-col>
-                    <v-col cols="12" sm="6">
-                        <v-text-field
-                            v-model="career.location"
-                            label="Location"
-                            required
-                        ></v-text-field>
-                    </v-col>
-                </v-row>
-                <v-btn type="submit" color="primary">Submit</v-btn>
-            </v-form>
+            <h1 class="pb-4">Job Career</h1>
+            <div class="btn">
+                <button
+                    v-if="!showModalCareer"
+                    @click="
+                        ($event) => {
+                            showModalCareer = true;
+                        }
+                    "
+                >
+                    <v-icon>fa-solid fa-plus</v-icon> Create a Seminar
+                </button>
+            </div>
+            <div v-if="showModalCareer">
+                <h1>Job Career Form</h1>
+                <v-form @submit.prevent="addCareer(career)">
+                    <v-row>
+                        <v-col cols="12" sm="6">
+                            <v-text-field
+                                v-model="career.title"
+                                label="Title"
+                                required
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6">
+                            <v-text-field
+                                v-model="career.date"
+                                label="Date"
+                                required
+                            ></v-text-field>
+                            <span class="text-overline">ex. July 18</span>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
+                                v-model="career.time"
+                                label="Time"
+                                required
+                            ></v-text-field>
+                            <span class="text-overline"
+                                >ex. 08:00AM - 10:00AM</span
+                            >
+                        </v-col>
+                        <v-col cols="12" sm="6">
+                            <v-text-field
+                                v-model="career.location"
+                                label="Location"
+                                required
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <button class="btn2" type="submit">SUBMIT</button>
+                    <button
+                        class="btn2"
+                        color="primary"
+                        @click="showModalCareer = false"
+                    >
+                        Cancel
+                    </button>
+                </v-form>
+            </div>
             <v-container>
                 <div v-if="showModal" class="modal">
                     <v-card>
@@ -144,6 +168,9 @@
 <script setup>
 const { data: careers } = useFetch("/api/careers");
 
+const showModalCareer = ref(false);
+const showModal = ref(false);
+
 const career = ref({
     title: "",
     date: "",
@@ -162,7 +189,6 @@ const addCareer = async (career) => {
         },
     });
 };
-const showModal = ref(false);
 
 const editedCareer = ref({
     id: null,
@@ -209,6 +235,32 @@ const deleteCareer = async (id) => {
 </script>
 
 <style scoped>
+.btn button {
+    display: flex;
+    width: 100%;
+    padding: 1em;
+    justify-content: center;
+    margin-bottom: 2em;
+    background-color: #d1d1d1;
+    transition: opacity 0.2s ease-in-out;
+    opacity: 1;
+}
+.btn button:active {
+    opacity: 0.5;
+}
+.btn2 {
+    appearance: none;
+    background-color: #003b1b;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1em;
+    padding: 0.4em 1.2em;
+    user-select: none;
+}
+
+.btn2:active {
+    background-color: #9bc0f7;
+}
 .modal {
     position: fixed;
     top: 0;

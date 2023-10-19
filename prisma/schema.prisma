@@ -86,7 +86,7 @@ model Career {
   updatedAt DateTime @updatedAt
 }
 
-model UniversityMissionVission {
+model UniversityMissionVision {
   id          String   @id @default(cuid())
   description String   @db.VarChar(550)
   createdAt   DateTime @default(now())

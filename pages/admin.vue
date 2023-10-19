@@ -1,53 +1,80 @@
 <template>
     <div class="content-container">
         <v-container>
-            <h1>Seminar Form</h1>
-            <v-form @submit.prevent="addSeminar(seminar)">
-                <v-row>
-                    <v-col cols="12" sm="6">
-                        <v-text-field
-                            v-model="seminar.title"
-                            label="Title"
-                            required
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                        <v-text-field
-                            v-model="seminar.description"
-                            label="Guest Speaker"
-                            auto-grow
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6">
-                        <v-text-field
-                            id="date"
-                            v-model="seminar.date"
-                            type="text"
-                            label="Date"
-                            required
-                        ></v-text-field>
-                        <span class="text-overline">ex. July 18</span>
-                    </v-col>
-                    <v-col>
-                        <v-text-field
-                            id="time"
-                            v-model="seminar.time"
-                            type="text"
-                            label="Time"
-                            required
-                        ></v-text-field>
-                        <span class="text-overline">ex. 08:00AM - 10:00AM</span>
-                    </v-col>
-                    <v-col cols="12" sm="6">
-                        <v-text-field
-                            v-model="seminar.location"
-                            label="Location"
-                            required
-                        ></v-text-field>
-                    </v-col>
-                </v-row>
-                <v-btn type="submit" color="primary">Submit</v-btn>
-            </v-form>
+            <div>
+                <MissionVission />
+            </div>
+            <h1 class="pb-4">Seminar</h1>
+            <div class="btn">
+                <button
+                    v-if="!showModalSeminar"
+                    @click="
+                        ($event) => {
+                            showModalSeminar = true;
+                        }
+                    "
+                >
+                    <v-icon>fa-solid fa-plus</v-icon> Create a Seminar
+                </button>
+            </div>
+            <div v-if="showModalSeminar">
+                <h1>Seminar Form</h1>
+                <v-form @submit.prevent="addSeminar(seminar)">
+                    <v-row>
+                        <v-col cols="12" sm="6">
+                            <v-text-field
+                                v-model="seminar.title"
+                                label="Title"
+                                required
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-text-field
+                                v-model="seminar.description"
+                                label="Guest Speaker"
+                                auto-grow
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6">
+                            <v-text-field
+                                id="date"
+                                v-model="seminar.date"
+                                type="text"
+                                label="Date"
+                                required
+                            ></v-text-field>
+                            <span class="text-overline">ex. July 18</span>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
+                                id="time"
+                                v-model="seminar.time"
+                                type="text"
+                                label="Time"
+                                required
+                            ></v-text-field>
+                            <span class="text-overline"
+                                >ex. 08:00AM - 10:00AM</span
+                            >
+                        </v-col>
+                        <v-col cols="12" sm="6">
+                            <v-text-field
+                                v-model="seminar.location"
+                                label="Location"
+                                required
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <button class="btn2" type="submit">SUBMIT</button>
+                    <button
+                        class="btn2"
+                        color="primary"
+                        @click="showModalSeminar = false"
+                    >
+                        Cancel
+                    </button>
+                </v-form>
+            </div>
             <v-container>
                 <div v-if="showModal" class="modal career">
                     <v-card>
@@ -186,6 +213,7 @@ useHead({
 
 const { signOut } = useAuth();
 
+const showModalSeminar = ref(false);
 const showModal = ref(false);
 
 const { data: seminars } = useFetch("/api/seminars");
@@ -259,6 +287,20 @@ const deleteSeminar = async (id) => {
 </script>
 
 <style scoped>
+.btn button {
+    display: flex;
+    width: 100%;
+    padding: 1em;
+    justify-content: center;
+    margin-bottom: 2em;
+    background-color: #d1d1d1;
+    transition: opacity 0.2s ease-in-out;
+    opacity: 1;
+}
+
+.btn button:active {
+    opacity: 0.5;
+}
 .career {
     z-index: 1;
 }
@@ -283,5 +325,19 @@ const deleteSeminar = async (id) => {
 }
 .content-container {
     height: 550vh;
+}
+
+.btn2 {
+    appearance: none;
+    background-color: #003b1b;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1em;
+    padding: 0.4em 1.2em;
+    user-select: none;
+}
+
+.btn2:active {
+    background-color: #9bc0f7;
 }
 </style>
