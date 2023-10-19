@@ -122,76 +122,92 @@
                     </v-card>
                 </div>
             </v-container>
-            <v-row class="mt-2">
-                <v-col>
-                    <div>
-                        The database received
-                        {{ seminars?.length || 0 }} records:
-                    </div>
-                    <div>
-                        <v-table density="compact">
-                            <thead>
-                                <tr>
-                                    <th class="text-left">Title</th>
-                                    <th class="text-left">Description</th>
-                                    <th class="text-left">Date</th>
-                                    <th class="text-left">Time</th>
-                                    <th class="text-left">Location</th>
-                                    <th class="text-left">Edit</th>
-                                    <th class="text-left">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="meeting in seminars"
-                                    :key="meeting.id"
-                                >
-                                    <td>{{ meeting.title }}</td>
-                                    <td>{{ meeting.description }}</td>
-                                    <td>{{ meeting.date }}</td>
-                                    <td>{{ meeting.time }}</td>
-                                    <td>{{ meeting.location }}</td>
-                                    <td>
-                                        <v-btn
-                                            v-if="!showModal"
-                                            variant="tonal"
-                                            @click="
-                                                ($event) => {
-                                                    editedSeminar.id =
-                                                        meeting.id;
-                                                    editedSeminar.title =
-                                                        meeting.title;
-                                                    editedSeminar.description =
-                                                        meeting.description;
-                                                    editedSeminar.date =
-                                                        meeting.date;
-                                                    editedSeminar.time =
-                                                        meeting.time;
-                                                    editedSeminar.location =
-                                                        meeting.location;
-                                                    showModal = true;
-                                                }
-                                            "
-                                        >
-                                            Edit
-                                        </v-btn>
-                                    </td>
-                                    <td>
-                                        <!-- Show the Delete button only if the modal is not open -->
-                                        <v-btn
-                                            v-if="!showModal"
-                                            variant="tonal"
-                                            @click="deleteSeminar(meeting.id)"
-                                        >
-                                            Delete
-                                        </v-btn>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </v-table>
-                    </div>
-                </v-col>
-            </v-row>
+            <div class="btn">
+                <button
+                    v-if="!showSeminarDatabase"
+                    @click="
+                        ($event) => {
+                            showSeminarDatabase = true;
+                        }
+                    "
+                >
+                    Show Seminar Database
+                </button>
+                <button
+                    v-else="showSeminarDatabase"
+                    @click="
+                        ($event) => {
+                            showSeminarDatabase = false;
+                        }
+                    "
+                >
+                    Hide Seminar Database
+                </button>
+            </div>
+            <v-col v-if="showSeminarDatabase">
+                <div>
+                    The database received
+                    {{ seminars?.length || 0 }} records:
+                </div>
+                <div>
+                    <v-table density="compact">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Title</th>
+                                <th class="text-left">Description</th>
+                                <th class="text-left">Date</th>
+                                <th class="text-left">Time</th>
+                                <th class="text-left">Location</th>
+                                <th class="text-left">Edit</th>
+                                <th class="text-left">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="meeting in seminars" :key="meeting.id">
+                                <td>{{ meeting.title }}</td>
+                                <td>{{ meeting.description }}</td>
+                                <td>{{ meeting.date }}</td>
+                                <td>{{ meeting.time }}</td>
+                                <td>{{ meeting.location }}</td>
+                                <td>
+                                    <v-btn
+                                        v-if="!showModal"
+                                        variant="tonal"
+                                        @click="
+                                            ($event) => {
+                                                editedSeminar.id = meeting.id;
+                                                editedSeminar.title =
+                                                    meeting.title;
+                                                editedSeminar.description =
+                                                    meeting.description;
+                                                editedSeminar.date =
+                                                    meeting.date;
+                                                editedSeminar.time =
+                                                    meeting.time;
+                                                editedSeminar.location =
+                                                    meeting.location;
+                                                showModal = true;
+                                            }
+                                        "
+                                    >
+                                        Edit
+                                    </v-btn>
+                                </td>
+                                <td>
+                                    <!-- Show the Delete button only if the modal is not open -->
+                                    <v-btn
+                                        v-if="!showModal"
+                                        variant="tonal"
+                                        @click="deleteSeminar(meeting.id)"
+                                    >
+                                        Delete
+                                    </v-btn>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </v-table>
+                </div>
+            </v-col>
         </v-container>
         <div>
             <CareerForm />
@@ -218,6 +234,7 @@ const { signOut } = useAuth();
 
 const showModalSeminar = ref(false);
 const showModal = ref(false);
+const showSeminarDatabase = ref(false);
 
 const { data: seminars } = useFetch("/api/seminars");
 

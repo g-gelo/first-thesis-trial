@@ -11,6 +11,16 @@
                         }
                     "
                 >
+                    <v-icon>fa-solid fa-plus</v-icon> Create a Job Career Event
+                </button>
+                <button
+                    v-else="showModalCareer"
+                    @click="
+                        ($event) => {
+                            showModalCareer = false;
+                        }
+                    "
+                >
                     <v-icon>fa-solid fa-plus</v-icon> Create a Seminar
                 </button>
             </div>
@@ -100,67 +110,84 @@
                     </v-card>
                 </div>
             </v-container>
-            <v-row class="mt-2">
-                <v-col>
-                    <div>
-                        The database received
-                        {{ careers?.length || 0 }} records:
-                    </div>
-                    <div>
-                        <v-table density="compact">
-                            <thead>
-                                <tr>
-                                    <th class="text-left">Title</th>
-                                    <th class="text-left">Date</th>
-                                    <th class="text-left">Time</th>
-                                    <th class="text-left">Location</th>
-                                    <th class="text-left">Edit</th>
-                                    <th class="text-left">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="job in careers" :key="job.id">
-                                    <td>{{ job.title }}</td>
-                                    <td>{{ job.date }}</td>
-                                    <td>{{ job.time }}</td>
-                                    <td>{{ job.location }}</td>
-                                    <td>
-                                        <v-btn
-                                            v-if="!showModal"
-                                            variant="tonal"
-                                            @click="
-                                                ($event) => {
-                                                    editedCareer.id = job.id;
-                                                    editedCareer.title =
-                                                        job.title;
-                                                    editedCareer.date =
-                                                        job.date;
-                                                    editedCareer.time =
-                                                        job.time;
-                                                    editedCareer.location =
-                                                        job.location;
-                                                    showModal = true;
-                                                }
-                                            "
-                                        >
-                                            Edit
-                                        </v-btn>
-                                    </td>
-                                    <td>
-                                        <v-btn
-                                            v-if="!showModal"
-                                            variant="tonal"
-                                            @click="deleteCareer(job.id)"
-                                        >
-                                            Delete
-                                        </v-btn>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </v-table>
-                    </div>
-                </v-col>
-            </v-row>
+            <div class="btn">
+                <button
+                    v-if="!showCareerDatabase"
+                    @click="
+                        ($event) => {
+                            showCareerDatabase = true;
+                        }
+                    "
+                >
+                    Show Job Career Database
+                </button>
+                <button
+                    v-else="showCareerDatabase"
+                    @click="
+                        ($event) => {
+                            showCareerDatabase = false;
+                        }
+                    "
+                >
+                    Hide Job Career Database
+                </button>
+            </div>
+            <v-col v-if="showCareerDatabase">
+                <div>
+                    The database received
+                    {{ careers?.length || 0 }} records:
+                </div>
+                <div>
+                    <v-table density="compact">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Title</th>
+                                <th class="text-left">Date</th>
+                                <th class="text-left">Time</th>
+                                <th class="text-left">Location</th>
+                                <th class="text-left">Edit</th>
+                                <th class="text-left">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="job in careers" :key="job.id">
+                                <td>{{ job.title }}</td>
+                                <td>{{ job.date }}</td>
+                                <td>{{ job.time }}</td>
+                                <td>{{ job.location }}</td>
+                                <td>
+                                    <v-btn
+                                        v-if="!showModal"
+                                        variant="tonal"
+                                        @click="
+                                            ($event) => {
+                                                editedCareer.id = job.id;
+                                                editedCareer.title = job.title;
+                                                editedCareer.date = job.date;
+                                                editedCareer.time = job.time;
+                                                editedCareer.location =
+                                                    job.location;
+                                                showModal = true;
+                                            }
+                                        "
+                                    >
+                                        Edit
+                                    </v-btn>
+                                </td>
+                                <td>
+                                    <v-btn
+                                        v-if="!showModal"
+                                        variant="tonal"
+                                        @click="deleteCareer(job.id)"
+                                    >
+                                        Delete
+                                    </v-btn>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </v-table>
+                </div>
+            </v-col>
         </v-container>
     </div>
 </template>
@@ -170,6 +197,7 @@ const { data: careers } = useFetch("/api/careers");
 
 const showModalCareer = ref(false);
 const showModal = ref(false);
+const showCareerDatabase = ref(false);
 
 const career = ref({
     title: "",

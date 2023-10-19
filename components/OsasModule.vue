@@ -27,10 +27,10 @@
             <table density="compact">
                 <thead>
                     <tr>
-                        <th class="text-left">Title</th>
-                        <th class="text-left">Description</th>
-                        <th class="text-left">Edit</th>
-                        <th class="text-left">Delete</th>
+                        <th class="w-25">Title</th>
+                        <th class="w-25">Description</th>
+                        <th class="w-25">Edit & Delete</th>
+                        <!-- <th class="w-25">Delete</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +39,7 @@
                         <td class="description">{{ profile.description }}</td>
                         <td>
                             <v-btn
+                                class="mb-2"
                                 v-if="!showOsasEdit"
                                 variant="tonal"
                                 @click="
@@ -52,8 +53,6 @@
                             >
                                 Edit
                             </v-btn>
-                        </td>
-                        <td>
                             <v-btn
                                 v-if="!showOsasEdit"
                                 variant="tonal"
