@@ -103,10 +103,10 @@ model OSASProfile {
 }
 
 model OSASFunctions {
-  id        String   @id @default(cuid())
-  function  String   @db.VarChar(300)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String   @id @default(cuid())
+  osasFunction String   @db.VarChar(300)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model GCOProfile {

@@ -4,6 +4,9 @@
             <div>
                 <MissionVission />
             </div>
+            <div>
+                <OsasModule />
+            </div>
             <h1 class="pb-4">Seminar</h1>
             <div class="btn">
                 <button

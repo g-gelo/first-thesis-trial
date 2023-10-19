@@ -10,14 +10,24 @@
 #     "location": "Updated Location"
 # }
 
-GET  http://localhost:3000/api/user
+GET  http://localhost:3000/api/osasfunction
 Content-Type: application/json
 
-{
+{  }
 
-}
+# POST http://localhost:3000/api/localhost:3000/api/osasfunction
+# Content-Type: application/json
 
+# {
+#     "function": "sadsadadsaUpdated sadcripripripription",
+# }
 
+# DELETE http://localhost:3000/api/osas
+# Content-Type: application/json
+
+# {
+#     "id": "clnwt9rw80001hs2knlxwawh5",
+# }
 
 
 
