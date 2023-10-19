@@ -23,40 +23,19 @@
         </div>
         <v-carousel class="card" hide-delimiters show-arrows="hover">
             <v-container>
-                <div>
-                    <v-carousel-item>
-                        <the-card
-                            class="custom-card card"
-                            logo="fa-solid fa-bullseye"
-                            title="Mission"
-                            content="Cavite State University shall provide excellent, equitable and relevant educational opportunities in the arts, sciences and technology through quality instruction and responsive research and development activities. It shall produce professional, skilled and morally upright individuals for global competitiveness."
-                        />
-                    </v-carousel-item>
-                    <v-carousel-item>
-                        <the-card
-                            class="custom-card card"
-                            logo="fa-solid fa-bullseye"
-                            title="Hangarin"
-                            content="Ang Cavite State university ay makapagbigay ng mahusay, pantay at makabuluhang edukasyon sa sining, agham at teknolohiya sa pamamagitan ng may kalidad na pagtuturo at tumutugon sa pangangailangang pananaliksik at mga gawaing pangkaunlaran. Makalikha ito ng mga indibidwal ng dalubhasa, may kasaysayan at kagandahan-asal sa pandaigdigang kakayahan."
-                        />
-                    </v-carousel-item>
-                    <v-carousel-item>
-                        <the-card
-                            class="custom-card card"
-                            logo="fa-regular fa-eye"
-                            title="Vision"
-                            content="The Premier University in historic Cavite globally recognized for excellence in character development, academics, research, innovation and sustainable community engagement."
-                        />
-                    </v-carousel-item>
-                    <v-carousel-item>
-                        <the-card
-                            class="custom-card card"
-                            logo="fa-regular fa-eye"
-                            title="Mithiin"
-                            content="Ang nangungunang pamantasan sa makasaysayang Kabite na kinikilala sa kahusayan sa paghubog ng mga indibidwal na may pandaigdigang kakayahan at kagandahang asal."
-                        />
-                    </v-carousel-item>
-                </div>
+                <v-carousel-item
+                    v-for="MisnVis in universityMissionVision"
+                    :key="MisnVis.id"
+                >
+                    <div class="mission-vision-box">
+                        <div class="title">
+                            <h1>{{ MisnVis.title }}</h1>
+                        </div>
+                        <p>
+                            {{ MisnVis.description }}
+                        </p>
+                    </div>
+                </v-carousel-item>
             </v-container>
         </v-carousel>
         <div class="bg">
@@ -182,7 +161,6 @@
 </template>
 <script setup>
 import { onMounted } from "vue";
-import TheCard from "@/components/TheCard.vue";
 import TheTitle from "@/components/TheTitle.vue";
 import TheOsas from "@/components/TheOsas.vue";
 import TheBox from "@/components/TheBox.vue";
@@ -193,7 +171,7 @@ import "intersection-observer";
 useHead({
     title: "Home",
 });
-
+const { data: universityMissionVision } = useFetch("/api/missionvision");
 onMounted(() => {
     if (process.client) {
         const sliders = document.querySelectorAll(".card");
@@ -227,6 +205,32 @@ onMounted(() => {
 <style scoped>
 body {
     overflow-x: hidden;
+}
+
+.mission-vision-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mission-vision-box .title {
+    padding: 0.8em;
+    text-align: center;
+    background-color: #c7ffb2;
+    width: 100%;
+    color: #003b1b;
+}
+
+.mission-vision-box p {
+    margin-top: 2em;
+    text-align: justify;
+    background-color: #fff;
+    padding: 1.5em;
+    border-radius: 20px;
+}
+
+.mission-vision-box p.mission {
+    color: #fff;
 }
 
 marquee {

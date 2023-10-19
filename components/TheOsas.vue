@@ -8,7 +8,7 @@
             ></v-img>
         </div>
         <div>
-            <v-card class="mt-4 rounded-xl rounded-be-xl color=bg100 card">
+            <v-card class="mt-4 rounded-xl rounded-be-xl card">
                 <div class="custom-text">
                     <v-list>
                         <span class="indent ma-3"
