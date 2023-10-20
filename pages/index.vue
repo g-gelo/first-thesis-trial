@@ -29,7 +29,7 @@
                 >
                     <div class="mission-vision-box">
                         <div class="title">
-                            <h1>{{ MisnVis.title }}</h1>
+                            <h1 class="text-3xl">{{ MisnVis.title }}</h1>
                         </div>
                         <p>
                             {{ MisnVis.description }}

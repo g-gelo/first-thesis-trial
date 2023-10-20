@@ -7,43 +7,19 @@
                 class="top-image card"
             ></v-img>
         </div>
-        <div>
-            <v-card class="mt-4 rounded-xl rounded-be-xl card">
-                <div class="custom-text">
-                    <v-list>
-                        <span class="indent ma-3"
-                            >As an institution of higher learning, the Cavite
-                            State University caters to the needs of students,
-                            not only in the acquisition of education but also in
-                            their personality development. To ensure that the
-                            students’ potentials for advancement are maximized,
-                            the Student Welfare Services was established.</span
-                        >
-                    </v-list>
+        <div v-for="osas in osasModule" :key="osas.id">
+            <div class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg">
+                <div class="px-4 py-2 bg-secondary-100">
+                    <h2 class="text-2xl font-medium ma-2">{{ osas.title }}</h2>
                 </div>
-            </v-card>
-        </div>
-        <div>
-            <v-card
-                title="Goal"
-                class="mt-4 rounded-xl rounded-be-xl card"
-                color="bg100"
-            >
-                <div class="custom-text">
-                    <v-list>
-                        <span class="indent ma-3 mt-0"
-                            >The goals of OSAS are to look after the
-                            educational, vocational, as well as the personal
-                            development needs of the students; to assist them to
-                            maximize their potentials by helping them understand
-                            themselves and their environment and to enhance
-                            their psychological growth towards socialized
-                            maturity.</span
-                        >
-                    </v-list>
+                <div class="px-4 py-2 bg-slate-50 rounded-b-lg">
+                    <p class="indent text-base text-justify leading-relaxed">
+                        {{ osas.description }}
+                    </p>
                 </div>
-            </v-card>
+            </div>
         </div>
+
         <div>
             <v-card
                 title="Functions"
@@ -106,6 +82,8 @@
 <script setup>
 import "animate.css";
 import { ref, onMounted } from "vue";
+
+const { data: osasModule } = useFetch("/api/osas");
 
 onMounted(() => {
     if (process.client) {

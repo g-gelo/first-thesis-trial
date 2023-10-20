@@ -25,7 +25,7 @@
         </div>
 
         <div v-if="showModalMisnVis">
-            <div v-if="showModalMisnVisEdit" class="modal">
+            <div v-if="showModalMisnVisEdit">
                 <v-card>
                     <v-card-title>Edit Mission and Vision</v-card-title>
                     <v-card-text>
@@ -60,7 +60,7 @@
                 <tbody>
                     <tr v-for="misnvis in missionvision" :key="misnvis.id">
                         <td>{{ misnvis.title }}</td>
-                        <td class="description">{{ misnvis.description }}</td>
+                        <td>{{ misnvis.description }}</td>
                         <td>
                             <v-btn
                                 v-if="!showModalMisnVisEdit"
@@ -125,11 +125,6 @@ const editMisnVis = async (editedMisnVis) => {
 }
 .btn button:active {
     opacity: 0.5;
-}
-.description {
-    overflow: hidden;
-    height: 20%;
-    text-overflow: ellipsis;
 }
 
 table {

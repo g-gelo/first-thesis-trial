@@ -1,3 +1,4 @@
+bf
 <template>
     <div class="content-container">
         <v-container>
@@ -22,61 +23,98 @@
             </div>
             <div v-if="showModalSeminar">
                 <h1>Seminar Form</h1>
-                <v-form @submit.prevent="addSeminar(seminar)">
-                    <v-row>
-                        <v-col cols="12" sm="6">
-                            <v-text-field
+
+                <form class="space-y-4" @submit.prevent="addSeminar(seminar)">
+                    <div class="flex flex-wrap -mx-4">
+                        <div class="w-full px-4 sm:w-1/2">
+                            <label
+                                for="title"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                >Title</label
+                            >
+                            <input
+                                type="text"
+                                id="title"
+                                name="title"
                                 v-model="seminar.title"
-                                label="Title"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Title"
                                 required
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                            <v-text-field
+                            />
+                        </div>
+                        <div class="w-full px-4">
+                            <label
+                                for="description"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                >Guest Speaker</label
+                            >
+                            <textarea
+                                id="description"
+                                name="description"
                                 v-model="seminar.description"
-                                label="Guest Speaker"
+                                rows="4"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Guest Speaker"
                                 auto-grow
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6">
-                            <v-text-field
+                            ></textarea>
+                        </div>
+                        <div class="w-full px-4 sm:w-1/2">
+                            <label
+                                for="date"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                >Date</label
+                            >
+                            <input
+                                type="text"
                                 id="date"
                                 v-model="seminar.date"
-                                type="text"
-                                label="Date"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Date"
                                 required
-                            ></v-text-field>
+                            />
                             <span class="text-overline">ex. July 18</span>
-                        </v-col>
-                        <v-col>
-                            <v-text-field
+                        </div>
+                        <div class="w-full px-4">
+                            <label
+                                for="time"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                >Time</label
+                            >
+                            <input
+                                type="text"
                                 id="time"
                                 v-model="seminar.time"
-                                type="text"
-                                label="Time"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Time"
                                 required
-                            ></v-text-field>
+                            />
                             <span class="text-overline"
                                 >ex. 08:00AM - 10:00AM</span
                             >
-                        </v-col>
-                        <v-col cols="12" sm="6">
-                            <v-text-field
+                        </div>
+                        <div class="w-full px-4 sm:w-1/2">
+                            <label
+                                for="location"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                >Location</label
+                            >
+                            <input
+                                type="text"
+                                id="location"
                                 v-model="seminar.location"
-                                label="Location"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Location"
                                 required
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-                    <button class="btn2" type="submit">SUBMIT</button>
+                            />
+                        </div>
+                    </div>
                     <button
-                        class="btn2"
-                        color="primary"
-                        @click="showModalSeminar = false"
+                        type="submit"
+                        class="bg-blue-500 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
                     >
-                        Cancel
+                        Submit
                     </button>
-                </v-form>
+                </form>
             </div>
             <v-container>
                 <div v-if="showModal" class="modal career">
