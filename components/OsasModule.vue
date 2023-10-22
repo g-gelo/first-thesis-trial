@@ -332,11 +332,7 @@ const addOsasFunction = async (oFunction) => {
 
 const editedOsasFunction = ref({
     id: null,
-    title: null,
-    description: null,
-    date: null,
-    time: null,
-    location: null,
+    osasFunction: null,
 });
 
 const editOsasFunction = async (editedOsasFunction) => {

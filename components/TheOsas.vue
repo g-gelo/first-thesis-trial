@@ -21,31 +21,24 @@
         </div>
 
         <div>
-            <v-card
-                title="Functions"
-                class="mt-4 rounded-xl rounded-be-xl card"
-                color="bg100"
-            >
-                <div class="custom-text">
-                    <span class="indent ma-3 mt-0"
-                        >To attain these goals, the OSAS performs the following
-                        functions:</span
-                    >
-                    <v-list>
-                        <v-list-item
-                            v-for="functions in osasFunction"
-                            :key="functions.id"
-                        >
-                            <v-icon size="2xs" class="mr-2"
-                                >fa-regular fa-circle-dot</v-icon
-                            >
-                            <v-list-item-content>{{
-                                functions.osasFunction
-                            }}</v-list-item-content>
-                        </v-list-item>
-                    </v-list>
+            <div class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg">
+                <div class="px-4 py-2 bg-secondary-100">
+                    <h2 class="text-lg ma-2">
+                        To attain these goals, the OSAS performs the following
+                        functions:
+                    </h2>
                 </div>
-            </v-card>
+                <div class="px-4 py-2 bg-slate-50 rounded-b-lg">
+                    <p
+                        v-for="functions in osasFunction"
+                        :functions="functions.id"
+                        class="text-justify leading-relaxed"
+                    >
+                        <v-icon class="mr-2 sm">fa-regular fa-circle-dot</v-icon
+                        >{{ functions.osasFunction }}
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -89,6 +82,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.sm {
+    font-size: medium;
+}
 .top-image {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(13, 202, 107, 0.3);

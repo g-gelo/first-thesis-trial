@@ -172,6 +172,7 @@ useHead({
     title: "Home",
 });
 const { data: universityMissionVision } = useFetch("/api/missionvision");
+
 onMounted(() => {
     if (process.client) {
         const sliders = document.querySelectorAll(".card");
