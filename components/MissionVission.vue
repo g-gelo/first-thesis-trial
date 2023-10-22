@@ -108,7 +108,6 @@ const editMisnVis = async (editedMisnVis) => {
                 description: editedMisnVis.description,
             },
         });
-    if (universityMissionVision) missionvision.value = await getMisnVis();
 };
 </script>
 

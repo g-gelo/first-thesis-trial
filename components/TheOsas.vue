@@ -32,45 +32,16 @@
                         functions:</span
                     >
                     <v-list>
-                        <v-list-item>
+                        <v-list-item
+                            v-for="functions in osasFunction"
+                            :key="functions.id"
+                        >
                             <v-icon size="2xs" class="mr-2"
                                 >fa-regular fa-circle-dot</v-icon
                             >
-                            <v-list-item-content
-                                >Provide counseling and testing to students so
-                                that they may recognize and accept themselves
-                                and develop their
-                                potentials;</v-list-item-content
-                            >
-                        </v-list-item>
-                        <v-list-item>
-                            <v-icon size="2xs" class="mr-2"
-                                >fa-regular fa-circle-dot</v-icon
-                            >
-                            <v-list-item-content
-                                >Provide information, training, placement and
-                                follow-up services to students, graduates and
-                                other clienteles;</v-list-item-content
-                            >
-                        </v-list-item>
-                        <v-list-item>
-                            <v-icon size="2xs" class="mr-2"
-                                >fa-regular fa-circle-dot</v-icon
-                            >
-                            <v-list-item-content
-                                >Provide avenues to hone students’ talents and
-                                interest to ensure social and cultural growth;
-                                and</v-list-item-content
-                            >
-                        </v-list-item>
-                        <v-list-item>
-                            <v-icon size="2xs" class="mr-2"
-                                >fa-regular fa-circle-dot</v-icon
-                            >
-                            <v-list-item-content
-                                >Develop skills and potentials of student
-                                writers.</v-list-item-content
-                            >
+                            <v-list-item-content>{{
+                                functions.osasFunction
+                            }}</v-list-item-content>
                         </v-list-item>
                     </v-list>
                 </div>
@@ -84,6 +55,7 @@ import "animate.css";
 import { ref, onMounted } from "vue";
 
 const { data: osasModule } = useFetch("/api/osas");
+const { data: osasFunction } = useFetch("/api/osasfunction");
 
 onMounted(() => {
     if (process.client) {

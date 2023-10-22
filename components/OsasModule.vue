@@ -162,6 +162,60 @@
                 </tbody>
             </table>
         </div>
+        <div class="btn mt-3">
+            <button
+                v-if="!showFunctionForm"
+                @click="
+                    ($event) => {
+                        showFunctionForm = true;
+                    }
+                "
+            >
+                <v-icon>fa-solid fa-plus</v-icon> Create Osas Function
+            </button>
+            <button
+                v-if="showFunctionForm"
+                @click="
+                    ($event) => {
+                        showFunctionForm = false;
+                    }
+                "
+            >
+                Cancel Creating Osas Function
+            </button>
+        </div>
+        <div v-if="showFunctionForm" class="mb-4">
+            <div class="bg-white shadow-lg rounded-lg">
+                <h1 class="m-2">Function Form</h1>
+                <form
+                    class="space-y-4"
+                    @submit.prevent="addOsasFunction(oFunction)"
+                >
+                    <div>
+                        <label
+                            for="function"
+                            class="block ma-2 text-sm font-medium text-gray-900"
+                            >Function</label
+                        >
+                        <input
+                            type="text"
+                            id="function"
+                            v-model="oFunction.osasFunction"
+                            name="function"
+                            class="shadow-sm m-3 w-10/12 bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            placeholder="Function"
+                            required
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        class="bg-blue-500 ma-2 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
+                    >
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
         <div class="btn">
             <button
                 v-if="!showFunction"
@@ -184,6 +238,72 @@
                 Hide Function Database
             </button>
         </div>
+        <div v-if="showFunctionEdit">
+            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                <h2 class="text-xl font-bold mb-4">Edit Osas Module</h2>
+                <div>
+                    <input
+                        v-model="editedOsasFunction.osasFunction"
+                        class="w-full p-2 border rounded mb-4"
+                        placeholder="title"
+                        required
+                    />
+                </div>
+                <div class="flex justify-end">
+                    <button
+                        @click="
+                            ($event) => editOsasFunction(editedOsasFunction)
+                        "
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    >
+                        Save
+                    </button>
+                    <button
+                        @click="showFunctionEdit = false"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div v-if="showFunction">
+            <table density="compact">
+                <thead>
+                    <tr>
+                        <th class="w-25">Function</th>
+                        <th class="w-25">Edit & Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="purpose in osasFunction" :key="purpose.id">
+                        <td>{{ purpose.osasFunction }}</td>
+                        <td>
+                            <v-btn
+                                v-if="!showFunctionEdit"
+                                variant="tonal"
+                                @click="
+                                    ($event) => {
+                                        editedOsasFunction.id = purpose.id;
+                                        editedOsasFunction.osasFunction =
+                                            purpose.osasFunction;
+                                        showFunctionEdit = true;
+                                    }
+                                "
+                            >
+                                Edit
+                            </v-btn>
+                            <v-btn
+                                variant="tonal"
+                                @click="deleteFunction(purpose.id)"
+                            >
+                                Delete
+                            </v-btn>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -192,6 +312,58 @@ const showOsasModule = ref(false);
 const showOsasEdit = ref(false);
 const showOsasForm = ref(false);
 const showFunction = ref(false);
+const showFunctionEdit = ref(false);
+const showFunctionForm = ref(false);
+
+const { data: osasFunction } = useFetch("/api/osasfunction");
+
+const oFunction = ref({
+    osasFunction: "",
+});
+
+const addOsasFunction = async (oFunction) => {
+    return await $fetch("/api/osasfunction", {
+        method: "POST",
+        body: {
+            osasFunction: oFunction.osasFunction,
+        },
+    });
+};
+
+const editedOsasFunction = ref({
+    id: null,
+    title: null,
+    description: null,
+    date: null,
+    time: null,
+    location: null,
+});
+
+const editOsasFunction = async (editedOsasFunction) => {
+    let osasFunction = null;
+
+    if (editedOsasFunction.id && editedOsasFunction.osasFunction)
+        osasFunction = await $fetch("/api/osasfunction", {
+            method: "PUT",
+            body: {
+                id: editedOsasFunction.id,
+                osasFunction: editedOsasFunction.osasFunction,
+            },
+        });
+    if (osasFunction) osasFunction.value = await getosasFunction();
+};
+
+const deleteFunction = async (id) => {
+    if (id)
+        return await $fetch("/api/osasfunction", {
+            method: "DELETE",
+            body: {
+                id,
+            },
+        });
+
+    if (oFunction.value) oFunction.value = await getoFunction;
+};
 
 const { data: osasAll } = useFetch("/api/osas");
 
@@ -232,7 +404,6 @@ const editOsasModule = async (editedOsasModule) => {
                 description: editedOsasModule.description,
             },
         });
-    if (universityMissionVision) missionvision.value = await getosasModule();
 };
 
 const deleteOsas = async (id) => {

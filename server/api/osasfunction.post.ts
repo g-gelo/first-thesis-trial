@@ -5,11 +5,11 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     let osasfunction = null;
 
-    if (body.function)
+    if (body.osasFunction)
         await event.context.prisma.oSASFunctions
             .create({
                 data: {
-                    function: body.function,
+                    osasFunction: body.osasFunction,
                 },
             })
             .then((response) => {
