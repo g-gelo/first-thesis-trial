@@ -20,6 +20,16 @@ bf
                 >
                     <v-icon>fa-solid fa-plus</v-icon> Create a Seminar
                 </button>
+                <button
+                    v-if="showModalSeminar"
+                    @click="
+                        ($event) => {
+                            showModalSeminar = false;
+                        }
+                    "
+                >
+                    Hide Function Database
+                </button>
             </div>
             <div v-if="showModalSeminar">
                 <h1>Seminar Form</h1>
