@@ -10,25 +10,27 @@
 #     "location": "Updated Location"
 # }
 
-# GET  http://localhost:3000/api/osas
+# GET  http://localhost:3000/api/gco
 # Content-Type: application/json
 
-# {  }
+# { 
 
-# POST http://localhost:3000/api/osas
-# Content-Type: application/json
-
-# {
-#     "title": "ption",
-#     "description": "sadsadadsaUpdated sadcripripripription",
 # }
 
-DELETE http://localhost:3000/api/osas
+POST http://localhost:3000/api/gco
 Content-Type: application/json
 
 {
-    "id": "clnxvqa4y0001hslwfdzdz1t0",
+    "title": "Option",
+    "description": "sadsadadsaUpdatedasda sadcripripripription",
 }
+
+# DELETE http://localhost:3000/api/osas
+# Content-Type: application/json
+
+# {
+#     "id": "clnxvqa4y0001hslwfdzdz1t0",
+# }
 
 
 

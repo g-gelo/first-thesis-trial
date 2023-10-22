@@ -8,6 +8,9 @@ bf
             <div>
                 <OsasModule />
             </div>
+            <div>
+                <GCOProfile />
+            </div>
             <h1 class="pb-4">Seminar</h1>
             <div class="btn">
                 <button
