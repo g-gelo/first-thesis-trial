@@ -33,13 +33,12 @@ bf
             </div>
             <div v-if="showModalSeminar">
                 <h1>Seminar Form</h1>
-
                 <form class="space-y-4" @submit.prevent="addSeminar(seminar)">
                     <div class="flex flex-wrap -mx-4">
                         <div class="w-full px-4 sm:w-1/2">
                             <label
                                 for="title"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                class="block mb-2 text-sm font-medium text-gray-900"
                                 >Title</label
                             >
                             <input
@@ -55,7 +54,7 @@ bf
                         <div class="w-full px-4">
                             <label
                                 for="description"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                class="block mb-2 text-sm font-medium text-gray-900"
                                 >Guest Speaker</label
                             >
                             <textarea
@@ -71,7 +70,7 @@ bf
                         <div class="w-full px-4 sm:w-1/2">
                             <label
                                 for="date"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                class="block mb-2 text-sm font-medium text-gray-900"
                                 >Date</label
                             >
                             <input
@@ -87,7 +86,7 @@ bf
                         <div class="w-full px-4">
                             <label
                                 for="time"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                class="block mb-2 text-sm font-medium text-gray-900"
                                 >Time</label
                             >
                             <input
@@ -105,7 +104,7 @@ bf
                         <div class="w-full px-4 sm:w-1/2">
                             <label
                                 for="location"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                class="block mb-2 text-sm font-medium text-gray-900"
                                 >Location</label
                             >
                             <input
@@ -197,69 +196,72 @@ bf
                     The database received
                     {{ seminars?.length || 0 }} records:
                 </div>
-                <div>
-                    <v-table density="compact">
-                        <thead>
-                            <tr>
-                                <th class="text-left">Title</th>
-                                <th class="text-left">Description</th>
-                                <th class="text-left">Date</th>
-                                <th class="text-left">Time</th>
-                                <th class="text-left">Location</th>
-                                <th class="text-left">Edit</th>
-                                <th class="text-left">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="meeting in seminars" :key="meeting.id">
-                                <td>{{ meeting.title }}</td>
-                                <td>{{ meeting.description }}</td>
-                                <td>{{ meeting.date }}</td>
-                                <td>{{ meeting.time }}</td>
-                                <td>{{ meeting.location }}</td>
-                                <td>
-                                    <v-btn
-                                        v-if="!showModal"
-                                        variant="tonal"
-                                        @click="
-                                            ($event) => {
-                                                editedSeminar.id = meeting.id;
-                                                editedSeminar.title =
-                                                    meeting.title;
-                                                editedSeminar.description =
-                                                    meeting.description;
-                                                editedSeminar.date =
-                                                    meeting.date;
-                                                editedSeminar.time =
-                                                    meeting.time;
-                                                editedSeminar.location =
-                                                    meeting.location;
-                                                showModal = true;
-                                            }
-                                        "
-                                    >
-                                        Edit
-                                    </v-btn>
-                                </td>
-                                <td>
-                                    <!-- Show the Delete button only if the modal is not open -->
-                                    <v-btn
-                                        v-if="!showModal"
-                                        variant="tonal"
-                                        @click="deleteSeminar(meeting.id)"
-                                    >
-                                        Delete
-                                    </v-btn>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </v-table>
+                <div class="overscroll-y-none">
+                    <div class="overscroll-x-auto">
+                        <table density="compact" class="min-w-full">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Location</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="meeting in seminars"
+                                    :key="meeting.id"
+                                >
+                                    <td>{{ meeting.title }}</td>
+                                    <td>{{ meeting.description }}</td>
+                                    <td>{{ meeting.date }}</td>
+                                    <td>{{ meeting.time }}</td>
+                                    <td>{{ meeting.location }}</td>
+                                    <td>
+                                        <v-btn
+                                            v-if="!showModal"
+                                            variant="tonal"
+                                            @click="
+                                                ($event) => {
+                                                    editedSeminar.id =
+                                                        meeting.id;
+                                                    editedSeminar.title =
+                                                        meeting.title;
+                                                    editedSeminar.description =
+                                                        meeting.description;
+                                                    editedSeminar.date =
+                                                        meeting.date;
+                                                    editedSeminar.time =
+                                                        meeting.time;
+                                                    editedSeminar.location =
+                                                        meeting.location;
+                                                    showModal = true;
+                                                }
+                                            "
+                                        >
+                                            Edit
+                                        </v-btn>
+                                    </td>
+                                    <td>
+                                        <v-btn
+                                            v-if="!showModal"
+                                            variant="tonal"
+                                            @click="deleteSeminar(meeting.id)"
+                                        >
+                                            Delete
+                                        </v-btn>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </v-col>
         </v-container>
-        <div>
-            <CareerForm />
-        </div>
+        <CareerForm />
         <v-btn
             v-if="!showModal"
             class="rounded-xl shadow-xl p-2 m-2"
@@ -355,6 +357,26 @@ const deleteSeminar = async (id) => {
 </script>
 
 <style scoped>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+td {
+    height: 100px;
+}
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+tr:nth-child(odd) {
+    background-color: #b5bbc4;
+}
 .btn button {
     display: flex;
     width: 100%;

@@ -26,90 +26,115 @@
             </div>
             <div v-if="showModalCareer">
                 <h1>Job Career Form</h1>
-                <v-form @submit.prevent="addCareer(career)">
-                    <v-row>
-                        <v-col cols="12" sm="6">
-                            <v-text-field
-                                v-model="career.title"
-                                label="Title"
-                                required
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6">
-                            <v-text-field
-                                v-model="career.date"
-                                label="Date"
-                                required
-                            ></v-text-field>
-                            <span class="text-overline">ex. July 18</span>
-                        </v-col>
-                        <v-col>
-                            <v-text-field
-                                v-model="career.time"
-                                label="Time"
-                                required
-                            ></v-text-field>
-                            <span class="text-overline"
-                                >ex. 08:00AM - 10:00AM</span
-                            >
-                        </v-col>
-                        <v-col cols="12" sm="6">
-                            <v-text-field
-                                v-model="career.location"
-                                label="Location"
-                                required
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-                    <button class="btn2" type="submit">SUBMIT</button>
+                <form @submit.prevent="addCareer(career)">
+                    <div class="w-full px-4 sm:w-1/2">
+                        <label
+                            for="title"
+                            class="block mb-2 text-sm font-medium text-gray-900"
+                            >Title</label
+                        >
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            v-model="career.title"
+                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="Title"
+                            required
+                        />
+                    </div>
+                    <div class="w-full px-4 sm:w-1/2">
+                        <label
+                            for="date"
+                            class="block mb-2 text-sm font-medium text-gray-900"
+                            >Date</label
+                        >
+                        <input
+                            type="text"
+                            id="date"
+                            v-model="career.date"
+                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="Date"
+                            required
+                        />
+                        <span class="text-overline">ex. July 18</span>
+                    </div>
+                    <div class="w-full px-4">
+                        <label
+                            for="time"
+                            class="block mb-2 text-sm font-medium text-gray-900"
+                            >Time</label
+                        >
+                        <input
+                            type="text"
+                            id="time"
+                            v-model="career.time"
+                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="Time"
+                            required
+                        />
+                        <span class="text-overline">ex. 08:00AM - 10:00AM</span>
+                    </div>
+                    <div class="w-full px-4 sm:w-1/2">
+                        <label
+                            for="location"
+                            class="block mb-2 text-sm font-medium text-gray-900"
+                            >Location</label
+                        >
+                        <input
+                            type="text"
+                            id="location"
+                            v-model="career.location"
+                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="Location"
+                            required
+                        />
+                    </div>
                     <button
-                        class="btn2"
-                        color="primary"
-                        @click="showModalCareer = false"
+                        type="submit"
+                        class="mt-3 bg-blue-500 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
                     >
-                        Cancel
+                        Submit
                     </button>
-                </v-form>
+                </form>
             </div>
-            <v-container>
-                <div v-if="showModal" class="modal">
-                    <v-card>
-                        <v-card-title>Edit Career</v-card-title>
-                        <v-card-text>
-                            <v-text-field
-                                v-model="editedCareer.title"
-                                label="Title"
-                                required
-                            ></v-text-field>
-                            <v-text-field
-                                v-model="editedCareer.date"
-                                label="Date"
-                                required
-                            ></v-text-field>
-                            <v-text-field
-                                v-model="editedCareer.time"
-                                label="Time"
-                                required
-                            ></v-text-field>
-                            <v-text-field
-                                v-model="editedCareer.location"
-                                label="Location"
-                                required
-                            ></v-text-field>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-btn
-                                color="primary"
-                                @click="($event) => editCareer(editedCareer)"
-                                >Save</v-btn
-                            >
-                            <v-btn color="error" @click="showModal = false"
-                                >Cancel</v-btn
-                            >
-                        </v-card-actions>
-                    </v-card>
-                </div>
-            </v-container>
+            <div v-if="showModal" class="modal">
+                <v-card>
+                    <v-card-title>Edit Career</v-card-title>
+                    <v-card-text>
+                        <v-text-field
+                            v-model="editedCareer.title"
+                            label="Title"
+                            required
+                        ></v-text-field>
+                        <v-text-field
+                            v-model="editedCareer.date"
+                            label="Date"
+                            required
+                        ></v-text-field>
+                        <v-text-field
+                            v-model="editedCareer.time"
+                            label="Time"
+                            required
+                        ></v-text-field>
+                        <v-text-field
+                            v-model="editedCareer.location"
+                            label="Location"
+                            required
+                        ></v-text-field>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-btn
+                            color="primary"
+                            @click="($event) => editCareer(editedCareer)"
+                            >Save</v-btn
+                        >
+                        <v-btn color="error" @click="showModal = false"
+                            >Cancel</v-btn
+                        >
+                    </v-card-actions>
+                </v-card>
+            </div>
             <div class="btn">
                 <button
                     v-if="!showCareerDatabase"
@@ -138,7 +163,7 @@
                     {{ careers?.length || 0 }} records:
                 </div>
                 <div>
-                    <v-table density="compact">
+                    <table density="compact">
                         <thead>
                             <tr>
                                 <th class="text-left">Title</th>
@@ -185,7 +210,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                    </v-table>
+                    </table>
                 </div>
             </v-col>
         </v-container>
@@ -263,6 +288,26 @@ const deleteCareer = async (id) => {
 </script>
 
 <style scoped>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+td {
+    height: 100px;
+}
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+tr:nth-child(odd) {
+    background-color: #b5bbc4;
+}
 .btn button {
     display: flex;
     width: 100%;
