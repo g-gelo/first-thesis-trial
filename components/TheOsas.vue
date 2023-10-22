@@ -10,7 +10,7 @@
         <div v-for="osas in osasModule" :key="osas.id">
             <div class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg">
                 <div class="px-4 py-2 bg-secondary-100">
-                    <h2 class="text-2xl font-medium ma-2">{{ osas.title }}</h2>
+                    <h2 class="text-2xl ma-2">{{ osas.title }}</h2>
                 </div>
                 <div class="px-4 py-2 bg-slate-50 rounded-b-lg">
                     <p class="indent text-base text-justify leading-relaxed">

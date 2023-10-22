@@ -77,12 +77,13 @@
                         placeholder="title"
                         required
                     />
-                    <input
+                    <textarea
                         v-model="editedOsasModule.description"
                         class="w-full p-2 border rounded mb-4"
                         placeholder="description"
+                        rows="5"
                         required
-                    />
+                    ></textarea>
                 </div>
                 <div class="flex justify-end">
                     <button
@@ -202,7 +203,7 @@
                             id="function"
                             v-model="oFunction.osasFunction"
                             name="function"
-                            class="shadow-sm m-3 w-10/12 bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            class="shadow-sm m-3 w-10/12 text-color text-white bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                             placeholder="Function"
                             required
                         />
@@ -240,7 +241,7 @@
         </div>
         <div v-if="showFunctionEdit">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                <h2 class="text-xl font-bold mb-4">Edit Osas Module</h2>
+                <h2 class="text-xl font-bold mb-4">Edit Osas Function</h2>
                 <div>
                     <input
                         v-model="editedOsasFunction.osasFunction"

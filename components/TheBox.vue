@@ -1,41 +1,51 @@
 <template>
     <div>
-        <div>
-            <v-card
-                :title="`${title}`"
-                class="mt-4 rounded-xl rounded-be-xl"
-                color="bg100"
-            >
-                <div class="custom-text">
-                    <span class="indent ma-3 mt-0">{{ subtitle }}</span>
-                    <v-list>
-                        <v-list-item v-for="item in items" :key="item.id">
-                            <v-icon size="2xs" class="mr-2">{{
-                                item.icon
-                            }}</v-icon>
-                            <v-list-item-content>
-                                <span v-html="item.content"></span>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
+        <div v-for="gco in gcoProfile" :key="gco.id">
+            <div class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg">
+                <div class="px-4 py-2 bg-secondary-100">
+                    <h2 class="text-2xl font-medium ma-2">{{ gco.title }}</h2>
                 </div>
-            </v-card>
+                <div class="px-4 py-2 bg-slate-50 rounded-b-lg">
+                    <p class="indent text-base text-justify leading-relaxed">
+                        {{ gco.description }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg">
+                <div class="px-4 py-2 bg-secondary-100">
+                    <div>
+                        <h1 class="text-2xl">Services Offered</h1>
+                    </div>
+                    <p class="indent">
+                        To attain these goals, the OSAS performs the following
+                        functions:
+                    </p>
+                </div>
+                <div class="px-4 py-2 bg-slate-50 rounded-b-lg">
+                    <p
+                        v-for="service in gcoService"
+                        :key="service.id"
+                        class="text-justify leading-loose"
+                    >
+                        <v-icon class="mr-2 sm">fa-regular fa-circle-dot</v-icon
+                        >{{ service.service }}
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
-<script setup lang="ts">
-defineProps<{
-    title: string;
-    subtitle: string;
-    items: Array<{ id: number; icon: string; content: string }>;
-}>();
+<script setup>
+const { data: gcoProfile } = useFetch("/api/gco");
+const { data: gcoService } = useFetch("/api/gcoservices");
 </script>
 
 <style scoped>
-.custom-text {
-    text-align: justify;
-    text-justify: inter-word;
+.sm {
+    font-size: medium;
 }
 
 .indent {

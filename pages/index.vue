@@ -59,59 +59,7 @@
         />
         <div>
             <v-container>
-                <the-box
-                    class="card"
-                    title=""
-                    subtitle=""
-                    :items="[
-                        {
-                            id: 1,
-                            content: `The Guidance and Counseling Office (GCO) serves as the students’ partner in achieving success in their career, personal and social domains. It is a place where any student can go and talk about concerns that affect his/her life as a college student and as an individual. Concerns or issues discussed in individual sessions with any of the counselors are treated with confidentiality and do not appear in the students’ academic records.
-`,
-                        },
-                    ]"
-                />
-            </v-container>
-        </div>
-        <div>
-            <v-container>
-                <the-box
-                    class="card"
-                    title="Services Offered"
-                    subtitle="The Guidance and Counseling Office (GCO) offers the following services:"
-                    :items="[
-                        {
-                            id: 1,
-                            icon: 'fa-regular fa-circle-dot',
-                            content: 'Counseling Referral',
-                        },
-                        {
-                            id: 2,
-                            icon: 'fa-regular fa-circle-dot',
-                            content: 'Career Placement',
-                        },
-                        {
-                            id: 3,
-                            icon: 'fa-regular fa-circle-dot',
-                            content: 'Individual Inventory',
-                        },
-                        {
-                            id: 4,
-                            icon: 'fa-regular fa-circle-dot',
-                            content: 'Information',
-                        },
-                        {
-                            id: 5,
-                            icon: 'fa-regular fa-circle-dot',
-                            content: 'Testing',
-                        },
-                        {
-                            id: 6,
-                            icon: 'fa-regular fa-circle-dot',
-                            content: 'Follow-up and Research evaluation',
-                        },
-                    ]"
-                />
+                <the-box />
             </v-container>
         </div>
         <the-title
