@@ -322,12 +322,14 @@ const gcoServices = ref({
 });
 
 const addGcoService = async (gcoServices) => {
-    return await $fetch("/api/gcoservices", {
+    let addedGcoService = null;
+    addedGcoService = await $fetch("/api/gcoservices", {
         method: "POST",
         body: {
             service: gcoServices.service,
         },
     });
+    if (addedGcoService) gcoService.value = await $fetch("/api/gcoservices");
 };
 
 const editedGcoService = ref({
@@ -336,26 +338,29 @@ const editedGcoService = ref({
 });
 
 const editGcoService = async (editedGcoService) => {
-    let gcoService = null;
+    let gcoServices = null;
 
     if (editedGcoService.id && editedGcoService.service)
-        gcoService = await $fetch("/api/gcoservices", {
+        gcoServices = await $fetch("/api/gcoservices", {
             method: "PUT",
             body: {
                 id: editedGcoService.id,
                 service: editedGcoService.service,
             },
         });
+    gcoService.value = await $fetch("/api/gcoservices");
 };
 
 const deleteGcoService = async (id) => {
+    let deletedGcoService = null;
     if (id)
-        return await $fetch("/api/gcoservices", {
+        deletedGcoService = await $fetch("/api/gcoservices", {
             method: "DELETE",
             body: {
                 id,
             },
         });
+    gcoService.value = await $fetch("/api/gcoservices");
 };
 
 const { data: gcoProfile } = useFetch("/api/gco");
@@ -366,13 +371,15 @@ const gco = ref({
 });
 
 const addGco = async (gco) => {
-    return await $fetch("/api/gco", {
+    let addedGco = null;
+    addedGco = await $fetch("/api/gco", {
         method: "POST",
         body: {
             title: gco.title,
             description: gco.description,
         },
     });
+    if (addedGco) gcoProfile.value = await $fetch("/api/gco");
 };
 
 const editedGcoProfile = ref({
@@ -382,14 +389,14 @@ const editedGcoProfile = ref({
 });
 
 const editGcoProfile = async (editedGcoProfile) => {
-    let gcoProfile = null;
+    let gcoProfiles = null;
 
     if (
         editedGcoProfile.id &&
         editedGcoProfile.title &&
         editedGcoProfile.description
     )
-        gcoProfile = await $fetch("/api/gco", {
+        gcoProfiles = await $fetch("/api/gco", {
             method: "PUT",
             body: {
                 id: editedGcoProfile.id,
@@ -397,18 +404,20 @@ const editGcoProfile = async (editedGcoProfile) => {
                 description: editedGcoProfile.description,
             },
         });
+    gcoProfile.value = await $fetch("/api/gco");
 };
 
 const deleteGco = async (id) => {
+    let deletedGco = null;
     if (id)
-        return await $fetch("/api/gco", {
+        deletedGco = await $fetch("/api/gco", {
             method: "DELETE",
             body: {
                 id,
             },
         });
 
-    if (osas.value) osas.value = await getOsas;
+    gcoProfile.value = await $fetch("/api/gco");
 };
 </script>
 
