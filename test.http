@@ -1,14 +1,11 @@
-# PUT http://localhost:3000/api/hotline
-# Content-Type: application/json
+PUT http://localhost:3000/api/missionvision
+Content-Type: application/json
 
-# {
-#     "id": "clo27a5me0000hsow6oy6jocm",
-#     "organization": "Edit ko ulit",
-#     "number": "Option",
-#     "location": "Option",
-#     "description": "sadsadadsaUpdatedasda sadcripripripription",
-#     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/2560px-PHP-logo.svg.png"
-# }
+{
+    "id": "clnwxhz280000hsfgwnyhck8x",
+    "title": "Edit ko ulit",
+    "description": "Option",
+}
 
 # GET  http://localhost:3000/api/hotline
 # Content-Type: application/json

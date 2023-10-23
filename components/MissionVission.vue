@@ -30,6 +30,11 @@
                     <v-card-title>Edit Mission and Vision</v-card-title>
                     <v-card-text>
                         <v-text-field
+                            v-model="editedMisnVis.title"
+                            label="title"
+                            required
+                        ></v-text-field>
+                        <v-text-field
                             v-model="editedMisnVis.description"
                             label="description"
                             required
@@ -68,6 +73,7 @@
                                 @click="
                                     ($event) => {
                                         editedMisnVis.id = misnvis.id;
+                                        editedMisnVis.title = misnvis.title;
                                         editedMisnVis.description =
                                             misnvis.description;
                                         showModalMisnVisEdit = true;
@@ -97,10 +103,10 @@ const editedMisnVis = ref({
 });
 
 const editMisnVis = async (editedMisnVis) => {
-    let MisnVis = null;
+    let missionNVision = null;
 
     if (editedMisnVis.id && editedMisnVis.title && editedMisnVis.description)
-        MisnVis = await $fetch("/api/missionvision", {
+        missionNVision = await $fetch("/api/missionvision", {
             method: "PUT",
             body: {
                 id: editedMisnVis.id,
@@ -108,6 +114,7 @@ const editMisnVis = async (editedMisnVis) => {
                 description: editedMisnVis.description,
             },
         });
+    missionvision.value = await $fetch("/api/missionvision");
 };
 </script>
 
