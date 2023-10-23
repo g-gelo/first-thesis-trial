@@ -323,12 +323,15 @@ const oFunction = ref({
 });
 
 const addOsasFunction = async (oFunction) => {
-    return await $fetch("/api/osasfunction", {
+    let addedFunction = null;
+
+    addedFunction = await $fetch("/api/osasfunction", {
         method: "POST",
         body: {
             osasFunction: oFunction.osasFunction,
         },
     });
+    if (addedFunction) osasFunction.value = await $fetch("/api/osasfunction");
 };
 
 const editedOsasFunction = ref({
@@ -337,29 +340,29 @@ const editedOsasFunction = ref({
 });
 
 const editOsasFunction = async (editedOsasFunction) => {
-    let osasFunction = null;
+    let osasFunctions = null;
 
     if (editedOsasFunction.id && editedOsasFunction.osasFunction)
-        osasFunction = await $fetch("/api/osasfunction", {
+        osasFunctions = await $fetch("/api/osasfunction", {
             method: "PUT",
             body: {
                 id: editedOsasFunction.id,
                 osasFunction: editedOsasFunction.osasFunction,
             },
         });
-    if (osasFunction) osasFunction.value = await getosasFunction();
+    osasFunction.value = await $fetch("/api/osasfunction");
 };
 
 const deleteFunction = async (id) => {
+    let deletedFunction = null;
     if (id)
-        return await $fetch("/api/osasfunction", {
+        deletedFunction = await $fetch("/api/osasfunction", {
             method: "DELETE",
             body: {
                 id,
             },
         });
-
-    if (oFunction.value) oFunction.value = await getoFunction;
+    osasFunction.value = await $fetch("/api/osasfunction");
 };
 
 const { data: osasAll } = useFetch("/api/osas");
@@ -370,13 +373,15 @@ const osas = ref({
 });
 
 const addOsas = async (osas) => {
-    return await $fetch("/api/osas", {
+    let addedOsas = null;
+    addedOsas = await $fetch("/api/osas", {
         method: "POST",
         body: {
             title: osas.title,
             description: osas.description,
         },
     });
+    if (addedOsas) osasAll.value = await $fetch("/api/osas");
 };
 
 const editedOsasModule = ref({
@@ -401,18 +406,20 @@ const editOsasModule = async (editedOsasModule) => {
                 description: editedOsasModule.description,
             },
         });
+    osasAll.value = await $fetch("/api/osas");
 };
 
 const deleteOsas = async (id) => {
+    let deletedOsas = null;
     if (id)
-        return await $fetch("/api/osas", {
+        deletedOsas = await $fetch("/api/osas", {
             method: "DELETE",
             body: {
                 id,
             },
         });
 
-    if (osas.value) osas.value = await getOsas;
+    osasAll.value = await $fetch("/api/osas");
 };
 </script>
 

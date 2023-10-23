@@ -232,7 +232,9 @@ const career = ref({
 });
 
 const addCareer = async (career) => {
-    return await $fetch("/api/careers", {
+    let addedCareer = null;
+
+    addedCareer = await $fetch("/api/careers", {
         method: "POST",
         body: {
             title: career.title,
@@ -241,6 +243,7 @@ const addCareer = async (career) => {
             location: career.location,
         },
     });
+    if (addedCareer) careers.value = await $fetch("/api/careers");
 };
 
 const editedCareer = ref({
@@ -271,19 +274,21 @@ const editCareer = async (editedCareer) => {
                 location: editedCareer.location,
             },
         });
-    if (career) career.value = await getCareers();
+    careers.value = await $fetch("/api/careers");
 };
 
 const deleteCareer = async (id) => {
+    let deletedCareer = null;
+
     if (id)
-        return await $fetch("/api/careers", {
+        deletedCareer = await $fetch("/api/careers", {
             method: "DELETE",
             body: {
                 id,
             },
         });
 
-    if (career.value) career.value = await getCareer;
+    careers.value = await $fetch("/api/careers");
 };
 </script>
 
