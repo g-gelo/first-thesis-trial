@@ -127,7 +127,7 @@ model GCOServices {
 model EmegergencyHotline {
   id           String   @id @default(cuid())
   organization String
-  number       Int
+  number       String   @db.VarChar(255)
   location     String
   description  String?  @db.VarChar(255)
   image        String?

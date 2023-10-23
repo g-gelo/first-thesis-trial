@@ -1,35 +1,38 @@
-# PUT http://localhost:3000/api/seminars
+# PUT http://localhost:3000/api/hotline
 # Content-Type: application/json
 
 # {
-#     "id": "clkc9iqk70001hs3cqjit7v3x",
-#     "title": "Seminar Title number 1",
-#     "description": "Updated Description",
-#     "date": "2023-07-31",
-#     "time": "15:00",
-#     "location": "Updated Location"
-# }
-
-GET  http://localhost:3000/api/gcoservices
-Content-Type: application/json
-
-{ 
-
-}
-
-# POST http://localhost:3000/api/gco
-# Content-Type: application/json
-
-# {
-#     "title": "Option",
+#     "id": "clo27a5me0000hsow6oy6jocm",
+#     "organization": "Edit ko ulit",
+#     "number": "Option",
+#     "location": "Option",
 #     "description": "sadsadadsaUpdatedasda sadcripripripription",
+#     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/2560px-PHP-logo.svg.png"
 # }
 
-# DELETE http://localhost:3000/api/osas
+# GET  http://localhost:3000/api/hotline
+# Content-Type: application/json
+
+# { 
+
+# }
+
+# POST http://localhost:3000/api/hotline
 # Content-Type: application/json
 
 # {
-#     "id": "clnxvqa4y0001hslwfdzdz1t0",
+#     "organization": "Option",
+#     "number": "Option",
+#     "location": "Option",
+#     "description": "sadsadadsaUpdatedasda sadcripripripription",
+#     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/2560px-PHP-logo.svg.png"
+# }
+
+# DELETE http://localhost:3000/api/hotline
+# Content-Type: application/json
+
+# {
+#     "id": "clo27a5me0000hsow6oy6jocm",
 # }
 
 
