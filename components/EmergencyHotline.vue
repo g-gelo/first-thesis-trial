@@ -272,7 +272,8 @@ const emergency_Hotline = ref({
 });
 
 const addEmergencyHotline = async (emergency_Hotline) => {
-    return await $fetch("/api/hotline", {
+    let addedEmergencyHotline = null;
+    addedEmergencyHotline = await $fetch("/api/hotline", {
         method: "POST",
         body: {
             organization: emergency_Hotline.organization,
@@ -282,6 +283,8 @@ const addEmergencyHotline = async (emergency_Hotline) => {
             image: emergency_Hotline.image,
         },
     });
+    if (addedEmergencyHotline)
+        emergencyHotline.value = await $fetch("/api/hotline");
 };
 
 const editedEmergencyHotline = ref({
@@ -294,7 +297,7 @@ const editedEmergencyHotline = ref({
 });
 
 const editEmergencyHotline = async (editedEmergencyHotline) => {
-    let emergencyHotline = null;
+    let emergencyHotlines = null;
 
     if (
         editedEmergencyHotline.id &&
@@ -304,7 +307,7 @@ const editEmergencyHotline = async (editedEmergencyHotline) => {
         editedEmergencyHotline.description &&
         editedEmergencyHotline.image
     )
-        emergencyHotline = await $fetch("/api/hotline", {
+        emergencyHotlines = await $fetch("/api/hotline", {
             method: "PUT",
             body: {
                 id: editedEmergencyHotline.id,
@@ -315,16 +318,19 @@ const editEmergencyHotline = async (editedEmergencyHotline) => {
                 image: editedEmergencyHotline.image,
             },
         });
+    emergencyHotline.value = await $fetch("/api/hotline");
 };
 
 const deleteEmergencyHotline = async (id) => {
+    let deletedEmergencyHotline = null;
     if (id)
-        return await $fetch("/api/hotline", {
+        deletedEmergencyHotline = await $fetch("/api/hotline", {
             method: "DELETE",
             body: {
                 id,
             },
         });
+    emergencyHotline.value = await $fetch("/api/hotline");
 };
 </script>
 

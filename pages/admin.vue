@@ -303,7 +303,9 @@ const seminar = ref({
 });
 
 const addSeminar = async (seminar) => {
-    return await $fetch("/api/seminars", {
+    let addedSeminar = null;
+
+    addedSeminar = await $fetch("/api/seminars", {
         method: "POST",
         body: {
             title: seminar.title,
@@ -313,6 +315,7 @@ const addSeminar = async (seminar) => {
             location: seminar.location,
         },
     });
+    if (addedSeminar) seminars.value = await $fetch("/api/seminars");
 };
 
 const editedSeminar = ref({
@@ -346,19 +349,20 @@ const editSeminar = async (editedSeminar) => {
                 location: editedSeminar.location,
             },
         });
-    if (seminar) seminar.value = await getSeminars();
+    seminars.value = await $fetch("/api/seminars");
 };
 
 const deleteSeminar = async (id) => {
+    let deletedSeminar = null;
     if (id)
-        return await $fetch("/api/seminars", {
+        deletedSeminar = await $fetch("/api/seminars", {
             method: "DELETE",
             body: {
                 id,
             },
         });
 
-    if (seminar.value) seminar.value = await getSeminar;
+    seminars.value = await $fetch("/api/seminars");
 };
 </script>
 
