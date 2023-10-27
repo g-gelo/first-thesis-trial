@@ -7,12 +7,10 @@ export default defineEventHandler(async (event) => {
     const organization = body.organization;
     const number = body.number;
     const location = body.location;
-    const description = body.description;
-    const image = body.image;
 
     let updatedEmergencyHotline;
 
-    if (id && organization && number && location && description && image)
+    if (id && organization && number && location)
         updatedEmergencyHotline = await prisma.emegergencyHotline.update({
             where: {
                 id,
@@ -21,8 +19,6 @@ export default defineEventHandler(async (event) => {
                 organization,
                 number,
                 location,
-                description,
-                image,
             },
         });
 

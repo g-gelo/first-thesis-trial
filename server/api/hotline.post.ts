@@ -5,21 +5,13 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     let hotline = null;
 
-    if (
-        body.organization &&
-        body.number &&
-        body.location &&
-        body.description &&
-        body.image
-    )
+    if (body.organization && body.number && body.location)
         await event.context.prisma.emegergencyHotline
             .create({
                 data: {
                     organization: body.organization,
                     number: body.number,
                     location: body.location,
-                    description: body.description,
-                    image: body.image,
                 },
             })
             .then((response) => {

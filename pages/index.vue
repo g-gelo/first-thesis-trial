@@ -71,38 +71,7 @@
         />
         <div>
             <v-container>
-                <the-emergency
-                    class="card"
-                    logo="/img/policeLogo.png"
-                    name="Philippine National Police"
-                    contact="0998 598 5601"
-                    address="9WVC+F57, Imus, Cavite"
-                    info="For more police station number, just tap the message icon and type 'Police'."
-                />
-            </v-container>
-        </div>
-        <div>
-            <v-container>
-                <the-emergency
-                    class="card"
-                    logo="/img/mentalHealthLogo.png"
-                    name="Mental Health Resources"
-                    contact="1553 (Luzon-wide and landline toll-free)"
-                    address="Philippines"
-                    info="For more information, just tap the message icon and type 'Mental'."
-                />
-            </v-container>
-        </div>
-        <div>
-            <v-container>
-                <the-emergency
-                    class="card"
-                    logo="/img/pdrrmoLogo.png"
-                    name="PDRRMO"
-                    contact="Telephone: (046) 424-0203 Cellphone No.: 0917-858-8263 && 0919-061-6584"
-                    address="Cavite, Philippines"
-                    info="For more information, visit this link"
-                />
+                <the-emergency />
             </v-container>
         </div>
     </div>

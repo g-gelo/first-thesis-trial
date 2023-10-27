@@ -77,38 +77,7 @@
                         required
                     />
                 </div>
-                <div>
-                    <label
-                        for="description"
-                        class="block mb-2 text-sm font-medium text-gray-900"
-                        >Description</label
-                    >
-                    <textarea
-                        id="description"
-                        v-model="emergency_Hotline.description"
-                        name="description"
-                        rows="4"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                        placeholder="Description"
-                        required
-                    ></textarea>
-                </div>
-                <div>
-                    <label
-                        for="image"
-                        class="block mb-2 text-sm font-medium text-gray-900"
-                        >Upload a logo (optional)</label
-                    >
-                    <input
-                        type="text"
-                        id="image"
-                        v-model="emergency_Hotline.image"
-                        name="image"
-                        placeholder="Upload Logo"
-                        accept=".png"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-white"
-                    />
-                </div>
+
                 <button
                     type="submit"
                     class="bg-blue-500 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
@@ -119,7 +88,7 @@
         </div>
         <div v-if="showHotlineEdit">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                <h2 class="text-xl font-bold mb-4">Edit GCO Profile</h2>
+                <h2 class="text-xl font-bold mb-4">Edit Emergency Hotline</h2>
                 <div>
                     <input
                         v-model="editedEmergencyHotline.organization"
@@ -130,25 +99,13 @@
                     <input
                         v-model="editedEmergencyHotline.number"
                         class="w-full p-2 border rounded mb-4"
-                        placeholder="description"
+                        placeholder="number"
                         required
                     />
                     <input
                         v-model="editedEmergencyHotline.location"
                         class="w-full p-2 border rounded mb-4"
-                        placeholder="description"
-                        required
-                    /><textarea
-                        v-model="editedEmergencyHotline.description"
-                        class="w-full p-2 border rounded mb-4"
-                        placeholder="description"
-                        rows="5"
-                        required
-                    ></textarea>
-                    <input
-                        v-model="editedEmergencyHotline.image"
-                        class="w-full p-2 border rounded mb-4"
-                        placeholder="description"
+                        placeholder="location"
                         required
                     />
                 </div>
@@ -163,7 +120,7 @@
                         Save
                     </button>
                     <button
-                        @click="showGcoFormEdit = false"
+                        @click="showHotlineEdit = false"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                     >
                         Cancel
@@ -200,8 +157,6 @@
                         <th>Organization</th>
                         <th>Number</th>
                         <th>Location</th>
-                        <th>Description</th>
-                        <th>Image</th>
                         <th>Edit & Delete</th>
                     </tr>
                 </thead>
@@ -213,8 +168,6 @@
                         <td>{{ emergencyhotline.organization }}</td>
                         <td>{{ emergencyhotline.number }}</td>
                         <td>{{ emergencyhotline.location }}</td>
-                        <td>{{ emergencyhotline.description }}</td>
-                        <td>{{ emergencyhotline.image }}</td>
                         <td>
                             <v-btn
                                 v-if="!showHotlineEdit"
@@ -229,10 +182,6 @@
                                             emergencyhotline.number;
                                         editedEmergencyHotline.location =
                                             emergencyhotline.location;
-                                        editedEmergencyHotline.description =
-                                            emergencyhotline.description;
-                                        editedEmergencyHotline.image =
-                                            emergencyhotline.image;
 
                                         showHotlineEdit = true;
                                     }
@@ -267,8 +216,6 @@ const emergency_Hotline = ref({
     organization: "",
     number: "",
     location: "",
-    description: "",
-    image: null,
 });
 
 const addEmergencyHotline = async (emergency_Hotline) => {
@@ -279,8 +226,6 @@ const addEmergencyHotline = async (emergency_Hotline) => {
             organization: emergency_Hotline.organization,
             number: emergency_Hotline.number,
             location: emergency_Hotline.location,
-            description: emergency_Hotline.description,
-            image: emergency_Hotline.image,
         },
     });
     if (addedEmergencyHotline)
@@ -292,8 +237,6 @@ const editedEmergencyHotline = ref({
     organization: null,
     number: null,
     location: null,
-    description: null,
-    image: null,
 });
 
 const editEmergencyHotline = async (editedEmergencyHotline) => {
@@ -303,9 +246,7 @@ const editEmergencyHotline = async (editedEmergencyHotline) => {
         editedEmergencyHotline.id &&
         editedEmergencyHotline.organization &&
         editedEmergencyHotline.number &&
-        editedEmergencyHotline.location &&
-        editedEmergencyHotline.description &&
-        editedEmergencyHotline.image
+        editedEmergencyHotline.location
     )
         emergencyHotlines = await $fetch("/api/hotline", {
             method: "PUT",
@@ -314,8 +255,6 @@ const editEmergencyHotline = async (editedEmergencyHotline) => {
                 organization: editedEmergencyHotline.organization,
                 number: editedEmergencyHotline.number,
                 location: editedEmergencyHotline.location,
-                description: editedEmergencyHotline.description,
-                image: editedEmergencyHotline.image,
             },
         });
     emergencyHotline.value = await $fetch("/api/hotline");
