@@ -268,13 +268,6 @@ bf
             </v-col>
         </v-container>
         <CareerForm />
-        <v-btn
-            v-if="!showModal"
-            class="rounded-xl shadow-xl p-2 m-2"
-            @click="signOut()"
-        >
-            sign out
-        </v-btn>
     </div>
 </template>
 

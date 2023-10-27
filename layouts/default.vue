@@ -32,22 +32,24 @@
                 >
                     <div class="avatar-container">
                         <div class="text-center">
-                            <v-avatar
-                                class="mt-3"
-                                color="surface-variant"
-                                size="140"
+                            <div
+                                class="mt-6 bg-surface-variant w-36 h-36 m-auto rounded-full flex items-center justify-center overflow-hidden"
                             >
                                 <img
-                                    src="https://randomuser.me/api/portraits/men/78.jpg"
+                                    :src="data.user.image"
                                     alt="Avatar"
+                                    class="object-cover w-full h-full m-auto"
                                 />
-                            </v-avatar>
+                            </div>
                         </div>
-                        <v-list-item-title class="text-center pt-5"
-                            >John Doe</v-list-item-title
-                        >
+                        <div class="text-center pt-5">
+                            <p class="text-xl font-bold text-gray-800">
+                                {{ data.user.name }}
+                            </p>
+                        </div>
                     </div>
-                    <v-divider></v-divider>
+
+                    <v-divider :thickness="10"></v-divider>
                     <v-list density="compact" nav>
                         <v-list-item
                             class="ma-2"
@@ -64,6 +66,14 @@
                             >{{ item.text }}</v-list-item
                         >
                     </v-list>
+                    <div class="text-center m-2 flex items-stretch">
+                        <button
+                            class="bg-gray-500 w-100 text-white font-bold py-2 mt-20 rounded-xl shadow-md"
+                            @click="signOut"
+                        >
+                            Sign Out
+                        </button>
+                    </div>
                 </v-navigation-drawer>
             </template>
             <template v-else>
@@ -84,7 +94,8 @@
 import { ref, onMounted } from "vue";
 import FacebookChat from "~/components/FacebookChat.vue";
 
-const { data: user } = useFetch("/api/user");
+const { data } = useAuth();
+const { signOut } = useAuth();
 
 const generateCoohomLink = () => {
     const coohomLink =

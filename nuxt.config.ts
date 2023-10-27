@@ -56,6 +56,9 @@ export default defineNuxtConfig({
         origin: process.env.AUTH_ORIGIN,
         enableGlobalAppMiddleware: true,
     },
+    runtimeConfig: {
+        API_ROUTE_SECRET: process.env.API_ROUTE_SECRET,
+    },
     css: [
         "vuetify/lib/styles/main.sass",
         "@fortawesome/fontawesome-free/css/all.min.css",
