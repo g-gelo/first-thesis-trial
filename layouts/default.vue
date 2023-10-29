@@ -120,7 +120,6 @@ const navItem = ref([
         route: "/announcement",
     },
     { icon: "fa-solid fa-comment", text: "Chatbot", route: "/chat" },
-    { icon: "fa-solid fa-lock", text: "Admin", route: "/admin" },
     {
         icon: "fa-solid fa-briefcase",
         text: "Office",
