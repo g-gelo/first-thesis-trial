@@ -74,7 +74,7 @@
     </v-card>
 </template>
 
-<script setup lang="ts">
+<script setup>
 const { data: seminars } = useFetch("/api/seminars");
 </script>
 

@@ -13,30 +13,12 @@
                     <v-img src="/img/careersblob.svg" class="top-image"
                         ><v-img
                             class="seminar-icon"
-                            :src="`${logo}`"
+                            src="/img/emergencyIcon.png"
                             width="75px"
                             height="75px"
                         ></v-img
                     ></v-img>
                 </div>
-                <!-- <div class="ml-3">
-                    <div class="seminar-info">
-                        <v-icon class="ml-6 icon-small"
-                            >fa-regular fa-calendar-days</v-icon
-                        ><br />
-                        <span class="ml-3 info-value info-small">{{
-                            date
-                        }}</span>
-                    </div>
-                    <div class="seminar-info">
-                        <v-icon class="ml-6 icon-small"
-                            >fa-regular fa-clock</v-icon
-                        ><br />
-                        <span class="ml-2 info-value info-small">{{
-                            time
-                        }}</span>
-                    </div>
-                </div> -->
             </v-col>
             <v-col cols="7">
                 <v-list class="seminar-details">
@@ -82,14 +64,6 @@ const { data: hotline } = useFetch("/api/hotline");
 </script>
 
 <style scoped>
-.mid-image {
-    position: absolute;
-    width: 30%;
-    height: 30%;
-    top: 50%;
-    left: 2%;
-    transform: translateY(-50%);
-}
 .content-center-left {
     justify-content: flex-start;
 }
