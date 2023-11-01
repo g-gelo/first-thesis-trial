@@ -279,8 +279,6 @@ useHead({
     title: "Admin",
 });
 
-const { signOut } = useAuth();
-
 const showModalSeminar = ref(false);
 const showModal = ref(false);
 const showSeminarDatabase = ref(false);
@@ -396,9 +394,6 @@ tr:nth-child(odd) {
 }
 .career {
     z-index: 1;
-}
-.show {
-    z-index: -1;
 }
 
 .modal {
