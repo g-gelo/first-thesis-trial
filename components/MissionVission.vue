@@ -26,33 +26,40 @@
 
         <div v-if="showModalMisnVis">
             <div v-if="showModalMisnVisEdit">
-                <v-card>
-                    <v-card-title>Edit Mission and Vision</v-card-title>
-                    <v-card-text>
-                        <v-text-field
+                <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                    <h2 class="text-xl font-bold mb-4">
+                        Edit Mission and Vision
+                    </h2>
+                    <div>
+                        <input
                             v-model="editedMisnVis.title"
-                            label="title"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Title"
                             required
-                        ></v-text-field>
-                        <v-text-field
+                        />
+                        <textarea
                             v-model="editedMisnVis.description"
-                            label="description"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Description"
+                            rows="5"
                             required
-                        ></v-text-field>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn
-                            color="primary"
+                        ></textarea>
+                    </div>
+                    <div class="flex justify-end">
+                        <button
                             @click="($event) => editMisnVis(editedMisnVis)"
-                            >Save</v-btn
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                         >
-                        <v-btn
-                            color="error"
+                            Save
+                        </button>
+                        <button
                             @click="showModalMisnVisEdit = false"
-                            >Cancel</v-btn
+                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                         >
-                    </v-card-actions>
-                </v-card>
+                            Cancel
+                        </button>
+                    </div>
+                </div>
             </div>
             <table density="compact">
                 <thead>

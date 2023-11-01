@@ -112,7 +112,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-10" v-for="osas in osasModule" :key="osas.id">
+        <div class="mt-10" v-for="osas in osasAll" :key="osas.id">
             <div class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg">
                 <div class="px-4 py-2 bg-secondary-100">
                     <h2 class="text-2xl ma-2 h-5">{{ osas.title }}</h2>
@@ -176,6 +176,9 @@ const { data } = useAuth();
 const showOsasForm = ref(false);
 const showOsasEdit = ref(false);
 
+const { data: osasAll } = useFetch("/api/osas");
+const { data: osasFunction } = useFetch("/api/osasfunction");
+
 const osas = ref({
     title: "",
     description: "",
@@ -217,9 +220,6 @@ const editOsasModule = async (editedOsasModule) => {
         });
     osasAll.value = await $fetch("/api/osas");
 };
-
-const { data: osasModule } = useFetch("/api/osas");
-const { data: osasFunction } = useFetch("/api/osasfunction");
 
 onMounted(() => {
     if (process.client) {

@@ -21,6 +21,40 @@
                 <li><a href="#Contact" class="font-display">Contact</a></li>
             </ul>
         </div>
+        <div v-if="showModalMisnVisEdit">
+            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                <h2 class="text-xl font-bold mb-4">Edit Mission and Vision</h2>
+                <div>
+                    <input
+                        v-model="editedMisnVis.title"
+                        class="w-full p-2 border rounded mb-4"
+                        placeholder="Title"
+                        required
+                    />
+                    <textarea
+                        v-model="editedMisnVis.description"
+                        class="w-full p-2 border rounded mb-4"
+                        placeholder="Description"
+                        rows="5"
+                        required
+                    ></textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button
+                        @click="($event) => editMisnVis(editedMisnVis)"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    >
+                        Save
+                    </button>
+                    <button
+                        @click="showModalMisnVisEdit = false"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
         <v-carousel class="card" hide-delimiters show-arrows="hover">
             <v-container>
                 <v-carousel-item
@@ -30,6 +64,24 @@
                     <div class="mission-vision-box">
                         <div class="title">
                             <h1 class="text-3xl">{{ MisnVis.title }}</h1>
+                            <button
+                                class="absolute top-3 right-0"
+                                v-if="!showModalMisnVisEdit"
+                                variant="tonal"
+                                @click="
+                                    ($event) => {
+                                        editedMisnVis.id = MisnVis.id;
+                                        editedMisnVis.title = MisnVis.title;
+                                        editedMisnVis.description =
+                                            MisnVis.description;
+                                        showModalMisnVisEdit = true;
+                                    }
+                                "
+                            >
+                                <v-icon color="bg300">
+                                    fa-solid fa-pen-to-square
+                                </v-icon>
+                            </button>
                         </div>
                         <p>
                             {{ MisnVis.description }}
@@ -85,10 +137,34 @@ import TheEmergency from "@/components/TheEmergency.vue";
 import "animate.css";
 import "intersection-observer";
 
+const showModalMisnVisEdit = ref(false);
+
+const { data: universityMissionVision } = useFetch("/api/missionvision");
+
+const editedMisnVis = ref({
+    id: null,
+    title: null,
+    description: null,
+});
+
+const editMisnVis = async (editedMisnVis) => {
+    let missionNVision = null;
+
+    if (editedMisnVis.id && editedMisnVis.title && editedMisnVis.description)
+        missionNVision = await $fetch("/api/missionvision", {
+            method: "PUT",
+            body: {
+                id: editedMisnVis.id,
+                title: editedMisnVis.title,
+                description: editedMisnVis.description,
+            },
+        });
+    universityMissionVision.value = await $fetch("/api/missionvision");
+};
+
 useHead({
     title: "Home",
 });
-const { data: universityMissionVision } = useFetch("/api/missionvision");
 
 onMounted(() => {
     if (process.client) {
