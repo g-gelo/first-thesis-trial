@@ -77,7 +77,6 @@
                         required
                     />
                 </div>
-
                 <button
                     type="submit"
                     class="bg-blue-500 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
@@ -182,7 +181,6 @@
                                             emergencyhotline.number;
                                         editedEmergencyHotline.location =
                                             emergencyhotline.location;
-
                                         showHotlineEdit = true;
                                     }
                                 "
