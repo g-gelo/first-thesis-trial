@@ -64,24 +64,26 @@
                     <div class="mission-vision-box">
                         <div class="title">
                             <h1 class="text-3xl">{{ MisnVis.title }}</h1>
-                            <button
-                                class="absolute top-3 right-0"
-                                v-if="!showModalMisnVisEdit"
-                                variant="tonal"
-                                @click="
-                                    ($event) => {
-                                        editedMisnVis.id = MisnVis.id;
-                                        editedMisnVis.title = MisnVis.title;
-                                        editedMisnVis.description =
-                                            MisnVis.description;
-                                        showModalMisnVisEdit = true;
-                                    }
-                                "
-                            >
-                                <v-icon color="bg300">
-                                    fa-solid fa-pen-to-square
-                                </v-icon>
-                            </button>
+                            <div v-if="data?.subscribed">
+                                <button
+                                    class="absolute top-3 right-0"
+                                    v-if="!showModalMisnVisEdit"
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            editedMisnVis.id = MisnVis.id;
+                                            editedMisnVis.title = MisnVis.title;
+                                            editedMisnVis.description =
+                                                MisnVis.description;
+                                            showModalMisnVisEdit = true;
+                                        }
+                                    "
+                                >
+                                    <v-icon color="bg300">
+                                        fa-solid fa-pen-to-square
+                                    </v-icon>
+                                </button>
+                            </div>
                         </div>
                         <p>
                             {{ MisnVis.description }}
@@ -136,6 +138,8 @@ import TheBox from "@/components/TheBox.vue";
 import TheEmergency from "@/components/TheEmergency.vue";
 import "animate.css";
 import "intersection-observer";
+
+const { data } = useAuth();
 
 const showModalMisnVisEdit = ref(false);
 

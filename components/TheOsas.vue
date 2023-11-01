@@ -31,11 +31,11 @@
                 class="absolute top-0 right-0 text-lg"
             >
                 <v-icon class="pa-5" color="bg300"
-                    >fa-regular fa-square-plus</v-icon
+                    >fa-regular fa-square-minus</v-icon
                 >
             </button>
         </div>
-        <div v-if="showOsasForm">
+        <div v-if="showOsasForm" class="ma-2">
             <h1>Osas Form</h1>
             <form class="space-y-4" @submit.prevent="addOsas(osas)">
                 <div>
@@ -144,25 +144,128 @@
                 </div>
             </div>
         </div>
-
-        <div>
-            <div class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg">
-                <div class="px-4 py-2 bg-secondary-100">
-                    <h2 class="text-lg ma-2">
-                        To attain these goals, the OSAS performs the following
-                        functions:
-                    </h2>
-                </div>
-                <div class="px-4 py-2 bg-slate-50 rounded-b-lg">
-                    <p
-                        v-for="functions in osasFunction"
-                        :functions="functions.id"
-                        class="text-justify leading-relaxed"
+        <div v-if="data?.subscribed" class="relative">
+            <button
+                v-if="!showFunctionForm"
+                @click="
+                    ($event) => {
+                        showFunctionForm = true;
+                    }
+                "
+                class="absolute top-10 right-1 text-lg"
+            >
+                <v-icon class="pa-5" color="bg300"
+                    >fa-regular fa-square-plus</v-icon
+                >
+            </button>
+            <button
+                v-if="showFunctionForm"
+                @click="
+                    ($event) => {
+                        showFunctionForm = false;
+                    }
+                "
+                class="absolute top-10 right-1 text-lg"
+            >
+                <v-icon class="pa-5" color="bg300"
+                    >fa-regular fa-square-minus</v-icon
+                >
+            </button>
+        </div>
+        <div v-if="showFunctionForm" class="ma-2">
+            <div class="bg-white shadow-lg rounded-lg pa-2">
+                <h1 class="m-2">Function Form</h1>
+                <form
+                    class="space-y-4"
+                    @submit.prevent="addOsasFunction(oFunction)"
+                >
+                    <div>
+                        <label
+                            for="function"
+                            class="block ma-2 text-sm font-medium text-gray-900"
+                            >Function</label
+                        >
+                        <input
+                            type="text"
+                            id="function"
+                            v-model="oFunction.osasFunction"
+                            name="function"
+                            class="shadow-sm m-3 w-10/12 text-color text-white bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            placeholder="Function"
+                            required
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        class="bg-blue-500 ma-2 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
                     >
-                        <v-icon class="mr-2 sm">fa-regular fa-circle-dot</v-icon
-                        >{{ functions.osasFunction }}
-                    </p>
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div v-if="showFunctionEdit" class="mt-2">
+            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                <h2 class="text-xl font-bold mb-4">Edit Osas Function</h2>
+                <div>
+                    <input
+                        v-model="editedOsasFunction.osasFunction"
+                        class="w-full p-2 border rounded mb-4"
+                        placeholder="title"
+                        required
+                    />
                 </div>
+                <div class="flex justify-end">
+                    <button
+                        @click="
+                            ($event) => editOsasFunction(editedOsasFunction)
+                        "
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    >
+                        Save
+                    </button>
+                    <button
+                        @click="showFunctionEdit = false"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg">
+            <div class="px-4 py-2 bg-secondary-100">
+                <h2 class="text-lg ma-2">
+                    To attain these goals, the OSAS performs the following
+                    functions:
+                </h2>
+            </div>
+            <div class="px-4 py-2 bg-slate-50 rounded-b-lg">
+                <p
+                    v-for="functions in osasFunction"
+                    :functions="functions.id"
+                    class="text-justify leading-relaxed"
+                >
+                    <button
+                        v-if="!showFunctionEdit"
+                        variant="tonal"
+                        @click="
+                            ($event) => {
+                                editedOsasFunction.id = functions.id;
+                                editedOsasFunction.osasFunction =
+                                    functions.osasFunction;
+                                showFunctionEdit = true;
+                            }
+                        "
+                    >
+                        <v-icon v-if="data?.subscribed" class="mr-2 sm"
+                            >fa-solid fa-pen-to-square</v-icon
+                        >
+                    </button>
+                    <v-icon v-else="data?.subscribed" class="mr-2 sm"
+                        >fa-regular fa-circle-dot</v-icon
+                    >{{ functions.osasFunction }}
+                </p>
             </div>
         </div>
     </div>
@@ -175,9 +278,10 @@ import { ref, onMounted } from "vue";
 const { data } = useAuth();
 const showOsasForm = ref(false);
 const showOsasEdit = ref(false);
+const showFunctionForm = ref(false);
+const showFunctionEdit = ref(false);
 
 const { data: osasAll } = useFetch("/api/osas");
-const { data: osasFunction } = useFetch("/api/osasfunction");
 
 const osas = ref({
     title: "",
@@ -219,6 +323,43 @@ const editOsasModule = async (editedOsasModule) => {
             },
         });
     osasAll.value = await $fetch("/api/osas");
+};
+
+const { data: osasFunction } = useFetch("/api/osasfunction");
+
+const oFunction = ref({
+    osasFunction: "",
+});
+
+const addOsasFunction = async (oFunction) => {
+    let addedFunction = null;
+
+    addedFunction = await $fetch("/api/osasfunction", {
+        method: "POST",
+        body: {
+            osasFunction: oFunction.osasFunction,
+        },
+    });
+    if (addedFunction) osasFunction.value = await $fetch("/api/osasfunction");
+};
+
+const editedOsasFunction = ref({
+    id: null,
+    osasFunction: null,
+});
+
+const editOsasFunction = async (editedOsasFunction) => {
+    let osasFunctions = null;
+
+    if (editedOsasFunction.id && editedOsasFunction.osasFunction)
+        osasFunctions = await $fetch("/api/osasfunction", {
+            method: "PUT",
+            body: {
+                id: editedOsasFunction.id,
+                osasFunction: editedOsasFunction.osasFunction,
+            },
+        });
+    osasFunction.value = await $fetch("/api/osasfunction");
 };
 
 onMounted(() => {
