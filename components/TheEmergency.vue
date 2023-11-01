@@ -19,7 +19,7 @@
                     />
                 </div>
             </div>
-            <div class="w-60 p-4 border-l-4 border-green-800">
+            <div class="w-60 p-4 border-l border-green-800">
                 <div class="mt-1 seminar-info">
                     <span class="info-value main-title highlight">{{
                         emergency.organization
