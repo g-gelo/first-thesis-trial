@@ -23,44 +23,42 @@
                 Hide Mission and Vision
             </button>
         </div>
-
-        <div v-if="showModalMisnVis">
-            <div v-if="showModalMisnVisEdit">
-                <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                    <h2 class="text-xl font-bold mb-4">
-                        Edit Mission and Vision
-                    </h2>
-                    <div>
-                        <input
-                            v-model="editedMisnVis.title"
-                            class="w-full p-2 border rounded mb-4"
-                            placeholder="Title"
-                            required
-                        />
-                        <textarea
-                            v-model="editedMisnVis.description"
-                            class="w-full p-2 border rounded mb-4"
-                            placeholder="Description"
-                            rows="5"
-                            required
-                        ></textarea>
-                    </div>
-                    <div class="flex justify-end">
-                        <button
-                            @click="($event) => editMisnVis(editedMisnVis)"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-                        >
-                            Save
-                        </button>
-                        <button
-                            @click="showModalMisnVisEdit = false"
-                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                        >
-                            Cancel
-                        </button>
-                    </div>
+        <div class="modal z-40" v-if="showModalMisnVisEdit">
+            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                <h2 class="text-xl font-bold mb-4">Edit Mission and Vision</h2>
+                <div>
+                    <input
+                        v-model="editedMisnVis.title"
+                        class="w-full p-2 border rounded mb-4"
+                        placeholder="Title"
+                        required
+                    />
+                    <textarea
+                        v-model="editedMisnVis.description"
+                        class="w-full p-2 border rounded mb-4"
+                        placeholder="Description"
+                        rows="5"
+                        required
+                    ></textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button
+                        @click="($event) => editMisnVis(editedMisnVis)"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    >
+                        Save
+                    </button>
+                    <button
+                        @click="showModalMisnVisEdit = false"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        Cancel
+                    </button>
                 </div>
             </div>
+        </div>
+
+        <div v-if="showModalMisnVis">
             <table density="compact">
                 <thead>
                     <tr>
@@ -160,5 +158,16 @@ tr:nth-child(even) {
 }
 tr:nth-child(odd) {
     background-color: #b5bbc4;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>

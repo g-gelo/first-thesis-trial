@@ -67,7 +67,7 @@
                 </button>
             </form>
         </div>
-        <div v-if="showOsasEdit" class="modal career">
+        <div v-if="showOsasEdit" class="modal career z-40">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Osas Module</h2>
                 <div>
@@ -239,7 +239,7 @@
                 Hide Function Database
             </button>
         </div>
-        <div v-if="showFunctionEdit">
+        <div class="modal z-40" v-if="showFunctionEdit">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Osas Function</h2>
                 <div>
@@ -424,9 +424,6 @@ const deleteOsas = async (id) => {
 </script>
 
 <style scoped>
-.career {
-    z-index: 1;
-}
 .modal {
     position: fixed;
     top: 0;

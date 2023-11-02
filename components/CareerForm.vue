@@ -98,43 +98,52 @@
                     </button>
                 </form>
             </div>
-            <div v-if="showModal" class="modal">
-                <v-card>
-                    <v-card-title>Edit Career</v-card-title>
-                    <v-card-text>
-                        <v-text-field
+            <div class="modal" v-if="showModal">
+                <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                    <h2 class="text-xl font-bold mb-4">Edit Career</h2>
+                    <div>
+                        <input
                             v-model="editedCareer.title"
-                            label="Title"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Title"
                             required
-                        ></v-text-field>
-                        <v-text-field
+                        />
+                        <input
                             v-model="editedCareer.date"
-                            label="Date"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Date"
                             required
-                        ></v-text-field>
-                        <v-text-field
+                        />
+                        <input
                             v-model="editedCareer.time"
-                            label="Time"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Time"
                             required
-                        ></v-text-field>
-                        <v-text-field
+                        />
+                        <input
                             v-model="editedCareer.location"
-                            label="Location"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Location"
                             required
-                        ></v-text-field>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn
-                            color="primary"
+                        />
+                    </div>
+                    <div class="flex justify-end">
+                        <button
                             @click="($event) => editCareer(editedCareer)"
-                            >Save</v-btn
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                         >
-                        <v-btn color="error" @click="showModal = false"
-                            >Cancel</v-btn
+                            Save
+                        </button>
+                        <button
+                            @click="showModal = false"
+                            class="bg-red-500 hover-bg-red-700 text-white font-bold py-2 px-4 rounded"
                         >
-                    </v-card-actions>
-                </v-card>
+                            Cancel
+                        </button>
+                    </div>
+                </div>
             </div>
+
             <div class="btn">
                 <button
                     v-if="!showCareerDatabase"
@@ -349,9 +358,5 @@ tr:nth-child(odd) {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.modal > .v-card {
-    max-width: 400px;
-    width: 100%;
 }
 </style>

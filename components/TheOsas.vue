@@ -78,7 +78,7 @@
                 </button>
             </form>
         </div>
-        <div v-if="showOsasEdit">
+        <div class="modal z-40" v-if="showOsasEdit">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Osas Module</h2>
                 <div>
@@ -204,7 +204,7 @@
                 </form>
             </div>
         </div>
-        <div v-if="showFunctionEdit" class="mt-2">
+        <div v-if="showFunctionEdit" class="modal z-40 mt-2">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Osas Function</h2>
                 <div>
@@ -394,6 +394,17 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .sm {
     font-size: medium;
 }

@@ -85,7 +85,7 @@
                 </button>
             </form>
         </div>
-        <div v-if="showHotlineEdit">
+        <div class="modal z-40" v-if="showHotlineEdit">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Emergency Hotline</h2>
                 <div>
@@ -281,6 +281,17 @@ const deleteEmergencyHotline = async (id) => {
     background-color: #d1d1d1;
     transition: opacity 0.2s ease-in-out;
     opacity: 1;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn button:active {

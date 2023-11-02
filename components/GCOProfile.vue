@@ -89,7 +89,7 @@
             </button>
         </div>
 
-        <div v-if="showGcoFormEdit">
+        <div class="modal z-40" v-if="showGcoFormEdit">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit GCO Profile</h2>
                 <div>
@@ -240,7 +240,7 @@
             </button>
         </div>
 
-        <div v-if="showGcoServiceEdit">
+        <div class="modal z-40" v-if="showGcoServiceEdit">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit GCO Service</h2>
                 <div>
@@ -455,5 +455,16 @@ tr:nth-child(even) {
 }
 tr:nth-child(odd) {
     background-color: #b5bbc4;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>

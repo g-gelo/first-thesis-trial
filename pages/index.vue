@@ -21,7 +21,7 @@
                 <li><a href="#Contact" class="font-display">Contact</a></li>
             </ul>
         </div>
-        <div v-if="showModalMisnVisEdit">
+        <div class="modal z-40" v-if="showModalMisnVisEdit">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Mission and Vision</h2>
                 <div>
@@ -284,5 +284,16 @@ marquee {
     position: relative;
     bottom: 0;
     right: 0;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>

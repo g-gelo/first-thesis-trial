@@ -131,50 +131,57 @@ bf
                     </button>
                 </form>
             </div>
-            <v-container>
-                <div v-if="showModal" class="modal career">
-                    <v-card>
-                        <v-card-title>Edit Seminar</v-card-title>
-                        <v-card-text>
-                            <!-- Input fields to edit the seminar data -->
-                            <v-text-field
-                                v-model="editedSeminar.title"
-                                label="Title"
-                                required
-                            ></v-text-field>
-                            <v-text-field
-                                v-model="editedSeminar.description"
-                                label="Guest Speaker"
-                            ></v-text-field>
-                            <v-text-field
-                                v-model="editedSeminar.date"
-                                label="Date"
-                                required
-                            ></v-text-field>
-                            <v-text-field
-                                v-model="editedSeminar.time"
-                                label="Time"
-                                required
-                            ></v-text-field>
-                            <v-text-field
-                                v-model="editedSeminar.location"
-                                label="Location"
-                                required
-                            ></v-text-field>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-btn
-                                color="primary"
-                                @click="($event) => editSeminar(editedSeminar)"
-                                >Save</v-btn
-                            >
-                            <v-btn color="error" @click="showModal = false"
-                                >Cancel</v-btn
-                            >
-                        </v-card-actions>
-                    </v-card>
+            <div class="modal" v-if="showModal">
+                <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                    <h2 class="text-xl font-bold mb-4">Edit Seminar</h2>
+                    <div>
+                        <input
+                            v-model="editedSeminar.title"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Title"
+                            required
+                        />
+                        <input
+                            v-model="editedSeminar.description"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Guest Speaker"
+                        />
+                        <input
+                            v-model="editedSeminar.date"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Date"
+                            required
+                        />
+                        <input
+                            v-model="editedSeminar.time"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Time"
+                            required
+                        />
+                        <input
+                            v-model="editedSeminar.location"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Location"
+                            required
+                        />
+                    </div>
+                    <div class="flex justify-end">
+                        <button
+                            @click="($event) => editSeminar(editedSeminar)"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        >
+                            Save
+                        </button>
+                        <button
+                            @click="showModal = false"
+                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </div>
-            </v-container>
+            </div>
+
             <div class="btn">
                 <button
                     v-if="!showSeminarDatabase"
@@ -407,10 +414,7 @@ tr:nth-child(odd) {
     align-items: center;
     justify-content: center;
 }
-.modal > .v-card {
-    max-width: 400px;
-    width: 100%;
-}
+
 .content-container {
     height: 550vh;
 }
