@@ -165,7 +165,9 @@
                         :key="emergencyhotline.id"
                     >
                         <td>{{ emergencyhotline.organization }}</td>
-                        <td>{{ emergencyhotline.number }}</td>
+                        <td class="line-clamp-3">
+                            {{ emergencyhotline.number }}
+                        </td>
                         <td>{{ emergencyhotline.location }}</td>
                         <td>
                             <v-btn

@@ -179,8 +179,7 @@
                                 <th class="text-left">Date</th>
                                 <th class="text-left">Time</th>
                                 <th class="text-left">Location</th>
-                                <th class="text-left">Edit</th>
-                                <th class="text-left">Delete</th>
+                                <th class="text-left">Edit&Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -188,7 +187,7 @@
                                 <td>{{ job.title }}</td>
                                 <td>{{ job.date }}</td>
                                 <td>{{ job.time }}</td>
-                                <td>{{ job.location }}</td>
+                                <td class="line-clamp-3">{{ job.location }}</td>
                                 <td>
                                     <v-btn
                                         v-if="!showModal"
@@ -207,8 +206,6 @@
                                     >
                                         Edit
                                     </v-btn>
-                                </td>
-                                <td>
                                     <v-btn
                                         v-if="!showModal"
                                         variant="tonal"

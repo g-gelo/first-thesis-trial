@@ -219,8 +219,7 @@ bf
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Location</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>Edit&Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -228,11 +227,15 @@ bf
                                     v-for="meeting in seminars"
                                     :key="meeting.id"
                                 >
-                                    <td>{{ meeting.title }}</td>
+                                    <td class="line-clamp-3">
+                                        {{ meeting.title }}
+                                    </td>
                                     <td>{{ meeting.description }}</td>
                                     <td>{{ meeting.date }}</td>
                                     <td>{{ meeting.time }}</td>
-                                    <td>{{ meeting.location }}</td>
+                                    <td class="line-clamp-3">
+                                        {{ meeting.location }}
+                                    </td>
                                     <td>
                                         <v-btn
                                             v-if="!showModal"
@@ -257,8 +260,6 @@ bf
                                         >
                                             Edit
                                         </v-btn>
-                                    </td>
-                                    <td>
                                         <v-btn
                                             v-if="!showModal"
                                             variant="tonal"

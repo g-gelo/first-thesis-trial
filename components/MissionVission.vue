@@ -70,7 +70,7 @@
                 <tbody>
                     <tr v-for="misnvis in missionvision" :key="misnvis.id">
                         <td>{{ misnvis.title }}</td>
-                        <td>{{ misnvis.description }}</td>
+                        <td class="line-clamp-3">{{ misnvis.description }}</td>
                         <td>
                             <v-btn
                                 v-if="!showModalMisnVisEdit"

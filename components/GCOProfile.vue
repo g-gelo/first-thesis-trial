@@ -135,7 +135,7 @@
                 <tbody>
                     <tr v-for="gco in gcoProfile" :key="gco.id">
                         <td>{{ gco.title }}</td>
-                        <td>{{ gco.description }}</td>
+                        <td class="line-clamp-3">{{ gco.description }}</td>
                         <td>
                             <v-btn
                                 v-if="!showGcoFormEdit"

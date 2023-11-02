@@ -135,7 +135,7 @@
                 <tbody>
                     <tr v-for="profile in osasAll" :key="profile.id">
                         <td>{{ profile.title }}</td>
-                        <td>{{ profile.description }}</td>
+                        <td class="line-clamp-3">{{ profile.description }}</td>
                         <td>
                             <v-btn
                                 v-if="!showOsasEdit"
@@ -278,7 +278,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="purpose in osasFunction" :key="purpose.id">
-                        <td>{{ purpose.osasFunction }}</td>
+                        <td class="line-clamp-3">{{ purpose.osasFunction }}</td>
                         <td>
                             <v-btn
                                 v-if="!showFunctionEdit"
