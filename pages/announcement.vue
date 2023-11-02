@@ -37,7 +37,7 @@
         />
         <v-container>
             <div>
-                <TheSeminar class="card" />
+                <TheSeminar />
             </div>
         </v-container>
         <TheTitle
@@ -49,7 +49,7 @@
         />
         <v-container>
             <div>
-                <TheCareer class="card" />
+                <TheCareer />
             </div>
         </v-container>
     </div>

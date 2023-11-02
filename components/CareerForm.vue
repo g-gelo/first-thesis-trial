@@ -249,7 +249,15 @@ const addCareer = async (career) => {
             location: career.location,
         },
     });
-    if (addedCareer) careers.value = await $fetch("/api/careers");
+    if (addedCareer) {
+        // Clear the form
+        career.title = "";
+        career.date = "";
+        career.time = "";
+        career.location = "";
+
+        careers.value = await $fetch("/api/careers");
+    }
 };
 
 const editedCareer = ref({
@@ -331,19 +339,6 @@ tr:nth-child(odd) {
 }
 .btn button:active {
     opacity: 0.5;
-}
-.btn2 {
-    appearance: none;
-    background-color: #003b1b;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 1em;
-    padding: 0.4em 1.2em;
-    user-select: none;
-}
-
-.btn2:active {
-    background-color: #9bc0f7;
 }
 .modal {
     position: fixed;

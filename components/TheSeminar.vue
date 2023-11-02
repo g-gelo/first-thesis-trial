@@ -216,7 +216,7 @@
                             <span class="info-value main-title highlight">
                                 <div v-if="data?.subscribed">
                                     <button
-                                        class="absolute top-3 right-0"
+                                        class="absolute top-3 right-2 text-sm"
                                         v-if="!showEditForm"
                                         variant="tonal"
                                         @click="
