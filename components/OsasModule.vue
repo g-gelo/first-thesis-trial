@@ -331,7 +331,11 @@ const addOsasFunction = async (oFunction) => {
             osasFunction: oFunction.osasFunction,
         },
     });
-    if (addedFunction) osasFunction.value = await $fetch("/api/osasfunction");
+    if (addedFunction) {
+        oFunction.osasFunction = "";
+
+        osasFunction.value = await $fetch("/api/osasfunction");
+    }
 };
 
 const editedOsasFunction = ref({
@@ -381,7 +385,12 @@ const addOsas = async (osas) => {
             description: osas.description,
         },
     });
-    if (addedOsas) osasAll.value = await $fetch("/api/osas");
+    if (addedOsas) {
+        osas.title = "";
+        osas.description = "";
+
+        osasAll.value = await $fetch("/api/osas");
+    }
 };
 
 const editedOsasModule = ref({

@@ -291,7 +291,12 @@ const addGco = async (gco) => {
             description: gco.description,
         },
     });
-    if (addedGco) gcoProfile.value = await $fetch("/api/gco");
+    if (addedGco) {
+        gco.title = "";
+        gco.description = "";
+
+        gcoProfile.value = await $fetch("/api/gco");
+    }
 };
 
 const editedGcoProfile = ref({
@@ -335,7 +340,11 @@ const addGcoService = async (gcoServices) => {
             service: gcoServices.service,
         },
     });
-    if (addedGcoService) gcoService.value = await $fetch("/api/gcoservices");
+    if (addedGcoService) {
+        gcoServices.service = "";
+
+        gcoService.value = await $fetch("/api/gcoservices");
+    }
 };
 
 const editedGcoService = ref({

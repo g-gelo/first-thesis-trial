@@ -63,15 +63,14 @@ bf
                                 class="block mb-2 text-sm font-medium text-gray-900"
                                 >Guest Speaker</label
                             >
-                            <textarea
+                            <input
+                                type="text"
                                 id="description"
-                                name="description"
                                 v-model="seminar.description"
-                                rows="4"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Guest Speaker"
-                                auto-grow
-                            ></textarea>
+                                placeholder="Description"
+                                required
+                            />
                         </div>
                         <div class="w-full px-4 sm:w-1/2">
                             <label
@@ -314,7 +313,15 @@ const addSeminar = async (seminar) => {
             location: seminar.location,
         },
     });
-    if (addedSeminar) seminars.value = await $fetch("/api/seminars");
+    if (addedSeminar) {
+        seminar.title = "";
+        seminar.description = "";
+        seminar.date = "";
+        seminar.time = "";
+        seminar.location = "";
+
+        seminars.value = await $fetch("/api/seminars");
+    }
 };
 
 const editedSeminar = ref({

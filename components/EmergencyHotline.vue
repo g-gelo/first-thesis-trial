@@ -228,8 +228,13 @@ const addEmergencyHotline = async (emergency_Hotline) => {
             location: emergency_Hotline.location,
         },
     });
-    if (addedEmergencyHotline)
+    if (addedEmergencyHotline) {
+        emergency_Hotline.organization = "";
+        emergency_Hotline.number = "";
+        emergency_Hotline.location = "";
+
         emergencyHotline.value = await $fetch("/api/hotline");
+    }
 };
 
 const editedEmergencyHotline = ref({
