@@ -1,21 +1,24 @@
 <template>
-    <v-card v-for="career in careers" :key="career.id" class="mb-6 rounded-xl">
-        <v-row class="content-center-left">
-            <v-col
-                cols="4"
-                class="border-left rounded-tl-xl rounded-bl-xl space-on-left"
-            >
-                <div>
-                    <v-img src="/img/careersblob.svg" class="top-image"
-                        ><v-img
-                            class="seminar-icon"
-                            src="/img/careersicon.png"
-                            width="75px"
-                            height="75px"
-                        ></v-img
-                    ></v-img>
+    <div
+        v-for="career in careers"
+        :key="career.id"
+        class="mb-6 bg-white rounded-tr-xl rounded-bl-xl"
+    >
+        <div class="h-64 flex">
+            <div class="w-24 h-24 bg-secondary-100 relative">
+                <div class="ma-2">
+                    <img
+                        src="/img/careersblob.svg"
+                        alt="Careers Blob"
+                        class="top-image absolute top-0 left-0"
+                    />
+                    <img
+                        src="/img/careersicon.png"
+                        alt="Careers Icon"
+                        class="absolute top-0 left-0"
+                    />
                 </div>
-                <div class="ml-3">
+                <div class="ml-3 absolute flex flex-col top-20 mt-5">
                     <div class="seminar-info">
                         <v-icon class="ml-6 icon-small"
                             >fa-regular fa-calendar-days</v-icon
@@ -33,37 +36,29 @@
                         }}</span>
                     </div>
                 </div>
-            </v-col>
-            <v-col cols="7">
-                <v-list class="seminar-details">
-                    <v-list-item-group>
-                        <v-list-item>
-                            <v-list-item-content>
-                                <div class="mt-1 seminar-info">
-                                    <span
-                                        class="info-value main-title highlight"
-                                        >{{ career.title }}</span
-                                    >
-                                </div>
-                                <div class="mt-5 ma-2 seminar-info">
-                                    <!-- Styling for the Where icon -->
-                                    <v-icon start class="icon-small"
-                                        >fa-solid fa-location-dot</v-icon
-                                    >
-                                    <span class="info-value info-small pa-0">{{
-                                        career.location
-                                    }}</span>
-                                </div>
-                                <span class="incline-text"
-                                    >Contact Guidance and Counseling Office
-                                </span>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list-item-group>
-                </v-list>
-            </v-col>
-        </v-row>
-    </v-card>
+            </div>
+            <div
+                class="w-60 p-4 border-l ml-2 border-green-800 relative flex flex-col gap-4"
+            >
+                <div class="mt-1 seminar-info ma-2">
+                    <span class="info-value main-title highlight">{{
+                        career.title
+                    }}</span>
+                </div>
+                <div class="ma-2 seminar-info">
+                    <v-icon start class="icon-small"
+                        >fa-solid fa-location-dot</v-icon
+                    >
+                    <span class="info-value info-small pa-0">{{
+                        career.location
+                    }}</span>
+                </div>
+                <span class="incline-text ma-2"
+                    >Contact Guidance and Counseling Office</span
+                >
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
