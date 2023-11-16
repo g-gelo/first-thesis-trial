@@ -92,7 +92,6 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import FacebookChat from "~/components/FacebookChat.vue";
 
 const { data } = useAuth();
 const { signOut } = useAuth();

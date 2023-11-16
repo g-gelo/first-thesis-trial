@@ -35,7 +35,6 @@
         "next-auth": "^4.22.1",
         "node-fetch-native": "^1.4.0",
         "sass": "^1.63.2",
-        "vue-fb-customer-chat": "^0.2.2",
         "vuetify": "^3.3.3"
     }
 }
