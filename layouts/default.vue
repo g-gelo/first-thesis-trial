@@ -22,7 +22,7 @@
             <template v-if="!isLargeScreen">
                 <slot />
                 <div>
-                    <FacebookChat />
+                    <TawkChat />
                 </div>
                 <v-navigation-drawer
                     v-model="drawer"
