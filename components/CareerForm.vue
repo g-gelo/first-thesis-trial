@@ -45,6 +45,20 @@
                     </div>
                     <div class="w-full px-4 sm:w-1/2">
                         <label
+                            for="title"
+                            class="block mb-2 text-sm font-medium text-gray-900"
+                            >Job Description</label
+                        >
+                        <textarea
+                            v-model="career.description"
+                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="Job Description"
+                            rows="5"
+                            required
+                        ></textarea>
+                    </div>
+                    <div class="w-full px-4 sm:w-1/2">
+                        <label
                             for="date"
                             class="block mb-2 text-sm font-medium text-gray-900"
                             >Date</label
@@ -108,6 +122,13 @@
                             placeholder="Title"
                             required
                         />
+                        <textarea
+                            v-model="editedCareer.description"
+                            class="w-full p-2 border rounded mb-4"
+                            placeholder="Job Description"
+                            rows="5"
+                            required
+                        ></textarea>
                         <input
                             v-model="editedCareer.date"
                             class="w-full p-2 border rounded mb-4"
@@ -175,19 +196,24 @@
                     <table density="compact">
                         <thead>
                             <tr>
-                                <th class="text-left">Title</th>
-                                <th class="text-left">Date</th>
-                                <th class="text-left">Time</th>
-                                <th class="text-left">Location</th>
-                                <th class="text-left">Edit&Delete</th>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Job Description</th>
+                                <th>Location</th>
+                                <th>Edit&Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="job in careers" :key="job.id">
-                                <td>{{ job.title }}</td>
+                                <td class="line-clamp-3">{{ job.title }}</td>
+
                                 <td>{{ job.date }}</td>
                                 <td>{{ job.time }}</td>
-                                <td class="line-clamp-3">{{ job.location }}</td>
+                                <td class="line-clamp-3">
+                                    {{ job.description }}
+                                </td>
+                                <td>{{ job.location }}</td>
                                 <td>
                                     <v-btn
                                         v-if="!showModal"
@@ -196,6 +222,8 @@
                                             ($event) => {
                                                 editedCareer.id = job.id;
                                                 editedCareer.title = job.title;
+                                                editedCareer.description =
+                                                    job.description;
                                                 editedCareer.date = job.date;
                                                 editedCareer.time = job.time;
                                                 editedCareer.location =
@@ -232,6 +260,7 @@ const showCareerDatabase = ref(false);
 
 const career = ref({
     title: "",
+    description: "",
     date: "",
     time: "",
     location: "",
@@ -244,6 +273,7 @@ const addCareer = async (career) => {
         method: "POST",
         body: {
             title: career.title,
+            description: career.description,
             date: career.date,
             time: career.time,
             location: career.location,
@@ -252,6 +282,7 @@ const addCareer = async (career) => {
     if (addedCareer) {
         // Clear the form
         career.title = "";
+        career.description = "";
         career.date = "";
         career.time = "";
         career.location = "";
@@ -263,6 +294,7 @@ const addCareer = async (career) => {
 const editedCareer = ref({
     id: null,
     title: null,
+    description: null,
     date: null,
     time: null,
     location: null,
@@ -274,6 +306,7 @@ const editCareer = async (editedCareer) => {
     if (
         editedCareer.id &&
         editedCareer.title &&
+        editedCareer.description &&
         editedCareer.date &&
         editedCareer.time &&
         editedCareer.location
@@ -283,6 +316,7 @@ const editCareer = async (editedCareer) => {
             body: {
                 id: editedCareer.id,
                 title: editedCareer.title,
+                description: editedCareer.description,
                 date: editedCareer.date,
                 time: editedCareer.time,
                 location: editedCareer.location,

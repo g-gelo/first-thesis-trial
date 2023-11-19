@@ -114,6 +114,13 @@
                         placeholder="Title"
                         required
                     />
+                    <textarea
+                        v-model="editedCareer.description"
+                        class="w-full p-2 border rounded mb-4"
+                        placeholder="Job Description"
+                        rows="5"
+                        required
+                    ></textarea>
                     <input
                         v-model="editedCareer.date"
                         class="w-full p-2 border rounded mb-4"
@@ -204,6 +211,8 @@
                                                 editedCareer.id = career.id;
                                                 editedCareer.title =
                                                     career.title;
+                                                editedCareer.description =
+                                                    career.description;
                                                 editedCareer.date = career.date;
                                                 editedCareer.time = career.time;
                                                 editedCareer.location =
@@ -228,9 +237,9 @@
                                 career.location
                             }}</span>
                         </div>
-                        <span class="incline-text ma-2"
-                            >Contact Guidance and Counseling Office</span
-                        >
+                        <span class="incline-text ma-2">{{
+                            career.description
+                        }}</span>
                     </div>
                 </div>
             </div>
@@ -246,6 +255,7 @@ const showEditCareerForm = ref(false);
 
 const career = ref({
     title: "",
+    description: "",
     date: "",
     time: "",
     location: "",
@@ -258,6 +268,7 @@ const addCareer = async (career) => {
         method: "POST",
         body: {
             title: career.title,
+            description: career.description,
             date: career.date,
             time: career.time,
             location: career.location,
@@ -266,6 +277,7 @@ const addCareer = async (career) => {
     if (addedCareer) {
         // Clear the form
         career.title = "";
+        career.description = "";
         career.date = "";
         career.time = "";
         career.location = "";
@@ -277,6 +289,7 @@ const addCareer = async (career) => {
 const editedCareer = ref({
     id: null,
     title: null,
+    description: null,
     date: null,
     time: null,
     location: null,
@@ -288,6 +301,7 @@ const editCareer = async (editedCareer) => {
     if (
         editedCareer.id &&
         editedCareer.title &&
+        editedCareer.description &&
         editedCareer.date &&
         editedCareer.time &&
         editedCareer.location
@@ -297,6 +311,7 @@ const editCareer = async (editedCareer) => {
             body: {
                 id: editedCareer.id,
                 title: editedCareer.title,
+                description: editedCareer.description,
                 date: editedCareer.date,
                 time: editedCareer.time,
                 location: editedCareer.location,
