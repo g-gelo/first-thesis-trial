@@ -1,4 +1,3 @@
-bf
 <template>
     <div class="content-container">
         <v-container>
@@ -68,7 +67,7 @@ bf
                                 id="description"
                                 v-model="seminar.description"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Description"
+                                placeholder="Guest Speaker"
                                 required
                             />
                         </div>
@@ -262,11 +261,49 @@ bf
                                         <v-btn
                                             v-if="!showModal"
                                             variant="tonal"
-                                            @click="deleteSeminar(meeting.id)"
+                                            @click="
+                                                ($event) => {
+                                                    showDeleteModal = true;
+                                                }
+                                            "
                                         >
                                             Delete
                                         </v-btn>
                                     </td>
+                                    <div class="modal" v-if="showDeleteModal">
+                                        <div
+                                            class="bg-white shadow-lg rounded-lg p-6 w-80"
+                                        >
+                                            <h2 class="text-xl font-bold mb-4">
+                                                Delete Seminar
+                                            </h2>
+                                            <p class="mb-4">
+                                                Do you want to delete this
+                                                Seminar?
+                                            </p>
+                                            <div class="flex justify-end">
+                                                <button
+                                                    @click="
+                                                        deleteSeminar(
+                                                            meeting.id
+                                                        ),
+                                                            (showDeleteModal = false)
+                                                    "
+                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                                >
+                                                    Delete
+                                                </button>
+                                                <button
+                                                    @click="
+                                                        showDeleteModal = false
+                                                    "
+                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                                >
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </tr>
                             </tbody>
                         </table>
@@ -289,6 +326,7 @@ useHead({
 const showModalSeminar = ref(false);
 const showModal = ref(false);
 const showSeminarDatabase = ref(false);
+const showDeleteModal = ref(false);
 
 const { data: seminars } = useFetch("/api/seminars");
 
