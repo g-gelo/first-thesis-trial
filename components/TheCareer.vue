@@ -242,19 +242,72 @@
                                 </div>
                                 {{ career.title }}</span
                             >
-                        </div>
-                        <div class="ma-2 seminar-info">
-                            <v-icon start class="icon-small"
-                                >fa-solid fa-location-dot</v-icon
+                            <div class="ma-2 seminar-info">
+                                <v-icon start class="icon-small"
+                                    >fa-solid fa-location-dot</v-icon
+                                >
+                                <span class="info-value info-small pa-0">{{
+                                    career.location
+                                }}</span>
+                            </div>
+                            <button
+                                class="mt-2 text-sm underline cursor-pointer text-blue-500"
+                                @click="
+                                    ($event) => {
+                                        showDetailedModal = true;
+                                        detailedCareer = career;
+                                    }
+                                "
                             >
-                            <span class="info-value info-small pa-0">{{
-                                career.location
-                            }}</span>
+                                View Details
+                            </button>
                         </div>
-                        <span class="incline-text ma-2">{{
-                            career.description
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" v-if="showDetailedModal">
+            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                <h2 class="text-xl font-bold mb-4">Job Career Details</h2>
+                <div>
+                    <h3 class="text-lg font-semibold">
+                        {{ detailedCareer.title }}
+                    </h3>
+                    <div class="seminar-info ma-2">
+                        <v-icon class="ml-6 icon-small"
+                            >fa-regular fa-calendar-days</v-icon
+                        >
+                        <span class="ml-3 info-value info-small">{{
+                            detailedCareer.date
                         }}</span>
                     </div>
+                    <div class="seminar-info ma-2">
+                        <v-icon class="ml-6 icon-small"
+                            >fa-regular fa-clock</v-icon
+                        >
+                        <span class="ml-2 info-value info-small">{{
+                            detailedCareer.time
+                        }}</span>
+                    </div>
+                    <div class="ma-2 seminar-info">
+                        <v-icon start class="icon-small"
+                            >fa-solid fa-location-dot</v-icon
+                        >
+                        <span class="info-value info-small pa-0">{{
+                            detailedCareer.location
+                        }}</span>
+                    </div>
+                    <div class="ma-2">
+                        <p>{{ detailedCareer.description }}</p>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <button
+                        @click="showDetailedModal = false"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -266,6 +319,8 @@ const { data: careers } = useFetch("/api/careers");
 const { data } = useAuth();
 const showModalCareer = ref(false);
 const showEditCareerForm = ref(false);
+const showDetailedModal = ref(false);
+const detailedCareer = ref(null);
 
 const career = ref({
     title: "",
