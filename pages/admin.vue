@@ -270,7 +270,7 @@
                                             Delete
                                         </v-btn>
                                     </td>
-                                    <div class="modal" v-if="showDeleteModal">
+                                    <div class="modal2" v-if="showDeleteModal">
                                         <div
                                             class="bg-white shadow-lg rounded-lg p-6 w-80"
                                         >
@@ -460,22 +460,19 @@ tr:nth-child(odd) {
     align-items: center;
     justify-content: center;
 }
+.modal2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .content-container {
     height: 550vh;
-}
-
-.btn2 {
-    appearance: none;
-    background-color: #003b1b;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 1em;
-    padding: 0.4em 1.2em;
-    user-select: none;
-}
-
-.btn2:active {
-    background-color: #9bc0f7;
 }
 </style>
