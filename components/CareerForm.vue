@@ -21,7 +21,7 @@
                         }
                     "
                 >
-                    <v-icon>fa-solid fa-plus</v-icon> Hide Job Career Event
+                    Hide Job Career Event
                 </button>
             </div>
             <div v-if="showModalCareer">
@@ -237,11 +237,44 @@
                                     <v-btn
                                         v-if="!showModal"
                                         variant="tonal"
-                                        @click="deleteCareer(job.id)"
+                                        @click="
+                                            ($event) => {
+                                                showDeleteModal = true;
+                                            }
+                                        "
                                     >
                                         Delete
                                     </v-btn>
                                 </td>
+                                <div class="modal2" v-if="showDeleteModal">
+                                    <div
+                                        class="bg-white shadow-lg rounded-lg p-6 w-80"
+                                    >
+                                        <h2 class="text-xl font-bold mb-4">
+                                            Delete Seminar
+                                        </h2>
+                                        <p class="mb-4">
+                                            Do you want to delete this Seminar?
+                                        </p>
+                                        <div class="flex justify-end">
+                                            <button
+                                                @click="
+                                                    deleteCareer(job.id),
+                                                        (showDeleteModal = false)
+                                                "
+                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                            >
+                                                Delete
+                                            </button>
+                                            <button
+                                                @click="showDeleteModal = false"
+                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </tr>
                         </tbody>
                     </table>
@@ -257,6 +290,7 @@ const { data: careers } = useFetch("/api/careers");
 const showModalCareer = ref(false);
 const showModal = ref(false);
 const showCareerDatabase = ref(false);
+const showDeleteModal = ref(false);
 
 const career = ref({
     title: "",
@@ -381,6 +415,17 @@ tr:nth-child(odd) {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
