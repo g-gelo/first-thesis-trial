@@ -152,10 +152,44 @@
                             >
                                 Edit
                             </v-btn>
-                            <v-btn variant="tonal" @click="deleteGco(gco.id)">
+                            <v-btn
+                                variant="tonal"
+                                @click="
+                                    ($event) => {
+                                        showDeleteModal2 = true;
+                                    }
+                                "
+                            >
                                 Delete
                             </v-btn>
                         </td>
+                        <div class="modal2" v-if="showDeleteModal2">
+                            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                                <h2 class="text-xl font-bold mb-4">
+                                    Delete Seminar
+                                </h2>
+                                <p class="mb-4">
+                                    Do you want to delete this Profile?
+                                </p>
+                                <div class="flex justify-end">
+                                    <button
+                                        @click="
+                                            deleteGco(gco.id),
+                                                (showDeleteModal2 = false)
+                                        "
+                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                    >
+                                        Delete
+                                    </button>
+                                    <button
+                                        @click="showDeleteModal2 = false"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </tr>
                 </tbody>
             </table>
@@ -295,11 +329,42 @@
                             </v-btn>
                             <v-btn
                                 variant="tonal"
-                                @click="deleteGcoService(service.id)"
+                                @click="
+                                    ($event) => {
+                                        showDeleteModal1 = true;
+                                    }
+                                "
                             >
                                 Delete
                             </v-btn>
                         </td>
+                        <div class="modal2" v-if="showDeleteModal1">
+                            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                                <h2 class="text-xl font-bold mb-4">
+                                    Delete Seminar
+                                </h2>
+                                <p class="mb-4">
+                                    Do you want to delete this Service?
+                                </p>
+                                <div class="flex justify-end">
+                                    <button
+                                        @click="
+                                            deleteGcoService(service.id),
+                                                (showDeleteModal1 = false)
+                                        "
+                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                    >
+                                        Delete
+                                    </button>
+                                    <button
+                                        @click="showDeleteModal1 = false"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </tr>
                 </tbody>
             </table>
@@ -314,6 +379,8 @@ const showGcoDatabase = ref(false);
 const showGcoServiceForm = ref(false);
 const showGcoServiceDb = ref(false);
 const showGcoServiceEdit = ref(false);
+const showDeleteModal1 = ref(false);
+const showDeleteModal2 = ref(false);
 
 const { data: gcoService } = useFetch("/api/gcoservices");
 
@@ -472,6 +539,17 @@ tr:nth-child(odd) {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;

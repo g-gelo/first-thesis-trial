@@ -254,7 +254,8 @@
                                             Delete Seminar
                                         </h2>
                                         <p class="mb-4">
-                                            Do you want to delete this Seminar?
+                                            Do you want to delete this Job
+                                            Career?
                                         </p>
                                         <div class="flex justify-end">
                                             <button

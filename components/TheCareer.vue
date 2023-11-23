@@ -251,7 +251,7 @@
                                 }}</span>
                             </div>
                             <button
-                                class="mt-2 text-sm underline cursor-pointer text-blue-500"
+                                class="mt-2 text-sm cursor-pointer text-blue"
                                 @click="
                                     ($event) => {
                                         showDetailedModal = true;
@@ -259,7 +259,7 @@
                                     }
                                 "
                             >
-                                View Details
+                                Tap for more details
                             </button>
                         </div>
                     </div>
