@@ -13,6 +13,9 @@
             <div>
                 <EmergencyHotline />
             </div>
+            <div>
+                <FaqsForm />
+            </div>
             <h1 class="pb-4">Seminar</h1>
             <div class="btn">
                 <button

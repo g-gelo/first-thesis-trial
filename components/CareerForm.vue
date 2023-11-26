@@ -1,5 +1,5 @@
 <template>
-    <div class="show">
+    <div>
         <v-container>
             <h1 class="pb-4">Job Career</h1>
             <div class="btn">
