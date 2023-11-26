@@ -116,6 +116,21 @@ import { ref } from "vue";
 import "animate.css";
 import "intersection-observer";
 
+const allChatData = ref([]);
+
+const fetchData = async () => {
+    try {
+        const response = await fetch("/api/chatbot");
+        const data = await response.json();
+        allChatData.value = data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+};
+
+// Call fetchData to populate allChatData
+fetchData();
+
 const showBusinessHours = ref(false);
 const loadingBusinessHours = ref(false);
 const showLocation = ref(false);
@@ -173,30 +188,25 @@ const sendMessage = () => {
         };
         messages.value.push(userMessage);
 
-        const keywords = [
-            "counselor",
-            "guidance",
-            "problem",
-            "police",
-            "mental",
-            "hi",
-            "hello",
-            "academic calendar",
-            "calendar",
-        ]; // Add more keywords as needed
+        // Check if allChatData is an array or initialize it as an empty array
+        const keywords = Array.isArray(allChatData.value)
+            ? allChatData.value.map((item) => item.keyword)
+            : [];
 
-        let foundKeyword = false; // Flag to track if a keyword is found
+        let foundKeyword = false;
 
         for (let i = 0; i < keywords.length; i++) {
             const keyword = keywords[i];
-            if (newMessage.value.toLowerCase().includes(keyword)) {
+            if (
+                newMessage.value.toLowerCase().includes(keyword.toLowerCase())
+            ) {
                 const chatbotResponse = {
                     sender: "Guidance Connect",
-                    text: getAnswer(keyword), // Call a function to get the corresponding answer
+                    text: getAnswer(keyword),
                 };
                 messages.value.push(chatbotResponse);
                 foundKeyword = true;
-                break; // Exit the loop after finding a match
+                break;
             }
         }
 
@@ -223,80 +233,14 @@ const sendMessage = () => {
 };
 
 const getAnswer = (keyword) => {
-    switch (keyword) {
-        case "counselor":
-            return "A counselor is a person trained to give guidance on personal, social, or psychological problems.";
-        case "guidance":
-            return "Guidance refers to the process of advising or providing support and direction in making decisions or solving problems.";
-        case "problem":
-            return "A problem is a matter or situation that requires attention, consideration, or resolution.";
-        case "hello":
-        case "hi":
-            return `Hello! 👋 Welcome to our offline chatbot. While I'm offline, I can still provide you
-            with useful information. Feel free to ask about emergency hotlines, school calendar, mental health
-            support hotline, or anything else you'd like to know. Just type your question, and I'll do my best to assist you!`;
-        case "police":
-            return `
-        Cavite Police Stations:
-            Cavite City: 0998-967-3349 
-            Kawit: 0998-967-3356 
-            Noveleta: 0998-967-3357 
-            Rosario: 0998-967-3358 
-            City of Bacoor: 0998-967-3348 
-            City of Dasmarinas: 0998-967-3350 
-            Carmona: 0998-967-3359 
-            GMA: 0998-967-3360 
-            Silang: 0998-598-5622 
-            Gen. Trias: 0998-967-3361 
-            Amadeo: 0998-967-3365 
-            Indang: 0998-967-3367 
-            Tanza: 0998-967-3362 
-            Trece Martires City: 0998-967-3354 
-            Alfonso: 0998-967-3364 
-            Gen. Emilio Aguinaldo: 0998-967-3512
-            Magallanes: 0998-967-3368 
-            Maragondon: 0998-967-3369 
-            Mendez: 0998-967-3370 
-            Naic: 0998-967-3371 
-            Tagaytay City: 0998-967-3352 
-            Ternate: 0998-967-3374 
-        
-    `;
-        case "mental":
-            return `
-            National Center for Mental Health 
-            - Psychiatric emergencies 
-            - Suicidal thoughts 
-            - Depression 
-            - Grief and loss 
-            - Relationship issues 
-            - Sexual orientation issues 
-            - School and career issues 
-            - referral to other agencies that can provide specific mental services in the 
-            Philippines. 
-            GLOBE/TM Subscribers: 0966-351-4518 & 0917-899-8727
-            SMART/SUN/TNT Subscribers: 0908-639-2672
-            `;
-        default:
-            return "I'm sorry, I don't have information about that.";
-        case "academic calendar":
-        case "calendar":
-            return `Academic Calendar | A.Y. 2023-2024
-            First Semester_________________
-            September 05 - Beginning of Classes
-            November 20 - 25 - Midterm Examination
-            December 23 - January 02 - Christmas Break
-            January 22 - 27 - Final Examination (Graduating)
-            January 29 - February 03 - Final Examination (Non-Graduating)
-            Graduation Day - TBA -------------
-            February 05 - 24 Semestral Break
-            Second Semester___________________
-            February 26 - Beginning of Classes
-            April 22 - 27 - Midterm Examination
-            June 17 - 22 - Final Examination (Graduating)
-            June 24 - 29 - Final Examination (Non-Graduating)
-            Graduation Day - TBA --------------------
-            July 01 - Start of Vacation`;
+    const matchingItem = Array.isArray(allChatData.value)
+        ? allChatData.value.find((item) => item.keyword === keyword)
+        : null;
+
+    if (matchingItem) {
+        return matchingItem.answer;
+    } else {
+        return "I'm sorry, I don't have information about that.";
     }
 };
 
