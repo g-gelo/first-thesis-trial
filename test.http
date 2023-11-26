@@ -1,13 +1,13 @@
-PUT http://localhost:3000/api/missionvision
-Content-Type: application/json
+# PUT http://localhost:3000/api/missionvision
+# Content-Type: application/json
 
-{
-    "id": "clnwxhz280000hsfgwnyhck8x",
-    "title": "Edit ko ulit",
-    "description": "Option",
-}
+# {
+#     "id": "clnwxhz280000hsfgwnyhck8x",
+#     "title": "Edit ko ulit",
+#     "description": "Option",
+# }
 
-# GET  http://localhost:3000/api/hotline
+# GET  http://localhost:3000/api/faq
 # Content-Type: application/json
 
 # { 
@@ -18,11 +18,8 @@ Content-Type: application/json
 # Content-Type: application/json
 
 # {
-#     "organization": "Option",
-#     "number": "Option",
-#     "location": "Option",
-#     "description": "sadsadadsaUpdatedasda sadcripripripription",
-#     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/2560px-PHP-logo.svg.png"
+#     "keyword": "Gelo",
+#     "answer": "3@1.9.0/node_modules/h3/dist/index.mjs:78:15)</span>\n<span class=\"stack internal\">at _parseJSON (/C:/xampp/htdocs/Projects/safety-repo/first-thesis-trial/node_modules/.pnpm/h3@1.9.0/node_modules/h3/dist/index.mjs:498:11)</span>\n<span class=\"stack internal\">at readBody (/C:/xampp/htdocs/Projects/saf",
 # }
 
 # DELETE http://localhost:3000/api/hotline

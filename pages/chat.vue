@@ -120,7 +120,7 @@ const allChatData = ref([]);
 
 const fetchData = async () => {
     try {
-        const response = await fetch("/api/chatbot");
+        const response = await fetch("/api/faq");
         const data = await response.json();
         allChatData.value = data;
     } catch (error) {
