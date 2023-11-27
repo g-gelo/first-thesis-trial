@@ -12,7 +12,8 @@
         "db:seed": "prisma db seed",
         "cmt": "git add -A && git commit -m",
         "push": "git push origin",
-        "test": "vitest"
+        "test": "vitest",
+        "send-emails": "node ./server/sendMail.js"
     },
     "devDependencies": {
         "@kevinmarrec/nuxt-pwa": "^0.17.0",
@@ -21,7 +22,6 @@
         "@nuxtjs/tailwindcss": "^6.8.0",
         "@sidebase/nuxt-auth": "^0.5.0",
         "@types/jest": "^29.5.10",
-        "@types/node": "^18",
         "@vitejs/plugin-vue": "^4.5.0",
         "eslint": "^8.44.0",
         "eslint-config-prettier": "^8.8.0",
@@ -35,10 +35,13 @@
         "@fortawesome/fontawesome-free": "^6.4.0",
         "@prisma/client": "^4.16.2",
         "@tawk.to/tawk-messenger-vue-3": "^1.0.1",
+        "@types/node": "^20.10.0",
         "animate.css": "^4.1.1",
+        "dotenv": "^16.3.1",
         "intersection-observer": "^0.12.2",
         "next-auth": "^4.22.1",
         "node-fetch-native": "^1.4.1",
+        "nodemailer": "^6.9.7",
         "sass": "^1.63.2",
         "vuetify": "^3.3.3"
     }
