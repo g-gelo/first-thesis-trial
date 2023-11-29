@@ -269,7 +269,7 @@
 </template>
 
 <script setup>
-// Filtering
+// Pagination
 const currentPage = ref(1);
 const itemsPerPage = 3;
 
