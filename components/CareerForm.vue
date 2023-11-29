@@ -189,7 +189,7 @@
             </div>
             <div
                 v-if="showCareerDatabase"
-                class="mt-4 flex items-center justify-center space-x-4"
+                class="mt-4 flex items-center justify-center space-x-4 ma-3"
             >
                 <button
                     @click="prevPage"
@@ -207,7 +207,7 @@
                     Next &gt;
                 </button>
             </div>
-            <v-col v-if="showCareerDatabase">
+            <div v-if="showCareerDatabase">
                 <div>
                     The database received
                     {{ careers?.length || 0 }} records:
@@ -299,7 +299,7 @@
                         </tbody>
                     </table>
                 </div>
-            </v-col>
+            </div>
         </v-container>
     </div>
 </template>

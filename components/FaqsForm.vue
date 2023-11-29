@@ -126,7 +126,7 @@
         </div>
         <div
             v-if="showFaqsTable"
-            class="mt-4 flex items-center justify-center space-x-4"
+            class="mt-4 flex items-center justify-center space-x-4 ma-3"
         >
             <button
                 @click="prevPage"
@@ -144,8 +144,7 @@
                 Next &gt;
             </button>
         </div>
-
-        <v-col v-if="showFaqsTable">
+        <div v-if="showFaqsTable">
             <div>
                 The database received
                 {{ allFaqs?.length || 0 }} records:
@@ -230,7 +229,7 @@
                     </table>
                 </div>
             </div>
-        </v-col>
+        </div>
     </div>
 </template>
 

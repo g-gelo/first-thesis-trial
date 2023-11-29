@@ -207,7 +207,7 @@
             </div>
             <div
                 v-if="showSeminarDatabase"
-                class="mt-4 flex items-center justify-center space-x-4"
+                class="mt-4 flex items-center justify-center space-x-4 ma-3"
             >
                 <button
                     @click="prevPage"
@@ -225,7 +225,7 @@
                     Next &gt;
                 </button>
             </div>
-            <v-col v-if="showSeminarDatabase">
+            <div v-if="showSeminarDatabase">
                 <div>
                     The database received
                     {{ seminars?.length || 0 }} records:
@@ -332,7 +332,7 @@
                         </table>
                     </div>
                 </div>
-            </v-col>
+            </div>
         </v-container>
         <CareerForm />
     </div>

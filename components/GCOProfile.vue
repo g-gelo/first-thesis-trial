@@ -122,8 +122,31 @@
                 </div>
             </div>
         </div>
-
+        <div
+            v-if="showGcoDatabase"
+            class="mt-4 flex items-center justify-center space-x-4"
+        >
+            <button
+                @click="prev_Page"
+                :disabled="currPage === 1"
+                class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+            >
+                &lt; Prev
+            </button>
+            <span class="text-sm font-semibold">{{ currPage }}</span>
+            <button
+                @click="next_Page"
+                :disabled="currPage * itemsInPage >= gcoProfile.length"
+                class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+            >
+                Next &gt;
+            </button>
+        </div>
         <div v-if="showGcoDatabase">
+            <div>
+                The database received
+                {{ gcoProfile?.length || 0 }} records:
+            </div>
             <table density="compact">
                 <thead>
                     <tr>
@@ -133,7 +156,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="gco in gcoProfile" :key="gco.id">
+                    <tr v-for="gco in pagedProfile" :key="gco.id">
                         <td>{{ gco.title }}</td>
                         <td class="line-clamp-3">{{ gco.description }}</td>
                         <td>
@@ -301,7 +324,31 @@
                 </div>
             </div>
         </div>
+        <div
+            v-if="showGcoServiceDb"
+            class="mt-4 flex items-center justify-center space-x-4"
+        >
+            <button
+                @click="prevPage"
+                :disabled="currentPage === 1"
+                class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+            >
+                &lt; Prev
+            </button>
+            <span class="text-sm font-semibold">{{ currentPage }}</span>
+            <button
+                @click="nextPage"
+                :disabled="currentPage * itemsPerPage >= gcoService.length"
+                class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+            >
+                Next &gt;
+            </button>
+        </div>
         <div v-if="showGcoServiceDb">
+            <div>
+                The database received
+                {{ gcoService?.length || 0 }} records:
+            </div>
             <table density="compact">
                 <thead>
                     <tr>
@@ -310,7 +357,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="service in gcoService" :key="service.id">
+                    <tr v-for="service in pagedService" :key="service.id">
                         <td>{{ service.service }}</td>
                         <td>
                             <v-btn
@@ -373,6 +420,48 @@
 </template>
 
 <script setup>
+const currentPage = ref(1);
+const itemsPerPage = 3;
+
+const pagedService = computed(() => {
+    const startIndex = (currentPage.value - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return gcoService.value.slice(startIndex, endIndex);
+});
+
+const nextPage = () => {
+    if (currentPage.value * itemsPerPage < gcoService.value.length) {
+        currentPage.value += 1;
+    }
+};
+
+const prevPage = () => {
+    if (currentPage.value > 1) {
+        currentPage.value -= 1;
+    }
+};
+// above is pagination for Services, and below is Pagination for Profile
+const currPage = ref(1);
+const itemsInPage = 3;
+
+const pagedProfile = computed(() => {
+    const startIndex = (currPage.value - 1) * itemsInPage;
+    const endIndex = startIndex + itemsInPage;
+    return gcoProfile.value.slice(startIndex, endIndex);
+});
+
+const next_Page = () => {
+    if (currPage.value * itemsInPage < gcoProfile.value.length) {
+        currPage.value += 1;
+    }
+};
+
+const prev_Page = () => {
+    if (currPage.value > 1) {
+        currPage.value -= 1;
+    }
+};
+
 const showGcoForm = ref(false);
 const showGcoFormEdit = ref(false);
 const showGcoDatabase = ref(false);
