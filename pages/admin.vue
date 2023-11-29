@@ -205,6 +205,26 @@
                     Hide Seminar Database
                 </button>
             </div>
+            <div
+                v-if="showSeminarDatabase"
+                class="mt-4 flex items-center justify-center space-x-4"
+            >
+                <button
+                    @click="prevPage"
+                    :disabled="currentPage === 1"
+                    class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                >
+                    &lt; Prev
+                </button>
+                <span class="text-sm font-semibold">{{ currentPage }}</span>
+                <button
+                    @click="nextPage"
+                    :disabled="currentPage * itemsPerPage >= seminars.length"
+                    class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                >
+                    Next &gt;
+                </button>
+            </div>
             <v-col v-if="showSeminarDatabase">
                 <div>
                     The database received
@@ -225,7 +245,7 @@
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="meeting in seminars"
+                                    v-for="meeting in pagedSeminars"
                                     :key="meeting.id"
                                 >
                                     <td class="line-clamp-3">
@@ -325,6 +345,26 @@ import CareerForm from "~/components/CareerForm.vue";
 useHead({
     title: "Admin",
 });
+const currentPage = ref(1);
+const itemsPerPage = 3;
+
+const pagedSeminars = computed(() => {
+    const startIndex = (currentPage.value - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return seminars.value.slice(startIndex, endIndex);
+});
+
+const nextPage = () => {
+    if (currentPage.value * itemsPerPage < seminars.value.length) {
+        currentPage.value += 1;
+    }
+};
+
+const prevPage = () => {
+    if (currentPage.value > 1) {
+        currentPage.value -= 1;
+    }
+};
 
 const showModalSeminar = ref(false);
 const showModal = ref(false);

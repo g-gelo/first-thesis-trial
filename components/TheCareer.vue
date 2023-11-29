@@ -177,7 +177,7 @@
                 :key="career.id"
                 class="mb-6 bg-white rounded-tr-xl rounded-bl-xl"
             >
-                <div class="h-64 flex">
+                <div class="h-64 flex max-w-md w-full h-full">
                     <div class="w-24 h-24 bg-secondary-100 relative">
                         <div class="ma-2">
                             <img
@@ -213,7 +213,7 @@
                     <div
                         class="w-60 p-4 border-l ml-2 border-green-800 relative flex flex-col gap-4"
                     >
-                        <div class="mt-1 seminar-info ma-2">
+                        <div class="mt-1 seminar-info ma-2 w-full">
                             <span class="info-value main-title highlight">
                                 <div v-if="data?.subscribed">
                                     <button
@@ -267,7 +267,7 @@
             </div>
         </div>
         <div class="modal" v-if="showDetailedModal">
-            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+            <div class="bg-white shadow-lg rounded-lg p-6 max-w-md w-full">
                 <h2 class="text-xl font-bold mb-4">Job Career Details</h2>
                 <div>
                     <h3 class="text-lg font-semibold">
