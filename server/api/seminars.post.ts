@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
     if (
         body.title &&
-        body.description &&
+        body.guest_speaker &&
         body.date &&
         body.time &&
         body.location
@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
             .create({
                 data: {
                     title: body.title,
-                    description: body.description,
+                    guest_speaker: body.guest_speaker,
                     date: body.date,
                     time: body.time,
                     location: body.location,

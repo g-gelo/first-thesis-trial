@@ -191,6 +191,47 @@
                 v-if="showCareerDatabase"
                 class="mt-4 flex items-center justify-center space-x-4 ma-3"
             >
+                <div
+                    class="flex flex-col items-start sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2"
+                >
+                    <label for="search" class="text-sm font-semibold"
+                        >Search:</label
+                    >
+                    <input
+                        v-model="searchKeyword"
+                        id="search"
+                        type="text"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                        placeholder="Search"
+                    />
+                </div>
+                <div class="flex items-center space-x-2">
+                    <label for="filter" class="text-sm font-semibold"
+                        >Filter:</label
+                    >
+                    <select
+                        v-model="selectedFilter"
+                        id="filter"
+                        class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
+                    >
+                        <option value="title">Title</option>
+                        <option value="location">Location</option>
+                        <option value="description">Job Description</option>
+                        <option value="date">Date</option>
+                        <option value="time">Time</option>
+                    </select>
+                </div>
+                <button
+                    @click="resetFilters"
+                    class="px-2 py-1 bg-gray-300 text-gray-600 rounded-md focus:outline-none hover:bg-gray-400"
+                >
+                    Reset Filters
+                </button>
+            </div>
+            <div
+                v-if="showCareerDatabase"
+                class="mt-4 flex items-center justify-center space-x-4 ma-3"
+            >
                 <button
                     @click="prevPage"
                     :disabled="currentPage === 1"
@@ -217,22 +258,22 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
+                                <th>Location</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Job Description</th>
-                                <th>Location</th>
                                 <th>Edit&Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="job in pagedCareers" :key="job.id">
                                 <td class="line-clamp-3">{{ job.title }}</td>
+                                <td>{{ job.location }}</td>
                                 <td>{{ job.date }}</td>
                                 <td>{{ job.time }}</td>
                                 <td class="line-clamp-3">
                                     {{ job.description }}
                                 </td>
-                                <td>{{ job.location }}</td>
                                 <td>
                                     <v-btn
                                         v-if="!showModal"
@@ -305,13 +346,14 @@
 </template>
 
 <script setup>
+// Pagination
 const currentPage = ref(1);
 const itemsPerPage = 3;
 
 const pagedCareers = computed(() => {
     const startIndex = (currentPage.value - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return careers.value.slice(startIndex, endIndex);
+    return filteredCareer.value.slice(startIndex, endIndex);
 });
 
 const nextPage = () => {
@@ -325,6 +367,23 @@ const prevPage = () => {
         currentPage.value -= 1;
     }
 };
+// Filtering
+const searchKeyword = ref("");
+const selectedFilter = ref("title");
+
+const resetFilters = () => {
+    searchKeyword.value = "";
+    selectedFilter.value = "title";
+};
+
+const filteredCareer = computed(() => {
+    const filterKey = selectedFilter.value.toLowerCase();
+    return careers.value.filter((career) =>
+        career[filterKey]
+            .toLowerCase()
+            .includes(searchKeyword.value.toLowerCase())
+    );
+});
 const { data: careers } = useFetch("/api/careers");
 
 const showModalCareer = ref(false);

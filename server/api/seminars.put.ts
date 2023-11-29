@@ -9,21 +9,21 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     const id = body.id;
     const title = body.title;
-    const description = body.description;
+    const guest_speaker = body.guest_speaker;
     const date = body.date;
     const time = body.time;
     const location = body.location;
 
     let updatedSeminar;
 
-    if (id && title && description && date && time && location)
+    if (id && title && guest_speaker && date && time && location)
         updatedSeminar = await prisma.seminar.update({
             where: {
                 id,
             },
             data: {
                 title,
-                description,
+                guest_speaker,
                 date,
                 time,
                 location,

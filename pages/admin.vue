@@ -61,14 +61,14 @@
                         </div>
                         <div class="w-full px-4">
                             <label
-                                for="description"
+                                for="guest_speaker"
                                 class="block mb-2 text-sm font-medium text-gray-900"
                                 >Guest Speaker</label
                             >
                             <input
                                 type="text"
                                 id="description"
-                                v-model="seminar.description"
+                                v-model="seminar.guest_speaker"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Guest Speaker"
                                 required
@@ -143,7 +143,7 @@
                             required
                         />
                         <input
-                            v-model="editedSeminar.description"
+                            v-model="editedSeminar.guest_speaker"
                             class="w-full p-2 border rounded mb-4"
                             placeholder="Guest Speaker"
                         />
@@ -209,6 +209,47 @@
                 v-if="showSeminarDatabase"
                 class="mt-4 flex items-center justify-center space-x-4 ma-3"
             >
+                <div
+                    class="flex flex-col items-start sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2"
+                >
+                    <label for="search" class="text-sm font-semibold"
+                        >Search:</label
+                    >
+                    <input
+                        v-model="searchKeyword"
+                        id="search"
+                        type="text"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                        placeholder="Search"
+                    />
+                </div>
+                <div class="flex items-center space-x-2">
+                    <label for="filter" class="text-sm font-semibold"
+                        >Filter:</label
+                    >
+                    <select
+                        v-model="selectedFilter"
+                        id="filter"
+                        class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
+                    >
+                        <option value="title">Title</option>
+                        <option value="guest_speaker">Speaker</option>
+                        <option value="date">Date</option>
+                        <option value="time">Time</option>
+                        <option value="location">Location</option>
+                    </select>
+                </div>
+                <button
+                    @click="resetFilters"
+                    class="px-2 py-1 bg-gray-300 text-gray-600 rounded-md focus:outline-none hover:bg-gray-400"
+                >
+                    Reset Filters
+                </button>
+            </div>
+            <div
+                v-if="showSeminarDatabase"
+                class="mt-4 flex items-center justify-center space-x-4 ma-3"
+            >
                 <button
                     @click="prevPage"
                     :disabled="currentPage === 1"
@@ -235,7 +276,7 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Description</th>
+                                <th>Speaker</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Location</th>
@@ -250,7 +291,7 @@
                                 <td class="line-clamp-3">
                                     {{ meeting.title }}
                                 </td>
-                                <td>{{ meeting.description }}</td>
+                                <td>{{ meeting.guest_speaker }}</td>
                                 <td>{{ meeting.date }}</td>
                                 <td>{{ meeting.time }}</td>
                                 <td class="line-clamp-3">
@@ -265,8 +306,8 @@
                                                 editedSeminar.id = meeting.id;
                                                 editedSeminar.title =
                                                     meeting.title;
-                                                editedSeminar.description =
-                                                    meeting.description;
+                                                editedSeminar.guest_speaker =
+                                                    meeting.guest_speaker;
                                                 editedSeminar.date =
                                                     meeting.date;
                                                 editedSeminar.time =
@@ -337,13 +378,14 @@ import CareerForm from "~/components/CareerForm.vue";
 useHead({
     title: "Admin",
 });
+// Pagination
 const currentPage = ref(1);
 const itemsPerPage = 3;
 
 const pagedSeminars = computed(() => {
     const startIndex = (currentPage.value - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return seminars.value.slice(startIndex, endIndex);
+    return filteredSeminar.value.slice(startIndex, endIndex);
 });
 
 const nextPage = () => {
@@ -357,6 +399,23 @@ const prevPage = () => {
         currentPage.value -= 1;
     }
 };
+// Filtering
+const searchKeyword = ref("");
+const selectedFilter = ref("title");
+
+const resetFilters = () => {
+    searchKeyword.value = "";
+    selectedFilter.value = "title";
+};
+
+const filteredSeminar = computed(() => {
+    const filterKey = selectedFilter.value.toLowerCase();
+    return seminars.value.filter((seminar) =>
+        seminar[filterKey]
+            .toLowerCase()
+            .includes(searchKeyword.value.toLowerCase())
+    );
+});
 
 const showModalSeminar = ref(false);
 const showModal = ref(false);
@@ -367,7 +426,7 @@ const { data: seminars } = useFetch("/api/seminars");
 
 const seminar = ref({
     title: "",
-    description: "",
+    guest_speaker: "",
     date: "",
     time: "",
     location: "",
@@ -380,7 +439,7 @@ const addSeminar = async (seminar) => {
         method: "POST",
         body: {
             title: seminar.title,
-            description: seminar.description,
+            guest_speaker: seminar.guest_speaker,
             date: seminar.date,
             time: seminar.time,
             location: seminar.location,
@@ -388,7 +447,7 @@ const addSeminar = async (seminar) => {
     });
     if (addedSeminar) {
         seminar.title = "";
-        seminar.description = "";
+        seminar.guest_speaker = "";
         seminar.date = "";
         seminar.time = "";
         seminar.location = "";
@@ -400,7 +459,7 @@ const addSeminar = async (seminar) => {
 const editedSeminar = ref({
     id: null,
     title: null,
-    description: null,
+    guest_speaker: null,
     date: null,
     time: null,
     location: null,
@@ -412,7 +471,7 @@ const editSeminar = async (editedSeminar) => {
     if (
         editedSeminar.id &&
         editedSeminar.title &&
-        editedSeminar.description &&
+        editedSeminar.guest_speaker &&
         editedSeminar.date &&
         editedSeminar.time &&
         editedSeminar.location
@@ -422,7 +481,7 @@ const editSeminar = async (editedSeminar) => {
             body: {
                 id: editedSeminar.id,
                 title: editedSeminar.title,
-                description: editedSeminar.description,
+                guest_speaker: editedSeminar.guest_speaker,
                 date: editedSeminar.date,
                 time: editedSeminar.time,
                 location: editedSeminar.location,

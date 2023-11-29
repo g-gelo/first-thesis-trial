@@ -128,7 +128,9 @@
             v-if="showFaqsTable"
             class="mt-4 flex items-center justify-center space-x-4 ma-3"
         >
-            <div class="flex items-center space-x-2">
+            <div
+                class="flex flex-col items-start sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2"
+            >
                 <label for="search" class="text-sm font-semibold"
                     >Search:</label
                 >
@@ -136,8 +138,8 @@
                     v-model="searchKeyword"
                     id="search"
                     type="text"
-                    class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
-                    placeholder="Keyword"
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                    placeholder="Search"
                 />
             </div>
             <div class="flex items-center space-x-2">
@@ -159,6 +161,11 @@
             >
                 Reset Filters
             </button>
+        </div>
+        <div
+            v-if="showFaqsTable"
+            class="mt-4 flex items-center justify-center space-x-4 ma-3"
+        >
             <button
                 @click="prevPage"
                 :disabled="currentPage === 1"
@@ -262,6 +269,7 @@
 </template>
 
 <script setup>
+// Filtering
 const currentPage = ref(1);
 const itemsPerPage = 3;
 
@@ -282,6 +290,7 @@ const prevPage = () => {
         currentPage.value -= 1;
     }
 };
+// Filtering
 const searchKeyword = ref("");
 const selectedFilter = ref("keyword");
 
