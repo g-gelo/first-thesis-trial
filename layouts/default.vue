@@ -70,12 +70,12 @@
                         <router-link
                             v-if="data?.subscribed"
                             to="/admin"
-                            class="p-2 cursor-pointer"
-                            @click="additionalAction()"
+                            @click="toggleActive(index)"
                             :class="{
                                 'active bg-gray-200': isActive(index),
                                 'pop-icon': isActive(index),
                             }"
+                            class="p-2 cursor-pointer w-full"
                         >
                             <i class="fa-solid fa-user-lock mr-2 mt-3"></i>
                             Admin
