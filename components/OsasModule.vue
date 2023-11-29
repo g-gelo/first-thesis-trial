@@ -123,7 +123,31 @@
                 Hide Osas Database
             </button>
         </div>
+        <div
+            v-if="showOsasModule"
+            class="mt-4 flex items-center justify-center space-x-4 ma-4"
+        >
+            <button
+                @click="prev_Page"
+                :disabled="currPage === 1"
+                class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+            >
+                &lt; Prev
+            </button>
+            <span class="text-sm font-semibold">{{ currPage }}</span>
+            <button
+                @click="next_Page"
+                :disabled="currPage * itemsPerPage >= osasAll.length"
+                class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+            >
+                Next &gt;
+            </button>
+        </div>
         <div v-if="showOsasModule">
+            <div>
+                The database received
+                {{ osasAll?.length || 0 }} records:
+            </div>
             <table density="compact">
                 <thead>
                     <tr>
@@ -133,7 +157,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="profile in osasAll" :key="profile.id">
+                    <tr v-for="profile in pagedOsas" :key="profile.id">
                         <td>{{ profile.title }}</td>
                         <td class="line-clamp-3">{{ profile.description }}</td>
                         <td>
@@ -299,7 +323,31 @@
                 </div>
             </div>
         </div>
+        <div
+            v-if="showFunction"
+            class="mt-4 flex items-center justify-center space-x-4 ma-4"
+        >
+            <button
+                @click="prevPage"
+                :disabled="currentPage === 1"
+                class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+            >
+                &lt; Prev
+            </button>
+            <span class="text-sm font-semibold">{{ currentPage }}</span>
+            <button
+                @click="nextPage"
+                :disabled="currentPage * itemsPerPage >= osasFunction.length"
+                class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+            >
+                Next &gt;
+            </button>
+        </div>
         <div v-if="showFunction">
+            <div>
+                The database received
+                {{ osasFunction?.length || 0 }} records:
+            </div>
             <table density="compact">
                 <thead>
                     <tr>
@@ -308,7 +356,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="purpose in osasFunction" :key="purpose.id">
+                    <tr v-for="purpose in pagedFunction" :key="purpose.id">
                         <td class="line-clamp-3">{{ purpose.osasFunction }}</td>
                         <td>
                             <v-btn
@@ -371,6 +419,47 @@
 </template>
 
 <script setup>
+const currentPage = ref(1);
+const itemsPerPage = 3;
+
+const pagedFunction = computed(() => {
+    const startIndex = (currentPage.value - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return osasFunction.value.slice(startIndex, endIndex);
+});
+
+const nextPage = () => {
+    if (currentPage.value * itemsPerPage < osasFunction.value.length) {
+        currentPage.value += 1;
+    }
+};
+
+const prevPage = () => {
+    if (currentPage.value > 1) {
+        currentPage.value -= 1;
+    }
+};
+// above is pagination for OsasModule, and below is Pagination for Osas Function
+const currPage = ref(1);
+const itemsInPage = 3;
+
+const pagedOsas = computed(() => {
+    const startIndex = (currPage.value - 1) * itemsInPage;
+    const endIndex = startIndex + itemsInPage;
+    return osasAll.value.slice(startIndex, endIndex);
+});
+
+const next_Page = () => {
+    if (currPage.value * itemsInPage < osasAll.value.length) {
+        currPage.value += 1;
+    }
+};
+
+const prev_Page = () => {
+    if (currPage.value > 1) {
+        currPage.value -= 1;
+    }
+};
 const showOsasModule = ref(false);
 const showOsasEdit = ref(false);
 const showOsasForm = ref(false);

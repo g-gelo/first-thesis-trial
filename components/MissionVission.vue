@@ -57,8 +57,31 @@
                 </div>
             </div>
         </div>
-
+        <div
+            v-if="showModalMisnVis"
+            class="mt-4 flex items-center justify-center space-x-4 ma-3"
+        >
+            <button
+                @click="prevPage"
+                :disabled="currentPage === 1"
+                class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+            >
+                &lt; Prev
+            </button>
+            <span class="text-sm font-semibold">{{ currentPage }}</span>
+            <button
+                @click="nextPage"
+                :disabled="currentPage * itemsPerPage >= missionvision.length"
+                class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+            >
+                Next &gt;
+            </button>
+        </div>
         <div v-if="showModalMisnVis">
+            <div>
+                The database received
+                {{ missionvision?.length || 0 }} records:
+            </div>
             <table density="compact">
                 <thead>
                     <tr>
@@ -68,7 +91,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="misnvis in missionvision" :key="misnvis.id">
+                    <tr v-for="misnvis in pagedMisNVis" :key="misnvis.id">
                         <td>{{ misnvis.title }}</td>
                         <td class="line-clamp-3">{{ misnvis.description }}</td>
                         <td>
@@ -96,6 +119,26 @@
 </template>
 
 <script setup>
+const currentPage = ref(1);
+const itemsPerPage = 2;
+
+const pagedMisNVis = computed(() => {
+    const startIndex = (currentPage.value - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return missionvision.value.slice(startIndex, endIndex);
+});
+
+const nextPage = () => {
+    if (currentPage.value * itemsPerPage < missionvision.value.length) {
+        currentPage.value += 1;
+    }
+};
+
+const prevPage = () => {
+    if (currentPage.value > 1) {
+        currentPage.value -= 1;
+    }
+};
 const showModalMisnVis = ref(false);
 const showModalMisnVisEdit = ref(false);
 

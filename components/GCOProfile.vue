@@ -124,7 +124,7 @@
         </div>
         <div
             v-if="showGcoDatabase"
-            class="mt-4 flex items-center justify-center space-x-4"
+            class="mt-4 flex items-center justify-center space-x-4 ma-4"
         >
             <button
                 @click="prev_Page"
@@ -326,7 +326,7 @@
         </div>
         <div
             v-if="showGcoServiceDb"
-            class="mt-4 flex items-center justify-center space-x-4"
+            class="mt-4 flex items-center justify-center space-x-4 ma-4"
         >
             <button
                 @click="prevPage"
