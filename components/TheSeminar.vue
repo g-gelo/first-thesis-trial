@@ -50,19 +50,18 @@
                     </div>
                     <div class="w-full px-4">
                         <label
-                            for="description"
+                            for="guest_speaker"
                             class="block mb-2 text-sm font-medium text-gray-900"
                             >Guest Speaker</label
                         >
-                        <textarea
-                            id="description"
-                            name="description"
-                            v-model="seminar.description"
-                            rows="4"
+                        <input
+                            type="text"
+                            id="guest"
+                            v-model="seminar.guest_speaker"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Guest Speaker"
-                            auto-grow
-                        ></textarea>
+                            required
+                        />
                     </div>
                     <div class="w-full px-4 sm:w-1/2">
                         <label
@@ -131,7 +130,7 @@
                         required
                     />
                     <input
-                        v-model="editedSeminar.description"
+                        v-model="editedSeminar.guest_speaker"
                         class="w-full p-2 border rounded mb-4"
                         placeholder="Guest Speaker"
                     />
@@ -224,8 +223,8 @@
                                                 editedSeminar.id = seminar.id;
                                                 editedSeminar.title =
                                                     seminar.title;
-                                                editedSeminar.description =
-                                                    seminar.description;
+                                                editedSeminar.guest_speaker =
+                                                    seminar.guest_speaker;
                                                 editedSeminar.date =
                                                     seminar.date;
                                                 editedSeminar.time =
@@ -257,7 +256,7 @@
                                 >fa-solid fa-microphone-lines</v-icon
                             >
                             <span class="info-value info-small">{{
-                                seminar.description
+                                seminar.guest_speaker
                             }}</span>
                         </div>
                     </div>
@@ -273,7 +272,7 @@ const { data } = useAuth();
 const showModalSeminar = ref(false);
 const seminar = ref({
     title: "",
-    description: "",
+    guest_speaker: "",
     date: "",
     time: "",
     location: "",
@@ -286,7 +285,7 @@ const addSeminar = async (seminar) => {
         method: "POST",
         body: {
             title: seminar.title,
-            description: seminar.description,
+            guest_speaker: seminar.guest_speaker,
             date: seminar.date,
             time: seminar.time,
             location: seminar.location,
@@ -295,7 +294,7 @@ const addSeminar = async (seminar) => {
     if (addedSeminar) {
         // Clear the form
         seminar.title = "";
-        seminar.description = "";
+        seminar.guest_speaker = "";
         seminar.date = "";
         seminar.time = "";
         seminar.location = "";
@@ -310,7 +309,7 @@ const showEditForm = ref(false);
 const editedSeminar = ref({
     id: null,
     title: null,
-    description: null,
+    guest_speaker: null,
     date: null,
     time: null,
     location: null,
@@ -322,7 +321,7 @@ const editSeminar = async (editedSeminar) => {
     if (
         editedSeminar.id &&
         editedSeminar.title &&
-        editedSeminar.description &&
+        editedSeminar.guest_speaker &&
         editedSeminar.date &&
         editedSeminar.time &&
         editedSeminar.location
@@ -332,7 +331,7 @@ const editSeminar = async (editedSeminar) => {
             body: {
                 id: editedSeminar.id,
                 title: editedSeminar.title,
-                description: editedSeminar.description,
+                guest_speaker: editedSeminar.guest_speaker,
                 date: editedSeminar.date,
                 time: editedSeminar.time,
                 location: editedSeminar.location,
