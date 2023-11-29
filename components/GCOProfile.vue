@@ -147,75 +147,79 @@
                 The database received
                 {{ gcoProfile?.length || 0 }} records:
             </div>
-            <table density="compact">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Edit & Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="gco in pagedProfile" :key="gco.id">
-                        <td>{{ gco.title }}</td>
-                        <td class="line-clamp-3">{{ gco.description }}</td>
-                        <td>
-                            <v-btn
-                                v-if="!showGcoFormEdit"
-                                variant="tonal"
-                                @click="
-                                    ($event) => {
-                                        editedGcoProfile.id = gco.id;
-                                        editedGcoProfile.title = gco.title;
-                                        editedGcoProfile.description =
-                                            gco.description;
-                                        showGcoFormEdit = true;
-                                    }
-                                "
-                            >
-                                Edit
-                            </v-btn>
-                            <v-btn
-                                variant="tonal"
-                                @click="
-                                    ($event) => {
-                                        showDeleteModal2 = true;
-                                    }
-                                "
-                            >
-                                Delete
-                            </v-btn>
-                        </td>
-                        <div class="modal2" v-if="showDeleteModal2">
-                            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                                <h2 class="text-xl font-bold mb-4">
-                                    Delete Seminar
-                                </h2>
-                                <p class="mb-4">
-                                    Do you want to delete this Profile?
-                                </p>
-                                <div class="flex justify-end">
-                                    <button
-                                        @click="
-                                            deleteGco(gco.id),
-                                                (showDeleteModal2 = false)
-                                        "
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                    >
-                                        Delete
-                                    </button>
-                                    <button
-                                        @click="showDeleteModal2 = false"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                    >
-                                        Cancel
-                                    </button>
+            <div class="table-container">
+                <table density="compact">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Edit & Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="gco in pagedProfile" :key="gco.id">
+                            <td>{{ gco.title }}</td>
+                            <td class="line-clamp-3">{{ gco.description }}</td>
+                            <td>
+                                <v-btn
+                                    v-if="!showGcoFormEdit"
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            editedGcoProfile.id = gco.id;
+                                            editedGcoProfile.title = gco.title;
+                                            editedGcoProfile.description =
+                                                gco.description;
+                                            showGcoFormEdit = true;
+                                        }
+                                    "
+                                >
+                                    Edit
+                                </v-btn>
+                                <v-btn
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            showDeleteModal2 = true;
+                                        }
+                                    "
+                                >
+                                    Delete
+                                </v-btn>
+                            </td>
+                            <div class="modal2" v-if="showDeleteModal2">
+                                <div
+                                    class="bg-white shadow-lg rounded-lg p-6 w-80"
+                                >
+                                    <h2 class="text-xl font-bold mb-4">
+                                        Delete Seminar
+                                    </h2>
+                                    <p class="mb-4">
+                                        Do you want to delete this Profile?
+                                    </p>
+                                    <div class="flex justify-end">
+                                        <button
+                                            @click="
+                                                deleteGco(gco.id),
+                                                    (showDeleteModal2 = false)
+                                            "
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            @click="showDeleteModal2 = false"
+                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="btn mt-3">
@@ -349,72 +353,76 @@
                 The database received
                 {{ gcoService?.length || 0 }} records:
             </div>
-            <table density="compact">
-                <thead>
-                    <tr>
-                        <th>Service</th>
-                        <th>Edit & Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="service in pagedService" :key="service.id">
-                        <td>{{ service.service }}</td>
-                        <td>
-                            <v-btn
-                                v-if="!showGcoServiceEdit"
-                                variant="tonal"
-                                @click="
-                                    ($event) => {
-                                        editedGcoService.id = service.id;
-                                        editedGcoService.service =
-                                            service.service;
-                                        showGcoServiceEdit = true;
-                                    }
-                                "
-                            >
-                                Edit
-                            </v-btn>
-                            <v-btn
-                                variant="tonal"
-                                @click="
-                                    ($event) => {
-                                        showDeleteModal1 = true;
-                                    }
-                                "
-                            >
-                                Delete
-                            </v-btn>
-                        </td>
-                        <div class="modal2" v-if="showDeleteModal1">
-                            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                                <h2 class="text-xl font-bold mb-4">
-                                    Delete Seminar
-                                </h2>
-                                <p class="mb-4">
-                                    Do you want to delete this Service?
-                                </p>
-                                <div class="flex justify-end">
-                                    <button
-                                        @click="
-                                            deleteGcoService(service.id),
-                                                (showDeleteModal1 = false)
-                                        "
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                    >
-                                        Delete
-                                    </button>
-                                    <button
-                                        @click="showDeleteModal1 = false"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                    >
-                                        Cancel
-                                    </button>
+            <div class="table-container">
+                <table density="compact">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Edit & Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="service in pagedService" :key="service.id">
+                            <td>{{ service.service }}</td>
+                            <td>
+                                <v-btn
+                                    v-if="!showGcoServiceEdit"
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            editedGcoService.id = service.id;
+                                            editedGcoService.service =
+                                                service.service;
+                                            showGcoServiceEdit = true;
+                                        }
+                                    "
+                                >
+                                    Edit
+                                </v-btn>
+                                <v-btn
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            showDeleteModal1 = true;
+                                        }
+                                    "
+                                >
+                                    Delete
+                                </v-btn>
+                            </td>
+                            <div class="modal2" v-if="showDeleteModal1">
+                                <div
+                                    class="bg-white shadow-lg rounded-lg p-6 w-80"
+                                >
+                                    <h2 class="text-xl font-bold mb-4">
+                                        Delete Seminar
+                                    </h2>
+                                    <p class="mb-4">
+                                        Do you want to delete this Service?
+                                    </p>
+                                    <div class="flex justify-end">
+                                        <button
+                                            @click="
+                                                deleteGcoService(service.id),
+                                                    (showDeleteModal1 = false)
+                                            "
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            @click="showDeleteModal1 = false"
+                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
@@ -587,6 +595,10 @@ const deleteGco = async (id) => {
 </script>
 
 <style scoped>
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+}
 .btn button {
     display: flex;
     width: 100%;

@@ -212,7 +212,7 @@
                     The database received
                     {{ careers?.length || 0 }} records:
                 </div>
-                <div>
+                <div class="table-container">
                     <table density="compact">
                         <thead>
                             <tr>
@@ -415,6 +415,10 @@ const deleteCareer = async (id) => {
 </script>
 
 <style scoped>
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+}
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;

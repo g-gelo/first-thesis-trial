@@ -230,107 +230,99 @@
                     The database received
                     {{ seminars?.length || 0 }} records:
                 </div>
-                <div class="overscroll-y-none">
-                    <div class="overscroll-x-auto">
-                        <table density="compact" class="min-w-full">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Location</th>
-                                    <th>Edit&Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="meeting in pagedSeminars"
-                                    :key="meeting.id"
-                                >
-                                    <td class="line-clamp-3">
-                                        {{ meeting.title }}
-                                    </td>
-                                    <td>{{ meeting.description }}</td>
-                                    <td>{{ meeting.date }}</td>
-                                    <td>{{ meeting.time }}</td>
-                                    <td class="line-clamp-3">
-                                        {{ meeting.location }}
-                                    </td>
-                                    <td>
-                                        <v-btn
-                                            v-if="!showModal"
-                                            variant="tonal"
-                                            @click="
-                                                ($event) => {
-                                                    editedSeminar.id =
-                                                        meeting.id;
-                                                    editedSeminar.title =
-                                                        meeting.title;
-                                                    editedSeminar.description =
-                                                        meeting.description;
-                                                    editedSeminar.date =
-                                                        meeting.date;
-                                                    editedSeminar.time =
-                                                        meeting.time;
-                                                    editedSeminar.location =
-                                                        meeting.location;
-                                                    showModal = true;
-                                                }
-                                            "
-                                        >
-                                            Edit
-                                        </v-btn>
-                                        <v-btn
-                                            v-if="!showModal"
-                                            variant="tonal"
-                                            @click="
-                                                ($event) => {
-                                                    showDeleteModal = true;
-                                                }
-                                            "
-                                        >
-                                            Delete
-                                        </v-btn>
-                                    </td>
-                                    <div class="modal2" v-if="showDeleteModal">
-                                        <div
-                                            class="bg-white shadow-lg rounded-lg p-6 w-80"
-                                        >
-                                            <h2 class="text-xl font-bold mb-4">
-                                                Delete Seminar
-                                            </h2>
-                                            <p class="mb-4">
-                                                Do you want to delete this
-                                                Seminar?
-                                            </p>
-                                            <div class="flex justify-end">
-                                                <button
-                                                    @click="
-                                                        deleteSeminar(
-                                                            meeting.id
-                                                        ),
-                                                            (showDeleteModal = false)
-                                                    "
-                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                                >
-                                                    Delete
-                                                </button>
-                                                <button
-                                                    @click="
-                                                        showDeleteModal = false
-                                                    "
-                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                                >
-                                                    Cancel
-                                                </button>
-                                            </div>
+                <div class="table-container">
+                    <table density="compact" class="min-w-full">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Location</th>
+                                <th>Edit&Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="meeting in pagedSeminars"
+                                :key="meeting.id"
+                            >
+                                <td class="line-clamp-3">
+                                    {{ meeting.title }}
+                                </td>
+                                <td>{{ meeting.description }}</td>
+                                <td>{{ meeting.date }}</td>
+                                <td>{{ meeting.time }}</td>
+                                <td class="line-clamp-3">
+                                    {{ meeting.location }}
+                                </td>
+                                <td>
+                                    <v-btn
+                                        v-if="!showModal"
+                                        variant="tonal"
+                                        @click="
+                                            ($event) => {
+                                                editedSeminar.id = meeting.id;
+                                                editedSeminar.title =
+                                                    meeting.title;
+                                                editedSeminar.description =
+                                                    meeting.description;
+                                                editedSeminar.date =
+                                                    meeting.date;
+                                                editedSeminar.time =
+                                                    meeting.time;
+                                                editedSeminar.location =
+                                                    meeting.location;
+                                                showModal = true;
+                                            }
+                                        "
+                                    >
+                                        Edit
+                                    </v-btn>
+                                    <v-btn
+                                        v-if="!showModal"
+                                        variant="tonal"
+                                        @click="
+                                            ($event) => {
+                                                showDeleteModal = true;
+                                            }
+                                        "
+                                    >
+                                        Delete
+                                    </v-btn>
+                                </td>
+                                <div class="modal2" v-if="showDeleteModal">
+                                    <div
+                                        class="bg-white shadow-lg rounded-lg p-6 w-80"
+                                    >
+                                        <h2 class="text-xl font-bold mb-4">
+                                            Delete Seminar
+                                        </h2>
+                                        <p class="mb-4">
+                                            Do you want to delete this Seminar?
+                                        </p>
+                                        <div class="flex justify-end">
+                                            <button
+                                                @click="
+                                                    deleteSeminar(meeting.id),
+                                                        (showDeleteModal = false)
+                                                "
+                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                            >
+                                                Delete
+                                            </button>
+                                            <button
+                                                @click="showDeleteModal = false"
+                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                            >
+                                                Cancel
+                                            </button>
                                         </div>
                                     </div>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </v-container>
@@ -454,6 +446,10 @@ const deleteSeminar = async (id) => {
 </script>
 
 <style scoped>
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+}
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;

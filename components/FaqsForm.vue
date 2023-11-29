@@ -128,6 +128,37 @@
             v-if="showFaqsTable"
             class="mt-4 flex items-center justify-center space-x-4 ma-3"
         >
+            <div class="flex items-center space-x-2">
+                <label for="search" class="text-sm font-semibold"
+                    >Search:</label
+                >
+                <input
+                    v-model="searchKeyword"
+                    id="search"
+                    type="text"
+                    class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
+                    placeholder="Keyword"
+                />
+            </div>
+            <div class="flex items-center space-x-2">
+                <label for="filter" class="text-sm font-semibold"
+                    >Filter:</label
+                >
+                <select
+                    v-model="selectedFilter"
+                    id="filter"
+                    class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
+                >
+                    <option value="keyword">Keyword</option>
+                    <option value="answer">Answer</option>
+                </select>
+            </div>
+            <button
+                @click="resetFilters"
+                class="px-2 py-1 bg-gray-300 text-gray-600 rounded-md focus:outline-none hover:bg-gray-400"
+            >
+                Reset Filters
+            </button>
             <button
                 @click="prevPage"
                 :disabled="currentPage === 1"
@@ -149,85 +180,82 @@
                 The database received
                 {{ allFaqs?.length || 0 }} records:
             </div>
-            <div class="overscroll-y-none">
-                <div class="overscroll-x-auto">
-                    <table density="compact" class="min-w-full">
-                        <thead>
-                            <tr>
-                                <th>Keyword</th>
-                                <th>Answer</th>
-                                <th>Edit&Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="faqs in pagedFaqs" :key="faqs.id">
-                                <td>
-                                    {{ faqs.keyword }}
-                                </td>
-                                <td class="line-clamp-1">{{ faqs.answer }}</td>
-                                <td>
-                                    <v-btn
-                                        v-if="!showEditFaqsForm"
-                                        variant="tonal"
-                                        @click="
-                                            ($event) => {
-                                                editedFaqs.id = faqs.id;
-                                                editedFaqs.keyword =
-                                                    faqs.keyword;
-                                                editedFaqs.answer = faqs.answer;
-                                                showEditFaqsForm = true;
-                                            }
-                                        "
-                                    >
-                                        Edit
-                                    </v-btn>
-                                    <v-btn
-                                        v-if="!showEditFaqsForm"
-                                        variant="tonal"
-                                        @click="
-                                            ($event) => {
-                                                showDeleteFaqsForm = true;
-                                            }
-                                        "
-                                    >
-                                        Delete
-                                    </v-btn>
-                                </td>
-                                <div class="modal2" v-if="showDeleteFaqsForm">
-                                    <div
-                                        class="bg-white shadow-lg rounded-lg p-6 w-80"
-                                    >
-                                        <h2 class="text-xl font-bold mb-4">
-                                            Delete FAQs
-                                        </h2>
-                                        <p class="mb-4">
-                                            Do you want to delete this FAQs?
-                                        </p>
-                                        <div class="flex justify-end">
-                                            <button
-                                                @click="
-                                                    deleteFaqs(faqs.id),
-                                                        (showDeleteFaqsForm = false)
-                                                "
-                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                            >
-                                                Delete
-                                            </button>
-                                            <button
-                                                @click="
-                                                    showDeleteFaqsForm = false
-                                                "
-                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                            >
-                                                Cancel
-                                            </button>
-                                        </div>
+            <div class="table-container">
+                <table density="compact" class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th>Keyword</th>
+                            <th>Answer</th>
+                            <th>Edit&Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="faqs in pagedFaqs" :key="faqs.id">
+                            <td>
+                                {{ faqs.keyword }}
+                            </td>
+                            <td class="line-clamp-1">
+                                {{ faqs.answer }}
+                            </td>
+                            <td>
+                                <v-btn
+                                    v-if="!showEditFaqsForm"
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            editedFaqs.id = faqs.id;
+                                            editedFaqs.keyword = faqs.keyword;
+                                            editedFaqs.answer = faqs.answer;
+                                            showEditFaqsForm = true;
+                                        }
+                                    "
+                                >
+                                    Edit
+                                </v-btn>
+                                <v-btn
+                                    v-if="!showEditFaqsForm"
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            showDeleteFaqsForm = true;
+                                        }
+                                    "
+                                >
+                                    Delete
+                                </v-btn>
+                            </td>
+                            <div class="modal2" v-if="showDeleteFaqsForm">
+                                <div
+                                    class="bg-white shadow-lg rounded-lg p-6 w-80"
+                                >
+                                    <h2 class="text-xl font-bold mb-4">
+                                        Delete FAQs
+                                    </h2>
+                                    <p class="mb-4">
+                                        Do you want to delete this FAQs?
+                                    </p>
+                                    <div class="flex justify-end">
+                                        <button
+                                            @click="
+                                                deleteFaqs(faqs.id),
+                                                    (showDeleteFaqsForm = false)
+                                            "
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            @click="showDeleteFaqsForm = false"
+                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        >
+                                            Cancel
+                                        </button>
                                     </div>
                                 </div>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            </div>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -240,7 +268,7 @@ const itemsPerPage = 3;
 const pagedFaqs = computed(() => {
     const startIndex = (currentPage.value - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return allFaqs.value.slice(startIndex, endIndex);
+    return filteredFaqs.value.slice(startIndex, endIndex);
 });
 
 const nextPage = () => {
@@ -254,6 +282,20 @@ const prevPage = () => {
         currentPage.value -= 1;
     }
 };
+const searchKeyword = ref("");
+const selectedFilter = ref("keyword");
+
+const resetFilters = () => {
+    searchKeyword.value = "";
+    selectedFilter.value = "keyword";
+};
+
+const filteredFaqs = computed(() => {
+    const filterKey = selectedFilter.value.toLowerCase();
+    return allFaqs.value.filter((faq) =>
+        faq[filterKey].toLowerCase().includes(searchKeyword.value.toLowerCase())
+    );
+});
 
 const showFaqsForm = ref(false);
 const showFaqsTable = ref(false);
@@ -320,6 +362,10 @@ const deleteFaqs = async (id) => {
 </script>
 
 <style scoped>
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+}
 .btn button {
     display: flex;
     width: 100%;

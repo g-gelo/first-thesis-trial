@@ -176,89 +176,93 @@
                 The database received
                 {{ emergencyHotline?.length || 0 }} records:
             </div>
-            <table density="compact">
-                <thead>
-                    <tr>
-                        <th>Organization</th>
-                        <th>Number</th>
-                        <th>Location</th>
-                        <th>Edit & Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        v-for="emergencyhotline in pagedHotline"
-                        :key="emergencyhotline.id"
-                    >
-                        <td>{{ emergencyhotline.organization }}</td>
-                        <td class="line-clamp-3">
-                            {{ emergencyhotline.number }}
-                        </td>
-                        <td>{{ emergencyhotline.location }}</td>
-                        <td>
-                            <v-btn
-                                v-if="!showHotlineEdit"
-                                variant="tonal"
-                                @click="
-                                    ($event) => {
-                                        editedEmergencyHotline.id =
-                                            emergencyhotline.id;
-                                        editedEmergencyHotline.organization =
-                                            emergencyhotline.organization;
-                                        editedEmergencyHotline.number =
-                                            emergencyhotline.number;
-                                        editedEmergencyHotline.location =
-                                            emergencyhotline.location;
-                                        showHotlineEdit = true;
-                                    }
-                                "
-                            >
-                                Edit
-                            </v-btn>
-                            <v-btn
-                                variant="tonal"
-                                @click="
-                                    ($event) => {
-                                        showDeleteModal = true;
-                                    }
-                                "
-                            >
-                                Delete
-                            </v-btn>
-                        </td>
-                        <div class="modal2" v-if="showDeleteModal">
-                            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                                <h2 class="text-xl font-bold mb-4">
-                                    Delete Seminar
-                                </h2>
-                                <p class="mb-4">
-                                    Do you want to delete this Emergency
-                                    Hotline?
-                                </p>
-                                <div class="flex justify-end">
-                                    <button
-                                        @click="
-                                            deleteEmergencyHotline(
-                                                emergencyhotline.id
-                                            ),
-                                                (showDeleteModal = false)
-                                        "
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                    >
-                                        Delete
-                                    </button>
-                                    <button
-                                        @click="showDeleteModal = false"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                    >
-                                        Cancel
-                                    </button>
+            <div class="table-container">
+                <table density="compact">
+                    <thead>
+                        <tr>
+                            <th>Organization</th>
+                            <th>Number</th>
+                            <th>Location</th>
+                            <th>Edit & Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            v-for="emergencyhotline in pagedHotline"
+                            :key="emergencyhotline.id"
+                        >
+                            <td>{{ emergencyhotline.organization }}</td>
+                            <td class="line-clamp-3">
+                                {{ emergencyhotline.number }}
+                            </td>
+                            <td>{{ emergencyhotline.location }}</td>
+                            <td>
+                                <v-btn
+                                    v-if="!showHotlineEdit"
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            editedEmergencyHotline.id =
+                                                emergencyhotline.id;
+                                            editedEmergencyHotline.organization =
+                                                emergencyhotline.organization;
+                                            editedEmergencyHotline.number =
+                                                emergencyhotline.number;
+                                            editedEmergencyHotline.location =
+                                                emergencyhotline.location;
+                                            showHotlineEdit = true;
+                                        }
+                                    "
+                                >
+                                    Edit
+                                </v-btn>
+                                <v-btn
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            showDeleteModal = true;
+                                        }
+                                    "
+                                >
+                                    Delete
+                                </v-btn>
+                            </td>
+                            <div class="modal2" v-if="showDeleteModal">
+                                <div
+                                    class="bg-white shadow-lg rounded-lg p-6 w-80"
+                                >
+                                    <h2 class="text-xl font-bold mb-4">
+                                        Delete Seminar
+                                    </h2>
+                                    <p class="mb-4">
+                                        Do you want to delete this Emergency
+                                        Hotline?
+                                    </p>
+                                    <div class="flex justify-end">
+                                        <button
+                                            @click="
+                                                deleteEmergencyHotline(
+                                                    emergencyhotline.id
+                                                ),
+                                                    (showDeleteModal = false)
+                                            "
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            @click="showDeleteModal = false"
+                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
@@ -358,6 +362,10 @@ const deleteEmergencyHotline = async (id) => {
 </script>
 
 <style scoped>
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+}
 .btn button {
     display: flex;
     width: 100%;

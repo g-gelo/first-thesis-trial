@@ -148,75 +148,82 @@
                 The database received
                 {{ osasAll?.length || 0 }} records:
             </div>
-            <table density="compact">
-                <thead>
-                    <tr>
-                        <th class="w-25">Title</th>
-                        <th class="w-25">Description</th>
-                        <th class="w-25">Edit & Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="profile in pagedOsas" :key="profile.id">
-                        <td>{{ profile.title }}</td>
-                        <td class="line-clamp-3">{{ profile.description }}</td>
-                        <td>
-                            <v-btn
-                                v-if="!showOsasEdit"
-                                variant="tonal"
-                                @click="
-                                    ($event) => {
-                                        editedOsasModule.id = profile.id;
-                                        editedOsasModule.title = profile.title;
-                                        editedOsasModule.description =
-                                            profile.description;
-                                        showOsasEdit = true;
-                                    }
-                                "
-                            >
-                                Edit
-                            </v-btn>
-                            <v-btn
-                                variant="tonal"
-                                @click="
-                                    ($event) => {
-                                        showDeleteModal1 = true;
-                                    }
-                                "
-                            >
-                                Delete
-                            </v-btn>
-                        </td>
-                        <div class="modal2" v-if="showDeleteModal1">
-                            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                                <h2 class="text-xl font-bold mb-4">
-                                    Delete Seminar
-                                </h2>
-                                <p class="mb-4">
-                                    Do you want to delete this Profile?
-                                </p>
-                                <div class="flex justify-end">
-                                    <button
-                                        @click="
-                                            deleteOsas(profile.id),
-                                                (showDeleteModal1 = false)
-                                        "
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                    >
-                                        Delete
-                                    </button>
-                                    <button
-                                        @click="showDeleteModal1 = false"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                    >
-                                        Cancel
-                                    </button>
+            <div class="table-container">
+                <table density="compact">
+                    <thead>
+                        <tr>
+                            <th class="w-25">Title</th>
+                            <th class="w-25">Description</th>
+                            <th class="w-25">Edit & Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="profile in pagedOsas" :key="profile.id">
+                            <td>{{ profile.title }}</td>
+                            <td class="line-clamp-3">
+                                {{ profile.description }}
+                            </td>
+                            <td>
+                                <v-btn
+                                    v-if="!showOsasEdit"
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            editedOsasModule.id = profile.id;
+                                            editedOsasModule.title =
+                                                profile.title;
+                                            editedOsasModule.description =
+                                                profile.description;
+                                            showOsasEdit = true;
+                                        }
+                                    "
+                                >
+                                    Edit
+                                </v-btn>
+                                <v-btn
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            showDeleteModal1 = true;
+                                        }
+                                    "
+                                >
+                                    Delete
+                                </v-btn>
+                            </td>
+                            <div class="modal2" v-if="showDeleteModal1">
+                                <div
+                                    class="bg-white shadow-lg rounded-lg p-6 w-80"
+                                >
+                                    <h2 class="text-xl font-bold mb-4">
+                                        Delete Seminar
+                                    </h2>
+                                    <p class="mb-4">
+                                        Do you want to delete this Profile?
+                                    </p>
+                                    <div class="flex justify-end">
+                                        <button
+                                            @click="
+                                                deleteOsas(profile.id),
+                                                    (showDeleteModal1 = false)
+                                            "
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            @click="showDeleteModal1 = false"
+                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="btn mt-3">
             <button
@@ -348,72 +355,78 @@
                 The database received
                 {{ osasFunction?.length || 0 }} records:
             </div>
-            <table density="compact">
-                <thead>
-                    <tr>
-                        <th class="w-25">Function</th>
-                        <th class="w-25">Edit & Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="purpose in pagedFunction" :key="purpose.id">
-                        <td class="line-clamp-3">{{ purpose.osasFunction }}</td>
-                        <td>
-                            <v-btn
-                                v-if="!showFunctionEdit"
-                                variant="tonal"
-                                @click="
-                                    ($event) => {
-                                        editedOsasFunction.id = purpose.id;
-                                        editedOsasFunction.osasFunction =
-                                            purpose.osasFunction;
-                                        showFunctionEdit = true;
-                                    }
-                                "
-                            >
-                                Edit
-                            </v-btn>
-                            <v-btn
-                                variant="tonal"
-                                @click="
-                                    ($event) => {
-                                        showDeleteModal2 = true;
-                                    }
-                                "
-                            >
-                                Delete
-                            </v-btn>
-                        </td>
-                        <div class="modal2" v-if="showDeleteModal2">
-                            <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                                <h2 class="text-xl font-bold mb-4">
-                                    Delete Seminar
-                                </h2>
-                                <p class="mb-4">
-                                    Do you want to delete this Function?
-                                </p>
-                                <div class="flex justify-end">
-                                    <button
-                                        @click="
-                                            deleteFunction(purpose.id),
-                                                (showDeleteModal2 = false)
-                                        "
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                    >
-                                        Delete
-                                    </button>
-                                    <button
-                                        @click="showDeleteModal2 = false"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                    >
-                                        Cancel
-                                    </button>
+            <div class="table-container">
+                <table density="compact">
+                    <thead>
+                        <tr>
+                            <th class="w-25">Function</th>
+                            <th class="w-25">Edit & Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="purpose in pagedFunction" :key="purpose.id">
+                            <td class="line-clamp-3">
+                                {{ purpose.osasFunction }}
+                            </td>
+                            <td>
+                                <v-btn
+                                    v-if="!showFunctionEdit"
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            editedOsasFunction.id = purpose.id;
+                                            editedOsasFunction.osasFunction =
+                                                purpose.osasFunction;
+                                            showFunctionEdit = true;
+                                        }
+                                    "
+                                >
+                                    Edit
+                                </v-btn>
+                                <v-btn
+                                    variant="tonal"
+                                    @click="
+                                        ($event) => {
+                                            showDeleteModal2 = true;
+                                        }
+                                    "
+                                >
+                                    Delete
+                                </v-btn>
+                            </td>
+                            <div class="modal2" v-if="showDeleteModal2">
+                                <div
+                                    class="bg-white shadow-lg rounded-lg p-6 w-80"
+                                >
+                                    <h2 class="text-xl font-bold mb-4">
+                                        Delete Seminar
+                                    </h2>
+                                    <p class="mb-4">
+                                        Do you want to delete this Function?
+                                    </p>
+                                    <div class="flex justify-end">
+                                        <button
+                                            @click="
+                                                deleteFunction(purpose.id),
+                                                    (showDeleteModal2 = false)
+                                            "
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                        >
+                                            Delete
+                                        </button>
+                                        <button
+                                            @click="showDeleteModal2 = false"
+                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
@@ -586,6 +599,10 @@ const deleteOsas = async (id) => {
 </script>
 
 <style scoped>
+.table-container {
+    overflow-x: auto;
+    max-width: 100%;
+}
 .modal {
     position: fixed;
     top: 0;
