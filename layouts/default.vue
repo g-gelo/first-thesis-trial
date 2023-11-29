@@ -30,7 +30,7 @@
                     color="bg200"
                     location="right"
                 >
-                    <div class="avatar-container">
+                    <div class="avatar-container mb-4">
                         <div class="text-center">
                             <div
                                 class="mt-6 bg-surface-variant w-36 h-36 m-auto rounded-full flex items-center justify-center overflow-hidden"
@@ -49,23 +49,38 @@
                         </div>
                     </div>
 
-                    <v-divider :thickness="10"></v-divider>
-                    <v-list density="compact" nav>
-                        <v-list-item
-                            class="ma-2"
+                    <div class="space-y-2 ma-4">
+                        <div
                             v-for="(item, index) in navItem"
-                            :class="{
-                                active: isActive(index),
-                                'pop-icon': isActive(index),
-                            }"
-                            :prepend-icon="item.icon"
+                            :key="index"
                             @click="
                                 toggleActive(index);
                                 createNavigationButton(item.route);
                             "
-                            >{{ item.text }}</v-list-item
+                            :class="{
+                                'active bg-gray-200': isActive(index),
+                                'pop-icon': isActive(index),
+                            }"
+                            class="p-2 cursor-pointer"
                         >
-                    </v-list>
+                            <i :class="item.icon + ' mr-2'"></i> {{ item.text }}
+                        </div>
+
+                        <!-- Additional section with different content -->
+                        <router-link
+                            v-if="data?.subscribed"
+                            to="/admin"
+                            class="p-2 cursor-pointer"
+                            @click="additionalAction()"
+                            :class="{
+                                'active bg-gray-200': isActive(index),
+                                'pop-icon': isActive(index),
+                            }"
+                        >
+                            <i class="fa-solid fa-user-lock mr-2 mt-3"></i>
+                            Admin
+                        </router-link>
+                    </div>
                     <div class="text-center m-2 flex items-stretch">
                         <button
                             class="bg-gray-500 w-100 text-white font-bold py-2 mt-20 rounded-xl shadow-md"
