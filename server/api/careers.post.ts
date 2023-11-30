@@ -1,6 +1,5 @@
-/**
- * Fetch all `examples` from the database. Run `pnpm prisma db push` at least once for this to work.
- */
+import sendEmail from "../../utils/sendEmail";
+
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     let career = null;
@@ -22,10 +21,10 @@ export default defineEventHandler(async (event) => {
                     location: body.location,
                 },
             })
-            .then((response) => {
+            .then(async (response) => {
                 career = response;
+                await sendEmail("Careers @ CvSU", "Hiring! 1 English");
             });
-
     return {
         career,
     };
