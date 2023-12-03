@@ -81,7 +81,7 @@
                                 >Date</label
                             >
                             <input
-                                type="text"
+                                type="date"
                                 id="date"
                                 v-model="seminar.date"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
@@ -97,7 +97,7 @@
                                 >Time</label
                             >
                             <input
-                                type="text"
+                                type="time"
                                 id="time"
                                 v-model="seminar.time"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
@@ -368,6 +368,9 @@
             </div>
         </v-container>
         <CareerForm />
+        <v-container>
+            <UserTable />
+        </v-container>
     </div>
 </template>
 
