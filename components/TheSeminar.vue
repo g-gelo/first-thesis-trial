@@ -77,23 +77,6 @@
                             placeholder="Date"
                             required
                         />
-                        <span class="text-overline">ex. July 18</span>
-                    </div>
-                    <div class="w-full px-4">
-                        <label
-                            for="time"
-                            class="block mb-2 text-sm font-medium text-gray-900"
-                            >Time</label
-                        >
-                        <input
-                            type="text"
-                            id="time"
-                            v-model="seminar.time"
-                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                            placeholder="Time"
-                            required
-                        />
-                        <span class="text-overline">ex. 08:00AM - 10:00AM</span>
                     </div>
                     <div class="w-full px-4 sm:w-1/2">
                         <label
@@ -138,12 +121,6 @@
                         v-model="editedSeminar.date"
                         class="w-full p-2 border rounded mb-4"
                         placeholder="Date"
-                        required
-                    />
-                    <input
-                        v-model="editedSeminar.time"
-                        class="w-full p-2 border rounded mb-4"
-                        placeholder="Time"
                         required
                     />
                     <input
@@ -198,14 +175,6 @@
                                     seminar.date
                                 }}</span>
                             </div>
-                            <div class="seminar-info">
-                                <v-icon class="ml-6 icon-small"
-                                    >fa-regular fa-clock</v-icon
-                                ><br />
-                                <span class="ml-2 info-value info-small">{{
-                                    seminar.time
-                                }}</span>
-                            </div>
                         </div>
                     </div>
                     <div
@@ -227,8 +196,6 @@
                                                     seminar.guest_speaker;
                                                 editedSeminar.date =
                                                     seminar.date;
-                                                editedSeminar.time =
-                                                    seminar.time;
                                                 editedSeminar.location =
                                                     seminar.location;
                                                 showEditForm = true;
@@ -274,7 +241,6 @@ const seminar = ref({
     title: "",
     guest_speaker: "",
     date: "",
-    time: "",
     location: "",
 });
 
@@ -287,7 +253,6 @@ const addSeminar = async (seminar) => {
             title: seminar.title,
             guest_speaker: seminar.guest_speaker,
             date: seminar.date,
-            time: seminar.time,
             location: seminar.location,
         },
     });
@@ -296,7 +261,6 @@ const addSeminar = async (seminar) => {
         seminar.title = "";
         seminar.guest_speaker = "";
         seminar.date = "";
-        seminar.time = "";
         seminar.location = "";
 
         // Fetch the updated list of seminars
@@ -311,7 +275,6 @@ const editedSeminar = ref({
     title: null,
     guest_speaker: null,
     date: null,
-    time: null,
     location: null,
 });
 
@@ -323,7 +286,6 @@ const editSeminar = async (editedSeminar) => {
         editedSeminar.title &&
         editedSeminar.guest_speaker &&
         editedSeminar.date &&
-        editedSeminar.time &&
         editedSeminar.location
     )
         seminar = await $fetch("/api/seminars", {
@@ -333,7 +295,6 @@ const editSeminar = async (editedSeminar) => {
                 title: editedSeminar.title,
                 guest_speaker: editedSeminar.guest_speaker,
                 date: editedSeminar.date,
-                time: editedSeminar.time,
                 location: editedSeminar.location,
             },
         });

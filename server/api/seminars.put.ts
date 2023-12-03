@@ -11,12 +11,11 @@ export default defineEventHandler(async (event) => {
     const title = body.title;
     const guest_speaker = body.guest_speaker;
     const date = body.date;
-    const time = body.time;
     const location = body.location;
 
     let updatedSeminar;
 
-    if (id && title && guest_speaker && date && time && location)
+    if (id && title && guest_speaker && date && location)
         updatedSeminar = await prisma.seminar.update({
             where: {
                 id,
@@ -25,7 +24,6 @@ export default defineEventHandler(async (event) => {
                 title,
                 guest_speaker,
                 date,
-                time,
                 location,
             },
         });

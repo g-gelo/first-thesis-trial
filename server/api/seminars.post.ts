@@ -5,20 +5,13 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     let seminar = null;
 
-    if (
-        body.title &&
-        body.guest_speaker &&
-        body.date &&
-        body.time &&
-        body.location
-    )
+    if (body.title && body.guest_speaker && body.date && body.location)
         await event.context.prisma.seminar
             .create({
                 data: {
                     title: body.title,
                     guest_speaker: body.guest_speaker,
                     date: body.date,
-                    time: body.time,
                     location: body.location,
                 },
             })

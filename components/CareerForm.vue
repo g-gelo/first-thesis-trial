@@ -64,30 +64,13 @@
                             >Date</label
                         >
                         <input
-                            type="text"
+                            type="date"
                             id="date"
                             v-model="career.date"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Date"
                             required
                         />
-                        <span class="text-overline">ex. July 18</span>
-                    </div>
-                    <div class="w-full px-4">
-                        <label
-                            for="time"
-                            class="block mb-2 text-sm font-medium text-gray-900"
-                            >Time</label
-                        >
-                        <input
-                            type="text"
-                            id="time"
-                            v-model="career.time"
-                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                            placeholder="Time"
-                            required
-                        />
-                        <span class="text-overline">ex. 08:00AM - 10:00AM</span>
                     </div>
                     <div class="w-full px-4 sm:w-1/2">
                         <label
@@ -130,15 +113,10 @@
                             required
                         ></textarea>
                         <input
+                            type="date"
                             v-model="editedCareer.date"
                             class="w-full p-2 border rounded mb-4"
                             placeholder="Date"
-                            required
-                        />
-                        <input
-                            v-model="editedCareer.time"
-                            class="w-full p-2 border rounded mb-4"
-                            placeholder="Time"
                             required
                         />
                         <input
@@ -260,7 +238,6 @@
                                 <th>Title</th>
                                 <th>Location</th>
                                 <th>Date</th>
-                                <th>Time</th>
                                 <th>Job Description</th>
                                 <th>Edit&Delete</th>
                             </tr>
@@ -270,7 +247,6 @@
                                 <td class="line-clamp-3">{{ job.title }}</td>
                                 <td>{{ job.location }}</td>
                                 <td>{{ job.date }}</td>
-                                <td>{{ job.time }}</td>
                                 <td class="line-clamp-3">
                                     {{ job.description }}
                                 </td>
@@ -285,7 +261,6 @@
                                                 editedCareer.description =
                                                     job.description;
                                                 editedCareer.date = job.date;
-                                                editedCareer.time = job.time;
                                                 editedCareer.location =
                                                     job.location;
                                                 showModal = true;
@@ -374,6 +349,7 @@ const selectedFilter = ref("title");
 const resetFilters = () => {
     searchKeyword.value = "";
     selectedFilter.value = "title";
+    currentPage.value = 1;
 };
 
 const filteredCareer = computed(() => {
@@ -395,7 +371,6 @@ const career = ref({
     title: "",
     description: "",
     date: "",
-    time: "",
     location: "",
 });
 
@@ -408,7 +383,6 @@ const addCareer = async (career) => {
             title: career.title,
             description: career.description,
             date: career.date,
-            time: career.time,
             location: career.location,
         },
     });
@@ -417,7 +391,6 @@ const addCareer = async (career) => {
         career.title = "";
         career.description = "";
         career.date = "";
-        career.time = "";
         career.location = "";
 
         careers.value = await $fetch("/api/careers");
@@ -429,7 +402,6 @@ const editedCareer = ref({
     title: null,
     description: null,
     date: null,
-    time: null,
     location: null,
 });
 
@@ -441,7 +413,6 @@ const editCareer = async (editedCareer) => {
         editedCareer.title &&
         editedCareer.description &&
         editedCareer.date &&
-        editedCareer.time &&
         editedCareer.location
     )
         career = await $fetch("/api/careers", {
@@ -451,7 +422,6 @@ const editCareer = async (editedCareer) => {
                 title: editedCareer.title,
                 description: editedCareer.description,
                 date: editedCareer.date,
-                time: editedCareer.time,
                 location: editedCareer.location,
             },
         });

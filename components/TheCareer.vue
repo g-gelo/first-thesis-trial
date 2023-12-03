@@ -76,23 +76,6 @@
                         placeholder="Date"
                         required
                     />
-                    <span class="text-overline">ex. July 18</span>
-                </div>
-                <div class="w-full px-4">
-                    <label
-                        for="time"
-                        class="block mb-2 text-sm font-medium text-gray-900"
-                        >Time</label
-                    >
-                    <input
-                        type="text"
-                        id="time"
-                        v-model="career.time"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                        placeholder="Time"
-                        required
-                    />
-                    <span class="text-overline">ex. 08:00AM - 10:00AM</span>
                 </div>
                 <div class="w-full px-4 sm:w-1/2">
                     <label
@@ -139,12 +122,6 @@
                         v-model="editedCareer.date"
                         class="w-full p-2 border rounded mb-4"
                         placeholder="Date"
-                        required
-                    />
-                    <input
-                        v-model="editedCareer.time"
-                        class="w-full p-2 border rounded mb-4"
-                        placeholder="Time"
                         required
                     />
                     <input
@@ -200,14 +177,6 @@
                                     career.date
                                 }}</span>
                             </div>
-                            <div class="seminar-info">
-                                <v-icon class="ml-6 icon-small"
-                                    >fa-regular fa-clock</v-icon
-                                ><br />
-                                <span class="ml-2 info-value info-small">{{
-                                    career.time
-                                }}</span>
-                            </div>
                         </div>
                     </div>
                     <div
@@ -228,7 +197,6 @@
                                                 editedCareer.description =
                                                     career.description;
                                                 editedCareer.date = career.date;
-                                                editedCareer.time = career.time;
                                                 editedCareer.location =
                                                     career.location;
                                                 showEditCareerForm = true;
@@ -281,14 +249,6 @@
                             detailedCareer.date
                         }}</span>
                     </div>
-                    <div class="seminar-info ma-2">
-                        <v-icon class="ml-6 icon-small"
-                            >fa-regular fa-clock</v-icon
-                        >
-                        <span class="ml-2 info-value info-small">{{
-                            detailedCareer.time
-                        }}</span>
-                    </div>
                     <div class="ma-2 seminar-info">
                         <v-icon start class="icon-small"
                             >fa-solid fa-location-dot</v-icon
@@ -326,7 +286,6 @@ const career = ref({
     title: "",
     description: "",
     date: "",
-    time: "",
     location: "",
 });
 
@@ -339,7 +298,6 @@ const addCareer = async (career) => {
             title: career.title,
             description: career.description,
             date: career.date,
-            time: career.time,
             location: career.location,
         },
     });
@@ -348,7 +306,6 @@ const addCareer = async (career) => {
         career.title = "";
         career.description = "";
         career.date = "";
-        career.time = "";
         career.location = "";
 
         careers.value = await $fetch("/api/careers");
@@ -360,7 +317,6 @@ const editedCareer = ref({
     title: null,
     description: null,
     date: null,
-    time: null,
     location: null,
 });
 
@@ -372,7 +328,6 @@ const editCareer = async (editedCareer) => {
         editedCareer.title &&
         editedCareer.description &&
         editedCareer.date &&
-        editedCareer.time &&
         editedCareer.location
     )
         career = await $fetch("/api/careers", {
@@ -382,7 +337,6 @@ const editCareer = async (editedCareer) => {
                 title: editedCareer.title,
                 description: editedCareer.description,
                 date: editedCareer.date,
-                time: editedCareer.time,
                 location: editedCareer.location,
             },
         });

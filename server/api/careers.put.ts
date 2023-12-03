@@ -12,11 +12,10 @@ export default defineEventHandler(async (event) => {
     const description = body.description;
     const location = body.location;
     const date = body.date;
-    const time = body.time;
 
     let updatedCareer;
 
-    if (id && title && description && location && date && time)
+    if (id && title && description && location && date)
         updatedCareer = await prisma.career.update({
             where: {
                 id,
@@ -26,7 +25,6 @@ export default defineEventHandler(async (event) => {
                 description,
                 location,
                 date,
-                time,
             },
         });
 

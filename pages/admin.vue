@@ -81,7 +81,7 @@
                                 >Date</label
                             >
                             <input
-                                type="text"
+                                type="date"
                                 id="date"
                                 v-model="seminar.date"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
@@ -89,24 +89,6 @@
                                 required
                             />
                             <span class="text-overline">ex. July 18</span>
-                        </div>
-                        <div class="w-full px-4">
-                            <label
-                                for="time"
-                                class="block mb-2 text-sm font-medium text-gray-900"
-                                >Time</label
-                            >
-                            <input
-                                type="text"
-                                id="time"
-                                v-model="seminar.time"
-                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Time"
-                                required
-                            />
-                            <span class="text-overline"
-                                >ex. 08:00AM - 10:00AM</span
-                            >
                         </div>
                         <div class="w-full px-4 sm:w-1/2">
                             <label
@@ -148,15 +130,10 @@
                             placeholder="Guest Speaker"
                         />
                         <input
+                            type="date"
                             v-model="editedSeminar.date"
                             class="w-full p-2 border rounded mb-4"
                             placeholder="Date"
-                            required
-                        />
-                        <input
-                            v-model="editedSeminar.time"
-                            class="w-full p-2 border rounded mb-4"
-                            placeholder="Time"
                             required
                         />
                         <input
@@ -278,7 +255,6 @@
                                 <th>Title</th>
                                 <th>Speaker</th>
                                 <th>Date</th>
-                                <th>Time</th>
                                 <th>Location</th>
                                 <th>Edit&Delete</th>
                             </tr>
@@ -293,7 +269,6 @@
                                 </td>
                                 <td>{{ meeting.guest_speaker }}</td>
                                 <td>{{ meeting.date }}</td>
-                                <td>{{ meeting.time }}</td>
                                 <td class="line-clamp-3">
                                     {{ meeting.location }}
                                 </td>
@@ -310,8 +285,6 @@
                                                     meeting.guest_speaker;
                                                 editedSeminar.date =
                                                     meeting.date;
-                                                editedSeminar.time =
-                                                    meeting.time;
                                                 editedSeminar.location =
                                                     meeting.location;
                                                 showModal = true;
@@ -406,6 +379,7 @@ const selectedFilter = ref("title");
 const resetFilters = () => {
     searchKeyword.value = "";
     selectedFilter.value = "title";
+    currentPage.value = 1;
 };
 
 const filteredSeminar = computed(() => {
