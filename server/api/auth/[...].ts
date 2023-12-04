@@ -4,20 +4,7 @@ import { NuxtAuthHandler } from "#auth";
 
 type ProviderWithDefault<T> = T & { default: T };
 
-const runtimeConfig = useRuntimeConfig();
 const prisma = prismaClient();
-
-async function getMe(session: any) {
-    return await $fetch("/api/me", {
-        method: "POST",
-        query: {
-            API_ROUTE_SECRET: runtimeConfig.API_ROUTE_SECRET,
-        },
-        body: {
-            email: session?.user?.email,
-        },
-    });
-}
 
 export default NuxtAuthHandler({
     adapter: PrismaAdapter(prisma),
@@ -26,13 +13,16 @@ export default NuxtAuthHandler({
         signIn: "/login",
     },
     callbacks: {
-        session: async ({ session, token }) => {
-            const me = await getMe(session);
-            if (me) {
-                session.subscribed = me.subscribed || false;
-            }
-            return Promise.resolve(session);
-        },
+        session: ({ session, user }) => ({
+            ...session,
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                image: user.image,
+                role: user.role,
+            },
+        }),
     },
     providers: [
         (GoogleProvider as ProviderWithDefault<typeof GoogleProvider>).default({

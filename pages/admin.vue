@@ -50,10 +50,10 @@
                                 >Title</label
                             >
                             <input
-                                type="text"
                                 id="title"
-                                name="title"
                                 v-model="seminar.title"
+                                type="text"
+                                name="title"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Title"
                                 required
@@ -66,9 +66,9 @@
                                 >Guest Speaker</label
                             >
                             <input
-                                type="text"
                                 id="description"
                                 v-model="seminar.guest_speaker"
+                                type="text"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Guest Speaker"
                                 required
@@ -81,9 +81,9 @@
                                 >Date</label
                             >
                             <input
-                                type="date"
                                 id="date"
                                 v-model="seminar.date"
+                                type="date"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Date"
                                 required
@@ -97,9 +97,9 @@
                                 >Location</label
                             >
                             <input
-                                type="text"
                                 id="location"
                                 v-model="seminar.location"
+                                type="text"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Location"
                                 required
@@ -114,7 +114,7 @@
                     </button>
                 </form>
             </div>
-            <div class="modal" v-if="showModal">
+            <div v-if="showModal" class="modal">
                 <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                     <h2 class="text-xl font-bold mb-4">Edit Seminar</h2>
                     <div>
@@ -130,8 +130,8 @@
                             placeholder="Guest Speaker"
                         />
                         <input
-                            type="date"
                             v-model="editedSeminar.date"
+                            type="date"
                             class="w-full p-2 border rounded mb-4"
                             placeholder="Date"
                             required
@@ -145,14 +145,14 @@
                     </div>
                     <div class="flex justify-end">
                         <button
-                            @click="($event) => editSeminar(editedSeminar)"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            @click="($event) => editSeminar(editedSeminar)"
                         >
                             Save
                         </button>
                         <button
-                            @click="showModal = false"
                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                            @click="showModal = false"
                         >
                             Cancel
                         </button>
@@ -193,8 +193,8 @@
                         >Search:</label
                     >
                     <input
-                        v-model="searchKeyword"
                         id="search"
+                        v-model="searchKeyword"
                         type="text"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                         placeholder="Search"
@@ -205,20 +205,19 @@
                         >Filter:</label
                     >
                     <select
-                        v-model="selectedFilter"
                         id="filter"
+                        v-model="selectedFilter"
                         class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
                     >
                         <option value="title">Title</option>
                         <option value="guest_speaker">Speaker</option>
                         <option value="date">Date</option>
-                        <option value="time">Time</option>
                         <option value="location">Location</option>
                     </select>
                 </div>
                 <button
-                    @click="resetFilters"
                     class="px-2 py-1 bg-gray-300 text-gray-600 rounded-md focus:outline-none hover:bg-gray-400"
+                    @click="resetFilters"
                 >
                     Reset Filters
                 </button>
@@ -228,17 +227,17 @@
                 class="mt-4 flex items-center justify-center space-x-4 ma-3"
             >
                 <button
-                    @click="prevPage"
                     :disabled="currentPage === 1"
                     class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                    @click="prevPage"
                 >
                     &lt; Prev
                 </button>
                 <span class="text-sm font-semibold">{{ currentPage }}</span>
                 <button
-                    @click="nextPage"
                     :disabled="currentPage * itemsPerPage >= seminars.length"
                     class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                    @click="nextPage"
                 >
                     Next &gt;
                 </button>
@@ -305,7 +304,7 @@
                                         Delete
                                     </v-btn>
                                 </td>
-                                <div class="modal2" v-if="showDeleteModal">
+                                <div v-if="showDeleteModal" class="modal2">
                                     <div
                                         class="bg-white shadow-lg rounded-lg p-6 w-80"
                                     >
@@ -317,17 +316,17 @@
                                         </p>
                                         <div class="flex justify-end">
                                             <button
+                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                                 @click="
                                                     deleteSeminar(meeting.id),
                                                         (showDeleteModal = false)
                                                 "
-                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             >
                                                 Delete
                                             </button>
                                             <button
-                                                @click="showDeleteModal = false"
                                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                                @click="showDeleteModal = false"
                                             >
                                                 Cancel
                                             </button>
@@ -341,6 +340,9 @@
             </div>
         </v-container>
         <CareerForm />
+        <v-container>
+            <UserTable />
+        </v-container>
     </div>
 </template>
 
@@ -402,7 +404,6 @@ const seminar = ref({
     title: "",
     guest_speaker: "",
     date: "",
-    time: "",
     location: "",
 });
 
@@ -415,7 +416,6 @@ const addSeminar = async (seminar) => {
             title: seminar.title,
             guest_speaker: seminar.guest_speaker,
             date: seminar.date,
-            time: seminar.time,
             location: seminar.location,
         },
     });
@@ -423,7 +423,6 @@ const addSeminar = async (seminar) => {
         seminar.title = "";
         seminar.guest_speaker = "";
         seminar.date = "";
-        seminar.time = "";
         seminar.location = "";
 
         seminars.value = await $fetch("/api/seminars");
@@ -435,7 +434,6 @@ const editedSeminar = ref({
     title: null,
     guest_speaker: null,
     date: null,
-    time: null,
     location: null,
 });
 
@@ -447,7 +445,6 @@ const editSeminar = async (editedSeminar) => {
         editedSeminar.title &&
         editedSeminar.guest_speaker &&
         editedSeminar.date &&
-        editedSeminar.time &&
         editedSeminar.location
     )
         seminar = await $fetch("/api/seminars", {
@@ -457,7 +454,6 @@ const editSeminar = async (editedSeminar) => {
                 title: editedSeminar.title,
                 guest_speaker: editedSeminar.guest_speaker,
                 date: editedSeminar.date,
-                time: editedSeminar.time,
                 location: editedSeminar.location,
             },
         });
