@@ -82,14 +82,18 @@
                             id="location"
                             v-model="career.location"
                             type="text"
-                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                            class="shadow-sm mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Location"
                             required
                         />
                     </div>
                     <button
+                        v-if="
+                            data?.user?.role == `SUPERADMIN` ||
+                            data?.user?.role == `ADMIN`
+                        "
                         type="submit"
-                        class="mt-3 bg-blue-500 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
+                        class="mt-3 bg-blue-500 mb-2 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
                     >
                         Submit
                     </button>
@@ -128,6 +132,10 @@
                     </div>
                     <div class="flex justify-end">
                         <button
+                            v-if="
+                                data?.user?.role == `SUPERADMIN` ||
+                                data?.user?.role == `ADMIN`
+                            "
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                             @click="($event) => editCareer(editedCareer)"
                         >
@@ -294,6 +302,11 @@
                                         </p>
                                         <div class="flex justify-end">
                                             <button
+                                                v-if="
+                                                    data?.user?.role ==
+                                                        `SUPERADMIN` ||
+                                                    data?.user?.role == `ADMIN`
+                                                "
                                                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                                 @click="
                                                     deleteCareer(job.id),
@@ -321,6 +334,8 @@
 </template>
 
 <script setup>
+const { data } = useAuth();
+
 // Pagination
 const currentPage = ref(1);
 const itemsPerPage = 3;

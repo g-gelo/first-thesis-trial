@@ -59,6 +59,7 @@
                     ></textarea>
                 </div>
                 <button
+                    v-if="data?.user?.role == `SUPERADMIN`"
                     type="submit"
                     class="bg-blue-500 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
                 >
@@ -109,6 +110,7 @@
                 </div>
                 <div class="flex justify-end">
                     <button
+                        v-if="data?.user?.role == `SUPERADMIN`"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="($event) => editGcoProfile(editedGcoProfile)"
                     >
@@ -203,6 +205,9 @@
                                     </p>
                                     <div class="flex justify-end">
                                         <button
+                                            v-if="
+                                                data?.user?.role == `SUPERADMIN`
+                                            "
                                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             @click="
                                                 deleteGco(guidance.id),
@@ -250,7 +255,7 @@
         </div>
 
         <div v-if="showGcoServiceForm" class="mb-4">
-            <div class="bg-white shadow-lg rounded-lg">
+            <div class="shadow-lg rounded-lg">
                 <h1 class="m-2">Service Form</h1>
                 <form
                     class="space-y-4"
@@ -273,6 +278,7 @@
                         />
                     </div>
                     <button
+                        v-if="data?.user?.role == `SUPERADMIN`"
                         type="submit"
                         class="bg-blue-500 ma-2 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
                     >
@@ -318,6 +324,7 @@
                 </div>
                 <div class="flex justify-end">
                     <button
+                        v-if="data?.user?.role == `SUPERADMIN`"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="($event) => editGcoService(editedGcoService)"
                     >
@@ -443,6 +450,9 @@
                                     </p>
                                     <div class="flex justify-end">
                                         <button
+                                            v-if="
+                                                data?.user?.role == `SUPERADMIN`
+                                            "
                                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             @click="
                                                 deleteGcoService(service.id),
@@ -469,6 +479,8 @@
 </template>
 
 <script setup>
+const { data } = useAuth();
+
 // Pagination
 const currentPage = ref(1);
 const itemsPerPage = 3;

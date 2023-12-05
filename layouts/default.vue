@@ -68,7 +68,10 @@
 
                         <!-- Additional section with different content -->
                         <router-link
-                            v-if="data?.user?.role == `SUPERADMIN`"
+                            v-if="
+                                data?.user?.role == `SUPERADMIN` ||
+                                data?.user?.role == `ADMIN`
+                            "
                             to="/admin"
                             :class="{
                                 'active bg-gray-200': isActive(index),

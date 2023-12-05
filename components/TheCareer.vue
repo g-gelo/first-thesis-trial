@@ -1,6 +1,11 @@
 <template>
     <div class="flex flex-col">
-        <div v-if="data?.user?.role == `SUPERADMIN`" class="relative">
+        <div
+            v-if="
+                data?.user?.role == `SUPERADMIN` || data?.user?.role == `ADMIN`
+            "
+            class="relative"
+        >
             <button
                 v-if="!showModalCareer"
                 class="absolute top-0 right-0 text-lg"
@@ -184,7 +189,12 @@
                     >
                         <div class="mt-1 seminar-info ma-2 w-full">
                             <span class="info-value main-title highlight">
-                                <div v-if="data?.user?.role == `SUPERADMIN`">
+                                <div
+                                    v-if="
+                                        data?.user?.role == `SUPERADMIN` ||
+                                        data?.user?.role == `ADMIN`
+                                    "
+                                >
                                     <button
                                         v-if="!showEditCareerForm"
                                         class="absolute top-3 right-2 text-sm"

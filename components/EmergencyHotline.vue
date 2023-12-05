@@ -13,7 +13,7 @@
                 <v-icon>fa-regular fa-plus</v-icon>Create Emergency Hotline Form
             </button>
             <button
-                v-if="showHotlineForm"
+                v-else
                 @click="
                     ($event) => {
                         showHotlineForm = false;
@@ -72,14 +72,18 @@
                         v-model="emergency_Hotline.location"
                         type="text"
                         name="location"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                        class="shadow-sm mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                         placeholder="Location"
                         required
                     />
                 </div>
                 <button
+                    v-if="
+                        data?.user?.role == `SUPERADMIN` ||
+                        data?.user?.role == `ADMIN`
+                    "
                     type="submit"
-                    class="bg-blue-500 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
+                    class="bg-blue-500 mb-2 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
                 >
                     Submit
                 </button>
@@ -110,6 +114,10 @@
                 </div>
                 <div class="flex justify-end">
                     <button
+                        v-if="
+                            data?.user?.role == `SUPERADMIN` ||
+                            data?.user?.role == `ADMIN`
+                        "
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
                             ($event) =>
@@ -271,7 +279,7 @@
                                     class="bg-white shadow-lg rounded-lg p-6 w-80"
                                 >
                                     <h2 class="text-xl font-bold mb-4">
-                                        Delete Seminar
+                                        Delete Emergency Hotline
                                     </h2>
                                     <p class="mb-4">
                                         Do you want to delete this Emergency
@@ -279,6 +287,11 @@
                                     </p>
                                     <div class="flex justify-end">
                                         <button
+                                            v-if="
+                                                data?.user?.role ==
+                                                    `SUPERADMIN` ||
+                                                data?.user?.role == `ADMIN`
+                                            "
                                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             @click="
                                                 deleteEmergencyHotline(
@@ -307,6 +320,8 @@
 </template>
 
 <script setup>
+const { data } = useAuth();
+
 // Pagination
 const currentPage = ref(1);
 const itemsPerPage = 3;

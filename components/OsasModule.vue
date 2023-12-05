@@ -26,7 +26,7 @@
         </div>
         <div v-if="showOsasForm">
             <h1>Osas Form</h1>
-            <form class="space-y-4" @submit.prevent="addOsas(osas)">
+            <form class="space-y-4 mb-4" @submit.prevent="addOsas(osas)">
                 <div>
                     <label
                         for="title"
@@ -60,6 +60,7 @@
                     ></textarea>
                 </div>
                 <button
+                    v-if="data?.user?.role == `SUPERADMIN`"
                     type="submit"
                     class="bg-blue-500 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
                 >
@@ -87,6 +88,7 @@
                 </div>
                 <div class="flex justify-end">
                     <button
+                        v-if="data?.user?.role == `SUPERADMIN`"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="($event) => editOsasModule(editedOsasModule)"
                     >
@@ -203,6 +205,9 @@
                                     </p>
                                     <div class="flex justify-end">
                                         <button
+                                            v-if="
+                                                data?.user?.role == `SUPERADMIN`
+                                            "
                                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             @click="
                                                 deleteOsas(profile.id),
@@ -248,7 +253,7 @@
             </button>
         </div>
         <div v-if="showFunctionForm" class="mb-4">
-            <div class="bg-white shadow-lg rounded-lg">
+            <div class="shadow-lg rounded-lg">
                 <h1 class="m-2">Function Form</h1>
                 <form
                     class="space-y-4"
@@ -271,6 +276,7 @@
                         />
                     </div>
                     <button
+                        v-if="data?.user?.role == `SUPERADMIN`"
                         type="submit"
                         class="bg-blue-500 ma-2 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
                     >
@@ -314,6 +320,7 @@
                 </div>
                 <div class="flex justify-end">
                     <button
+                        v-if="data?.user?.role == `SUPERADMIN`"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
                             ($event) => editOsasFunction(editedOsasFunction)
@@ -406,6 +413,9 @@
                                     </p>
                                     <div class="flex justify-end">
                                         <button
+                                            v-if="
+                                                data?.user?.role == `SUPERADMIN`
+                                            "
                                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             @click="
                                                 deleteFunction(purpose.id),
@@ -432,6 +442,8 @@
 </template>
 
 <script setup>
+const { data } = useAuth();
+
 const currentPage = ref(1);
 const itemsPerPage = 3;
 
