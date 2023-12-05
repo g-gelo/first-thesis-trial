@@ -1,13 +1,13 @@
 <template>
-    <div v-if="data?.subscribed" class="relative">
+    <div v-if="data?.user?.role == `SUPERADMIN`" class="relative">
         <button
             v-if="!showHotlineForm"
+            class="absolute top-0 right-0 text-lg"
             @click="
                 ($event) => {
                     showHotlineForm = true;
                 }
             "
-            class="absolute top-0 right-0 text-lg"
         >
             <v-icon class="pa-5" color="bg300"
                 >fa-regular fa-square-plus</v-icon
@@ -15,12 +15,12 @@
         </button>
         <button
             v-if="showHotlineForm"
+            class="absolute top-0 right-0 text-lg"
             @click="
                 ($event) => {
                     showHotlineForm = false;
                 }
             "
-            class="absolute top-0 right-0 text-lg"
         >
             <v-icon class="pa-5" color="bg300"
                 >fa-regular fa-square-minus</v-icon
@@ -40,9 +40,9 @@
                     >Title</label
                 >
                 <input
-                    type="text"
                     id="title"
                     v-model="emergency_Hotline.organization"
+                    type="text"
                     name="title"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Title"
@@ -56,9 +56,9 @@
                     >Number</label
                 >
                 <input
-                    type="text"
                     id="number"
                     v-model="emergency_Hotline.number"
+                    type="text"
                     name="number"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Number"
@@ -72,9 +72,9 @@
                     >Location</label
                 >
                 <input
-                    type="text"
                     id="location"
                     v-model="emergency_Hotline.location"
+                    type="text"
                     name="location"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Location"
@@ -89,7 +89,7 @@
             </button>
         </form>
     </div>
-    <div class="modal z-40" v-if="showHotlineEdit">
+    <div v-if="showHotlineEdit" class="modal z-40">
         <div class="bg-white shadow-lg rounded-lg p-6 w-80">
             <h2 class="text-xl font-bold mb-4">Edit Emergency Hotline</h2>
             <div>
@@ -114,16 +114,16 @@
             </div>
             <div class="flex justify-end">
                 <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                     @click="
                         ($event) => editEmergencyHotline(editedEmergencyHotline)
                     "
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                 >
                     Save
                 </button>
                 <button
-                    @click="showHotlineEdit = false"
                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    @click="showHotlineEdit = false"
                 >
                     Cancel
                 </button>
@@ -154,10 +154,13 @@
                 <div class="mt-1 seminar-info">
                     <span class="info-value main-title highlight"
                         >{{ emergency.organization }}
-                        <div v-if="data?.subscribed" class="relative">
+                        <div
+                            v-if="data?.user?.role == `SUPERADMIN`"
+                            class="relative"
+                        >
                             <button
-                                class="absolute bottom-10 right-0 text-lg"
                                 v-if="!showHotlineEdit"
+                                class="absolute bottom-10 right-0 text-lg"
                                 variant="tonal"
                                 @click="
                                     ($event) => {

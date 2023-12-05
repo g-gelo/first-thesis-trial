@@ -1,5 +1,5 @@
 <template>
-    <div v-if="data?.subscribed" class="relative">
+    <div v-if="data?.user?.role == `SUPERADMIN`" class="relative">
         <button
             v-if="!showGcoForm"
             class="absolute top-0 right-0 text-lg"
@@ -108,7 +108,10 @@
             <div class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg">
                 <div class="px-4 py-2 bg-secondary-100">
                     <h2 class="text-2xl font-medium ma-2 h-5">
-                        <div v-if="data?.subscribed" class="relative">
+                        <div
+                            v-if="data?.user?.role == `SUPERADMIN`"
+                            class="relative"
+                        >
                             <button
                                 v-if="!showGcoFormEdit"
                                 class="absolute top-0 right-0 text-lg"
@@ -139,7 +142,7 @@
             </div>
         </div>
         <div>
-            <div v-if="data?.subscribed" class="relative">
+            <div v-if="data?.user?.role == `SUPERADMIN`" class="relative">
                 <button
                     v-if="!showGcoServiceForm"
                     class="absolute top-10 right-1 text-lg"
@@ -256,11 +259,13 @@
                                 }
                             "
                         >
-                            <v-icon v-if="data?.subscribed" class="mr-2 sm"
+                            <v-icon
+                                v-if="data?.user?.role == `SUPERADMIN`"
+                                class="mr-2 sm"
                                 >fa-solid fa-pen-to-square</v-icon
                             >
                         </button>
-                        <v-icon v-else="data?.subscribed" class="mr-2 sm"
+                        <v-icon v-else class="mr-2 sm"
                             >fa-regular fa-circle-dot</v-icon
                         >{{ service.service }}
                     </p>

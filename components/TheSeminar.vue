@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col">
-        <div v-if="data?.subscribed" class="relative z-40">
+        <div v-if="data?.user?.role == `SUPERADMIN`" class="relative z-40">
             <button
                 v-if="!showModalSeminar"
                 class="absolute top-0 right-0 text-lg"
@@ -182,7 +182,7 @@
                     >
                         <div class="mt-1 seminar-info">
                             <span class="info-value main-title highlight">
-                                <div v-if="data?.subscribed">
+                                <div v-if="data?.user?.role == `SUPERADMIN`">
                                     <button
                                         v-if="!showEditForm"
                                         class="absolute top-3 right-2 text-sm"

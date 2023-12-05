@@ -53,29 +53,29 @@
                         <div
                             v-for="(item, index) in navItem"
                             :key="index"
-                            @click="
-                                toggleActive(index);
-                                createNavigationButton(item.route);
-                            "
                             :class="{
                                 'active bg-gray-200': isActive(index),
                                 'pop-icon': isActive(index),
                             }"
                             class="p-2 cursor-pointer"
+                            @click="
+                                toggleActive(index);
+                                createNavigationButton(item.route);
+                            "
                         >
                             <i :class="item.icon + ' mr-2'"></i> {{ item.text }}
                         </div>
 
                         <!-- Additional section with different content -->
                         <router-link
-                            v-if="data?.subscribed"
+                            v-if="data?.user?.role == `SUPERADMIN`"
                             to="/admin"
-                            @click="toggleActive(index)"
                             :class="{
                                 'active bg-gray-200': isActive(index),
                                 'pop-icon': isActive(index),
                             }"
                             class="p-2 cursor-pointer w-full"
+                            @click="toggleActive(index)"
                         >
                             <i class="fa-solid fa-user-lock mr-2 mt-3"></i>
                             Admin

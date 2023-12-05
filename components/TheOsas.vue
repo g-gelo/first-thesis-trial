@@ -7,7 +7,7 @@
                 class="top-image card"
             ></v-img>
         </div>
-        <div v-if="data?.subscribed" class="relative">
+        <div v-if="data?.user?.role == `SUPERADMIN`" class="relative">
             <button
                 v-if="!showOsasForm"
                 class="absolute top-0 right-0 text-lg"
@@ -116,7 +116,10 @@
             <div class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg">
                 <div class="px-4 py-2 bg-secondary-100">
                     <h2 class="text-2xl ma-2 h-5">{{ osasProf.title }}</h2>
-                    <div v-if="data?.subscribed" class="relative">
+                    <div
+                        v-if="data?.user?.role == `SUPERADMIN`"
+                        class="relative"
+                    >
                         <button
                             v-if="!showOsasEdit"
                             class="absolute bottom-0 right-0 text-lg"
@@ -144,7 +147,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="data?.subscribed" class="relative">
+        <div v-if="data?.user?.role == `SUPERADMIN`" class="relative">
             <button
                 v-if="!showFunctionForm"
                 class="absolute top-10 right-1 text-lg"
@@ -208,12 +211,13 @@
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Osas Function</h2>
                 <div>
-                    <input
+                    <textarea
                         v-model="editedOsasFunction.osasFunction"
                         class="w-full p-2 border rounded mb-4"
-                        placeholder="title"
+                        placeholder="Description"
+                        rows="5"
                         required
-                    />
+                    ></textarea>
                 </div>
                 <div class="flex justify-end">
                     <button
@@ -258,11 +262,13 @@
                             }
                         "
                     >
-                        <v-icon v-if="data?.subscribed" class="mr-2 sm"
+                        <v-icon
+                            v-if="data?.user?.role == `SUPERADMIN`"
+                            class="mr-2 sm"
                             >fa-solid fa-pen-to-square</v-icon
                         >
                     </button>
-                    <v-icon v-else="data?.subscribed" class="mr-2 sm"
+                    <v-icon v-else class="mr-2 sm"
                         >fa-regular fa-circle-dot</v-icon
                     >{{ functions.osasFunction }}
                 </p>

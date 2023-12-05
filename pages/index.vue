@@ -64,7 +64,7 @@
                     <div class="mission-vision-box">
                         <div class="title">
                             <h1 class="text-3xl">{{ MisnVis.title }}</h1>
-                            <div v-if="data?.subscribed">
+                            <div v-if="data?.user?.role == `SUPERADMIN`">
                                 <button
                                     v-if="!showModalMisnVisEdit"
                                     class="absolute top-3 right-0"
