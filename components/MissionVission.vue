@@ -23,7 +23,7 @@
                 Hide Mission and Vision
             </button>
         </div>
-        <div class="modal z-40" v-if="showModalMisnVisEdit">
+        <div v-if="showModalMisnVisEdit" class="modal z-40">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Mission and Vision</h2>
                 <div>
@@ -43,14 +43,14 @@
                 </div>
                 <div class="flex justify-end">
                     <button
-                        @click="($event) => editMisnVis(editedMisnVis)"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        @click="($event) => editMisnVis(editedMisnVis)"
                     >
                         Save
                     </button>
                     <button
-                        @click="showModalMisnVisEdit = false"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        @click="showModalMisnVisEdit = false"
                     >
                         Cancel
                     </button>
@@ -62,17 +62,17 @@
             class="mt-4 flex items-center justify-center space-x-4 ma-3"
         >
             <button
-                @click="prevPage"
                 :disabled="currentPage === 1"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="prevPage"
             >
                 &lt; Prev
             </button>
             <span class="text-sm font-semibold">{{ currentPage }}</span>
             <button
-                @click="nextPage"
                 :disabled="currentPage * itemsPerPage >= missionvision.length"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="nextPage"
             >
                 Next &gt;
             </button>

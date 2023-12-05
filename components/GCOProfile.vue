@@ -33,9 +33,9 @@
                         >Title</label
                     >
                     <input
-                        type="text"
                         id="title"
                         v-model="gco.title"
+                        type="text"
                         name="title"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                         placeholder="Title"
@@ -89,7 +89,7 @@
             </button>
         </div>
 
-        <div class="modal z-40" v-if="showGcoFormEdit">
+        <div v-if="showGcoFormEdit" class="modal z-40">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit GCO Profile</h2>
                 <div>
@@ -99,23 +99,24 @@
                         placeholder="title"
                         required
                     />
-                    <input
+                    <textarea
                         v-model="editedGcoProfile.description"
                         class="w-full p-2 border rounded mb-4"
-                        placeholder="description"
+                        placeholder="Description"
+                        rows="5"
                         required
-                    />
+                    ></textarea>
                 </div>
                 <div class="flex justify-end">
                     <button
-                        @click="($event) => editGcoProfile(editedGcoProfile)"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        @click="($event) => editGcoProfile(editedGcoProfile)"
                     >
                         Save
                     </button>
                     <button
-                        @click="showGcoFormEdit = false"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        @click="showGcoFormEdit = false"
                     >
                         Cancel
                     </button>
@@ -127,17 +128,17 @@
             class="mt-4 flex items-center justify-center space-x-4 ma-4"
         >
             <button
-                @click="prev_Page"
                 :disabled="currPage === 1"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="prev_Page"
             >
                 &lt; Prev
             </button>
             <span class="text-sm font-semibold">{{ currPage }}</span>
             <button
-                @click="next_Page"
                 :disabled="currPage * itemsInPage >= gcoProfile.length"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="next_Page"
             >
                 Next &gt;
             </button>
@@ -157,19 +158,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="gco in pagedProfile" :key="gco.id">
-                            <td>{{ gco.title }}</td>
-                            <td class="line-clamp-3">{{ gco.description }}</td>
+                        <tr v-for="guidance in pagedProfile" :key="guidance.id">
+                            <td>{{ guidance.title }}</td>
+                            <td class="line-clamp-3">
+                                {{ guidance.description }}
+                            </td>
                             <td>
                                 <v-btn
                                     v-if="!showGcoFormEdit"
                                     variant="tonal"
                                     @click="
                                         ($event) => {
-                                            editedGcoProfile.id = gco.id;
-                                            editedGcoProfile.title = gco.title;
+                                            editedGcoProfile.id = guidance.id;
+                                            editedGcoProfile.title =
+                                                guidance.title;
                                             editedGcoProfile.description =
-                                                gco.description;
+                                                guidance.description;
                                             showGcoFormEdit = true;
                                         }
                                     "
@@ -187,7 +191,7 @@
                                     Delete
                                 </v-btn>
                             </td>
-                            <div class="modal2" v-if="showDeleteModal2">
+                            <div v-if="showDeleteModal2" class="modal2">
                                 <div
                                     class="bg-white shadow-lg rounded-lg p-6 w-80"
                                 >
@@ -199,17 +203,17 @@
                                     </p>
                                     <div class="flex justify-end">
                                         <button
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             @click="
-                                                deleteGco(gco.id),
+                                                deleteGco(guidance.id),
                                                     (showDeleteModal2 = false)
                                             "
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                         >
                                             Delete
                                         </button>
                                         <button
-                                            @click="showDeleteModal2 = false"
                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="showDeleteModal2 = false"
                                         >
                                             Cancel
                                         </button>
@@ -259,9 +263,9 @@
                             >Service</label
                         >
                         <input
-                            type="text"
                             id="function"
                             v-model="gcoServices.service"
+                            type="text"
                             name="function"
                             class="shadow-sm text-white m-3 w-10/12 bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                             placeholder="Function"
@@ -301,7 +305,7 @@
             </button>
         </div>
 
-        <div class="modal z-40" v-if="showGcoServiceEdit">
+        <div v-if="showGcoServiceEdit" class="modal z-40">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit GCO Service</h2>
                 <div>
@@ -314,14 +318,14 @@
                 </div>
                 <div class="flex justify-end">
                     <button
-                        @click="($event) => editGcoService(editedGcoService)"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        @click="($event) => editGcoService(editedGcoService)"
                     >
                         Save
                     </button>
                     <button
-                        @click="showGcoServiceEdit = false"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        @click="showGcoServiceEdit = false"
                     >
                         Cancel
                     </button>
@@ -339,8 +343,8 @@
                     >Search:</label
                 >
                 <input
-                    v-model="searchKeyword"
                     id="search"
+                    v-model="searchKeyword"
                     type="text"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Search"
@@ -351,16 +355,16 @@
                     >Filter:</label
                 >
                 <select
-                    v-model="selectedFilter"
                     id="filter"
+                    v-model="selectedFilter"
                     class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
                 >
                     <option value="service">Services</option>
                 </select>
             </div>
             <button
-                @click="resetFilters"
                 class="px-2 py-1 bg-gray-300 text-gray-600 rounded-md focus:outline-none hover:bg-gray-400"
+                @click="resetFilters"
             >
                 Reset Filters
             </button>
@@ -370,17 +374,17 @@
             class="mt-4 flex items-center justify-center space-x-4 ma-4"
         >
             <button
-                @click="prevPage"
                 :disabled="currentPage === 1"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="prevPage"
             >
                 &lt; Prev
             </button>
             <span class="text-sm font-semibold">{{ currentPage }}</span>
             <button
-                @click="nextPage"
                 :disabled="currentPage * itemsPerPage >= gcoService.length"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="nextPage"
             >
                 Next &gt;
             </button>
@@ -427,7 +431,7 @@
                                     Delete
                                 </v-btn>
                             </td>
-                            <div class="modal2" v-if="showDeleteModal1">
+                            <div v-if="showDeleteModal1" class="modal2">
                                 <div
                                     class="bg-white shadow-lg rounded-lg p-6 w-80"
                                 >
@@ -439,17 +443,17 @@
                                     </p>
                                     <div class="flex justify-end">
                                         <button
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             @click="
                                                 deleteGcoService(service.id),
                                                     (showDeleteModal1 = false)
                                             "
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                         >
                                             Delete
                                         </button>
                                         <button
-                                            @click="showDeleteModal1 = false"
                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="showDeleteModal1 = false"
                                         >
                                             Cancel
                                         </button>
@@ -514,6 +518,7 @@ const selectedFilter = ref("service");
 const resetFilters = () => {
     searchKeyword.value = "";
     selectedFilter.value = "service";
+    currentPage.value = 1;
 };
 
 const filteredService = computed(() => {

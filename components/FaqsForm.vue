@@ -13,7 +13,7 @@
                 <v-icon>fa-solid fa-plus</v-icon> Create FAQs Form
             </button>
             <button
-                v-else="showFaqsForm"
+                v-else
                 @click="
                     ($event) => {
                         showFaqsForm = false;
@@ -34,10 +34,10 @@
                             >Keyword</label
                         >
                         <input
-                            type="text"
                             id="keyword"
-                            name="keyword"
                             v-model="faq.keyword"
+                            type="text"
+                            name="keyword"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Keyword"
                             required
@@ -68,7 +68,7 @@
                 </button>
             </form>
         </div>
-        <div class="modal" v-if="showEditFaqsForm">
+        <div v-if="showEditFaqsForm" class="modal">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit FAQs</h2>
                 <div>
@@ -88,14 +88,14 @@
                 </div>
                 <div class="flex justify-end">
                     <button
-                        @click="($event) => editFaqs(editedFaqs)"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        @click="($event) => editFaqs(editedFaqs)"
                     >
                         Save
                     </button>
                     <button
-                        @click="showEditFaqsForm = false"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        @click="showEditFaqsForm = false"
                     >
                         Cancel
                     </button>
@@ -114,7 +114,7 @@
                 Show FAQs Database
             </button>
             <button
-                v-else="showFaqsTable"
+                v-else
                 @click="
                     ($event) => {
                         showFaqsTable = false;
@@ -135,8 +135,8 @@
                     >Search:</label
                 >
                 <input
-                    v-model="searchKeyword"
                     id="search"
+                    v-model="searchKeyword"
                     type="text"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Search"
@@ -147,8 +147,8 @@
                     >Filter:</label
                 >
                 <select
-                    v-model="selectedFilter"
                     id="filter"
+                    v-model="selectedFilter"
                     class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
                 >
                     <option value="keyword">Keyword</option>
@@ -156,8 +156,8 @@
                 </select>
             </div>
             <button
-                @click="resetFilters"
                 class="px-2 py-1 bg-gray-300 text-gray-600 rounded-md focus:outline-none hover:bg-gray-400"
+                @click="resetFilters"
             >
                 Reset Filters
             </button>
@@ -167,17 +167,17 @@
             class="mt-4 flex items-center justify-center space-x-4 ma-3"
         >
             <button
-                @click="prevPage"
                 :disabled="currentPage === 1"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="prevPage"
             >
                 &lt; Prev
             </button>
             <span class="text-sm font-semibold">{{ currentPage }}</span>
             <button
-                @click="nextPage"
                 :disabled="currentPage * itemsPerPage >= allFaqs.length"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="nextPage"
             >
                 Next &gt;
             </button>
@@ -231,7 +231,7 @@
                                     Delete
                                 </v-btn>
                             </td>
-                            <div class="modal2" v-if="showDeleteFaqsForm">
+                            <div v-if="showDeleteFaqsForm" class="modal2">
                                 <div
                                     class="bg-white shadow-lg rounded-lg p-6 w-80"
                                 >
@@ -243,17 +243,17 @@
                                     </p>
                                     <div class="flex justify-end">
                                         <button
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             @click="
                                                 deleteFaqs(faqs.id),
                                                     (showDeleteFaqsForm = false)
                                             "
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                         >
                                             Delete
                                         </button>
                                         <button
-                                            @click="showDeleteFaqsForm = false"
                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="showDeleteFaqsForm = false"
                                         >
                                             Cancel
                                         </button>
@@ -297,6 +297,7 @@ const selectedFilter = ref("keyword");
 const resetFilters = () => {
     searchKeyword.value = "";
     selectedFilter.value = "keyword";
+    currentPage.value = 1;
 };
 
 const filteredFaqs = computed(() => {

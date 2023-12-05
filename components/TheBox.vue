@@ -2,12 +2,12 @@
     <div v-if="data?.subscribed" class="relative">
         <button
             v-if="!showGcoForm"
+            class="absolute top-0 right-0 text-lg"
             @click="
                 ($event) => {
                     showGcoForm = true;
                 }
             "
-            class="absolute top-0 right-0 text-lg"
         >
             <v-icon class="pa-5" color="bg300"
                 >fa-regular fa-square-plus</v-icon
@@ -15,12 +15,12 @@
         </button>
         <button
             v-if="showGcoForm"
+            class="absolute top-0 right-0 text-lg"
             @click="
                 ($event) => {
                     showGcoForm = false;
                 }
             "
-            class="absolute top-0 right-0 text-lg"
         >
             <v-icon class="pa-5" color="bg300"
                 >fa-regular fa-square-minus</v-icon
@@ -37,9 +37,9 @@
                     >Title</label
                 >
                 <input
-                    type="text"
                     id="title"
                     v-model="gco.title"
+                    type="text"
                     name="title"
                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                     placeholder="Title"
@@ -70,7 +70,7 @@
             </button>
         </form>
     </div>
-    <div class="modal z-40" v-if="showGcoFormEdit">
+    <div v-if="showGcoFormEdit" class="modal z-40">
         <div class="bg-white shadow-lg rounded-lg p-6 w-80">
             <h2 class="text-xl font-bold mb-4">Edit GCO Profile</h2>
             <div>
@@ -89,14 +89,14 @@
             </div>
             <div class="flex justify-end">
                 <button
-                    @click="($event) => editGcoProfile(editedGcoProfile)"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    @click="($event) => editGcoProfile(editedGcoProfile)"
                 >
                     Save
                 </button>
                 <button
-                    @click="showGcoFormEdit = false"
                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    @click="showGcoFormEdit = false"
                 >
                     Cancel
                 </button>
@@ -104,21 +104,21 @@
         </div>
     </div>
     <div>
-        <div class="mt-10" v-for="gco in gcoProfile" :key="gco.id">
+        <div v-for="guidance in gcoProfile" :key="guidance.id" class="mt-10">
             <div class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg">
                 <div class="px-4 py-2 bg-secondary-100">
                     <h2 class="text-2xl font-medium ma-2 h-5">
                         <div v-if="data?.subscribed" class="relative">
                             <button
-                                class="absolute top-0 right-0 text-lg"
                                 v-if="!showGcoFormEdit"
+                                class="absolute top-0 right-0 text-lg"
                                 variant="tonal"
                                 @click="
                                     ($event) => {
-                                        editedGcoProfile.id = gco.id;
-                                        editedGcoProfile.title = gco.title;
+                                        editedGcoProfile.id = guidance.id;
+                                        editedGcoProfile.title = guidance.title;
                                         editedGcoProfile.description =
-                                            gco.description;
+                                            guidance.description;
                                         showGcoFormEdit = true;
                                     }
                                 "
@@ -128,12 +128,12 @@
                                 </v-icon>
                             </button>
                         </div>
-                        {{ gco.title }}
+                        {{ guidance.title }}
                     </h2>
                 </div>
                 <div class="px-4 py-2 bg-slate-50 rounded-b-lg">
                     <p class="indent text-base text-justify leading-relaxed">
-                        {{ gco.description }}
+                        {{ guidance.description }}
                     </p>
                 </div>
             </div>
@@ -142,12 +142,12 @@
             <div v-if="data?.subscribed" class="relative">
                 <button
                     v-if="!showGcoServiceForm"
+                    class="absolute top-10 right-1 text-lg"
                     @click="
                         ($event) => {
                             showGcoServiceForm = true;
                         }
                     "
-                    class="absolute top-10 right-1 text-lg"
                 >
                     <v-icon class="pa-5" color="bg300"
                         >fa-regular fa-square-plus</v-icon
@@ -155,12 +155,12 @@
                 </button>
                 <button
                     v-if="showGcoServiceForm"
+                    class="absolute top-10 right-1 text-lg"
                     @click="
                         ($event) => {
                             showGcoServiceForm = false;
                         }
                     "
-                    class="absolute top-10 right-1 text-lg"
                 >
                     <v-icon class="pa-5" color="bg300"
                         >fa-regular fa-square-minus</v-icon
@@ -181,9 +181,9 @@
                                 >Service</label
                             >
                             <input
-                                type="text"
                                 id="function"
                                 v-model="gcoServices.service"
+                                type="text"
                                 name="function"
                                 class="shadow-sm text-white m-3 w-10/12 bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                 placeholder="Function"
@@ -199,7 +199,7 @@
                     </form>
                 </div>
             </div>
-            <div class="modal z-40" v-if="showGcoServiceEdit">
+            <div v-if="showGcoServiceEdit" class="modal z-40">
                 <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                     <h2 class="text-xl font-bold mb-4">Edit GCO Service</h2>
                     <div>
@@ -212,16 +212,16 @@
                     </div>
                     <div class="flex justify-end">
                         <button
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                             @click="
                                 ($event) => editGcoService(editedGcoService)
                             "
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                         >
                             Save
                         </button>
                         <button
-                            @click="showGcoServiceEdit = false"
                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                            @click="showGcoServiceEdit = false"
                         >
                             Cancel
                         </button>

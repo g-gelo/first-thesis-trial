@@ -16,12 +16,12 @@
         </marquee>
         <div class="category">
             <ul>
-                <li><a href="#Osas" class="font-display">OSAS</a></li>
-                <li><a href="#GCO" class="font-display">GCO</a></li>
-                <li><a href="#Contact" class="font-display">Contact</a></li>
+                <li><a href="#Osas">OSAS</a></li>
+                <li><a href="#GCO">GCO</a></li>
+                <li><a href="#Contact">Contact</a></li>
             </ul>
         </div>
-        <div class="modal z-40" v-if="showModalMisnVisEdit">
+        <div v-if="showModalMisnVisEdit" class="modal z-40">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Mission and Vision</h2>
                 <div>
@@ -41,14 +41,14 @@
                 </div>
                 <div class="flex justify-end">
                     <button
-                        @click="($event) => editMisnVis(editedMisnVis)"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        @click="($event) => editMisnVis(editedMisnVis)"
                     >
                         Save
                     </button>
                     <button
-                        @click="showModalMisnVisEdit = false"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        @click="showModalMisnVisEdit = false"
                     >
                         Cancel
                     </button>
@@ -66,8 +66,8 @@
                             <h1 class="text-3xl">{{ MisnVis.title }}</h1>
                             <div v-if="data?.subscribed">
                                 <button
-                                    class="absolute top-3 right-0"
                                     v-if="!showModalMisnVisEdit"
+                                    class="absolute top-3 right-0"
                                     variant="tonal"
                                     @click="
                                         ($event) => {

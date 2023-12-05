@@ -14,7 +14,7 @@
                     <v-icon>fa-solid fa-plus</v-icon> Create a Job Career Event
                 </button>
                 <button
-                    v-else="showModalCareer"
+                    v-else
                     @click="
                         ($event) => {
                             showModalCareer = false;
@@ -34,10 +34,10 @@
                             >Title</label
                         >
                         <input
-                            type="text"
                             id="title"
-                            name="title"
                             v-model="career.title"
+                            type="text"
+                            name="title"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Title"
                             required
@@ -64,9 +64,9 @@
                             >Date</label
                         >
                         <input
-                            type="date"
                             id="date"
                             v-model="career.date"
+                            type="date"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Date"
                             required
@@ -79,9 +79,9 @@
                             >Location</label
                         >
                         <input
-                            type="text"
                             id="location"
                             v-model="career.location"
+                            type="text"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Location"
                             required
@@ -95,7 +95,7 @@
                     </button>
                 </form>
             </div>
-            <div class="modal" v-if="showModal">
+            <div v-if="showModal" class="modal">
                 <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                     <h2 class="text-xl font-bold mb-4">Edit Career</h2>
                     <div>
@@ -113,8 +113,8 @@
                             required
                         ></textarea>
                         <input
-                            type="date"
                             v-model="editedCareer.date"
+                            type="date"
                             class="w-full p-2 border rounded mb-4"
                             placeholder="Date"
                             required
@@ -128,14 +128,14 @@
                     </div>
                     <div class="flex justify-end">
                         <button
-                            @click="($event) => editCareer(editedCareer)"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            @click="($event) => editCareer(editedCareer)"
                         >
                             Save
                         </button>
                         <button
-                            @click="showModal = false"
                             class="bg-red-500 hover-bg-red-700 text-white font-bold py-2 px-4 rounded"
+                            @click="showModal = false"
                         >
                             Cancel
                         </button>
@@ -155,7 +155,7 @@
                     Show Job Career Database
                 </button>
                 <button
-                    v-else="showCareerDatabase"
+                    v-else
                     @click="
                         ($event) => {
                             showCareerDatabase = false;
@@ -176,8 +176,8 @@
                         >Search:</label
                     >
                     <input
-                        v-model="searchKeyword"
                         id="search"
+                        v-model="searchKeyword"
                         type="text"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                         placeholder="Search"
@@ -188,8 +188,8 @@
                         >Filter:</label
                     >
                     <select
-                        v-model="selectedFilter"
                         id="filter"
+                        v-model="selectedFilter"
                         class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
                     >
                         <option value="title">Title</option>
@@ -200,8 +200,8 @@
                     </select>
                 </div>
                 <button
-                    @click="resetFilters"
                     class="px-2 py-1 bg-gray-300 text-gray-600 rounded-md focus:outline-none hover:bg-gray-400"
+                    @click="resetFilters"
                 >
                     Reset Filters
                 </button>
@@ -211,17 +211,17 @@
                 class="mt-4 flex items-center justify-center space-x-4 ma-3"
             >
                 <button
-                    @click="prevPage"
                     :disabled="currentPage === 1"
                     class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                    @click="prevPage"
                 >
                     &lt; Prev
                 </button>
                 <span class="text-sm font-semibold">{{ currentPage }}</span>
                 <button
-                    @click="nextPage"
                     :disabled="currentPage * itemsPerPage >= careers.length"
                     class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                    @click="nextPage"
                 >
                     Next &gt;
                 </button>
@@ -281,7 +281,7 @@
                                         Delete
                                     </v-btn>
                                 </td>
-                                <div class="modal2" v-if="showDeleteModal">
+                                <div v-if="showDeleteModal" class="modal2">
                                     <div
                                         class="bg-white shadow-lg rounded-lg p-6 w-80"
                                     >
@@ -294,17 +294,17 @@
                                         </p>
                                         <div class="flex justify-end">
                                             <button
+                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                                 @click="
                                                     deleteCareer(job.id),
                                                         (showDeleteModal = false)
                                                 "
-                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             >
                                                 Delete
                                             </button>
                                             <button
-                                                @click="showDeleteModal = false"
                                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                                @click="showDeleteModal = false"
                                             >
                                                 Cancel
                                             </button>

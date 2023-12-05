@@ -34,9 +34,9 @@
                         >Title</label
                     >
                     <input
-                        type="text"
                         id="title"
                         v-model="osas.title"
+                        type="text"
                         name="title"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                         placeholder="Title"
@@ -87,14 +87,14 @@
                 </div>
                 <div class="flex justify-end">
                     <button
-                        @click="($event) => editOsasModule(editedOsasModule)"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        @click="($event) => editOsasModule(editedOsasModule)"
                     >
                         Save
                     </button>
                     <button
-                        @click="showOsasEdit = false"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        @click="showOsasEdit = false"
                     >
                         Cancel
                     </button>
@@ -128,17 +128,17 @@
             class="mt-4 flex items-center justify-center space-x-4 ma-4"
         >
             <button
-                @click="prev_Page"
                 :disabled="currPage === 1"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="prev_Page"
             >
                 &lt; Prev
             </button>
             <span class="text-sm font-semibold">{{ currPage }}</span>
             <button
-                @click="next_Page"
                 :disabled="currPage * itemsPerPage >= osasAll.length"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="next_Page"
             >
                 Next &gt;
             </button>
@@ -191,7 +191,7 @@
                                     Delete
                                 </v-btn>
                             </td>
-                            <div class="modal2" v-if="showDeleteModal1">
+                            <div v-if="showDeleteModal1" class="modal2">
                                 <div
                                     class="bg-white shadow-lg rounded-lg p-6 w-80"
                                 >
@@ -203,17 +203,17 @@
                                     </p>
                                     <div class="flex justify-end">
                                         <button
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             @click="
                                                 deleteOsas(profile.id),
                                                     (showDeleteModal1 = false)
                                             "
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                         >
                                             Delete
                                         </button>
                                         <button
-                                            @click="showDeleteModal1 = false"
                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="showDeleteModal1 = false"
                                         >
                                             Cancel
                                         </button>
@@ -261,9 +261,9 @@
                             >Function</label
                         >
                         <input
-                            type="text"
                             id="function"
                             v-model="oFunction.osasFunction"
+                            type="text"
                             name="function"
                             class="shadow-sm m-3 w-10/12 text-color text-white bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                             placeholder="Function"
@@ -301,7 +301,7 @@
                 Hide Function Database
             </button>
         </div>
-        <div class="modal z-40" v-if="showFunctionEdit">
+        <div v-if="showFunctionEdit" class="modal z-40">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Osas Function</h2>
                 <div>
@@ -314,16 +314,16 @@
                 </div>
                 <div class="flex justify-end">
                     <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
                             ($event) => editOsasFunction(editedOsasFunction)
                         "
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
                     >
                         Save
                     </button>
                     <button
-                        @click="showFunctionEdit = false"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        @click="showFunctionEdit = false"
                     >
                         Cancel
                     </button>
@@ -335,17 +335,17 @@
             class="mt-4 flex items-center justify-center space-x-4 ma-4"
         >
             <button
-                @click="prevPage"
                 :disabled="currentPage === 1"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="prevPage"
             >
                 &lt; Prev
             </button>
             <span class="text-sm font-semibold">{{ currentPage }}</span>
             <button
-                @click="nextPage"
                 :disabled="currentPage * itemsPerPage >= osasFunction.length"
                 class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-300"
+                @click="nextPage"
             >
                 Next &gt;
             </button>
@@ -394,7 +394,7 @@
                                     Delete
                                 </v-btn>
                             </td>
-                            <div class="modal2" v-if="showDeleteModal2">
+                            <div v-if="showDeleteModal2" class="modal2">
                                 <div
                                     class="bg-white shadow-lg rounded-lg p-6 w-80"
                                 >
@@ -406,17 +406,17 @@
                                     </p>
                                     <div class="flex justify-end">
                                         <button
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                             @click="
                                                 deleteFunction(purpose.id),
                                                     (showDeleteModal2 = false)
                                             "
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                                         >
                                             Delete
                                         </button>
                                         <button
-                                            @click="showDeleteModal2 = false"
                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                            @click="showDeleteModal2 = false"
                                         >
                                             Cancel
                                         </button>

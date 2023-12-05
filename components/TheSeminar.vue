@@ -3,12 +3,12 @@
         <div v-if="data?.subscribed" class="relative z-40">
             <button
                 v-if="!showModalSeminar"
+                class="absolute top-0 right-0 text-lg"
                 @click="
                     ($event) => {
                         showModalSeminar = true;
                     }
                 "
-                class="absolute top-0 right-0 text-lg"
             >
                 <v-icon class="pa-5" color="bg300"
                     >fa-regular fa-square-plus</v-icon
@@ -16,12 +16,12 @@
             </button>
             <button
                 v-if="showModalSeminar"
+                class="absolute top-0 right-0 text-lg"
                 @click="
                     ($event) => {
                         showModalSeminar = false;
                     }
                 "
-                class="absolute top-0 right-0 text-lg"
             >
                 <v-icon class="pa-5" color="bg300"
                     >fa-regular fa-square-minus</v-icon
@@ -39,10 +39,10 @@
                             >Title</label
                         >
                         <input
-                            type="text"
                             id="title"
-                            name="title"
                             v-model="seminar.title"
+                            type="text"
+                            name="title"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Title"
                             required
@@ -55,9 +55,9 @@
                             >Guest Speaker</label
                         >
                         <input
-                            type="text"
                             id="guest"
                             v-model="seminar.guest_speaker"
+                            type="text"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Guest Speaker"
                             required
@@ -70,9 +70,9 @@
                             >Date</label
                         >
                         <input
-                            type="text"
                             id="date"
                             v-model="seminar.date"
+                            type="text"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Date"
                             required
@@ -85,9 +85,9 @@
                             >Location</label
                         >
                         <input
-                            type="text"
                             id="location"
                             v-model="seminar.location"
+                            type="text"
                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Location"
                             required
@@ -102,7 +102,7 @@
                 </button>
             </form>
         </div>
-        <div class="modal z-40" v-if="showEditForm">
+        <div v-if="showEditForm" class="modal z-40">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Seminar</h2>
                 <div>
@@ -132,14 +132,14 @@
                 </div>
                 <div class="flex justify-end">
                     <button
-                        @click="($event) => editSeminar(editedSeminar)"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        @click="($event) => editSeminar(editedSeminar)"
                     >
                         Save
                     </button>
                     <button
-                        @click="showEditForm = false"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        @click="showEditForm = false"
                     >
                         Cancel
                     </button>
@@ -148,8 +148,8 @@
         </div>
         <div class="mt-10">
             <div
-                v-for="seminar in seminars"
-                :key="seminar.id"
+                v-for="meeting in seminars"
+                :key="meeting.id"
                 class="mb-6 bg-white rounded-tr-xl rounded-bl-xl"
             >
                 <div class="h-64 flex">
@@ -172,7 +172,7 @@
                                     >fa-regular fa-calendar-days</v-icon
                                 ><br />
                                 <span class="ml-3 info-value info-small">{{
-                                    seminar.date
+                                    meeting.date
                                 }}</span>
                             </div>
                         </div>
@@ -184,20 +184,20 @@
                             <span class="info-value main-title highlight">
                                 <div v-if="data?.subscribed">
                                     <button
-                                        class="absolute top-3 right-2 text-sm"
                                         v-if="!showEditForm"
+                                        class="absolute top-3 right-2 text-sm"
                                         variant="tonal"
                                         @click="
                                             ($event) => {
-                                                editedSeminar.id = seminar.id;
+                                                editedSeminar.id = meeting.id;
                                                 editedSeminar.title =
-                                                    seminar.title;
+                                                    meeting.title;
                                                 editedSeminar.guest_speaker =
-                                                    seminar.guest_speaker;
+                                                    meeting.guest_speaker;
                                                 editedSeminar.date =
-                                                    seminar.date;
+                                                    meeting.date;
                                                 editedSeminar.location =
-                                                    seminar.location;
+                                                    meeting.location;
                                                 showEditForm = true;
                                             }
                                         "
@@ -207,7 +207,7 @@
                                         </v-icon>
                                     </button>
                                 </div>
-                                {{ seminar.title }}
+                                {{ meeting.title }}
                             </span>
                         </div>
                         <div class="ma-2 seminar-info">
@@ -215,7 +215,7 @@
                                 >fa-solid fa-location-dot</v-icon
                             >
                             <span class="info-value info-small">{{
-                                seminar.location
+                                meeting.location
                             }}</span>
                         </div>
                         <div class="ma-2 seminar-info">
@@ -223,7 +223,7 @@
                                 >fa-solid fa-microphone-lines</v-icon
                             >
                             <span class="info-value info-small">{{
-                                seminar.guest_speaker
+                                meeting.guest_speaker
                             }}</span>
                         </div>
                     </div>

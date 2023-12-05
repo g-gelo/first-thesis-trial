@@ -3,12 +3,12 @@
         <div v-if="data?.subscribed" class="relative">
             <button
                 v-if="!showModalCareer"
+                class="absolute top-0 right-0 text-lg"
                 @click="
                     ($event) => {
                         showModalCareer = true;
                     }
                 "
-                class="absolute top-0 right-0 text-lg"
             >
                 <v-icon class="pa-5" color="bg300"
                     >fa-regular fa-square-plus</v-icon
@@ -16,12 +16,12 @@
             </button>
             <button
                 v-if="showModalCareer"
+                class="absolute top-0 right-0 text-lg"
                 @click="
                     ($event) => {
                         showModalCareer = false;
                     }
                 "
-                class="absolute top-0 right-0 text-lg"
             >
                 <v-icon class="pa-5" color="bg300"
                     >fa-regular fa-square-minus</v-icon
@@ -39,10 +39,10 @@
                         >Title</label
                     >
                     <input
-                        type="text"
                         id="title"
-                        name="title"
                         v-model="career.title"
+                        type="text"
+                        name="title"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                         placeholder="Title"
                         required
@@ -69,9 +69,9 @@
                         >Date</label
                     >
                     <input
-                        type="text"
                         id="date"
                         v-model="career.date"
+                        type="text"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                         placeholder="Date"
                         required
@@ -84,9 +84,9 @@
                         >Location</label
                     >
                     <input
-                        type="text"
                         id="location"
                         v-model="career.location"
+                        type="text"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                         placeholder="Location"
                         required
@@ -101,7 +101,7 @@
             </form>
         </div>
 
-        <div class="modal z-40" v-if="showEditCareerForm">
+        <div v-if="showEditCareerForm" class="modal z-40">
             <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                 <h2 class="text-xl font-bold mb-4">Edit Career</h2>
                 <div>
@@ -133,14 +133,14 @@
                 </div>
                 <div class="flex justify-end">
                     <button
-                        @click="($event) => editCareer(editedCareer)"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                        @click="($event) => editCareer(editedCareer)"
                     >
                         Save
                     </button>
                     <button
-                        @click="showEditCareerForm = false"
                         class="bg-red-500 hover-bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        @click="showEditCareerForm = false"
                     >
                         Cancel
                     </button>
@@ -186,8 +186,8 @@
                             <span class="info-value main-title highlight">
                                 <div v-if="data?.subscribed">
                                     <button
-                                        class="absolute top-3 right-2 text-sm"
                                         v-if="!showEditCareerForm"
+                                        class="absolute top-3 right-2 text-sm"
                                         variant="tonal"
                                         @click="
                                             ($event) => {
@@ -234,7 +234,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal" v-if="showDetailedModal">
+        <div v-if="showDetailedModal" class="modal">
             <div class="bg-white shadow-lg rounded-lg p-6 max-w-md w-full">
                 <h2 class="text-xl font-bold mb-4">Job Career Details</h2>
                 <div>
@@ -263,8 +263,8 @@
                 </div>
                 <div class="flex justify-end">
                     <button
-                        @click="showDetailedModal = false"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        @click="showDetailedModal = false"
                     >
                         Close
                     </button>
