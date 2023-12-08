@@ -39,11 +39,11 @@
                     Hide Function Database
                 </button>
             </div>
-            <div v-if="showModalSeminar">
+            <div v-if="showModalSeminar" class="shadow-lg p-3 mb-4 rounded-lg">
                 <h1>Seminar Form</h1>
                 <form class="space-y-4" @submit.prevent="addSeminar(seminar)">
                     <div class="flex flex-wrap -mx-4">
-                        <div class="w-full px-4 sm:w-1/2">
+                        <div class="w-full px-4 sm:w-1/2 my-2">
                             <label
                                 for="title"
                                 class="block mb-2 text-sm font-medium text-gray-900"
@@ -59,7 +59,7 @@
                                 required
                             />
                         </div>
-                        <div class="w-full px-4">
+                        <div class="w-full px-4 sm:w-1/2 my-2">
                             <label
                                 for="guest_speaker"
                                 class="block mb-2 text-sm font-medium text-gray-900"
@@ -74,7 +74,7 @@
                                 required
                             />
                         </div>
-                        <div class="w-full px-4 sm:w-1/2">
+                        <div class="w-full px-4 sm:w-1/2 my-2">
                             <label
                                 for="date"
                                 class="block mb-2 text-sm font-medium text-gray-900"
@@ -88,9 +88,8 @@
                                 placeholder="Date"
                                 required
                             />
-                            <span class="text-overline">ex. July 18</span>
                         </div>
-                        <div class="w-full px-4 sm:w-1/2">
+                        <div class="w-full px-4 sm:w-1/2 my-2">
                             <label
                                 for="location"
                                 class="block mb-2 text-sm font-medium text-gray-900"

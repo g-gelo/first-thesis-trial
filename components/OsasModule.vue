@@ -24,7 +24,7 @@
                 Cancel Creating Osas Card
             </button>
         </div>
-        <div v-if="showOsasForm">
+        <div v-if="showOsasForm" class="shadow-lg p-3 mb-4 rounded-xl">
             <h1>Osas Form</h1>
             <form class="space-y-4 mb-4" @submit.prevent="addOsas(osas)">
                 <div>
@@ -253,7 +253,7 @@
             </button>
         </div>
         <div v-if="showFunctionForm" class="mb-4">
-            <div class="shadow-lg rounded-lg">
+            <div class="shadow-lg rounded-xl">
                 <h1 class="m-2">Function Form</h1>
                 <form
                     class="space-y-4"

@@ -23,8 +23,8 @@
                 Hide Emergency Hotline Form
             </button>
         </div>
-        <div v-if="showHotlineForm">
-            <h1>Emergency Hotline Form</h1>
+        <div v-if="showHotlineForm" class="shadow-lg p-3 mb-4 rounded-xl">
+            <h1 class="my-2">Emergency Hotline Form</h1>
             <form
                 class="space-y-4"
                 @submit.prevent="addEmergencyHotline(emergency_Hotline)"

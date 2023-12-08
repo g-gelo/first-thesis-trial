@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <v-carousel class="card" hide-delimiters show-arrows="hover">
+        <v-carousel hide-delimiters show-arrows="hover">
             <v-container>
                 <v-carousel-item
                     v-for="MisnVis in universityMissionVision"
@@ -85,7 +85,7 @@
                                 </button>
                             </div>
                         </div>
-                        <p>
+                        <p class="shadow-lg p-3 mb-4">
                             {{ MisnVis.description }}
                         </p>
                     </div>

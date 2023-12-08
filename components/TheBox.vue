@@ -27,7 +27,7 @@
             >
         </button>
     </div>
-    <div v-if="showGcoForm">
+    <div v-if="showGcoForm" class="shadow-lg p-3 mb-4 rounded-xl">
         <h1>GCO Profile Form</h1>
         <form class="space-y-4" @submit.prevent="addGco(gco)">
             <div>

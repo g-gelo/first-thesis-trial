@@ -24,79 +24,81 @@
                     Hide Job Career Event
                 </button>
             </div>
-            <div v-if="showModalCareer">
+            <div v-if="showModalCareer" class="shadow-lg p-3 mb-4">
                 <h1>Job Career Form</h1>
                 <form @submit.prevent="addCareer(career)">
-                    <div class="w-full px-4 sm:w-1/2">
-                        <label
-                            for="title"
-                            class="block mb-2 text-sm font-medium text-gray-900"
-                            >Title</label
+                    <div class="flex flex-wrap -mx-4">
+                        <div class="w-full px-4 sm:w-1/ my-2">
+                            <label
+                                for="title"
+                                class="block mb-2 text-sm font-medium text-gray-900"
+                                >Title</label
+                            >
+                            <input
+                                id="title"
+                                v-model="career.title"
+                                type="text"
+                                name="title"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Title"
+                                required
+                            />
+                        </div>
+                        <div class="w-full px-4 sm:w-1/2 my-2 my-2">
+                            <label
+                                for="title"
+                                class="block mb-2 text-sm font-medium text-gray-900"
+                                >Job Description</label
+                            >
+                            <textarea
+                                v-model="career.description"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Job Description"
+                                rows="5"
+                                required
+                            ></textarea>
+                        </div>
+                        <div class="w-full px-4 sm:w-1/2 my-2">
+                            <label
+                                for="date"
+                                class="block mb-2 text-sm font-medium text-gray-900"
+                                >Date</label
+                            >
+                            <input
+                                id="date"
+                                v-model="career.date"
+                                type="date"
+                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Date"
+                                required
+                            />
+                        </div>
+                        <div class="w-full px-4 sm:w-1/2 my-2">
+                            <label
+                                for="location"
+                                class="block mb-2 text-sm font-medium text-gray-900"
+                                >Location</label
+                            >
+                            <input
+                                id="location"
+                                v-model="career.location"
+                                type="text"
+                                class="shadow-sm mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Location"
+                                required
+                            />
+                        </div>
+                        <button
+                            v-if="
+                                data?.user?.role == `SUPERADMIN` ||
+                                data?.user?.role == `ADMIN`
+                            "
+                            type="submit"
+                            class="bg-blue-500 mb-2 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
                         >
-                        <input
-                            id="title"
-                            v-model="career.title"
-                            type="text"
-                            name="title"
-                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                            placeholder="Title"
-                            required
-                        />
+                            Submit
+                        </button>
                     </div>
-                    <div class="w-full px-4 sm:w-1/2">
-                        <label
-                            for="title"
-                            class="block mb-2 text-sm font-medium text-gray-900"
-                            >Job Description</label
-                        >
-                        <textarea
-                            v-model="career.description"
-                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                            placeholder="Job Description"
-                            rows="5"
-                            required
-                        ></textarea>
-                    </div>
-                    <div class="w-full px-4 sm:w-1/2">
-                        <label
-                            for="date"
-                            class="block mb-2 text-sm font-medium text-gray-900"
-                            >Date</label
-                        >
-                        <input
-                            id="date"
-                            v-model="career.date"
-                            type="date"
-                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                            placeholder="Date"
-                            required
-                        />
-                    </div>
-                    <div class="w-full px-4 sm:w-1/2">
-                        <label
-                            for="location"
-                            class="block mb-2 text-sm font-medium text-gray-900"
-                            >Location</label
-                        >
-                        <input
-                            id="location"
-                            v-model="career.location"
-                            type="text"
-                            class="shadow-sm mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                            placeholder="Location"
-                            required
-                        />
-                    </div>
-                    <button
-                        v-if="
-                            data?.user?.role == `SUPERADMIN` ||
-                            data?.user?.role == `ADMIN`
-                        "
-                        type="submit"
-                        class="mt-3 bg-blue-500 mb-2 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded"
-                    >
-                        Submit
-                    </button>
                 </form>
             </div>
             <div v-if="showModal" class="modal">

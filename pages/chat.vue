@@ -1,6 +1,6 @@
 <template>
-    <div class="chat-container">
-        <v-container class="chat-content" fluid>
+    <div class="chat-container relative min-h-screen">
+        <v-container class="chat-content mb-20" fluid>
             <div>
                 <div v-for="(message, index) in messages" :key="index">
                     <div
@@ -97,16 +97,11 @@
                 <span> How else can I contact you? </span>
             </div>
         </v-container>
-        <div class="chat-input">
-            <v-text-field
-                v-model="newMessage"
-                placeholder="Type your message..."
-                rows="1"
-                auto-grow
-            ></v-text-field>
-            <v-btn color="bg200" @click="sendMessage"
-                ><v-icon color="bg300">fa-solid fa-paper-plane</v-icon></v-btn
-            >
+        <div class="fixed inset-x-0 bottom-0 bg-white p-4 flex items-center z-50 border-t-2">
+            <input v-model="newMessage" class="flex-grow bg-slate-300 h-12 rounded-xl p-3 mr-2" type="text" placeholder="Message">
+            <button class="text-white p-2 rounded active:bg-slate-300" @click="sendMessage">
+                <i class="fas fa-paper-plane text-green-800 text-2xl"></i>
+            </button>
         </div>
     </div>
 </template>
@@ -311,7 +306,6 @@ onMounted(() => {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem;
-    background-color: #d9facd;
     border-top: 1px solid #333;
 }
 

@@ -35,7 +35,7 @@
                 >
             </button>
         </div>
-        <div v-if="showOsasForm" class="ma-2">
+        <div v-if="showOsasForm" class="shadow-lg p-3 mb-4 rounded-lg">
             <h1>Osas Form</h1>
             <form class="space-y-4" @submit.prevent="addOsas(osas)">
                 <div>

@@ -159,7 +159,7 @@
                 :key="career.id"
                 class="mb-6 bg-white rounded-tr-xl rounded-bl-xl"
             >
-                <div class="h-64 flex max-w-md w-full h-full">
+                <div class="h-64 flex max-w-md w-full h-full shadow-lg rounded-xl">
                     <div class="w-24 h-24 bg-secondary-100 relative">
                         <div class="ma-2">
                             <img

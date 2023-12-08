@@ -15,7 +15,7 @@ const myCustomLightTheme: ThemeDefinition = {
         text100: "#333333",
         text200: "#5c5c5c",
         bg100: "#C7FFB2",
-        bg200: "#d9facd",
+        bg200: "#fff",
         bg300: "#003b1b",
     },
 };

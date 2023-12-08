@@ -27,7 +27,7 @@
             >
         </button>
     </div>
-    <div v-if="showHotlineForm">
+    <div v-if="showHotlineForm" class="shadow-lg p-3 mb-4 rounded-xl">
         <h1>Emergency Hotline Form</h1>
         <form
             class="space-y-4"
@@ -135,7 +135,7 @@
         :key="emergency.id"
         class="mb-6 rounded-xl bg-white mt-12"
     >
-        <div class="flex items-start">
+        <div class="flex items-start shadow-lg rounded-xl">
             <div class="w-24 h-24 bg-secondary-100 relative">
                 <div class="ma-2">
                     <img

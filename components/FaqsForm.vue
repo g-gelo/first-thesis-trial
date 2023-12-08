@@ -23,11 +23,11 @@
                 Hide FAQs Form
             </button>
         </div>
-        <div v-if="showFaqsForm">
+        <div v-if="showFaqsForm" class="shadow-lg p-3 mb-4 rounded-lg">
             <h1>FAQs Form</h1>
             <form class="space-y-4" @submit.prevent="addFaqs(faq)">
                 <div class="flex flex-wrap -mx-4">
-                    <div class="w-full px-4 sm:w-1/2">
+                    <div class="w-full px-4 sm:w-1/2 my-2">
                         <label
                             for="keyword"
                             class="block mb-2 text-sm font-medium text-gray-900"
@@ -43,7 +43,7 @@
                             required
                         />
                     </div>
-                    <div class="w-full px-4">
+                    <div class="w-full px-4 sm:w-1/2 my-2">
                         <label
                             for="answer"
                             class="block mb-2 text-sm font-medium text-gray-900"

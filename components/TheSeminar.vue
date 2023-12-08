@@ -155,9 +155,9 @@
             <div
                 v-for="meeting in seminars"
                 :key="meeting.id"
-                class="mb-6 bg-white rounded-tr-xl rounded-bl-xl"
+                class="mb-6 bg-white"
             >
-                <div class="h-64 flex">
+                <div class="h-64 flex shadow-lg rounded-xl">
                     <div class="w-24 h-24 bg-secondary-100 relative">
                         <div class="ma-2">
                             <img
