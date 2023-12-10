@@ -1,5 +1,14 @@
 <template>
     <v-app dark>
+        
+        <v-main
+            :style="{
+                backgroundColor:
+                    $vuetify.theme.themes.myCustomLightTheme.colors.bg200,
+            }"
+            class="scrollable-content"
+        >   
+        <template v-if="isStandalonePWA">
         <v-app-bar fixed app color="bg100">
             <v-img
                 src="/img/GuidanceConnectName.png"
@@ -11,15 +20,7 @@
             <v-btn icon color="bg300" @click.stop="drawer = !drawer">
                 <v-icon>fa-solid fa-bars</v-icon>
             </v-btn>
-        </v-app-bar>
-        <v-main
-            :style="{
-                backgroundColor:
-                    $vuetify.theme.themes.myCustomLightTheme.colors.bg200,
-            }"
-            class="scrollable-content"
-        >
-            <template v-if="!isLargeScreen">
+        </v-app-bar>        
                 <slot />
                 <div>
                     <TawkChat />
@@ -97,10 +98,11 @@
             <template v-else>
                 <!-- Alternative Content for Large Screens -->
                 <div class="alternative-content">
-                    <h1>Welcome to our App!</h1>
+                    <h1 class="text-2xl font-bold m-4">Welcome to our App!</h1>
                     <p>
-                        Thank you for visiting our app on a larger screen.
-                        Please use a mobile device to access the main content.
+                        Thank you for visiting our app. For an optimal experience, we recommend installing it on your
+                    device. This will allow you to access the main content and receive guidance and counseling more 
+                    effectively.
                     </p>
                 </div>
             </template>
@@ -165,6 +167,14 @@ const checkScreenSize = () => {
 onMounted(() => {
     checkScreenSize();
     window.addEventListener("resize", checkScreenSize);
+});
+const isStandalonePWA = ref(false);
+
+onMounted(() => {
+  // Check if the app is running in standalone mode (PWA)
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    isStandalonePWA.value = true;
+  }
 });
 </script>
 
