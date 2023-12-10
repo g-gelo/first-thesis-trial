@@ -2,20 +2,22 @@
     <div
         :style="{
             backgroundColor:
-                $vuetify.theme.themes.myCustomLightTheme.colors.bg100,
+                $vuetify.theme.themes.myCustomLightTheme.colors.bg200,
         }"
     >
-        <template v-if="isLargeScreen">
-            <div class="alternative-page">
-                <h1>Welcome to our App!</h1>
-                <p>
-                    Thank you for visiting our app on a larger screen. Please
-                    use a mobile device to access the main content of this page.
-                </p>
-            </div>
+        <template v-if="isStandalonePWA">
+            
+            <slot />
         </template>
         <template v-else>
-            <slot />
+            <div class="alternative-page">
+                <h1 class="text-2xl font-bold m-4">Welcome to our App!</h1>
+                <p>
+                    Thank you for visiting our app. For an optimal experience, we recommend installing it on your
+                    device. This will allow you to access the main content and receive guidance and counseling more 
+                    effectively.
+                </p>
+            </div>
         </template>
     </div>
 </template>
@@ -23,15 +25,14 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
-const isLargeScreen = ref(false);
 
-const checkScreenSize = () => {
-    isLargeScreen.value = window.innerWidth >= 960; // Adjust the breakpoint as needed
-};
+const isStandalonePWA = ref(false);
 
 onMounted(() => {
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
+  // Check if the app is running in standalone mode (PWA)
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    isStandalonePWA.value = true;
+  }
 });
 </script>
 
