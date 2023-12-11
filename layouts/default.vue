@@ -118,7 +118,7 @@ const { signOut } = useAuth();
 
 const generateCoohomLink = () => {
     const coohomLink =
-        "https://www.coohom.com/pub/tool/panorama/aiwalking?obsPlanId=3FO3VCSHBSNT&utm_source=smart720_share&uri=%2Fpub%2Fsaas%2Fapps%2Fproject%2Fdetail%2F3FO3VCSHBSNT%3Fuid%3D3FO4MK887FQ4%26fromTool%3Dtrue&utm_content=3FO3VCSHBSNT&utm_medium=linkcopy&locale=en_US";
+        "https://www.coohom.com/pub/tool/panorama/aiwalking?obsPlanId=3FO3V8DLHYW7&locale=en_US";
     window.location.href = coohomLink;
 };
 
