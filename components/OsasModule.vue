@@ -220,7 +220,7 @@
         </table>
       </div>
     </div>
-    <div v-if="showFunctionForm" class="modal">
+    <div v-if="showFunctionForm" class="modal z-40">
       <div class="bg-white shadow-lg rounded-lg p-6 w-80">
         <h1 class="m-2">Function Form</h1>
         <form class="space-y-4" @submit.prevent="addOsasFunction(oFunction)">
@@ -338,7 +338,7 @@
             }
           "
         >
-          <v-icon>fa-solid fa-plus</v-icon> Create Osas Function
+          <v-icon>fa-solid fa-plus</v-icon> Add New Osas Function
         </button>
       </div>
       <div class="mb-4 text-sm font-semibold col-start-1 col-span-3">

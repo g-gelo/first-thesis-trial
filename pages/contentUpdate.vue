@@ -31,6 +31,32 @@
         </div>
       </div>
     </div>
+    <!-- Table For GCO -->
+    <div>
+      <div class="mt-8 rounded-xl bg-slate-300 p-4">
+        <h2
+          class="text-xl font-bold mb-4 border-b-2 border-white mb-4 text-sm font-semibold"
+        >
+          GCO Profile
+        </h2>
+        <div>
+          <GCOProfile />
+        </div>
+      </div>
+    </div>
+    <!-- Table For Emergency Hotline -->
+    <div>
+      <div class="mt-8 rounded-xl bg-slate-300 p-4">
+        <h2
+          class="text-xl font-bold mb-4 border-b-2 border-white mb-4 text-sm font-semibold"
+        >
+          Emergency Hotline
+        </h2>
+        <div>
+          <EmergencyHotline />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
