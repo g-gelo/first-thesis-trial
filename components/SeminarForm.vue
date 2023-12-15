@@ -1,11 +1,11 @@
 <template>
   <div class="p-4">
-    <div v-if="showModalCareer" class="modal z-40">
+    <div v-if="showModalSeminar" class="modal z-40">
       <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-        <h1>Job Career Form</h1>
-        <form @submit.prevent="addCareer(career)">
+        <h1>Seminar Form</h1>
+        <form class="space-y-4" @submit.prevent="addSeminar(seminar)">
           <div class="flex flex-wrap -mx-4">
-            <div class="w-full px-4 sm:w-1/ my-2">
+            <div class="w-full px-4 sm:w-1/2 my-2">
               <label
                 for="title"
                 class="block mb-2 text-sm font-medium text-gray-900"
@@ -13,7 +13,7 @@
               >
               <input
                 id="title"
-                v-model="career.title"
+                v-model="seminar.title"
                 type="text"
                 name="title"
                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
@@ -21,19 +21,20 @@
                 required
               />
             </div>
-            <div class="w-full px-4 sm:w-1/2 my-2 my-2">
+            <div class="w-full px-4 sm:w-1/2 my-2">
               <label
-                for="title"
+                for="guest_speaker"
                 class="block mb-2 text-sm font-medium text-gray-900"
-                >Job Description</label
+                >Guest Speaker</label
               >
-              <textarea
-                v-model="career.description"
+              <input
+                id="description"
+                v-model="seminar.guest_speaker"
+                type="text"
                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
-                placeholder="Job Description"
-                rows="5"
+                placeholder="Guest Speaker"
                 required
-              ></textarea>
+              />
             </div>
             <div class="w-full px-4 sm:w-1/2 my-2">
               <label
@@ -43,7 +44,7 @@
               >
               <input
                 id="date"
-                v-model="career.date"
+                v-model="seminar.date"
                 type="date"
                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="Date"
@@ -58,7 +59,7 @@
               >
               <input
                 id="location"
-                v-model="career.location"
+                v-model="seminar.location"
                 type="text"
                 class="shadow-sm mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                 placeholder="Location"
@@ -67,17 +68,15 @@
             </div>
           </div>
           <button
-            v-if="
-              data?.user?.role == `SUPERADMIN` || data?.user?.role == `ADMIN`
-            "
+            v-if="data?.user?.role == `SUPERADMIN`"
             type="submit"
             class="bg-blue-500 mb-2 active:bg-blue-700 ease-linear text-white font-bold py-2 px-4 rounded mr-2"
           >
             Submit
           </button>
           <button
-            class="bg-red-500 mb-2 active:bg-red-700 ease-linear text-white font-bold py-2 px-4 rounded"
-            @click="showModalCareer = false"
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            @click="showModalSeminar = false"
           >
             Cancel
           </button>
@@ -86,30 +85,28 @@
     </div>
     <div v-if="showModal" class="modal">
       <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-        <h2 class="text-xl font-bold mb-4">Edit Career</h2>
+        <h2 class="text-xl font-bold mb-4">Edit Seminar</h2>
         <div>
           <input
-            v-model="editedCareer.title"
+            v-model="editedSeminar.title"
             class="w-full p-2 border rounded mb-4"
             placeholder="Title"
             required
           />
-          <textarea
-            v-model="editedCareer.description"
-            class="w-full p-2 border rounded mb-4"
-            placeholder="Job Description"
-            rows="5"
-            required
-          ></textarea>
           <input
-            v-model="editedCareer.date"
+            v-model="editedSeminar.guest_speaker"
+            class="w-full p-2 border rounded mb-4"
+            placeholder="Guest Speaker"
+          />
+          <input
+            v-model="editedSeminar.date"
             type="date"
             class="w-full p-2 border rounded mb-4"
             placeholder="Date"
             required
           />
           <input
-            v-model="editedCareer.location"
+            v-model="editedSeminar.location"
             class="w-full p-2 border rounded mb-4"
             placeholder="Location"
             required
@@ -121,12 +118,12 @@
               data?.user?.role == `SUPERADMIN` || data?.user?.role == `ADMIN`
             "
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-            @click="($event) => editCareer(editedCareer)"
+            @click="($event) => editSeminar(editedSeminar)"
           >
             Save
           </button>
           <button
-            class="bg-red-500 hover-bg-red-700 text-white font-bold py-2 px-4 rounded"
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             @click="showModal = false"
           >
             Cancel
@@ -137,31 +134,31 @@
 
     <div>
       <button
-        v-if="!showCareerDatabase"
+        v-if="!showSeminarDatabase"
         class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full p-4 rounded-lg"
         @click="
           ($event) => {
-            showCareerDatabase = true;
+            showSeminarDatabase = true;
           }
         "
       >
-        Show Job Career Database
+        Show Seminar Database
       </button>
       <button
         v-else
         class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full p-4 rounded-lg"
         @click="
           ($event) => {
-            showCareerDatabase = false;
+            showSeminarDatabase = false;
           }
         "
       >
-        Hide Job Career Database
+        Hide Seminar Database
       </button>
     </div>
-    <div v-if="showCareerDatabase" class="grid grid-cols-3">
+    <div v-if="showSeminarDatabase" class="grid grid-cols-3">
       <div
-        class="mt-4 flex items-center justify-center space-x-4 ma-3 col-start-1 col-span-3"
+        class="mt-4 flex items-center justify-center space-x-4 col-start-1 col-span-3"
       >
         <div
           class="flex flex-col items-start sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2"
@@ -183,10 +180,9 @@
             class="appearance-none px-4 py-2 border border-blue-500 rounded-md focus:outline-none focus:ring focus:border-blue-300 text-gray-700"
           >
             <option value="title">Title</option>
-            <option value="location">Location</option>
-            <option value="description">Description</option>
+            <option value="guest_speaker">Speaker</option>
             <option value="date">Date</option>
-            <option value="time">Time</option>
+            <option value="location">Location</option>
           </select>
         </div>
         <button
@@ -209,33 +205,35 @@
         </button>
         <span class="text-sm font-semibold">{{ currentPage }}</span>
         <button
-          :disabled="currentPage * itemsPerPage >= careers.length"
+          :disabled="currentPage * itemsPerPage >= seminars.length"
           class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-500"
           @click="nextPage"
         >
           Next &gt;
         </button>
       </div>
+
       <div class="col-start-1 col-span-3">
         <button
-          v-if="!showModalCareer"
+          v-if="!showModalSeminar"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded transition-all w-full p-2"
           @click="
             ($event) => {
-              showModalCareer = true;
+              showModalSeminar = true;
             }
           "
         >
-          <v-icon>fa-solid fa-plus</v-icon> Add New Job Career Event
+          <v-icon>fa-solid fa-plus</v-icon> Add New Seminar
         </button>
       </div>
+
       <div class="my-2 text-sm font-semibold col-start-1 col-span-3">
         The database received
-        {{ careers?.length || 0 }} records:
+        {{ seminars?.length || 0 }} records:
       </div>
     </div>
 
-    <div v-if="showCareerDatabase">
+    <div v-if="showSeminarDatabase">
       <div class="table-container">
         <table
           class="min-w-full bg-white border border-gray-300 shadow-md rounded-lg overflow-hidden"
@@ -243,23 +241,21 @@
           <thead class="bg-green-800 text-white">
             <tr>
               <th class="py-2 px-4 border-b">Title</th>
-              <th class="py-2 px-4 border-b">Location</th>
+              <th class="py-2 px-4 border-b">Speaker</th>
               <th class="py-2 px-4 border-b">Date</th>
-              <th class="py-2 px-4 border-b">Job Description</th>
+              <th class="py-2 px-4 border-b">Location</th>
               <th class="py-2 px-4 border-b">Edit & Delete</th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="job in pagedCareers"
-              :key="job.id"
-              class="hover:bg-gray-50"
-            >
-              <td class="py-3 px-4 border-b line-clamp-4">{{ job.title }}</td>
-              <td class="py-3 px-4 border-b">{{ job.location }}</td>
-              <td class="py-3 px-4 border-b">{{ job.date }}</td>
-              <td class="py-3 px-4 border-b line-clamp-4">
-                {{ job.description }}
+            <tr v-for="meeting in pagedSeminars" :key="meeting.id">
+              <td class="py-3 px-4 border-b line-clamp-3">
+                {{ meeting.title }}
+              </td>
+              <td class="py-3 px-4 border-b">{{ meeting.guest_speaker }}</td>
+              <td class="py-3 px-4 border-b">{{ meeting.date }}</td>
+              <td class="py-3 px-4 border-b line-clamp-2">
+                {{ meeting.location }}
               </td>
               <td class="py-3 px-4 border-b">
                 <div class="flex items-center space-x-2">
@@ -268,11 +264,11 @@
                     variant="tonal"
                     @click="
                       ($event) => {
-                        editedCareer.id = job.id;
-                        editedCareer.title = job.title;
-                        editedCareer.description = job.description;
-                        editedCareer.date = job.date;
-                        editedCareer.location = job.location;
+                        editedSeminar.id = meeting.id;
+                        editedSeminar.title = meeting.title;
+                        editedSeminar.guest_speaker = meeting.guest_speaker;
+                        editedSeminar.date = meeting.date;
+                        editedSeminar.location = meeting.location;
                         showModal = true;
                       }
                     "
@@ -293,8 +289,8 @@
                 </div>
                 <div v-if="showDeleteModal" class="modal2">
                   <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                    <h2 class="text-xl font-bold mb-4">Delete Job Career</h2>
-                    <p class="mb-4">Do you want to delete this Job Career?</p>
+                    <h2 class="text-xl font-bold mb-4">Delete Seminar</h2>
+                    <p class="mb-4">Do you want to delete this Seminar?</p>
                     <div class="flex justify-end">
                       <button
                         v-if="
@@ -302,7 +298,9 @@
                           data?.user?.role == 'ADMIN'
                         "
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                        @click="deleteCareer(job.id), (showDeleteModal = false)"
+                        @click="
+                          deleteSeminar(meeting.id), (showDeleteModal = false)
+                        "
                       >
                         Delete
                       </button>
@@ -327,18 +325,21 @@
 <script setup>
 const { data } = useAuth();
 
+useHead({
+  title: "Admin",
+});
 // Pagination
 const currentPage = ref(1);
 const itemsPerPage = 3;
 
-const pagedCareers = computed(() => {
+const pagedSeminars = computed(() => {
   const startIndex = (currentPage.value - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  return filteredCareer.value.slice(startIndex, endIndex);
+  return filteredSeminar.value.slice(startIndex, endIndex);
 });
 
 const nextPage = () => {
-  if (currentPage.value * itemsPerPage < careers.value.length) {
+  if (currentPage.value * itemsPerPage < seminars.value.length) {
     currentPage.value += 1;
   }
 };
@@ -358,104 +359,104 @@ const resetFilters = () => {
   currentPage.value = 1;
 };
 
-const filteredCareer = computed(() => {
+const filteredSeminar = computed(() => {
   const filterKey = selectedFilter.value.toLowerCase();
-  return careers.value.filter((career) =>
-    career[filterKey].toLowerCase().includes(searchKeyword.value.toLowerCase())
+  return seminars.value.filter((seminar) =>
+    seminar[filterKey].toLowerCase().includes(searchKeyword.value.toLowerCase())
   );
 });
-const { data: careers } = useFetch("/api/careers");
 
-const showModalCareer = ref(false);
+const showModalSeminar = ref(false);
 const showModal = ref(false);
-const showCareerDatabase = ref(false);
+const showSeminarDatabase = ref(false);
 const showDeleteModal = ref(false);
 
-const career = ref({
+const { data: seminars } = useFetch("/api/seminars");
+
+const seminar = ref({
   title: "",
-  description: "",
+  guest_speaker: "",
   date: "",
   location: "",
 });
 
-const addCareer = async (career) => {
-  let addedCareer = null;
+const addSeminar = async (seminar) => {
+  let addedSeminar = null;
 
-  addedCareer = await $fetch("/api/careers", {
+  addedSeminar = await $fetch("/api/seminars", {
     method: "POST",
     body: {
-      title: career.title,
-      description: career.description,
-      date: career.date,
-      location: career.location,
+      title: seminar.title,
+      guest_speaker: seminar.guest_speaker,
+      date: seminar.date,
+      location: seminar.location,
     },
   });
-  if (addedCareer) {
-    // Clear the form
-    career.title = "";
-    career.description = "";
-    career.date = "";
-    career.location = "";
+  if (addedSeminar) {
+    seminar.title = "";
+    seminar.guest_speaker = "";
+    seminar.date = "";
+    seminar.location = "";
 
-    careers.value = await $fetch("/api/careers");
+    seminars.value = await $fetch("/api/seminars");
   }
 };
 
-const editedCareer = ref({
+const editedSeminar = ref({
   id: null,
   title: null,
-  description: null,
+  guest_speaker: null,
   date: null,
   location: null,
 });
 
-const editCareer = async (editedCareer) => {
-  let career = null;
+const editSeminar = async (editedSeminar) => {
+  let seminar = null;
 
   if (
-    editedCareer.id &&
-    editedCareer.title &&
-    editedCareer.description &&
-    editedCareer.date &&
-    editedCareer.location
+    editedSeminar.id &&
+    editedSeminar.title &&
+    editedSeminar.guest_speaker &&
+    editedSeminar.date &&
+    editedSeminar.location
   )
-    career = await $fetch("/api/careers", {
+    seminar = await $fetch("/api/seminars", {
       method: "PUT",
       body: {
-        id: editedCareer.id,
-        title: editedCareer.title,
-        description: editedCareer.description,
-        date: editedCareer.date,
-        location: editedCareer.location,
+        id: editedSeminar.id,
+        title: editedSeminar.title,
+        guest_speaker: editedSeminar.guest_speaker,
+        date: editedSeminar.date,
+        location: editedSeminar.location,
       },
     });
-  careers.value = await $fetch("/api/careers");
+  seminars.value = await $fetch("/api/seminars");
 };
 
-const deleteCareer = async (id) => {
-  let deletedCareer = null;
-
+const deleteSeminar = async (id) => {
+  let deletedSeminar = null;
   if (id)
-    deletedCareer = await $fetch("/api/careers", {
+    deletedSeminar = await $fetch("/api/seminars", {
       method: "DELETE",
       body: {
         id,
       },
     });
 
-  careers.value = await $fetch("/api/careers");
+  seminars.value = await $fetch("/api/seminars");
 };
 </script>
 
 <style scoped>
-.table-container {
-  overflow-x: auto;
-  max-width: 100%;
-}
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
 }
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -473,7 +474,7 @@ table {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;

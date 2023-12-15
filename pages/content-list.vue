@@ -1,5 +1,13 @@
 <template>
   <div class="p-4">
+    <div class="flex justify-end">
+      <NuxtLink
+        to="/newAdmin"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+      >
+        &lt; Back
+      </NuxtLink>
+    </div>
     <div>
       <p class="mt-2">
         Manage and update your application's content efficiently.
@@ -54,6 +62,19 @@
         </h2>
         <div>
           <EmergencyHotline />
+        </div>
+      </div>
+    </div>
+    <!-- Table For Frequently Ask Questions -->
+    <div>
+      <div class="mt-8 rounded-xl bg-slate-300 p-4">
+        <h2
+          class="text-xl font-bold mb-4 border-b-2 border-white mb-4 text-sm font-semibold"
+        >
+          Frequently Ask Questions
+        </h2>
+        <div>
+          <FaqsForm />
         </div>
       </div>
     </div>

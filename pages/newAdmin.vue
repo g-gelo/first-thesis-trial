@@ -2,7 +2,7 @@
   <div class="p-4">
     <!-- 4 Content -->
     <div class="grid grid-cols-2 gap-4">
-      <NuxtLink to="/contentUpdate">
+      <NuxtLink to="/content-list">
         <div
           class="bg-green-400 shadow-md rounded-lg overflow-hidden p-4 text-white"
         >
@@ -14,19 +14,18 @@
           </div>
         </div>
       </NuxtLink>
-      <div
-        class="bg-yellow-400 shadow-md rounded-lg overflow-hidden p-4 text-white"
-      >
-        <h1 class="text-base font-bold">Announcement List</h1>
-        <!-- <p class="mt-2 line-clamp-1">
-          Create and manage announcements for users.
-        </p> -->
-        <div class="flex">
-          <span class="text-white mt-4 font-bold text-xs"
-            >Publish New Announcement</span
-          >
+      <NuxtLink to="/announcement-list">
+        <div
+          class="bg-yellow-400 shadow-md rounded-lg overflow-hidden p-4 text-white"
+        >
+          <h1 class="text-base font-bold">Announcement List</h1>
+          <div class="flex">
+            <span class="text-white mt-4 font-bold text-xs"
+              >Publish New Announcement</span
+            >
+          </div>
         </div>
-      </div>
+      </NuxtLink>
       <div
         class="bg-orange-400 shadow-md rounded-lg overflow-hidden p-4 text-white"
       >
