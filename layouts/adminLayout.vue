@@ -19,6 +19,25 @@
             <v-icon>fa-solid fa-bars</v-icon>
           </v-btn>
         </v-app-bar>
+        <v-container>
+          <div class="mt-8 rounded-xl bg-slate-300 p-4">
+            <div class="grid grid-cols-3 justify-items-end">
+              <div class="col-start-1 mt-4">
+                <h1 class="text-xs text-zinc-500 font-bold">WELCOME BACK</h1>
+              </div>
+              <div
+                class="col-start-3 col-end-3 row-span-2 w-20 h-20 rounded-full overflow-hidden"
+              >
+                <img :src="data.user.image" alt="Avatar" />
+              </div>
+              <div class="col-start-1 col-span-2 mt-0">
+                <p class="text-base font-bold text-black">
+                  {{ data.user.name }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </v-container>
         <slot />
         <div>
           <TawkChat />
@@ -47,7 +66,6 @@
               </p>
             </div>
           </div>
-
           <div class="space-y-2 ma-4">
             <div
               v-for="(item, index) in navItem"
@@ -187,12 +205,6 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-}
-
-.rounds {
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
 }
 
 .pop-icon {
