@@ -3,7 +3,7 @@
     <!-- Hero Area -->
     <div class="text-white py-16 bg-green-800">
       <div class="grid place-content-center">
-        <img src="../img/BookAppointment.png" alt="Hero Image" class="w-64" />
+        <img src="./img/BookAppointment.png" alt="Hero Image" class="w-64" />
       </div>
       <div class="text-center mt-4">
         <h1 class="text-3xl font-bold">
