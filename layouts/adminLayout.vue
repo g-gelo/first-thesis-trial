@@ -20,7 +20,7 @@
           </v-btn>
         </v-app-bar>
         <v-container>
-          <div class="mt-8 rounded-xl bg-slate-300 p-4">
+          <div class="mt-4 rounded-xl bg-slate-300 p-4">
             <div class="grid grid-cols-3 justify-items-end">
               <div class="col-start-1 mt-4">
                 <h1 class="text-xs text-zinc-500 font-bold">WELCOME BACK</h1>
@@ -153,6 +153,11 @@ const navItem = ref([
     icon: "fa-solid fa-bullhorn",
     text: "Announcement",
     route: "/announcement",
+  },
+  {
+    icon: "fa-solid fa-calendar-check",
+    text: "Book Appointment",
+    route: "/appointment",
   },
   { icon: "fa-solid fa-comment", text: "Chatbot", route: "/chat" },
   {

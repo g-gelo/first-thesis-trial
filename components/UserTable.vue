@@ -9,7 +9,7 @@
         }
       "
     >
-      Create a Job Career Event
+      Show User
     </button>
     <button
       v-else
@@ -20,7 +20,7 @@
         }
       "
     >
-      Hide Job Career Event
+      Hide User
     </button>
     <div v-if="showUserTable" class="grid grid-cols-3">
       <div

@@ -59,7 +59,7 @@
         <h2 class="text-xl font-bold mb-4 border-b-2 border-white">
           User Management
         </h2>
-        <div class="">
+        <div>
           <UserTable />
         </div>
       </div>

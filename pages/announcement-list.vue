@@ -5,7 +5,7 @@
         to="/newAdmin"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
       >
-        &lt; Back
+        <i class="fa-solid fa-arrow-left"></i> Back
       </NuxtLink>
     </div>
     <div>
