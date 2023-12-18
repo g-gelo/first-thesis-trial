@@ -63,6 +63,26 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  appointments  Appointment[]
+}
+enum AppointmentStatus {
+  Pending
+  Rejected
+  Accepted
+  Finished
+}
+model Appointment {
+  id        String   @id @default(cuid())
+  date      String
+  time      String
+  reason    String  @db.VarChar(250)
+  course    String
+  year      Int
+  status    AppointmentStatus @default(Pending)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
 model VerificationToken {
