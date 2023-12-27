@@ -6,27 +6,29 @@ import { PrismaClient } from "@prisma/client";
 // Create an instance of the PrismaClient
 const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
-    const body = await readBody(event);
-    const id = body.id;
-    const title = body.title;
-    const guest_speaker = body.guest_speaker;
-    const date = body.date;
-    const location = body.location;
+  const body = await readBody(event);
+  const id = body.id;
+  const title = body.title;
+  const guest_speaker = body.guest_speaker;
+  const date = body.date;
+  const location = body.location;
+  const isArchive = body.isArchive;
 
-    let updatedSeminar;
+  let updatedSeminar;
 
-    if (id && title && guest_speaker && date && location)
-        updatedSeminar = await prisma.seminar.update({
-            where: {
-                id,
-            },
-            data: {
-                title,
-                guest_speaker,
-                date,
-                location,
-            },
-        });
+  if (id && title && guest_speaker && date && location)
+    updatedSeminar = await prisma.seminar.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        guest_speaker,
+        date,
+        location,
+        isArchive,
+      },
+    });
 
-    return updatedSeminar;
+  return updatedSeminar;
 });

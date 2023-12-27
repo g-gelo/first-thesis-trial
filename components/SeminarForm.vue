@@ -111,6 +111,16 @@
             placeholder="Location"
             required
           />
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Status:</label
+          >
+          <select
+            v-model="editedSeminar.isArchive"
+            class="w-full p-2 border rounded mb-4"
+          >
+            <option :value="false">Active</option>
+            <option :value="true">Archived</option>
+          </select>
         </div>
         <div class="flex justify-end">
           <button
@@ -269,6 +279,7 @@
                         editedSeminar.guest_speaker = meeting.guest_speaker;
                         editedSeminar.date = meeting.date;
                         editedSeminar.location = meeting.location;
+                        editedSeminar.isArchive = meeting.isArchive;
                         showModal = true;
                       }
                     "
@@ -290,9 +301,7 @@
                 <div v-if="showDeleteModal" class="modal2">
                   <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                     <h2 class="text-xl font-bold mb-4">Delete Seminar</h2>
-                    <p class="mb-4">
-                      Do you want to delete this Seminar? {{ meeting.title }}
-                    </p>
+                    <p class="mb-4">Do you want to delete this Seminar?</p>
                     <div class="flex justify-end">
                       <button
                         v-if="
@@ -300,10 +309,7 @@
                           data?.user?.role == 'ADMIN'
                         "
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                        @click="
-                          deleteSeminar(editedSeminar.id),
-                            (showDeleteModal = false)
-                        "
+                        @click="deleteSeminar(id), (showDeleteModal = false)"
                       >
                         Delete
                       </button>
@@ -411,18 +417,13 @@ const editedSeminar = ref({
   guest_speaker: null,
   date: null,
   location: null,
+  isArchive: false,
 });
 
 const editSeminar = async (editedSeminar) => {
   let seminar = null;
 
-  if (
-    editedSeminar.id &&
-    editedSeminar.title &&
-    editedSeminar.guest_speaker &&
-    editedSeminar.date &&
-    editedSeminar.location
-  )
+  if (editedSeminar.id)
     seminar = await $fetch("/api/seminars", {
       method: "PUT",
       body: {
@@ -431,18 +432,19 @@ const editSeminar = async (editedSeminar) => {
         guest_speaker: editedSeminar.guest_speaker,
         date: editedSeminar.date,
         location: editedSeminar.location,
+        isArchive: editedSeminar.isArchive,
       },
     });
   seminars.value = await $fetch("/api/seminars");
 };
 
-const deleteSeminar = async (editedSeminar) => {
+const deleteSeminar = async (id) => {
   let deletedSeminar = null;
-  if (editedSeminar.id)
+  if (id)
     deletedSeminar = await $fetch("/api/seminars", {
       method: "DELETE",
       body: {
-        id: editedSeminar.id,
+        id,
       },
     });
 
