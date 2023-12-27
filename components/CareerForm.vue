@@ -114,6 +114,16 @@
             placeholder="Location"
             required
           />
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Status:</label
+          >
+          <select
+            v-model="editedCareer.isArchive"
+            class="w-full p-2 border rounded mb-4"
+          >
+            <option :value="false">Active</option>
+            <option :value="true">Archived</option>
+          </select>
         </div>
         <div class="flex justify-end">
           <button
@@ -246,7 +256,7 @@
               <th class="py-2 px-4 border-b">Location</th>
               <th class="py-2 px-4 border-b">Date</th>
               <th class="py-2 px-4 border-b">Job Description</th>
-              <th class="py-2 px-4 border-b">Edit & Delete</th>
+              <th class="py-2 px-4 border-b">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -273,6 +283,7 @@
                         editedCareer.description = job.description;
                         editedCareer.date = job.date;
                         editedCareer.location = job.location;
+                        editedCareer.isArchive = job.isArchive;
                         showModal = true;
                       }
                     "
@@ -285,6 +296,7 @@
                     @click="
                       ($event) => {
                         showDeleteModal = true;
+                        Delete_Career = job;
                       }
                     "
                   >
@@ -293,8 +305,16 @@
                 </div>
                 <div v-if="showDeleteModal" class="modal2">
                   <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                    <h2 class="text-xl font-bold mb-4">Delete Job Career</h2>
-                    <p class="mb-4">Do you want to delete this Job Career?</p>
+                    <h2 class="text-lg font-bold mb-4">
+                      Are you sure you wan to delete this job vacancy?
+                    </h2>
+                    <p class="mb-2">
+                      This will delete this post permanently. You cannot undo
+                      this action.
+                    </p>
+                    <p class="text-slate-600 mb-4">
+                      Title: {{ Delete_Career.title }}
+                    </p>
                     <div class="flex justify-end">
                       <button
                         v-if="
@@ -370,6 +390,7 @@ const showModalCareer = ref(false);
 const showModal = ref(false);
 const showCareerDatabase = ref(false);
 const showDeleteModal = ref(false);
+const Delete_Career = ref(null);
 
 const career = ref({
   title: "",
@@ -407,18 +428,13 @@ const editedCareer = ref({
   description: null,
   date: null,
   location: null,
+  isArchive: false,
 });
 
 const editCareer = async (editedCareer) => {
   let career = null;
 
-  if (
-    editedCareer.id &&
-    editedCareer.title &&
-    editedCareer.description &&
-    editedCareer.date &&
-    editedCareer.location
-  )
+  if (editedCareer.id)
     career = await $fetch("/api/careers", {
       method: "PUT",
       body: {
@@ -427,6 +443,7 @@ const editCareer = async (editedCareer) => {
         description: editedCareer.description,
         date: editedCareer.date,
         location: editedCareer.location,
+        isArchive: editedCareer.isArchive,
       },
     });
   careers.value = await $fetch("/api/careers");

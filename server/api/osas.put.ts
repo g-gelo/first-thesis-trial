@@ -6,23 +6,25 @@ import { PrismaClient } from "@prisma/client";
 // Create an instance of the PrismaClient
 const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
-    const body = await readBody(event);
-    const id = body.id;
-    const title = body.title;
-    const description = body.description;
+  const body = await readBody(event);
+  const id = body.id;
+  const title = body.title;
+  const description = body.description;
+  const isArchive = body.isArchive;
 
-    let updatedOsas;
+  let updatedOsas;
 
-    if (id && title && description)
-        updatedOsas = await prisma.oSASProfile.update({
-            where: {
-                id,
-            },
-            data: {
-                title,
-                description,
-            },
-        });
+  if (id && title && description)
+    updatedOsas = await prisma.oSASProfile.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        description,
+        isArchive,
+      },
+    });
 
-    return updatedOsas;
+  return updatedOsas;
 });

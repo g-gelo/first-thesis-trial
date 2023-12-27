@@ -94,6 +94,13 @@
             rows="5"
             required
           ></textarea>
+          <select
+            v-model="editedGcoProfile.isArchive"
+            class="w-full p-2 border rounded mb-4"
+          >
+            <option :value="false">Active</option>
+            <option :value="true">Archived</option>
+          </select>
         </div>
         <div class="flex justify-end">
           <button
@@ -182,6 +189,7 @@
                         editedGcoProfile.id = guidance.id;
                         editedGcoProfile.title = guidance.title;
                         editedGcoProfile.description = guidance.description;
+                        editedGcoProfile.isArchive = guidance.isArchive;
                         showGcoFormEdit = true;
                       }
                     "
@@ -193,6 +201,7 @@
                     @click="
                       ($event) => {
                         showDeleteModal2 = true;
+                        Delete_GcoProfile = guidance;
                       }
                     "
                   >
@@ -201,8 +210,16 @@
                 </div>
                 <div v-if="showDeleteModal2" class="modal2">
                   <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                    <h2 class="text-xl font-bold mb-4">Delete Profile</h2>
-                    <p class="mb-4">Do you want to delete this Profile?</p>
+                    <h2 class="text-lg font-bold mb-4">
+                      Are you sure you wan to delete this profile?
+                    </h2>
+                    <p class="mb-2">
+                      This will delete this post permanently. You cannot undo
+                      this action.
+                    </p>
+                    <p class="text-slate-600 mb-4">
+                      Title: {{ Delete_GcoProfile.title }}
+                    </p>
                     <div class="flex justify-end">
                       <button
                         v-if="data?.user?.role == 'SUPERADMIN'"
@@ -300,6 +317,13 @@
             placeholder="title"
             required
           />
+          <select
+            v-model="editedGcoService.isArchive"
+            class="w-full p-2 border rounded mb-4"
+          >
+            <option :value="false">Active</option>
+            <option :value="true">Archived</option>
+          </select>
         </div>
         <div class="flex justify-end">
           <button
@@ -416,6 +440,7 @@
                       ($event) => {
                         editedGcoService.id = service.id;
                         editedGcoService.service = service.service;
+                        editedGcoService.isArchive = service.isArchive;
                         showGcoServiceEdit = true;
                       }
                     "
@@ -427,6 +452,7 @@
                     @click="
                       ($event) => {
                         showDeleteModal1 = true;
+                        Delete_GcoService = service;
                       }
                     "
                   >
@@ -435,8 +461,16 @@
                 </div>
                 <div v-if="showDeleteModal1" class="modal2">
                   <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                    <h2 class="text-xl font-bold mb-4">Delete Service</h2>
-                    <p class="mb-4">Do you want to delete this Service?</p>
+                    <h2 class="text-lg font-bold mb-4">
+                      Are you sure you wan to delete this service?
+                    </h2>
+                    <p class="mb-2">
+                      This will delete this post permanently. You cannot undo
+                      this action.
+                    </p>
+                    <p class="text-slate-600 mb-4">
+                      Service: {{ Delete_GcoService.service }}
+                    </p>
                     <div class="flex justify-end">
                       <button
                         v-if="data?.user?.role == 'SUPERADMIN'"
@@ -538,6 +572,8 @@ const showGcoServiceDb = ref(false);
 const showGcoServiceEdit = ref(false);
 const showDeleteModal1 = ref(false);
 const showDeleteModal2 = ref(false);
+const Delete_GcoProfile = ref(null);
+const Delete_GcoService = ref(null);
 
 const { data: gcoService } = useFetch("/api/gcoservices");
 
@@ -563,17 +599,19 @@ const addGcoService = async (gcoServices) => {
 const editedGcoService = ref({
   id: null,
   service: null,
+  isArchive: false,
 });
 
 const editGcoService = async (editedGcoService) => {
   let gcoServices = null;
 
-  if (editedGcoService.id && editedGcoService.service)
+  if (editedGcoService.id)
     gcoServices = await $fetch("/api/gcoservices", {
       method: "PUT",
       body: {
         id: editedGcoService.id,
         service: editedGcoService.service,
+        isArchive: editedGcoService.isArchive,
       },
     });
   gcoService.value = await $fetch("/api/gcoservices");
@@ -619,22 +657,20 @@ const editedGcoProfile = ref({
   id: null,
   title: null,
   description: null,
+  isArchive: false,
 });
 
 const editGcoProfile = async (editedGcoProfile) => {
   let gcoProfiles = null;
 
-  if (
-    editedGcoProfile.id &&
-    editedGcoProfile.title &&
-    editedGcoProfile.description
-  )
+  if (editedGcoProfile.id)
     gcoProfiles = await $fetch("/api/gco", {
       method: "PUT",
       body: {
         id: editedGcoProfile.id,
         title: editedGcoProfile.title,
         description: editedGcoProfile.description,
+        isArchive: editedGcoProfile.isArchive,
       },
     });
   gcoProfile.value = await $fetch("/api/gco");

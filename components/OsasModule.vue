@@ -69,6 +69,16 @@
             rows="5"
             required
           ></textarea>
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Status:</label
+          >
+          <select
+            v-model="editedOsasModule.isArchive"
+            class="w-full p-2 border rounded mb-4"
+          >
+            <option :value="false">Active</option>
+            <option :value="true">Archived</option>
+          </select>
         </div>
         <div class="flex justify-end">
           <button
@@ -181,20 +191,35 @@
                         editedOsasModule.id = profile.id;
                         editedOsasModule.title = profile.title;
                         editedOsasModule.description = profile.description;
+                        editedOsasModule.isArchive = profile.isArchive;
                         showOsasEdit = true;
                       }
                     "
                   >
                     Edit
                   </v-btn>
-                  <v-btn variant="tonal" @click="showDeleteModal1 = true">
+                  <v-btn
+                    variant="tonal"
+                    @click="
+                      showDeleteModal1 = true;
+                      Delete_OsasModule = profile;
+                    "
+                  >
                     Delete
                   </v-btn>
                 </div>
                 <div v-if="showDeleteModal1" class="modal2">
                   <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                    <h2 class="text-xl font-bold mb-4">Delete Seminar</h2>
-                    <p class="mb-4">Do you want to delete this Profile?</p>
+                    <h2 class="text-xl font-bold mb-4">
+                      Are you sure you wan to delete this profile?
+                    </h2>
+                    <p class="mb-2">
+                      This will delete this post permanently. You cannot undo
+                      this action.
+                    </p>
+                    <p class="text-slate-600 mb-4">
+                      Title: {{ Delete_OsasModule.title }}
+                    </p>
                     <div class="flex justify-end">
                       <button
                         v-if="data?.user?.role == 'SUPERADMIN'"
@@ -256,7 +281,7 @@
         </form>
       </div>
     </div>
-    <div class="btn">
+    <div class="btn mt-2">
       <button
         v-if="!showFunction"
         class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full p-4 rounded-lg"
@@ -290,6 +315,13 @@
             placeholder="title"
             required
           />
+          <select
+            v-model="editedOsasFunction.isArchive"
+            class="w-full p-2 border rounded mb-4"
+          >
+            <option :value="false">Active</option>
+            <option :value="true">Archived</option>
+          </select>
         </div>
         <div class="flex justify-end">
           <button
@@ -375,6 +407,7 @@
                       ($event) => {
                         editedOsasFunction.id = purpose.id;
                         editedOsasFunction.osasFunction = purpose.osasFunction;
+                        editedOsasFunction.isArchive = purpose.isArchive;
                         showFunctionEdit = true;
                       }
                     "
@@ -386,6 +419,7 @@
                     @click="
                       ($event) => {
                         showDeleteModal2 = true;
+                        Delete_OsasFunction = purpose;
                       }
                     "
                   >
@@ -394,8 +428,16 @@
                 </div>
                 <div v-if="showDeleteModal2" class="modal2">
                   <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                    <h2 class="text-xl font-bold mb-4">Delete Function</h2>
-                    <p class="mb-4">Do you want to delete this Function?</p>
+                    <h2 class="text-lg font-bold mb-4">
+                      Are you sure you wan to delete this function?
+                    </h2>
+                    <p class="mb-2">
+                      This will delete this post permanently. You cannot undo
+                      this action.
+                    </p>
+                    <p class="text-slate-600 mb-4">
+                      Function: {{ Delete_OsasFunction.osasFunction }}
+                    </p>
                     <div class="flex justify-end">
                       <button
                         v-if="data?.user?.role == 'SUPERADMIN'"
@@ -476,6 +518,8 @@ const showFunctionEdit = ref(false);
 const showFunctionForm = ref(false);
 const showDeleteModal1 = ref(false);
 const showDeleteModal2 = ref(false);
+const Delete_OsasModule = ref(null);
+const Delete_OsasFunction = ref(null);
 
 const { data: osasFunction } = useFetch("/api/osasfunction");
 
@@ -502,17 +546,19 @@ const addOsasFunction = async (oFunction) => {
 const editedOsasFunction = ref({
   id: null,
   osasFunction: null,
+  isArchive: false,
 });
 
 const editOsasFunction = async (editedOsasFunction) => {
   let osasFunctions = null;
 
-  if (editedOsasFunction.id && editedOsasFunction.osasFunction)
+  if (editedOsasFunction.id)
     osasFunctions = await $fetch("/api/osasfunction", {
       method: "PUT",
       body: {
         id: editedOsasFunction.id,
         osasFunction: editedOsasFunction.osasFunction,
+        isArchive: editedOsasFunction.isArchive,
       },
     });
   osasFunction.value = await $fetch("/api/osasfunction");
@@ -558,22 +604,20 @@ const editedOsasModule = ref({
   id: null,
   title: null,
   description: null,
+  isArchive: false,
 });
 
 const editOsasModule = async (editedOsasModule) => {
   let osasModule = null;
 
-  if (
-    editedOsasModule.id &&
-    editedOsasModule.title &&
-    editedOsasModule.description
-  )
+  if (editedOsasModule.id)
     osasModule = await $fetch("/api/osas", {
       method: "PUT",
       body: {
         id: editedOsasModule.id,
         title: editedOsasModule.title,
         description: editedOsasModule.description,
+        isArchive: editedOsasModule.isArchive,
       },
     });
   osasAll.value = await $fetch("/api/osas");

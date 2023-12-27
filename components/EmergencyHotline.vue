@@ -95,6 +95,13 @@
             placeholder="location"
             required
           />
+          <select
+            v-model="editedEmergencyHotline.isArchive"
+            class="w-full p-2 border rounded mb-4"
+          >
+            <option :value="false">Active</option>
+            <option :value="true">Archived</option>
+          </select>
         </div>
         <div class="flex justify-end">
           <button
@@ -252,6 +259,8 @@
                         editedEmergencyHotline.number = emergencyhotline.number;
                         editedEmergencyHotline.location =
                           emergencyhotline.location;
+                        editedEmergencyHotline.isArchive =
+                          emergencyhotline.isArchive;
                         showHotlineEdit = true;
                       }
                     "
@@ -263,6 +272,7 @@
                     @click="
                       ($event) => {
                         showDeleteModal = true;
+                        Delete_Hotline = emergencyhotline;
                       }
                     "
                   >
@@ -271,11 +281,15 @@
                 </div>
                 <div v-if="showDeleteModal" class="modal2">
                   <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                    <h2 class="text-xl font-bold mb-4">
-                      Delete Emergency Hotline
+                    <h2 class="text-lg font-bold mb-4">
+                      Are you sure you wan to delete this Emergency Hotline?
                     </h2>
-                    <p class="mb-4">
-                      Do you want to delete this Emergency Hotline?
+                    <p class="mb-2">
+                      This will delete this post permanently. You cannot undo
+                      this action.
+                    </p>
+                    <p class="text-slate-600 mb-4">
+                      Organization: {{ Delete_Hotline.organization }}
                     </p>
                     <div class="flex justify-end">
                       <button
@@ -355,6 +369,7 @@ const showHotlineDatabase = ref(false);
 const showHotlineForm = ref(false);
 const showHotlineEdit = ref(false);
 const showDeleteModal = ref(false);
+const Delete_Hotline = ref(null);
 
 const { data: emergencyHotline } = useFetch("/api/hotline");
 
@@ -388,17 +403,13 @@ const editedEmergencyHotline = ref({
   organization: null,
   number: null,
   location: null,
+  isArchive: null,
 });
 
 const editEmergencyHotline = async (editedEmergencyHotline) => {
   let emergencyHotlines = null;
 
-  if (
-    editedEmergencyHotline.id &&
-    editedEmergencyHotline.organization &&
-    editedEmergencyHotline.number &&
-    editedEmergencyHotline.location
-  )
+  if (editedEmergencyHotline.id)
     emergencyHotlines = await $fetch("/api/hotline", {
       method: "PUT",
       body: {
@@ -406,6 +417,7 @@ const editEmergencyHotline = async (editedEmergencyHotline) => {
         organization: editedEmergencyHotline.organization,
         number: editedEmergencyHotline.number,
         location: editedEmergencyHotline.location,
+        isArchive: editedEmergencyHotline.isArchive,
       },
     });
   emergencyHotline.value = await $fetch("/api/hotline");

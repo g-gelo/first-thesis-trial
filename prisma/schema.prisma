@@ -72,15 +72,16 @@ enum AppointmentStatus {
   Finished
 }
 model Appointment {
-  id        String   @id @default(cuid())
-  date      String
-  time      String
-  reason    String  @db.VarChar(250)
-  course    String
-  year      Int
-  status    AppointmentStatus @default(Pending)
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  id            String   @id @default(cuid())
+  date          String
+  time          String
+  reason        String  @db.VarChar(250)
+  course        String
+  year          Int
+  status        AppointmentStatus @default(Pending)
+  isArchive     Boolean @default(false)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
@@ -105,13 +106,14 @@ model Seminar {
 }
 
 model Career {
-  id          String   @id @default(cuid())
-  title       String
-  location    String
-  description String   @db.VarChar(500)
-  date        String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(cuid())
+  title         String
+  location      String
+  description   String   @db.VarChar(500)
+  date          String
+  isArchive     Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model UniversityMissionVision {
@@ -123,48 +125,54 @@ model UniversityMissionVision {
 }
 
 model OSASProfile {
-  id          String   @id @default(cuid())
-  title       String?
-  description String   @db.VarChar(550)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(cuid())
+  title         String?
+  description   String   @db.VarChar(550)
+  isArchive     Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model OSASFunctions {
-  id           String   @id @default(cuid())
-  osasFunction String   @db.VarChar(300)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id            String   @id @default(cuid())
+  osasFunction  String   @db.VarChar(300)
+  isArchive     Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model GCOProfile {
-  id          String   @id @default(cuid())
-  title       String?
-  description String   @db.VarChar(550)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(cuid())
+  title         String?
+  description   String   @db.VarChar(550)
+  isArchive     Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model GCOServices {
-  id        String   @id @default(cuid())
-  service   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(cuid())
+  service       String
+  isArchive     Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model EmegergencyHotline {
-  id           String   @id @default(cuid())
-  organization String
-  number       String   @db.VarChar(255)
-  location     String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id            String   @id @default(cuid())
+  organization  String
+  number        String   @db.VarChar(255)
+  location      String
+  isArchive     Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model ChatBot {
-  id        String   @id @default(cuid())
-  keyword   String
-  answer    String   @db.VarChar(1000)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(cuid())
+  keyword       String
+  answer        String   @db.VarChar(1000)
+  isArchive     Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

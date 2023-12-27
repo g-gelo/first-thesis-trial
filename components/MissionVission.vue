@@ -89,7 +89,7 @@
             <tr>
               <th class="py-2 px-4 border-b text-left">Title</th>
               <th class="py-2 px-4 border-b text-left">Description</th>
-              <th class="py-2 px-4 border-b text-left">Edit</th>
+              <th class="py-2 px-4 border-b text-left">Action</th>
             </tr>
           </thead>
           <tbody>

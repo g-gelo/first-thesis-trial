@@ -71,6 +71,13 @@
             rows="5"
             required
           ></textarea>
+          <select
+            v-model="editedFaqs.isArchive"
+            class="w-full p-2 border rounded mb-4"
+          >
+            <option :value="false">Active</option>
+            <option :value="true">Archived</option>
+          </select>
         </div>
         <div class="flex justify-end">
           <button
@@ -212,6 +219,7 @@
                         editedFaqs.id = faqs.id;
                         editedFaqs.keyword = faqs.keyword;
                         editedFaqs.answer = faqs.answer;
+                        editedFaqs.isArchive = faqs.isArchive;
                         showEditFaqsForm = true;
                       }
                     "
@@ -224,6 +232,7 @@
                     @click="
                       ($event) => {
                         showDeleteFaqsForm = true;
+                        Delete_Faqs = faqs;
                       }
                     "
                   >
@@ -232,8 +241,16 @@
                 </div>
                 <div v-if="showDeleteFaqsForm" class="modal2">
                   <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                    <h2 class="text-xl font-bold mb-4">Delete FAQs</h2>
-                    <p class="mb-4">Do you want to delete this FAQs?</p>
+                    <h2 class="text-lg font-bold mb-4">
+                      Are you sure you wan to delete this Seminar?
+                    </h2>
+                    <p class="mb-2">
+                      This will delete this post permanently. You cannot undo
+                      this action.
+                    </p>
+                    <p class="text-slate-600 mb-4">
+                      Keyword: {{ Delete_Faqs.keyword }}
+                    </p>
                     <div class="flex justify-end">
                       <button
                         v-if="data?.user?.role == 'SUPERADMIN'"
@@ -307,6 +324,7 @@ const showFaqsForm = ref(false);
 const showFaqsTable = ref(false);
 const showEditFaqsForm = ref(false);
 const showDeleteFaqsForm = ref(false);
+const Delete_Faqs = ref(null);
 
 const { data: allFaqs } = useFetch("/api/faq");
 
@@ -337,18 +355,20 @@ const editedFaqs = ref({
   id: null,
   keyword: null,
   answer: null,
+  isArchive: false,
 });
 
 const editFaqs = async (editedFaqs) => {
   let faqs = null;
 
-  if (editedFaqs.id && editedFaqs.keyword && editedFaqs.answer)
+  if (editedFaqs.id)
     faqs = await $fetch("/api/faq", {
       method: "PUT",
       body: {
         id: editedFaqs.id,
         keyword: editedFaqs.keyword,
         answer: editedFaqs.answer,
+        isArchive: editedFaqs.isArchive,
       },
     });
   allFaqs.value = await $fetch("/api/faq");

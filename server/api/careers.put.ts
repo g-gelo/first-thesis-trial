@@ -6,27 +6,29 @@ import { PrismaClient } from "@prisma/client";
 // Create an instance of the PrismaClient
 const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
-    const body = await readBody(event);
-    const id = body.id;
-    const title = body.title;
-    const description = body.description;
-    const location = body.location;
-    const date = body.date;
+  const body = await readBody(event);
+  const id = body.id;
+  const title = body.title;
+  const description = body.description;
+  const location = body.location;
+  const date = body.date;
+  const isArchive = body.isArchive;
 
-    let updatedCareer;
+  let updatedCareer;
 
-    if (id && title && description && location && date)
-        updatedCareer = await prisma.career.update({
-            where: {
-                id,
-            },
-            data: {
-                title,
-                description,
-                location,
-                date,
-            },
-        });
+  if (id && title && description && location && date)
+    updatedCareer = await prisma.career.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        description,
+        location,
+        date,
+        isArchive,
+      },
+    });
 
-    return updatedCareer;
+  return updatedCareer;
 });
