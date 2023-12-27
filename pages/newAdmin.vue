@@ -34,24 +34,26 @@
           Review and analyze user reports for improvement.
         </p> -->
         <div class="flex mt-10">
-          <span class="text-white font-bold text-xs mr-4"
+          <span class="text-white font-bold text-xs"
             >View & Manage Reports</span
           >
         </div>
       </div>
-      <div
-        class="bg-blue-400 shadow-md rounded-lg overflow-hidden p-4 text-white"
-      >
-        <h1 class="text-base font-bold">Appointments & Referrals</h1>
-        <!-- <p class="mt-2 line-clamp-1">
+      <NuxtLink to="/appointment-list">
+        <div
+          class="bg-blue-400 shadow-md rounded-lg overflow-hidden p-4 text-white"
+        >
+          <h1 class="text-base font-bold">Appointments</h1>
+          <!-- <p class="mt-2 line-clamp-1">
           Manage appointments, referrals, and patient interactions.
         </p> -->
-        <div class="flex">
-          <span class="text-white mt-4 font-bold text-xs"
-            >Schedule Appointments</span
-          >
+          <div class="flex mt-10">
+            <span class="text-white font-bold text-xs"
+              >Schedule Appointments</span
+            >
+          </div>
         </div>
-      </div>
+      </NuxtLink>
     </div>
     <!-- You Projects -->
     <div>

@@ -208,11 +208,11 @@
           <div class="mt-4 flex justify-end space-x-4">
             <button
               class="text-red-500 font-semibold"
-              v-if="!showModal"
               variant="tonal"
               @click="
                 ($event) => {
                   showDeleteModal = true;
+                  Delete_Appointment = book;
                 }
               "
             >
@@ -233,18 +233,40 @@
       <!-- Delete Modal -->
       <div v-if="showDeleteModal" class="modal2 h-screen w-full">
         <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-          <h2 class="text-xl font-bold mb-4">Delete Appointment</h2>
-          <p class="mb-4">Do you want to delete this Appointment?</p>
-          <div class="flex justify-end">
+          <h2 class="text-xl font-bold mb-4">Delete your appointment?</h2>
+          <div class="grid grid-cols-4">
+            <div class="col-start-1 col-span-4 ml-4">
+              <h1 class="text-md font-semibold">
+                {{ Delete_Appointment.user.name }}
+              </h1>
+            </div>
+            <div class="row-start-2 col-start-1 col-span-2 ml-4 mt-2 mb-1.5">
+              <span class="text-md font-semibold text-zinc-600 line-clamp-1">{{
+                Delete_Appointment.reason
+              }}</span>
+            </div>
+            <div class="row-start-2 col-start-4 col-span-2 mt-2">
+              <span class="text-md font-semibold text-zinc-600 line-clamp-2">{{
+                Delete_Appointment.status
+              }}</span>
+            </div>
+          </div>
+          <div class="flex justify-end mt-2">
             <button
+              v-if="data?.user?.role == 'SUPERADMIN'"
               class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-              @click="deleteAppointment(book.id), (showDeleteModal = false)"
+              @click="
+                () => {
+                  deleteAppointment(Delete_Appointment.id);
+                  showDeleteModal = false;
+                }
+              "
             >
               Delete
             </button>
             <button
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              @click="showDeleteModal = false"
+              @click="() => (showDeleteModal = false)"
             >
               Cancel
             </button>
@@ -258,6 +280,8 @@
 
 <script setup>
 const showDeleteModal = ref(false);
+const Delete_Appointment = ref(null);
+
 const { data } = useAuth();
 const userId = data?.user?.userId;
 console.log("UserId:", userId);

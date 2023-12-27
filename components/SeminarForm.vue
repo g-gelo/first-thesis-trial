@@ -290,7 +290,9 @@
                 <div v-if="showDeleteModal" class="modal2">
                   <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                     <h2 class="text-xl font-bold mb-4">Delete Seminar</h2>
-                    <p class="mb-4">Do you want to delete this Seminar?</p>
+                    <p class="mb-4">
+                      Do you want to delete this Seminar? {{ meeting.title }}
+                    </p>
                     <div class="flex justify-end">
                       <button
                         v-if="
@@ -299,7 +301,8 @@
                         "
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
-                          deleteSeminar(meeting.id), (showDeleteModal = false)
+                          deleteSeminar(editedSeminar.id),
+                            (showDeleteModal = false)
                         "
                       >
                         Delete
@@ -433,13 +436,13 @@ const editSeminar = async (editedSeminar) => {
   seminars.value = await $fetch("/api/seminars");
 };
 
-const deleteSeminar = async (id) => {
+const deleteSeminar = async (editedSeminar) => {
   let deletedSeminar = null;
-  if (id)
+  if (editedSeminar.id)
     deletedSeminar = await $fetch("/api/seminars", {
       method: "DELETE",
       body: {
-        id,
+        id: editedSeminar.id,
       },
     });
 
