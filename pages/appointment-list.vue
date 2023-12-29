@@ -126,7 +126,7 @@
                 </p>
                 <div class="col-start-3 col-span-4">
                   <select
-                    id="role"
+                    id="status"
                     class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
                     @change="
                       updateStatusAppointment(
@@ -314,7 +314,7 @@ const appointmentsRef = ref(appointments.value);
 // Changing Status of the Appointment
 const updateStatusAppointment = async (appointmentId, newStatus) => {
   try {
-    // Make an API request to update the user role
+    // Make an API request to update the appointment status
     const response = await fetch(`/api/appointmentAction`, {
       method: "PUT",
       headers: {
@@ -327,19 +327,9 @@ const updateStatusAppointment = async (appointmentId, newStatus) => {
     });
 
     // Parse the response body as JSON
-    const updatedAppointmentStatus = await response.json();
-
-    // Find the index of the updated user in the array and replace it
-    const appointmentIndex = appointments.value.findIndex(
-      (user) => user.id === updatedAppointmentStatus.id
-    );
-    if (appointmentIndex !== -1) {
-      appointments.value[appointmentIndex] = updatedAppointmentStatus;
-      // Update the reactive ref
-      appointments.value = [...appointments.value];
-    }
+    appointments.value = await $fetch("/api/appointment");
   } catch (error) {
-    console.error("Error updating user role:", error);
+    console.error("Error updating appointment status:", error);
     // Handle error, show a notification, etc.
   }
 };
