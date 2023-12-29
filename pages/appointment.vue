@@ -133,9 +133,16 @@
                 class="mt-1 p-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
-                <option value="bsit">BSIT</option>
-                <option value="bscs">BSCS</option>
-                <option value="bsoa">BSOA</option>
+                <option value="bsit">BS in Information Technology</option>
+                <option value="bscs">BS in Computer Science</option>
+                <option value="bsoa">BS in Office Administration</option>
+                <option value="ba journ">BA Journalism</option>
+                <option value="bece">B of Early Childhood Education</option>
+                <option value="bsbm">BS in Business Management</option>
+                <option value="bs entrep">BS in Entrepreneur</option>
+                <option value="bshm">BS in Hospital Management</option>
+                <option value="bs pysch">BS in Pyschology</option>
+                <option value="bse">B of Secondary Education</option>
               </select>
             </div>
             <div class="col-span-1 md:col-span-1">
@@ -275,9 +282,16 @@
               class="w-full p-2 border rounded mb-4"
               required
             >
-              <option value="bsit">BSIT</option>
-              <option value="bscs">BSCS</option>
-              <option value="bsoa">BSOA</option>
+              <option value="bsit">BS in Information Technology</option>
+              <option value="bscs">BS in Computer Science</option>
+              <option value="bsoa">BS in Office Administration</option>
+              <option value="ba journ">BA Journalism</option>
+              <option value="bece">B of Early Childhood Education</option>
+              <option value="bsbm">BS in Business Management</option>
+              <option value="bs entrep">BS in Entrepreneur</option>
+              <option value="bshm">BS in Hospital Management</option>
+              <option value="bs pysch">BS in Pyschology</option>
+              <option value="bse">B of Secondary Education</option>
             </select>
             <label for="year" class="block text-sm font-medium text-gray-700"
               >Year:</label
