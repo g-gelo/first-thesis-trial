@@ -15,15 +15,7 @@ export default defineEventHandler(async (event) => {
     const year = body.year;
     const isArchive = body.isArchive;
 
-    if (
-      id &&
-      date &&
-      time &&
-      reason &&
-      course &&
-      year &&
-      isArchive
-    ) {
+    if (id && date && time && reason && course && year) {
       try {
         updatedAppointment = await prisma.appointment.update({
           where: {
