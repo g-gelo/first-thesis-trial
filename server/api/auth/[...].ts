@@ -16,7 +16,7 @@ export default NuxtAuthHandler({
     session: ({ session, user }) => ({
       ...session,
       user: {
-        userId: user.id,
+        id: user.id,
         name: user.name,
         email: user.email,
         image: user.image,

@@ -77,7 +77,7 @@ model Appointment {
   time          String
   reason        String  @db.VarChar(250)
   course        String
-  year          Int
+  year          String
   status        AppointmentStatus @default(Pending)
   isArchive     Boolean @default(false)
   userId        String

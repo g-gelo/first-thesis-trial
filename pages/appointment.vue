@@ -24,7 +24,10 @@
     <div v-if="showAppointmentForm" class="modal h-screen w-full">
       <div class="modal-wrapper bg-white p-4 rounded-lg w-10/12">
         <h1 class="font-bold text-lg mb-4 mt-2">Book Your Appointment</h1>
-        <form class="space-y-4" @submit.prevent="addAppointment(appointment)">
+        <form
+          class="space-y-4"
+          @submit.prevent="addAppointment(appointment, data?.user?.id)"
+        >
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="col-span-1 md:col-span-1">
               <label for="date" class="block text-sm font-medium text-gray-700"
@@ -61,13 +64,16 @@
                 >Reason for Counseling:</label
               >
               <div class="relative mt-1">
-                <input
+                <textarea
                   id="reason"
                   v-model="appointment.reason"
+                  name="reason"
+                  rows="2"
                   class="p-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="text"
                   placeholder="Reason for Counseling"
-                />
+                  required
+                ></textarea>
+
                 <!-- Helper button -->
                 <button
                   type="button"
@@ -143,26 +149,12 @@
                 class="mt-1 p-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
               </select>
             </div>
-            <!-- <div class="col-span-1 md:col-span-1">
-              <label
-                for="userId"
-                class="block text-sm font-medium text-gray-700"
-                >userId:</label
-              >
-              <input
-                id="userId"
-                v-model="appointment.userId"
-                type="text"
-                name="userId"
-                class="mt-1 p-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div> -->
           </div>
           <div class="flex justify-end">
             <button
@@ -220,13 +212,110 @@
             </button>
             <button
               class="text-blue-500 font-semibold"
-              @click="rescheduleAppointment"
+              @click="
+                ($event) => {
+                  editedAppointment.id = book.id;
+                  editedAppointment.date = book.date;
+                  editedAppointment.time = book.time;
+                  editedAppointment.reason = book.reason;
+                  editedAppointment.course = book.course;
+                  editedAppointment.year = book.year;
+                  editedAppointment.isArchive = book.isArchive;
+                  showReschedule = true;
+                }
+              "
             >
               Reschedule
             </button>
             <span :class="computedStatusColorClass(book.status)">{{
               book.status
             }}</span>
+          </div>
+        </div>
+      </div>
+      <!-- Edit/Reschedule Modal -->
+      <div v-if="showReschedule" class="modal2 h-screen w-full">
+        <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+          <h2 class="text-xl font-bold mb-4">Edit Appointment</h2>
+          <div>
+            <input
+              v-model="editedAppointment.date"
+              type="date"
+              class="w-full p-2 border rounded mb-4"
+              placeholder="Date"
+              required
+            />
+            <input
+              v-model="editedAppointment.time"
+              type="time"
+              class="w-full p-2 border rounded mb-4"
+              placeholder="Time"
+              required
+            />
+            <textarea
+              v-model="editedAppointment.reason"
+              class="w-full p-2 border rounded mb-4"
+              placeholder="Reason for Counseling"
+              rows="2"
+              required
+            ></textarea>
+            <label for="course" class="block text-sm font-medium text-gray-700"
+              >Course:</label
+            >
+            <select
+              id="course"
+              v-model="editedAppointment.course"
+              name="course"
+              class="w-full p-2 border rounded mb-4"
+              required
+            >
+              <option value="bsit">BSIT</option>
+              <option value="bscs">BSCS</option>
+              <option value="bsoa">BSOA</option>
+            </select>
+            <label for="year" class="block text-sm font-medium text-gray-700"
+              >Year:</label
+            >
+            <select
+              id="year"
+              v-model="editedAppointment.year"
+              name="year"
+              class="w-full p-2 border rounded mb-4"
+              required
+            >
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+            <!-- dapat wala tong status, delete ko sya later -->
+            <label class="block text-sm font-medium text-gray-700 mb-2"
+              >Status:</label
+            >
+            <select
+              v-model="editedAppointment.isArchive"
+              class="w-full p-2 border rounded mb-4"
+            >
+              <option :value="false">Active</option>
+              <option :value="true">Archived</option>
+            </select>
+          </div>
+          <div class="flex justify-end">
+            <button
+              v-if="
+                data?.user?.role == `SUPERADMIN` || data?.user?.role == `ADMIN`
+              "
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+              @click="($event) => editAppointment(editedAppointment)"
+            >
+              Save
+            </button>
+            <button
+              class="bg-red-500 hover-bg-red-700 text-white font-bold py-2 px-4 rounded"
+              @click="showReschedule = false"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>
@@ -246,9 +335,10 @@
               }}</span>
             </div>
             <div class="row-start-2 col-start-4 col-span-2 mt-2">
-              <span class="text-md font-semibold text-zinc-600 line-clamp-2">{{
-                Delete_Appointment.status
-              }}</span>
+              <span
+                :class="computedStatusColorClass(Delete_Appointment.status)"
+                >{{ Delete_Appointment.status }}</span
+              >
             </div>
           </div>
           <div class="flex justify-end mt-2">
@@ -274,7 +364,6 @@
         </div>
       </div>
     </div>
-    <pre>{{ data }}</pre>
   </div>
 </template>
 
@@ -283,8 +372,6 @@ const showDeleteModal = ref(false);
 const Delete_Appointment = ref(null);
 
 const { data } = useAuth();
-const userId = data?.user?.userId;
-console.log("UserId:", userId);
 
 // Status color of the Appointment
 const statusColorMapping = {
@@ -299,8 +386,9 @@ const computedStatusColorClass = (status) =>
 
 const showAppointmentForm = ref(false);
 const showReasonsList = ref(false);
-// const selectedReason = ref("");
-// const reasonsInput = ref("");
+const showReschedule = ref(false);
+const selectedReason = ref("");
+const reasonsInput = ref("");
 
 // Function to toggle the display of the reasons list
 const toggleReasonsList = () => {
@@ -308,14 +396,14 @@ const toggleReasonsList = () => {
 };
 
 // Function to select a reason from the list
-// const selectReason = (reason) => {
-//   selectedReason.value = reason;
-//   reasonsInput.value = reason; // Optionally, update the input field value
-//   showReasonsList.value = false; // Hide the reasons list
-// };
-// const watchInput = () => {
-//   showReasonsList.value = false; // Hide the reasons list when the user types
-// };
+const selectReason = (reason) => {
+  selectedReason.value = reason;
+  reasonsInput.value = reason; // Optionally, update the input field value
+  showReasonsList.value = false; // Hide the reasons list
+};
+const watchInput = () => {
+  showReasonsList.value = false; // Hide the reasons list when the user types
+};
 // Get All Appointment Data
 const { data: appointments } = useFetch("/api/appointment");
 
@@ -326,23 +414,24 @@ const appointment = ref({
   reason: "",
   course: "",
   year: "",
-  userId: "",
 });
 
-const addAppointment = async (appointment) => {
+const addAppointment = async (appointment, userId) => {
+  console.log("userId:", userId);
   try {
-    const userId = data?.user?.userId;
-
     const addedAppointment = await $fetch("/api/appointment", {
       method: "POST",
-      body: {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         date: appointment.date,
         time: appointment.time,
         reason: appointment.reason,
         course: appointment.course,
         year: appointment.year,
         userId: userId,
-      },
+      }),
     });
 
     console.log("Added Appointment:", addedAppointment);
@@ -350,6 +439,7 @@ const addAppointment = async (appointment) => {
     if (addedAppointment) {
       // Reset form fields
       appointment.date = "";
+      appointment.userId = "";
       appointment.time = "";
       appointment.reason = "";
       appointment.course = "";
@@ -366,6 +456,55 @@ const addAppointment = async (appointment) => {
     // Handle any other errors that might occur
   }
 };
+// Editing / Reschedule of the Appointment
+const editedAppointment = ref({
+  id: null,
+  date: null,
+  time: null,
+  reason: null,
+  course: null,
+  year: null,
+  status: null,
+  isArchive: false,
+});
+
+const editAppointment = async (editedAppointment) => {
+  let appointment = null;
+  try {
+    if (editedAppointment.id) {
+      appointment = await $fetch("/api/appointment", {
+        method: "PUT",
+        body: {
+          id: editedAppointment.id,
+          date: editedAppointment.date,
+          time: editedAppointment.time,
+          reason: editedAppointment.reason,
+          course: editedAppointment.course,
+          year: editedAppointment.year,
+          status: editedAppointment.status,
+          isArchive: editedAppointment.isArchive,
+        },
+      });
+
+      // Handle the response as needed (check status, show success message, etc.)
+      console.log("PUT request response:", appointment);
+
+      // Optionally, you can fetch the updated appointments here
+      appointments.value = await $fetch("/api/appointment");
+
+      // Close the modal or perform any other actions
+      showReschedule.value = false;
+    }
+  } catch (error) {
+    console.error("Error updating appointment:", error);
+
+    // Optionally, you can show an error message to the user
+    // or perform other error-handling actions
+    // For example, you might set an error message to be displayed in the UI
+    // errorMessage.value = "Error updating appointment: " + error.message;
+  }
+};
+
 const deleteAppointment = async (id) => {
   let deletedAppointment = null;
   if (id)

@@ -20,7 +20,6 @@ export default defineEventHandler(async (event) => {
           course: body.course,
           year: body.year,
           userId: body.userId,
-          status: "Pending",
         },
       });
 

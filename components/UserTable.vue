@@ -118,9 +118,7 @@
                   <select
                     id="role"
                     class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
-                    @change="
-                      confirmUpdateUserRole(user.id, $event.target.value)
-                    "
+                    @change="updateUserRole(user.id, $event.target.value)"
                   >
                     <option
                       value="SUPERADMIN"
@@ -140,6 +138,34 @@
             </tr>
           </tbody>
         </table>
+        <!-- Confirmation Modal for Role
+        <div v-if="showConfirmRole" class="modal2">
+          <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+            <h2 class="text-lg font-bold mb-4">
+              Are you sure you want Change this users Role?
+            </h2>
+            <p class="mb-2">
+              This action will have this user to change his/her role.
+            </p>
+            <div class="flex justify-end">
+              <button
+                v-if="data?.user?.role == 'SUPERADMIN'"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                @change="
+                  confirmUpdateUserRole(selectedUser.id, $event.target.value)
+                "
+              >
+                Confirm
+              </button>
+              <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                @click="showConfirmRole = false"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -185,6 +211,8 @@ const filteredUsers = computed(() => {
 });
 const { data: allAccount } = await useFetch("/api/users");
 const { data } = useAuth();
+const showConfirmRole = ref(false);
+const selectedUser = ref(null);
 
 const updateUserRole = async (userId, newRole) => {
   try {
@@ -216,19 +244,25 @@ const updateUserRole = async (userId, newRole) => {
   }
 };
 
-const confirmUpdateUserRole = (userId, newRole) => {
-  const isConfirmed = confirm(
-    "Are you sure you want to change the user's role?"
-  );
-  if (isConfirmed) {
-    updateUserRole(userId, newRole);
-  }
-};
+// const confirmUpdateUserRole = (userId, newRole) => {
+//   updateUserRole(userId, newRole);
+// };
 </script>
 
 <style scoped>
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
+}
+.modal2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

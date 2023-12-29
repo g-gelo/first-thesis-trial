@@ -1,11 +1,22 @@
-# PUT http://localhost:3000/api/missionvision
-# Content-Type: application/json
+PUT http://localhost:3000/api/appointment
+Content-Type: application/json
 
-# {
-#     "id": "clnwxhz280000hsfgwnyhck8x",
-#     "title": "Edit ko ulit",
-#     "description": "Option",
-# }
+{
+    "id": "clqolnyax0001hs7sb19t4b9t",
+    "date": "2023-12-13",
+    "time": "10:42",
+    "reason": "Forgotten ID",
+    "course": "bscs",
+    "year": "1",
+    "status": "Pending",
+    "isArchive": false,
+    "userId": "clnwx5pn40000hswwz84xlt3b",
+        "user": {
+            "name": "ANGELO GABRIEL EVANGELISTA",
+            "image": "https://lh3.googleusercontent.com/a/ACg8ocKLim7MLqpsI4rShYlY958dZuOpAKXq0MMeRoUY1NdiNw=s96-c"
+        }
+}
+
 
 # GET  http://localhost:3000/api/appointment
 # Content-Type: application/json
