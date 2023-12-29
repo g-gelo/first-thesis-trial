@@ -180,56 +180,62 @@
       v-for="book in appointments"
       :key="book.id"
     >
-      <div
-        class="mt-8 rounded-lg bg-slate-300 p-3 mx-3"
-        v-if="data?.user?.name == book?.user?.name"
-      >
-        <div class="text-xl font-bold mb-4 border-b-2 border-white">
-          <h2>Appointment List</h2>
-        </div>
-        <!-- List Content -->
-        <div class="bg-white p-4 rounded-lg mb-4">
-          <div class="flex justify-between items-center">
-            <h3 class="text-base font-semibold mr-2">{{ book?.user?.name }}</h3>
-            <span class="text-gray-500">{{ book.date }} | {{ book.time }}</span>
+      <div v-if="book.isArchive == false">
+        <div
+          class="mt-8 rounded-lg bg-slate-300 p-3 mx-3 mb-4"
+          v-if="data?.user?.name == book?.user?.name"
+        >
+          <div class="text-xl font-bold mb-4 border-b-2 border-white">
+            <h2>Appointment List</h2>
           </div>
-          <p class="text-gray-700 mt-2">
-            {{ book.course }} - Year {{ book.year }}
-          </p>
-          <p class="text-gray-700 mt-2">Reason: {{ book.reason }}</p>
-          <div class="mt-4 flex justify-end space-x-4">
-            <button
-              class="text-red-500 font-semibold"
-              variant="tonal"
-              @click="
-                ($event) => {
-                  showDeleteModal = true;
-                  Delete_Appointment = book;
-                }
-              "
-            >
-              Delete
-            </button>
-            <button
-              class="text-blue-500 font-semibold"
-              @click="
-                ($event) => {
-                  editedAppointment.id = book.id;
-                  editedAppointment.date = book.date;
-                  editedAppointment.time = book.time;
-                  editedAppointment.reason = book.reason;
-                  editedAppointment.course = book.course;
-                  editedAppointment.year = book.year;
-                  editedAppointment.isArchive = book.isArchive;
-                  showReschedule = true;
-                }
-              "
-            >
-              Reschedule
-            </button>
-            <span :class="computedStatusColorClass(book.status)">{{
-              book.status
-            }}</span>
+          <!-- List Content -->
+          <div class="bg-white p-4 rounded-lg mb-4">
+            <div class="flex justify-between items-center">
+              <h3 class="text-base font-semibold mr-2">
+                {{ book?.user?.name }}
+              </h3>
+              <span class="text-gray-500"
+                >{{ book.date }} | {{ book.time }}</span
+              >
+            </div>
+            <p class="text-gray-700 mt-2">
+              {{ book.course }} - Year {{ book.year }}
+            </p>
+            <p class="text-gray-700 mt-2">Reason: {{ book.reason }}</p>
+            <div class="mt-4 flex justify-end space-x-4">
+              <button
+                class="text-red-500 font-semibold"
+                variant="tonal"
+                @click="
+                  ($event) => {
+                    showDeleteModal = true;
+                    Delete_Appointment = book;
+                  }
+                "
+              >
+                Delete
+              </button>
+              <button
+                class="text-blue-500 font-semibold"
+                @click="
+                  ($event) => {
+                    editedAppointment.id = book.id;
+                    editedAppointment.date = book.date;
+                    editedAppointment.time = book.time;
+                    editedAppointment.reason = book.reason;
+                    editedAppointment.course = book.course;
+                    editedAppointment.year = book.year;
+                    editedAppointment.isArchive = book.isArchive;
+                    showReschedule = true;
+                  }
+                "
+              >
+                Reschedule
+              </button>
+              <span :class="computedStatusColorClass(book.status)">{{
+                book.status
+              }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -287,17 +293,6 @@
               <option>2</option>
               <option>3</option>
               <option>4</option>
-            </select>
-            <!-- dapat wala tong status, delete ko sya later -->
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >Status:</label
-            >
-            <select
-              v-model="editedAppointment.isArchive"
-              class="w-full p-2 border rounded mb-4"
-            >
-              <option :value="false">Active</option>
-              <option :value="true">Archived</option>
             </select>
           </div>
           <div class="flex justify-end">
@@ -401,9 +396,7 @@ const selectReason = (reason) => {
   reasonsInput.value = reason; // Optionally, update the input field value
   showReasonsList.value = false; // Hide the reasons list
 };
-const watchInput = () => {
-  showReasonsList.value = false; // Hide the reasons list when the user types
-};
+
 // Get All Appointment Data
 const { data: appointments } = useFetch("/api/appointment");
 
@@ -417,7 +410,6 @@ const appointment = ref({
 });
 
 const addAppointment = async (appointment, userId) => {
-  console.log("userId:", userId);
   try {
     const addedAppointment = await $fetch("/api/appointment", {
       method: "POST",
@@ -433,9 +425,6 @@ const addAppointment = async (appointment, userId) => {
         userId: userId,
       }),
     });
-
-    console.log("Added Appointment:", addedAppointment);
-
     if (addedAppointment) {
       // Reset form fields
       appointment.date = "";
@@ -486,9 +475,6 @@ const editAppointment = async (editedAppointment) => {
         },
       });
 
-      // Handle the response as needed (check status, show success message, etc.)
-      console.log("PUT request response:", appointment);
-
       // Optionally, you can fetch the updated appointments here
       appointments.value = await $fetch("/api/appointment");
 
@@ -497,25 +483,39 @@ const editAppointment = async (editedAppointment) => {
     }
   } catch (error) {
     console.error("Error updating appointment:", error);
-
-    // Optionally, you can show an error message to the user
-    // or perform other error-handling actions
-    // For example, you might set an error message to be displayed in the UI
-    // errorMessage.value = "Error updating appointment: " + error.message;
   }
 };
 
 const deleteAppointment = async (id) => {
-  let deletedAppointment = null;
-  if (id)
-    deletedAppointment = await $fetch("/api/appointment", {
-      method: "DELETE",
-      body: {
-        id,
-      },
-    });
+  let response = null;
+  try {
+    if (id) {
+      // Fetch the appointment by ID
+      // const appointment = await $fetch("/api/appointment");
 
-  appointments.value = await $fetch("/api/appointment");
+      // Update the isArchive property to true
+      appointment.isArchive = true;
+
+      // Send a PUT request to update the appointment
+      response = await $fetch("/api/appointments", {
+        method: "PUT",
+        body: {
+          id: id,
+          isArchive: appointment.isArchive,
+        },
+      });
+
+      // Fetch the updated list of appointments
+      appointments.value = await $fetch("/api/appointment");
+    }
+  } catch (error) {
+    console.error("Error archiving appointment:", error);
+
+    // Handle any errors that might occur during the archiving process
+  } finally {
+    // Close the delete modal
+    showDeleteModal.value = false;
+  }
 };
 </script>
 

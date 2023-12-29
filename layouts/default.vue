@@ -70,7 +70,7 @@
               v-if="
                 data?.user?.role == `SUPERADMIN` || data?.user?.role == `ADMIN`
               "
-              to="/admin"
+              to="/newAdmin"
               :class="{
                 'active bg-gray-200': isActive(index),
                 'pop-icon': isActive(index),
