@@ -56,8 +56,8 @@
           class="col-start-1 col-end-2 row-span-2 w-16 h-16 rounded-full overflow-hidden"
           @click="
             ($event) => {
-              showFullInfo = true;
               detailedAppointment = book;
+              showFullInfo = true;
             }
           "
         >
@@ -67,14 +67,14 @@
           class="col-start-2 col-span-3 ml-4"
           @click="
             ($event) => {
-              showFullInfo = true;
               detailedAppointment = book;
+              showFullInfo = true;
             }
           "
         >
           <h1 class="text-md font-semibold">{{ book?.user?.name }}</h1>
         </div>
-        <div class="col-start-5 ml-6">
+        <div class="col-start-5 ml-6" v-if="data.user.role == 'SUPERADMIN'">
           <button class="text-xs">
             <v-icon
               @click="
@@ -105,29 +105,66 @@
           <div class="bg-white shadow-lg rounded-lg p-6 w-80">
             <h2 class="text-lg font-semibold">Full Details</h2>
             <div class="bg-white px-3 pt-3 pb-4 sm:p-6 sm:pb-4">
-              <div class="mt-2">
-                <p class="text-sm text-gray-500 my-2">
-                  Name: {{ detailedAppointment.user.name }}
+              <div class="mt-2 grid grid-cols-4">
+                <p class="text-sm text-gray-500 my-2 col-start-1 col-span-4">
+                  Name: {{ detailedAppointment?.user?.name }}
                 </p>
-                <p class="text-sm text-gray-500 my-2">
+                <p class="text-sm text-gray-500 my-2 col-start-1 col-span-3">
                   Date: {{ detailedAppointment.date }}
                 </p>
-                <p class="text-sm text-gray-500 my-2">
+                <p class="text-sm text-gray-500 my-2 col-start-1 col-span-3">
                   Time: {{ detailedAppointment.time }}
                 </p>
-                <p class="text-sm text-gray-500 my-2">
+                <p class="text-sm text-gray-500 my-2 col-start-1 col-span-3">
                   Course: {{ detailedAppointment.course }}
                 </p>
-                <p class="text-sm text-gray-500 my-2">
+                <p class="text-sm text-gray-500 my-2 col-start-1 col-span-4">
                   Reason for Counseling: {{ detailedAppointment.reason }}
                 </p>
-                <p class="text-sm text-gray-500 my-2">
+                <p class="text-sm text-gray-500 my-2 col-start-1 col-span-3">
                   Year: {{ detailedAppointment.year }}
                 </p>
+                <div class="col-start-3 col-span-4">
+                  <select
+                    id="role"
+                    class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
+                    @change="
+                      updateStatusAppointment(
+                        detailedAppointment.id,
+                        $event.target.value
+                      )
+                    "
+                  >
+                    <option
+                      value="Pending"
+                      :selected="detailedAppointment.status === 'Pending'"
+                    >
+                      Pending
+                    </option>
+                    <option
+                      value="Rejected"
+                      :selected="detailedAppointment.status === 'Rejected'"
+                    >
+                      Rejected
+                    </option>
+                    <option
+                      value="Accepted"
+                      :selected="detailedAppointment.status === 'Accepted'"
+                    >
+                      Accepted
+                    </option>
+                    <option
+                      value="Finished"
+                      :selected="detailedAppointment.status === 'Finished'"
+                    >
+                      Finished
+                    </option>
+                  </select>
+                </div>
               </div>
             </div>
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-start-1 col-span-3"
               @click="() => (showFullInfo = false)"
             >
               Close
@@ -137,7 +174,11 @@
         <!-- Delete Modal -->
         <div v-if="showDeleteModal" class="modal2 h-screen w-full">
           <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-            <h2 class="text-xl font-bold mb-4">Delete Appointment?</h2>
+            <h2 class="text-xl font-bold">Delete Appointment?</h2>
+            <span class="text-sm text-slate-500">
+              This will delete this post permanently. You cannot undo this
+              action.</span
+            >
             <div class="grid grid-cols-4">
               <div
                 class="col-start-1 col-end-2 row-span-2 w-16 h-16 rounded-full overflow-hidden"
@@ -269,6 +310,41 @@ const filteredAppointment = computed(() => {
       .includes(searchKeyword.value.toLowerCase())
   );
 });
+const appointmentsRef = ref(appointments.value);
+// Changing Status of the Appointment
+const updateStatusAppointment = async (appointmentId, newStatus) => {
+  try {
+    // Make an API request to update the user role
+    const response = await fetch(`/api/appointmentAction`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: appointmentId, // Include the appointmentId in the request body
+        newStatus,
+      }),
+    });
+
+    // Parse the response body as JSON
+    const updatedAppointmentStatus = await response.json();
+
+    // Find the index of the updated user in the array and replace it
+    const appointmentIndex = appointments.value.findIndex(
+      (user) => user.id === updatedAppointmentStatus.id
+    );
+    if (appointmentIndex !== -1) {
+      appointments.value[appointmentIndex] = updatedAppointmentStatus;
+      // Update the reactive ref
+      appointments.value = [...appointments.value];
+    }
+  } catch (error) {
+    console.error("Error updating user role:", error);
+    // Handle error, show a notification, etc.
+  }
+};
+
+// Actual Deleting an appointment
 const deleteAppointment = async (id) => {
   let deletedAppointment = null;
   if (id)
