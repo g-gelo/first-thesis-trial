@@ -64,6 +64,26 @@ model User {
   accounts      Account[]
   sessions      Session[]
   appointments  Appointment[]
+  reports       Report[]
+}
+
+enum ReportStatus {
+  PENDING
+  ACCEPTED
+  RESOLVED
+}
+model Report {
+  id            String   @id @default(cuid())
+  incident      String  
+  description   String  @db.VarChar(250)
+  status        ReportStatus @default(PENDING)
+  isArchive     Boolean @default(false)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId])
 }
 enum AppointmentStatus {
   Pending
