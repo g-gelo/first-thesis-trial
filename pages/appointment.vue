@@ -298,16 +298,28 @@
               class="w-full p-2 border rounded mb-4"
               required
             >
-              <option value="bsit">BS in Information Technology</option>
-              <option value="bscs">BS in Computer Science</option>
-              <option value="bsoa">BS in Office Administration</option>
-              <option value="ba journ">BA Journalism</option>
-              <option value="bece">B of Early Childhood Education</option>
-              <option value="bsbm">BS in Business Management</option>
-              <option value="bs entrep">BS in Entrepreneur</option>
-              <option value="bshm">BS in Hospital Management</option>
-              <option value="bs pysch">BS in Pyschology</option>
-              <option value="bse">B of Secondary Education</option>
+              <option value="Information Technology">
+                BS in Information Technology
+              </option>
+              <option value="Computer Science">BS in Computer Science</option>
+              <option value="Office Administration">
+                BS in Office Administration
+              </option>
+              <option value="Journalism">BA Journalism</option>
+              <option value="Early Childhood Education">
+                Bachelor of Early Childhood Education
+              </option>
+              <option value="Business Management">
+                BS in Business Management
+              </option>
+              <option value="Entrepreneur">BS in Entrepreneur</option>
+              <option value="Hospital Management">
+                BS in Hospital Management
+              </option>
+              <option value="BS in Psychology">BS in Pyschology</option>
+              <option value="Secondary Education">
+                Bachelor of Secondary Education
+              </option>
             </select>
             <label for="year" class="block text-sm font-medium text-gray-700"
               >Year:</label
@@ -368,11 +380,10 @@
           </div>
           <div class="flex justify-end mt-2">
             <button
-              v-if="data?.user?.role == 'SUPERADMIN'"
               class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
               @click="
                 () => {
-                  deleteAppointment(Delete_Appointment.id);
+                  archivingAppointment(Delete_Appointment.id);
                   showDeleteModal = false;
                 }
               "
@@ -516,7 +527,7 @@ const editAppointment = async (editedAppointment) => {
   }
 };
 
-const deleteAppointment = async (id) => {
+const archivingAppointment = async (id) => {
   let response = null;
   try {
     if (id) {

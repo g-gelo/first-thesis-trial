@@ -68,16 +68,17 @@ model User {
 }
 
 enum ReportStatus {
-  PENDING
-  ACCEPTED
-  RESOLVED
+  Pending
+  Accepted
+  Resolved
+  Rejected
 }
 model Report {
   id            String   @id @default(cuid())
   incident      String  
   description   String  @db.VarChar(250)
   feedback      String?  @db.VarChar(250)
-  status        ReportStatus @default(PENDING)
+  status        ReportStatus @default(Pending)
   isArchive     Boolean @default(false)
   userId        String
   user          User     @relation(fields: [userId], references: [id])

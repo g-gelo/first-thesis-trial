@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     // Check if required properties are present in the request body
-    if (body.incident && body.description && body.status && body.userId) {
+    if (body.incident && body.description && body.userId) {
       // create a report
       const report = await event.context.prisma.report.create({
         data: {

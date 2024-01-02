@@ -8,31 +8,26 @@ export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
     const id = body.id;
-    const incident = body.incident;
-    const description = body.description;
     const isArchive = body.isArchive;
 
-    if (id && incident && description) {
+    if (id) {
       try {
         updatedReport = await prisma.report.update({
           where: {
             id,
           },
           data: {
-            incident,
-            description,
-            status: "Pending",
             isArchive,
           },
         });
       } catch (error) {
-        console.error("Error updating appointment:", error);
+        console.error("Error updating report:", error);
       }
     } else {
       console.error("Invalid input data");
     }
   } catch (error) {
-    console.error("Error updating appointment:", error);
+    console.error("Error updating report:", error);
   } finally {
     await prisma.$disconnect();
   }
