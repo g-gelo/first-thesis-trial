@@ -113,16 +113,16 @@
                   Date: {{ detailedAppointment?.date }}
                 </p>
                 <p class="text-sm text-gray-500 my-2 col-start-1 col-span-3">
-                  Time: {{ detailedAppointment.time }}
+                  Time: {{ detailedAppointment?.time }}
                 </p>
                 <p class="text-sm text-gray-500 my-2 col-start-1 col-span-3">
-                  Course: {{ detailedAppointment.course }}
+                  Course: {{ detailedAppointment?.course }}
                 </p>
                 <p class="text-sm text-gray-500 my-2 col-start-1 col-span-4">
-                  Reason for Counseling: {{ detailedAppointment.reason }}
+                  Reason for Counseling: {{ detailedAppointment?.reason }}
                 </p>
                 <p class="text-sm text-gray-500 my-2 col-start-1 col-span-3">
-                  Year: {{ detailedAppointment.year }}
+                  Year: {{ detailedAppointment?.year }}
                 </p>
                 <div class="col-start-3 col-span-4">
                   <select
@@ -311,7 +311,6 @@ const filteredAppointment = computed(() => {
       .includes(searchKeyword.value.toLowerCase())
   );
 });
-const appointmentsRef = ref(appointments.value);
 // Changing Status of the Appointment
 const updateStatusAppointment = async (appointmentId, newStatus) => {
   try {

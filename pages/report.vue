@@ -112,13 +112,13 @@
         <div class="grid grid-cols-4">
           <div class="col-start-1 col-span-4 ml-4">
             <h1 class="text-md font-semibold">
-              {{ Archive_IncidentReport?.user?.name }}
+              {{ Archive_IncidentReport.incident }}
             </h1>
           </div>
-          <div class="row-start-2 col-start-1 col-span-2 ml-4 mt-2 mb-1.5">
-            <span class="text-md font-semibold text-zinc-600 line-clamp-1">{{
-              Archive_IncidentReport.incident
-            }}</span>
+          <div class="row-start-2 col-start-1 col-span-3 ml-4 mt-2 mb-1.5">
+            <p class="line-clamp-2">
+              {{ Archive_IncidentReport.description }}
+            </p>
           </div>
           <div class="row-start-2 col-start-4 col-span-2 mt-2">
             <span
@@ -165,7 +165,6 @@
           <div class="grid grid-cols-4">
             <div class="text-lg mb-2 col-start-1 col-span-2 row-span-2">
               <h3>
-                Incident:
                 <span class="font-semibold">{{ report.incident }}</span>
               </h3>
             </div>
@@ -223,23 +222,23 @@
           <h1 class="text-lg font-bold text-blue-500 mb-4">Full Details</h1>
           <div class="grid grid-cols-4 gap-4">
             <div class="col-start-1 col-span-4">
-              <label class="text-base font-semibold">Incident: </label>
+              <label class="text-base">Incident: </label>
               <span class="text-lg font-bold">{{
                 detailedReportIncident.incident
               }}</span>
             </div>
             <div class="col-start-1 col-span-4">
-              <label class="text-base font-semibold">Description: </label>
+              <label class="text-base">Description: </label>
               <span class="text-base font-bold">{{
                 detailedReportIncident.description
               }}</span>
             </div>
             <div class="border-b-4 border-gray-900 col-span-4 my-3"></div>
             <div class="col-start-1 col-span-4">
-              <label class="text-base font-semibold"
-                >Feedback from the Guidance:
-              </label>
-              <span class="text-sm">{{ detailedReportIncident.feedback }}</span>
+              <label class="text-base">Feedback from the Guidance: </label>
+              <span class="text-sm font-bold">{{
+                detailedReportIncident.feedback
+              }}</span>
             </div>
           </div>
           <button

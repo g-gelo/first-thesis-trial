@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
         data: {
           incident: body.incident,
           description: body.description,
+          feedback: "Thank you! Your report has been submitted successfully.",
           status: body.status,
           isArchive: body.isArchive,
           userId: body.userId,
