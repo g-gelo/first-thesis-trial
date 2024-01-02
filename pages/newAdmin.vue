@@ -1,13 +1,13 @@
 <template>
   <div class="p-4">
     <!-- 4 Content -->
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-2 gap-3">
       <NuxtLink to="/content-list">
         <div
           class="bg-green-400 shadow-md rounded-lg overflow-hidden p-4 text-white"
         >
           <h1 class="text-base font-bold">Content Update</h1>
-          <div class="flex mt-10">
+          <div class="flex mt-7">
             <span class="text-white mt-4 font-bold text-xs"
               >View & Edit Content</span
             >
@@ -18,27 +18,32 @@
         <div
           class="bg-yellow-400 shadow-md rounded-lg overflow-hidden p-4 text-white"
         >
-          <h1 class="text-base font-bold">Announcement List</h1>
-          <div class="flex">
-            <span class="text-white mt-4 font-bold text-xs"
-              >Publish New Announcement</span
+          <h1 class="text-base font-bold">Announcement</h1>
+          <!-- <p class="mt-2 line-clamp-1">
+          Review and analyze user reports for improvement.
+        </p> -->
+          <div class="flex mt-10">
+            <span class="text-white font-bold text-xs"
+              >Manage Announcement</span
             >
           </div>
         </div>
       </NuxtLink>
-      <div
-        class="bg-orange-400 shadow-md rounded-lg overflow-hidden p-4 text-white"
-      >
-        <h1 class="text-base font-bold">Reports</h1>
-        <!-- <p class="mt-2 line-clamp-1">
+      <NuxtLink to="/report-list">
+        <div
+          class="bg-orange-400 shadow-md rounded-lg overflow-hidden p-4 text-white"
+        >
+          <h1 class="text-base font-bold">Reports</h1>
+          <!-- <p class="mt-2 line-clamp-1">
           Review and analyze user reports for improvement.
         </p> -->
-        <div class="flex mt-10">
-          <span class="text-white font-bold text-xs"
-            >View & Manage Reports</span
-          >
+          <div class="flex mt-10">
+            <span class="text-white font-bold text-xs"
+              >View & Manage Reports</span
+            >
+          </div>
         </div>
-      </div>
+      </NuxtLink>
       <NuxtLink to="/appointment-list">
         <div
           class="bg-blue-400 shadow-md rounded-lg overflow-hidden p-4 text-white"

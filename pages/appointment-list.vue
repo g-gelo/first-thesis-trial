@@ -110,7 +110,7 @@
                   Name: {{ detailedAppointment?.user?.name }}
                 </p>
                 <p class="text-sm text-gray-500 my-2 col-start-1 col-span-3">
-                  Date: {{ detailedAppointment.date }}
+                  Date: {{ detailedAppointment?.date }}
                 </p>
                 <p class="text-sm text-gray-500 my-2 col-start-1 col-span-3">
                   Time: {{ detailedAppointment.time }}
@@ -292,6 +292,7 @@ const prevPage = () => {
     currentPage.value -= 1;
   }
 };
+
 // Filtering
 const searchKeyword = ref("");
 const selectedFilter = ref("status");

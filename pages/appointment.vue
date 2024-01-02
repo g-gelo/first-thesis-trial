@@ -131,18 +131,32 @@
                 v-model="appointment.course"
                 name="course"
                 class="mt-1 p-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                defaultValue=""
                 required
               >
-                <option value="bsit">BS in Information Technology</option>
-                <option value="bscs">BS in Computer Science</option>
-                <option value="bsoa">BS in Office Administration</option>
-                <option value="ba journ">BA Journalism</option>
-                <option value="bece">B of Early Childhood Education</option>
-                <option value="bsbm">BS in Business Management</option>
-                <option value="bs entrep">BS in Entrepreneur</option>
-                <option value="bshm">BS in Hospital Management</option>
-                <option value="bs pysch">BS in Pyschology</option>
-                <option value="bse">B of Secondary Education</option>
+                <option hidden value="">Select Course</option>
+                <option value="Information Technology">
+                  BS in Information Technology
+                </option>
+                <option value="Computer Science">BS in Computer Science</option>
+                <option value="Office Administration">
+                  BS in Office Administration
+                </option>
+                <option value="Journalism">BA Journalism</option>
+                <option value="Early Childhood Education">
+                  Bachelor of Early Childhood Education
+                </option>
+                <option value="Business Management">
+                  BS in Business Management
+                </option>
+                <option value="Entrepreneur">BS in Entrepreneur</option>
+                <option value="Hospital Management">
+                  BS in Hospital Management
+                </option>
+                <option value="BS in Psychology">BS in Pyschology</option>
+                <option value="Secondary Education">
+                  Bachelor of Secondary Education
+                </option>
               </select>
             </div>
             <div class="col-span-1 md:col-span-1">
@@ -154,8 +168,10 @@
                 v-model="appointment.year"
                 name="year"
                 class="mt-1 p-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                defaultValue=""
                 required
               >
+                <option hidden value="">Select Year Level</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>

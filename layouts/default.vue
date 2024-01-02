@@ -143,6 +143,11 @@ const navItem = ref([
     route: "/appointment",
   },
   {
+    icon: "fa-solid fa-clipboard",
+    text: "Report Incident",
+    route: "/report",
+  },
+  {
     icon: "fa-solid fa-briefcase",
     text: "Office",
     route: generateCoohomLink,
