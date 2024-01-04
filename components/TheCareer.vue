@@ -183,9 +183,9 @@
                 <v-icon class="ml-6 icon-small"
                   >fa-regular fa-calendar-days</v-icon
                 ><br />
-                <span class="ml-3 info-value info-small">{{
-                  career.date
-                }}</span>
+                <span class="ml-3 info-value info-small">
+                  {{ formatCreatedAt(career.date) }}</span
+                >
               </div>
             </div>
           </div>
@@ -290,6 +290,12 @@ const showModalCareer = ref(false);
 const showEditCareerForm = ref(false);
 const showDetailedModal = ref(false);
 const detailedCareer = ref(null);
+
+const formatCreatedAt = (date) => {
+  const parsedDate = new Date(date);
+  // Format the incident in a human-readable way
+  return parsedDate.toLocaleDateString(); // Adjust options as needed
+};
 
 const career = ref({
   title: "",

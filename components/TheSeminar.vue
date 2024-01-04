@@ -179,9 +179,9 @@
                 <v-icon class="ml-6 icon-small"
                   >fa-regular fa-calendar-days</v-icon
                 ><br />
-                <span class="ml-3 info-value info-small">{{
-                  meeting.date
-                }}</span>
+                <span class="ml-3 info-value info-small">
+                  {{ formatCreatedAt(meeting.date) }}</span
+                >
               </div>
             </div>
           </div>
@@ -241,6 +241,12 @@
 const { data: seminars } = useFetch("/api/seminars");
 const { data } = useAuth();
 const showModalSeminar = ref(false);
+
+const formatCreatedAt = (date) => {
+  const parsedDate = new Date(date);
+  // Format the incident in a human-readable way
+  return parsedDate.toLocaleDateString(); // Adjust options as needed
+};
 const seminar = ref({
   title: "",
   guest_speaker: "",

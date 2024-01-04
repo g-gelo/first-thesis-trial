@@ -56,6 +56,8 @@
             ($event) => {
               detailedIncident = report;
               showFullIncidentReport = true;
+              editedFeedbackReport.id = report.id;
+              editedFeedbackReport.feedback = report.feedback;
             }
           "
         >
@@ -67,6 +69,8 @@
             ($event) => {
               detailedIncident = report;
               showFullIncidentReport = true;
+              editedFeedbackReport.id = report.id;
+              editedFeedbackReport.feedback = report.feedback;
             }
           "
         >
@@ -76,7 +80,15 @@
         </div>
         <div class="col-start-5 ml-6" v-if="data.user.role == 'SUPERADMIN'">
           <button class="text-xs">
-            <v-icon>fa-solid fa-trash</v-icon>
+            <v-icon
+              @click="
+                ($event) => {
+                  showDeleteIncidentReport = true;
+                  Delete_Incident = report;
+                }
+              "
+              >fa-solid fa-trash</v-icon
+            >
           </button>
         </div>
         <div class="row-start-2 col-start-2 col-span-2 ml-4 mt-2">
@@ -90,6 +102,8 @@
             ($event) => {
               detailedIncident = report;
               showFullIncidentReport = true;
+              editedFeedbackReport.id = report.id;
+              editedFeedbackReport.feedback = report.feedback;
             }
           "
         >
@@ -97,7 +111,7 @@
             report.status
           }}</span>
         </div>
-        <!-- Show Full Appointment Information -->
+        <!-- Show Full Report incident Information -->
         <div v-if="showFullIncidentReport" class="modal2 h-screen w-full">
           <!-- Modal content goes here -->
           <div class="bg-white shadow-lg rounded-lg p-6 w-80">
@@ -166,6 +180,76 @@
                   </select>
                 </div>
               </div>
+              <div class="border-b-4 border-gray-900 col-span-4 my-3"></div>
+              <!-- Feedback with predefined reasons -->
+              <div class="mt-4">
+                <h1 class="text-lg font-semibold mb-2">Feedback</h1>
+                <div class="relative">
+                  <textarea
+                    id="reason"
+                    v-model="editedFeedbackReport.feedback"
+                    name="reason"
+                    rows="2"
+                    class="p-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Feedback of the chosen status"
+                    required
+                  ></textarea>
+                  <!-- Helper button -->
+                  <button
+                    type="button"
+                    class="absolute inset-y-0 right-0 px-2 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none"
+                    @click="toggleReasonsList"
+                  >
+                    ?
+                  </button>
+                  <!-- Display reasons list -->
+                  <div
+                    v-show="showReasonsList"
+                    class="absolute z-10 right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-md"
+                  >
+                    <ul class="py-1">
+                      <li
+                        class="px-4 py-2 cursor-pointer"
+                        @click="
+                          selectReason(
+                            'Thank you! Your report has been reviewed. You are invited to visit the guidance counselor within the next 3 to 5 days to discuss this matter further.'
+                          )
+                        "
+                      >
+                        Accepted (Modify if needed)
+                      </li>
+                      <li
+                        class="px-4 py-2 cursor-pointer"
+                        @click="
+                          selectReason(
+                            'Congratulations! Your reported incident has been successfully resolved. If you have any further concerns, feel free to reach out to the guidance counselor.'
+                          )
+                        "
+                      >
+                        Resolved (Modify if needed)
+                      </li>
+                      <li
+                        class="px-4 py-2 cursor-pointer"
+                        @click="
+                          selectReason(
+                            'We appreciate your concern, but after careful review, your report has been rejected. If you have additional information or questions, please contact the guidance counselor for clarification.'
+                          )
+                        "
+                      >
+                        Rejected (Modify if needed)
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <button
+                  class="mt-2 px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md"
+                  @click="
+                    ($event) => updateFeedbackReport(editedFeedbackReport)
+                  "
+                >
+                  SEND
+                </button>
+              </div>
             </div>
             <button
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-start-1 col-span-3"
@@ -173,6 +257,54 @@
             >
               Close
             </button>
+          </div>
+        </div>
+        <!-- Delete Modal -->
+        <div v-if="showDeleteIncidentReport" class="modal2 h-screen w-full">
+          <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+            <h2 class="text-xl font-bold">Delete Incident?</h2>
+            <span class="text-sm text-slate-500">
+              This will delete this incident permanently. You cannot undo this
+              action.</span
+            >
+            <div class="grid grid-cols-4">
+              <div
+                class="col-start-1 col-end-2 row-span-2 w-16 h-16 rounded-full overflow-hidden"
+              >
+                <img :src="Delete_Incident.user.image" alt="Avatar" />
+              </div>
+              <div class="col-start-2 col-span-3 ml-4">
+                <h1 class="text-md font-semibold">
+                  {{ Delete_Incident.user.name }}
+                </h1>
+              </div>
+              <div class="row-start-2 col-start-2 col-span-2 ml-4 mt-2 mb-1.5">
+                <span
+                  class="text-md font-semibold text-zinc-600 line-clamp-2"
+                  >{{ Delete_Incident.reason }}</span
+                >
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <button
+                v-if="data?.user?.role == 'SUPERADMIN'"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                @click="
+                  () => {
+                    deleteReport(Delete_Incident.id);
+                    showDeleteIncidentReport = false;
+                  }
+                "
+              >
+                Delete
+              </button>
+              <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                @click="() => (showDeleteIncidentReport = false)"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -221,12 +353,28 @@ const computedStatusColorClass = (status) =>
   statusColorMapping[status] || "text-gray-500";
 
 const showFullIncidentReport = ref(false);
+const showDeleteIncidentReport = ref(false);
+const Delete_Incident = ref(null);
 const detailedIncident = ref(null);
 
 const formatCreatedAt = (createdAtTimestamp) => {
   const parsedDate = new Date(createdAtTimestamp);
   // Format the incident in a human-readable way
   return parsedDate.toLocaleString(); // Adjust options as needed
+};
+
+const showReasonsList = ref(false);
+
+// Function to toggle the display of the reasons list
+const toggleReasonsList = () => {
+  showReasonsList.value = !showReasonsList.value;
+};
+
+// Function to select a reason from the list
+const selectReason = (reason) => {
+  editedFeedbackReport.feedback = reason; // Update the textarea value
+  console.log(editedFeedbackReport.feedback);
+  showReasonsList.value = false; // Hide the reasons list
 };
 
 const { data: incidents } = useFetch("/api/report");
@@ -269,10 +417,10 @@ const filteredIncident = computed(() => {
     report[filterKey].toLowerCase().includes(searchKeyword.value.toLowerCase())
   );
 });
-// Changing Status of the Appointment
+// Changing Status of the Report Incident
 const updateStatusReport = async (reportId, newStatus) => {
   try {
-    // Make an API request to update the appointment status
+    // Make an API request to update the incident status
     const response = await fetch(`/api/reportAction`, {
       method: "PUT",
       headers: {
@@ -290,6 +438,46 @@ const updateStatusReport = async (reportId, newStatus) => {
     console.error("Error updating report status:", error);
     // Handle error, show a notification, etc.
   }
+};
+const editedFeedbackReport = ref({
+  id: null,
+  feedback: null,
+});
+// Changing Status of the Incident Feedback
+const updateFeedbackReport = async (editedFeedbackReport) => {
+  try {
+    // Make an API request to update the feedback
+    const response = await fetch(`/api/reportFeedback`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: editedFeedbackReport.id, // Include the reportId in the request body
+        feedback: editedFeedbackReport.feedback,
+      }),
+    });
+
+    // Parse the response body as JSON
+    incidents.value = await $fetch("/api/report");
+  } catch (error) {
+    console.error("Error updating report status:", error);
+    // Handle error, show a notification, etc.
+  }
+};
+
+// Actual Deleting an appointment
+const deleteReport = async (id) => {
+  let deleteReport = null;
+  if (id)
+    deleteReport = await $fetch("/api/report", {
+      method: "DELETE",
+      body: {
+        id,
+      },
+    });
+
+  incidents.value = await $fetch("/api/report");
 };
 </script>
 

@@ -176,8 +176,8 @@
           <div class="bg-white shadow-lg rounded-lg p-6 w-80">
             <h2 class="text-xl font-bold">Delete Appointment?</h2>
             <span class="text-sm text-slate-500">
-              This will delete this post permanently. You cannot undo this
-              action.</span
+              This will delete this appointment permanently. You cannot undo
+              this action.</span
             >
             <div class="grid grid-cols-4">
               <div
@@ -273,7 +273,7 @@ const computedStatusColorClass = (status) =>
 
 // Pagination
 const currentPage = ref(1);
-const itemsPerPage = 3;
+const itemsPerPage = 5;
 
 const pagedAppointment = computed(() => {
   const startIndex = (currentPage.value - 1) * itemsPerPage;
