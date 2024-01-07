@@ -21,6 +21,7 @@ export default defineEventHandler(async (event) => {
           data: {
             incident,
             description,
+            feedback: "Thank you! Your report has been submitted successfully.",
             status: "Pending",
             isArchive,
           },

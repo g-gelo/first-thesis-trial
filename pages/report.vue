@@ -31,22 +31,91 @@
               class="block text-sm font-medium text-gray-700"
               >Incident:</label
             >
-            <input
-              v-model="report.incident"
-              type="text"
-              class="w-full p-2 border rounded mb-4"
-              placeholder="Incident"
-              required
-            />
+            <!-- Incident input field with helping button -->
+            <div class="relative">
+              <input
+                v-model="report.incident"
+                type="text"
+                class="p-2 w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Incident"
+                required
+              />
+
+              <!-- Helper button -->
+              <button
+                type="button"
+                class="absolute inset-y-0 right-0 px-2 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none"
+                @click="toggleIncidentList"
+              >
+                ?
+              </button>
+
+              <!-- Display incident choices list -->
+              <div
+                v-show="showIncidentList"
+                class="absolute z-10 right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-md"
+              >
+                <ul class="py-1">
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="selectIncident('Academic Issues')"
+                  >
+                    Academic Issues
+                  </li>
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="selectIncident('Bullying')"
+                  >
+                    Bullying
+                  </li>
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="selectIncident('Substance Abuse')"
+                  >
+                    Alcohol and Substance Abuse
+                  </li>
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="selectIncident('Theft')"
+                  >
+                    Theft
+                  </li>
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="selectIncident('Discrimination')"
+                  >
+                    Discrimination
+                  </li>
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="selectIncident('Conflict Resolution')"
+                  >
+                    Conflict Resolution
+                  </li>
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="selectIncident('Health and Safety Concerns')"
+                  >
+                    Health and Safety Concerns
+                  </li>
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="selectIncident('Other Concern')"
+                  >
+                    Other Concern.
+                  </li>
+                </ul>
+              </div>
+            </div>
             <label
-              for="incident"
+              for="description"
               class="block text-sm font-medium text-gray-700"
               >Description:</label
             >
             <textarea
               v-model="report.description"
               class="w-full p-2 border rounded mb-4"
-              placeholder="Brief Description of Incident"
+              placeholder="Brief Description of an Incident"
               rows="2"
               required
             ></textarea>
@@ -160,7 +229,7 @@
           v-if="data?.user?.name == report?.user?.name"
         >
           <div class="text-xl font-bold mb-4 border-b-2 border-white">
-            <h2>Report List</h2>
+            <h2>Counseling Report</h2>
           </div>
           <div class="grid grid-cols-4">
             <div class="text-lg mb-2 col-start-1 col-span-2 row-span-2">
@@ -259,6 +328,17 @@ const showReportIncidentEditForm = ref(false);
 const showReportIncidentDeleteModal = ref(false);
 const showReportIncidentFullDetail = ref(false);
 const detailedReportIncident = ref(null);
+
+const showIncidentList = ref(false);
+
+const toggleIncidentList = () => {
+  showIncidentList.value = !showIncidentList.value;
+};
+
+const selectIncident = (incident) => {
+  report.value.incident = incident;
+  showIncidentList.value = false;
+};
 
 // Status color of the Report
 const statusColorMapping = {
