@@ -189,8 +189,8 @@
                     id="reason"
                     v-model="editedFeedbackReport.feedback"
                     name="reason"
-                    rows="2"
-                    class="p-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    rows="4"
+                    class="px-4 py-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Feedback of the chosen status"
                     required
                   ></textarea>
@@ -372,8 +372,7 @@ const toggleReasonsList = () => {
 
 // Function to select a reason from the list
 const selectReason = (reason) => {
-  editedFeedbackReport.feedback = reason; // Update the textarea value
-  console.log(editedFeedbackReport.feedback);
+  editedFeedbackReport.value.feedback = reason; // Update the textarea value
   showReasonsList.value = false; // Hide the reasons list
 };
 

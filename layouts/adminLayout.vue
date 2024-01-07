@@ -154,12 +154,17 @@ const navItem = ref([
     text: "Announcement",
     route: "/announcement",
   },
+  { icon: "fa-solid fa-comment", text: "Chatbot", route: "/chat" },
   {
     icon: "fa-solid fa-calendar-check",
     text: "Book Appointment",
     route: "/appointment",
   },
-  { icon: "fa-solid fa-comment", text: "Chatbot", route: "/chat" },
+  {
+    icon: "fa-solid fa-clipboard",
+    text: "Report Incident",
+    route: "/report",
+  },
   {
     icon: "fa-solid fa-briefcase",
     text: "Office",

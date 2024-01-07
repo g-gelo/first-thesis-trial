@@ -112,7 +112,7 @@
                     </li>
                     <li
                       class="px-4 py-2 cursor-pointer"
-                      @click="selectReason('Other Concern, Specify')"
+                      @click="selectReason('Other Concern, Specify...')"
                     >
                       Other Concern, Specify.
                     </li>
@@ -434,7 +434,7 @@ const toggleReasonsList = () => {
 // Function to select a reason from the list
 const selectReason = (reason) => {
   selectedReason.value = reason;
-  reasonsInput.value = reason; // Optionally, update the input field value
+  appointment.value.reason = reason;
   showReasonsList.value = false; // Hide the reasons list
 };
 
