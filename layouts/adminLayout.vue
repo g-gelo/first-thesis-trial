@@ -15,7 +15,7 @@
             contain
             class="ml-13"
           ></v-img>
-          <v-btn icon color="bg300" @click.stop="drawer = !drawer">
+          <v-btn icon color="bg300" @click.stop="toggleDrawer">
             <v-icon>fa-solid fa-bars</v-icon>
           </v-btn>
         </v-app-bar>
@@ -173,6 +173,11 @@ const navItem = ref([
 ]);
 
 const drawer = ref(false);
+
+const toggleDrawer = () => {
+  drawer.value = !drawer.value;
+};
+
 const isLargeScreen = ref(false);
 const activeIndex = ref(false);
 

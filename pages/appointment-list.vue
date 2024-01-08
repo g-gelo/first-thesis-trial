@@ -233,7 +233,7 @@
         </button>
         <span class="text-sm font-semibold">{{ currentPage }}</span>
         <button
-          :disabled="currentPage * itemsPerPage >= appointments.length"
+          :disabled="currentPage * itemsPerPage >= (appointments?.length ?? 0)"
           class="px-2 py-1 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-700 disabled:bg-gray-500"
           @click="nextPage"
         >
@@ -305,12 +305,15 @@ const resetFilters = () => {
 
 const filteredAppointment = computed(() => {
   const filterKey = selectedFilter.value.toLowerCase();
-  return appointments.value.filter((appointment) =>
-    appointment[filterKey]
-      .toLowerCase()
-      .includes(searchKeyword.value.toLowerCase())
+  return (
+    appointments.value?.filter((appointment) =>
+      appointment[filterKey]
+        .toLowerCase()
+        .includes(searchKeyword.value.toLowerCase())
+    ) ?? []
   );
 });
+
 // Changing Status of the Appointment
 const updateStatusAppointment = async (appointmentId, newStatus) => {
   try {
