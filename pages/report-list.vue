@@ -8,6 +8,7 @@
         <i class="fa-solid fa-arrow-left"></i> Back
       </NuxtLink>
     </div>
+    <BarGraph />
     <div class="bg-slate-300 p-4 rounded-t-xl h-fit">
       <h1 class="text-lg font-bold my-2">Incident Report</h1>
       <!-- Report List Card -->

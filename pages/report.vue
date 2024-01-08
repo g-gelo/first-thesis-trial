@@ -33,79 +33,26 @@
             >
             <!-- Incident input field with helping button -->
             <div class="relative">
-              <input
+              <select
                 v-model="report.incident"
-                type="text"
                 class="p-2 w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Incident"
                 required
-              />
-
-              <!-- Helper button -->
-              <button
-                type="button"
-                class="absolute inset-y-0 right-0 px-2 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none"
-                @click="toggleIncidentList"
               >
-                ?
-              </button>
-
-              <!-- Display incident choices list -->
-              <div
-                v-show="showIncidentList"
-                class="absolute z-10 right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-md"
-              >
-                <ul class="py-1">
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="selectIncident('Academic Issues')"
-                  >
-                    Academic Issues
-                  </li>
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="selectIncident('Bullying')"
-                  >
-                    Bullying
-                  </li>
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="selectIncident('Substance Abuse')"
-                  >
-                    Alcohol and Substance Abuse
-                  </li>
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="selectIncident('Theft')"
-                  >
-                    Theft
-                  </li>
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="selectIncident('Discrimination')"
-                  >
-                    Discrimination
-                  </li>
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="selectIncident('Conflict Resolution')"
-                  >
-                    Conflict Resolution
-                  </li>
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="selectIncident('Health and Safety Concerns')"
-                  >
-                    Health and Safety Concerns
-                  </li>
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="selectIncident('Other Concern')"
-                  >
-                    Other Concern.
-                  </li>
-                </ul>
-              </div>
+                <option hidden value="">Select Incident</option>
+                <option value="Academic Issues">Academic Issues</option>
+                <option value="Bullying">Bullying</option>
+                <option value="Substance Abuse">
+                  Alcohol and Substance Abuse
+                </option>
+                <option value="Theft">Theft</option>
+                <option value="Discrimination">Discrimination</option>
+                <option value="Conflict Resolution">Conflict Resolution</option>
+                <option value="Health and Safety Concerns">
+                  Health and Safety Concerns
+                </option>
+                <option value="Other Concern">Other Concern</option>
+              </select>
             </div>
             <label
               for="description"
