@@ -40,7 +40,25 @@
                 name="date"
                 class="mt-1 p-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                 required
+                @input="validateDate"
               />
+              <!-- Warning Modal -->
+              <div v-if="showWarningModal" class="modal2 h-screen w-full z-999">
+                <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                  <h2 class="text-xl font-bold mb-4">Warning</h2>
+                  <p class="text-red-500 font-semibold mb-4">
+                    Please choose a date other than Friday, Saturday, or Sunday.
+                  </p>
+                  <div class="flex justify-end">
+                    <button
+                      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      @click="showWarningModal = false"
+                    >
+                      OK
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="col-span-1 md:col-span-1">
               <label for="time" class="block text-sm font-medium text-gray-700"
@@ -65,6 +83,7 @@
               >
               <div class="relative mt-1">
                 <textarea
+                  v-if="!showWarningModal"
                   id="reason"
                   v-model="appointment.reason"
                   name="reason"
@@ -76,6 +95,7 @@
 
                 <!-- Helper button -->
                 <button
+                  v-if="!showWarningModal"
                   type="button"
                   class="absolute inset-y-0 right-0 px-2 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none"
                   @click="toggleReasonsList"
@@ -423,6 +443,7 @@ const computedStatusColorClass = (status) =>
 const showAppointmentForm = ref(false);
 const showReasonsList = ref(false);
 const showReschedule = ref(false);
+const showWarningModal = ref(false);
 const selectedReason = ref("");
 const reasonsInput = ref("");
 
@@ -436,6 +457,17 @@ const selectReason = (reason) => {
   selectedReason.value = reason;
   appointment.value.reason = reason;
   showReasonsList.value = false; // Hide the reasons list
+};
+
+const validateDate = () => {
+  const selectedDate = new Date(appointment.value.date);
+  const dayOfWeek = selectedDate.getDay();
+
+  // Check if the selected day is Friday (5), Saturday (6), or Sunday (0)
+  if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) {
+    showWarningModal.value = true; // Display the warning modal
+    appointment.value.date = ""; // Clear the input value
+  }
 };
 
 // Get All Appointment Data
