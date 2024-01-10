@@ -6,7 +6,7 @@
       }"
       class="scrollable-content"
     >
-      <template v-if="!isLargeScreen">
+      <template v-if="isStandalonePWA">
         <v-app-bar fixed app color="bg100">
           <v-img
             src="/img/GuidanceConnectName.png"
@@ -99,6 +99,13 @@
             access the main content and receive guidance and counseling more
             effectively.
           </p>
+          <button
+            v-if="!isStandalonePWA"
+            id="installButton"
+            @click="installApp"
+          >
+            Install
+          </button>
         </div>
       </template>
     </v-main>
@@ -170,6 +177,44 @@ onMounted(() => {
     isStandalonePWA.value = true;
   }
 });
+const installApp = () => {
+  if ("serviceWorker" in navigator && "beforeinstallprompt" in window) {
+    // Check if the service worker and beforeinstallprompt are supported
+
+    // Add an event listener for the beforeinstallprompt event
+    window.addEventListener("beforeinstallprompt", (event) => {
+      // Prevent the default behavior to avoid automatic prompt
+      event.preventDefault();
+
+      // Store the event for later use
+      let deferredPrompt = event;
+
+      // Show the install button or UI to prompt the user to install
+      // For simplicity, you can use a confirmation dialog
+      const userChoice = window.confirm("Do you want to install this app?");
+
+      if (userChoice) {
+        // User clicked "Yes," so trigger the prompt
+        deferredPrompt.prompt();
+
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === "accepted") {
+            console.log("User accepted the install prompt");
+          } else {
+            console.log("User dismissed the install prompt");
+          }
+
+          // Clear the deferredPrompt variable as it can only be used once
+          // You may choose to save it to handle later installations
+          deferredPrompt = null;
+        });
+      }
+    });
+  } else {
+    console.error("Service worker or beforeinstallprompt not supported");
+  }
+};
 </script>
 
 <style scoped>
