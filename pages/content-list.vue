@@ -2,7 +2,7 @@
   <div class="p-4">
     <div class="flex justify-end">
       <NuxtLink
-        to="/newAdmin"
+        to="/admin"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300"
       >
         <i class="fa-solid fa-arrow-left"></i> Back
