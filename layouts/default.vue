@@ -20,9 +20,6 @@
           </v-btn>
         </v-app-bar>
         <slot />
-        <div>
-          <TawkChat />
-        </div>
         <v-navigation-drawer
           v-model="drawer"
           temporary
@@ -70,7 +67,7 @@
               v-if="
                 data?.user?.role == `SUPERADMIN` || data?.user?.role == `ADMIN`
               "
-              to="/newAdmin"
+              to="/admin"
               :class="{
                 'active bg-gray-200': isActive(index),
                 'pop-icon': isActive(index),
@@ -114,12 +111,6 @@ import { ref, onMounted } from "vue";
 const { data } = useAuth();
 const { signOut } = useAuth();
 
-const generateCoohomLink = () => {
-  const coohomLink =
-    "https://www.coohom.com/pub/tool/panorama/aiwalking?obsPlanId=3FO3V8DLHYW7&locale=en_US";
-  window.location.href = coohomLink;
-};
-
 const createNavigationButton = (route) => {
   if (typeof route === "function") {
     route();
@@ -146,11 +137,6 @@ const navItem = ref([
     icon: "fa-solid fa-clipboard",
     text: "Report Incident",
     route: "/report",
-  },
-  {
-    icon: "fa-solid fa-briefcase",
-    text: "Office",
-    route: generateCoohomLink,
   },
 ]);
 
