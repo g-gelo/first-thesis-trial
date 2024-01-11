@@ -92,7 +92,6 @@
                   placeholder="Reason for Counseling"
                   required
                 ></textarea>
-
                 <!-- Helper button -->
                 <button
                   v-if="!showWarningModal"
@@ -219,14 +218,14 @@
     </div>
     <!-- Appointment List Card -->
     <div
-      class="grid place-content-center"
       v-for="book in appointments"
       :key="book.id"
+      class="grid place-content-center"
     >
       <div v-if="book.isArchive == false">
         <div
-          class="mt-8 rounded-lg bg-slate-300 p-3 mx-3 mb-4"
           v-if="data?.user?.name == book?.user?.name"
+          class="mt-8 rounded-lg bg-slate-300 p-3 mx-3 mb-4"
         >
           <div class="text-xl font-bold mb-4 border-b-2 border-white">
             <h2>Appointment List</h2>
@@ -359,9 +358,6 @@
           </div>
           <div class="flex justify-end">
             <button
-              v-if="
-                data?.user?.role == `SUPERADMIN` || data?.user?.role == `ADMIN`
-              "
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
               @click="($event) => editAppointment(editedAppointment)"
             >
@@ -445,7 +441,6 @@ const showReasonsList = ref(false);
 const showReschedule = ref(false);
 const showWarningModal = ref(false);
 const selectedReason = ref("");
-const reasonsInput = ref("");
 
 // Function to toggle the display of the reasons list
 const toggleReasonsList = () => {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Hero Area -->
-    <div class="text-white py-16 bg-green-800 mb-4">
+    <div class="text-white py-16 bg-green-800 mb-8">
       <div class="grid place-content-center">
         <img src="/img/reportIncident.png" alt="Hero Image" class="w-64" />
       </div>
@@ -88,20 +88,35 @@
     <!-- Edit/Reschedule Modal -->
     <div v-if="showReportIncidentEditForm" class="modal h-screen w-full">
       <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-        <h2 class="text-xl font-bold mb-4">Edit Incident Report</h2>
+        <h2 class="text-xl font-bold mb-4">Edit Counseling Report</h2>
         <div>
-          <input
-            v-model="editedReport.incident"
-            type="incident"
-            class="w-full p-2 border rounded mb-4"
-            placeholder="Incident"
-            required
-          />
+          <div class="relative">
+            <select
+              v-model="editedReport.incident"
+              class="w-full p-2 border rounded mb-4"
+              placeholder="Incident"
+              required
+            >
+              <option hidden value="">Select Incident</option>
+              <option value="Academic Issues">Academic Issues</option>
+              <option value="Bullying">Bullying</option>
+              <option value="Substance Abuse">
+                Alcohol and Substance Abuse
+              </option>
+              <option value="Theft">Theft</option>
+              <option value="Discrimination">Discrimination</option>
+              <option value="Conflict Resolution">Conflict Resolution</option>
+              <option value="Health and Safety Concerns">
+                Health and Safety Concerns
+              </option>
+              <option value="Other Concern">Other Concern</option>
+            </select>
+          </div>
           <textarea
             v-model="editedReport.description"
             class="w-full p-2 border rounded mb-4"
             placeholder="Reason for Counseling"
-            rows="2"
+            rows="3"
             required
           ></textarea>
         </div>
@@ -166,14 +181,14 @@
     </div>
     <!-- Display Report / Report List -->
     <div
-      class="grid place-content-center p-4"
       v-for="report in incidents"
       :key="report.id"
+      class="grid place-content-center"
     >
       <div v-if="report.isArchive == false">
         <div
-          class="rounded-lg bg-slate-300 p-3 mx-3 mb-4"
           v-if="data?.user?.name == report?.user?.name"
+          class="rounded-lg bg-slate-300 p-3 mx-3 mb-4 p-4"
         >
           <div class="text-xl font-bold mb-4 border-b-2 border-white">
             <h2>Counseling Report</h2>
@@ -275,17 +290,6 @@ const showReportIncidentEditForm = ref(false);
 const showReportIncidentDeleteModal = ref(false);
 const showReportIncidentFullDetail = ref(false);
 const detailedReportIncident = ref(null);
-
-const showIncidentList = ref(false);
-
-const toggleIncidentList = () => {
-  showIncidentList.value = !showIncidentList.value;
-};
-
-const selectIncident = (incident) => {
-  report.value.incident = incident;
-  showIncidentList.value = false;
-};
 
 // Status color of the Report
 const statusColorMapping = {

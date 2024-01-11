@@ -48,9 +48,9 @@
       </div>
       <!-- Appointment List Card -->
       <div
-        class="bg-white p-4 rounded-xl mb-4 grid grid-cols-5"
         v-for="book in pagedAppointment"
         :key="book.id"
+        class="bg-white p-4 rounded-xl mb-4 grid grid-cols-5"
       >
         <div
           class="col-start-1 col-end-2 row-span-2 w-16 h-16 rounded-full overflow-hidden"
@@ -74,7 +74,7 @@
         >
           <h1 class="text-md font-semibold">{{ book?.user?.name }}</h1>
         </div>
-        <div class="col-start-5 ml-6" v-if="data.user.role == 'SUPERADMIN'">
+        <div v-if="data.user.role == 'SUPERADMIN'" class="col-start-5 ml-6">
           <button class="text-xs">
             <v-icon
               @click="
