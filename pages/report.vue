@@ -28,11 +28,11 @@
           <div>
             <label
               for="incident"
-              class="block text-sm font-medium text-gray-700"
+              class="block text-sm font-medium text-gray-700 mb-2"
               >Incident:</label
             >
             <!-- Incident input field with helping button -->
-            <div class="relative">
+            <div class="relative mb-4">
               <select
                 v-model="report.incident"
                 class="p-2 w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -56,7 +56,7 @@
             </div>
             <label
               for="description"
-              class="block text-sm font-medium text-gray-700"
+              class="block text-sm font-medium text-gray-700 mb-2"
               >Description:</label
             >
             <textarea

@@ -126,6 +126,7 @@
                 </p>
                 <div class="col-start-3 col-span-4">
                   <select
+                    v-if="data?.user?.role == 'SUPERADMIN'"
                     id="status"
                     class="px-2 py-1 border rounded focus:outline-none focus:ring focus:border-blue-300"
                     @change="

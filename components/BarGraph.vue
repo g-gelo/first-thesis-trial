@@ -63,8 +63,6 @@ const countIncidentOccurrences = (incidents) => {
     }
   });
 
-  console.log("Incident Counts:", incidentCounts);
-
   return incidentCounts;
 };
 
