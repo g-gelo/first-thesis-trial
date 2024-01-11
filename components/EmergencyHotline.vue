@@ -296,7 +296,7 @@
                         v-if="data?.user?.role == 'SUPERADMIN'"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
-                          deleteEmergencyHotline(emergencyhotline.id),
+                          deleteEmergencyHotline(Delete_Hotline.id),
                             (showDeleteModal = false)
                         "
                       >

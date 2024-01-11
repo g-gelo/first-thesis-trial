@@ -256,7 +256,7 @@
                         v-if="data?.user?.role == 'SUPERADMIN'"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
-                          deleteFaqs(faqs.id), (showDeleteFaqsForm = false)
+                          deleteFaqs(Delete_Faqs.id), (showDeleteFaqsForm = false)
                         "
                       >
                         Delete

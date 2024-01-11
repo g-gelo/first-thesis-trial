@@ -225,7 +225,7 @@
                         v-if="data?.user?.role == 'SUPERADMIN'"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
-                          deleteGco(guidance.id), (showDeleteModal2 = false)
+                          deleteGco(Delete_GcoProfile.id), (showDeleteModal2 = false)
                         "
                       >
                         Delete
@@ -476,7 +476,7 @@
                         v-if="data?.user?.role == 'SUPERADMIN'"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
-                          deleteGcoService(service.id),
+                          deleteGcoService(Delete_GcoService.id),
                             (showDeleteModal1 = false)
                         "
                       >

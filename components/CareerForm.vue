@@ -322,7 +322,7 @@
                           data?.user?.role == 'ADMIN'
                         "
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
-                        @click="deleteCareer(job.id), (showDeleteModal = false)"
+                        @click="deleteCareer(Delete_Career.id), (showDeleteModal = false)"
                       >
                         Delete
                       </button>

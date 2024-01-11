@@ -225,7 +225,7 @@
                         v-if="data?.user?.role == 'SUPERADMIN'"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
-                          deleteOsas(profile.id), (showDeleteModal1 = false)
+                          deleteOsas(Delete_OsasModule.id), (showDeleteModal1 = false)
                         "
                       >
                         Delete
@@ -443,7 +443,7 @@
                         v-if="data?.user?.role == 'SUPERADMIN'"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
-                          deleteFunction(purpose.id), (showDeleteModal2 = false)
+                          deleteFunction(Delete_OsasFunction.id), (showDeleteModal2 = false)
                         "
                       >
                         Delete
