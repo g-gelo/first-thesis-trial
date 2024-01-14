@@ -11,6 +11,9 @@ export default defineNuxtConfig({
             name: "Guidance Connect",
             short_name: "Guidance Connect",
             description: "Guidance and Counseling Office Web/Mobile Application",
+            lang: "es-US",
+            start_url: `/`,
+            prefer_related_applications: true,
             icons: [
                 {
                     src: "icons/android-icon48x48.png",
