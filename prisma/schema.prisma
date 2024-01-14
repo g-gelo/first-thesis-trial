@@ -92,6 +92,7 @@ enum AppointmentStatus {
   Rejected
   Accepted
   Finished
+  Canceled
 }
 model Appointment {
   id            String   @id @default(cuid())
@@ -100,6 +101,7 @@ model Appointment {
   reason        String  @db.VarChar(250)
   course        String
   year          String
+  cancel_reason String? @db.VarChar(250)
   status        AppointmentStatus @default(Pending)
   isArchive     Boolean @default(false)
   userId        String

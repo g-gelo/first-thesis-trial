@@ -124,6 +124,12 @@
                 <p class="text-sm text-gray-500 my-2 col-start-1 col-span-3">
                   Year: {{ detailedAppointment?.year }}
                 </p>
+                <p
+                  v-if="detailedAppointment?.status === 'Canceled'"
+                  class="text-sm text-gray-500 my-2 col-start-1 col-span-3"
+                >
+                  Reason for Canceling: {{ detailedAppointment?.cancel_reason }}
+                </p>
                 <div class="col-start-3 col-span-4">
                   <select
                     v-if="data?.user?.role == 'SUPERADMIN'"
@@ -138,25 +144,25 @@
                   >
                     <option
                       value="Pending"
-                      :selected="detailedAppointment.status === 'Pending'"
+                      :selected="detailedAppointment?.status === 'Pending'"
                     >
                       Pending
                     </option>
                     <option
                       value="Rejected"
-                      :selected="detailedAppointment.status === 'Rejected'"
+                      :selected="detailedAppointment?.status === 'Rejected'"
                     >
                       Rejected
                     </option>
                     <option
                       value="Accepted"
-                      :selected="detailedAppointment.status === 'Accepted'"
+                      :selected="detailedAppointment?.status === 'Accepted'"
                     >
                       Accepted
                     </option>
                     <option
                       value="Finished"
-                      :selected="detailedAppointment.status === 'Finished'"
+                      :selected="detailedAppointment?.status === 'Finished'"
                     >
                       Finished
                     </option>
@@ -267,6 +273,7 @@ const statusColorMapping = {
   Rejected: "text-red-500 font-semibold",
   Pending: "text-yellow-500 font-semibold",
   Finished: "text-blue-500 font-semibold",
+  Canceled: "text-orange-500 font-semibold",
 };
 
 const computedStatusColorClass = (status) =>

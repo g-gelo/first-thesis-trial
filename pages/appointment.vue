@@ -259,6 +259,20 @@
             </div>
             <div class="mt-4 flex justify-end space-x-4">
               <button
+                v-if="book.status === 'Pending' || book.status === 'Accepted'"
+                class="text-blue-500 font-semibold"
+                variant="tonal"
+                @click="
+                  ($event) => {
+                    showCancelAppointment = true;
+                    cancel_Appointment = book;
+                  }
+                "
+              >
+                Cancel
+              </button>
+              <button
+                v-if="book.status === 'Rejected' || book.status === 'Finished'"
                 class="text-red-500 font-semibold"
                 variant="tonal"
                 @click="
@@ -310,13 +324,61 @@
               placeholder="Time"
               required
             />
-            <textarea
-              v-model="editedAppointment.reason"
-              class="w-full p-2 border rounded mb-4"
-              placeholder="Reason for Counseling"
-              rows="2"
-              required
-            ></textarea>
+            <div class="relative mt-1">
+              <textarea
+                v-if="!showWarningModal"
+                id="reason"
+                v-model="editedAppointment.reason"
+                name="reason"
+                rows="2"
+                class="p-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Reason for Counseling"
+                required
+              ></textarea>
+              <!-- Helper button -->
+              <button
+                v-if="!showWarningModal"
+                type="button"
+                class="absolute inset-y-0 right-0 px-2 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none"
+                @click="toggleReasonsList"
+              >
+                ?
+              </button>
+              <!-- Display reasons list -->
+              <div
+                v-show="showReasonsList"
+                class="absolute z-10 right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-md"
+              >
+                <ul class="py-1">
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="selectReason('Academic Concern')"
+                  >
+                    Academic Concern
+                  </li>
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="selectReason('Behavior Maladjustments')"
+                  >
+                    Behavior Maladjustments
+                  </li>
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="
+                      selectReason('Violation to school Rules, specifically...')
+                    "
+                  >
+                    Violation to school Rules, specifically...
+                  </li>
+                  <li
+                    class="px-4 py-2 cursor-pointer"
+                    @click="selectReason('Other Concern, Specify...')"
+                  >
+                    Other Concern, Specify.
+                  </li>
+                </ul>
+              </div>
+            </div>
             <label for="course" class="block text-sm font-medium text-gray-700"
               >Course:</label
             >
@@ -385,7 +447,7 @@
       <!-- Delete Modal -->
       <div v-if="showDeleteModal" class="modal2 h-screen w-full">
         <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-          <h2 class="text-xl font-bold mb-4">Delete your appointment?</h2>
+          <h2 class="text-xl font-bold mb-4">Delete appointment?</h2>
           <div class="grid grid-cols-4">
             <div class="col-start-1 col-span-4 ml-4">
               <h1 class="text-md font-semibold">
@@ -425,6 +487,49 @@
           </div>
         </div>
       </div>
+      <!-- Cancel Appointment Modal -->
+      <div v-if="showCancelAppointment" class="modal2 h-screen w-full">
+        <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+          <h2 class="text-xl font-bold mb-4">Cancel Appointment?</h2>
+          <div class="grid grid-cols-4">
+            <div class="col-start-1 col-span-4 ml-4">
+              <h1 class="text-md font-semibold">
+                {{ cancel_Appointment.user.name }}
+              </h1>
+              <h1 class="text-sm font-medium mt-2 mb-1">
+                Reason for Canceling
+              </h1>
+              <!-- Optional Reasoning Input -->
+              <textarea
+                v-model="editedAppointment.cancel_reason"
+                class="p-2 border rounded w-full"
+                placeholder="Optional: Enter reason for canceling"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+          <div class="flex justify-end mt-2">
+            <button
+              class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+              @click="
+                () => {
+                  cancelAppointment(cancel_Appointment.id, editedAppointment);
+                  editedAppointment = initializeEditedAppointment();
+                  showCancelAppointment = false;
+                }
+              "
+            >
+              Delete
+            </button>
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              @click="() => (showCancelAppointment = false)"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -432,6 +537,7 @@
 <script setup>
 const showDeleteModal = ref(false);
 const Delete_Appointment = ref(null);
+const cancel_Appointment = ref(null);
 
 const { data } = useAuth();
 
@@ -450,6 +556,7 @@ const showAppointmentForm = ref(false);
 const showReasonsList = ref(false);
 const showReschedule = ref(false);
 const showWarningModal = ref(false);
+const showCancelAppointment = ref(false);
 const selectedReason = ref("");
 
 // Function to toggle the display of the reasons list
@@ -461,6 +568,7 @@ const toggleReasonsList = () => {
 const selectReason = (reason) => {
   selectedReason.value = reason;
   appointment.value.reason = reason;
+  editedAppointment.value.reason = reason;
   showReasonsList.value = false; // Hide the reasons list
 };
 
@@ -531,6 +639,7 @@ const editedAppointment = ref({
   reason: null,
   course: null,
   year: null,
+  cancel_reason: null,
   status: null,
   isArchive: false,
 });
@@ -572,14 +681,13 @@ const archivingAppointment = async (id) => {
       // const appointment = await $fetch("/api/appointment");
 
       // Update the isArchive property to true
-      appointment.isArchive = true;
 
       // Send a PUT request to update the appointment
       response = await $fetch("/api/appointments", {
         method: "PUT",
         body: {
           id: id,
-          isArchive: appointment.isArchive,
+          isArchive: true,
         },
       });
 
@@ -594,6 +702,36 @@ const archivingAppointment = async (id) => {
     // Close the delete modal
     showDeleteModal.value = false;
   }
+};
+
+const cancelAppointment = async (id, editedAppointment) => {
+  let response = null;
+  try {
+    if (id) {
+      response = await $fetch("/api/appointment_cancel", {
+        method: "PUT",
+        body: {
+          id: id,
+          status: "Canceled",
+          cancel_reason: editedAppointment.cancel_reason,
+          isArchive: true,
+        },
+      });
+
+      // Fetch the updated list of appointments
+      appointments.value = await $fetch("/api/appointment");
+    }
+  } catch (error) {
+    console.error("Error archiving appointment:", error);
+
+    // Handle any errors that might occur during the archiving process
+  } finally {
+    // Close the delete modal
+    showCancelAppointment.value = false;
+  }
+};
+const initializeEditedAppointment = () => {
+  return { cancel_reason: "" };
 };
 </script>
 
