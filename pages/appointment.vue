@@ -240,10 +240,23 @@
                 >{{ book.date }} | {{ book.time }}</span
               >
             </div>
-            <p class="text-gray-700 mt-2">
-              {{ book.course }} - Year {{ book.year }}
-            </p>
-            <p class="text-gray-700 mt-2">Reason: {{ book.reason }}</p>
+            <div class="grid grid-cols-4">
+              <div class="grid col-start-1 col-span-4">
+                <span
+                  class="flex justify-end"
+                  :class="computedStatusColorClass(book.status)"
+                  >{{ book.status }}</span
+                >
+              </div>
+              <div class="grid col-start-1 col-span-4">
+                <p class="text-gray-700 mt-2">
+                  {{ book.course }} - Year {{ book.year }}
+                </p>
+              </div>
+              <div class="grid col-start-1 col-span-4">
+                <p class="text-gray-700 mt-2">Reason: {{ book.reason }}</p>
+              </div>
+            </div>
             <div class="mt-4 flex justify-end space-x-4">
               <button
                 class="text-red-500 font-semibold"
@@ -274,9 +287,6 @@
               >
                 Reschedule
               </button>
-              <span :class="computedStatusColorClass(book.status)">{{
-                book.status
-              }}</span>
             </div>
           </div>
         </div>
