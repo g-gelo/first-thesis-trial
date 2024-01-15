@@ -285,6 +285,7 @@
                 Delete
               </button>
               <button
+                v-if="book.status === 'Pending' || book.status === 'Accepted'"
                 class="text-blue-500 font-semibold"
                 @click="
                   ($event) => {
