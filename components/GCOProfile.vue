@@ -17,7 +17,6 @@
               name="title"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
               placeholder="Title"
-              required
             />
           </div>
           <div>
@@ -225,7 +224,8 @@
                         v-if="data?.user?.role == 'SUPERADMIN'"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
-                          deleteGco(Delete_GcoProfile.id), (showDeleteModal2 = false)
+                          deleteGco(Delete_GcoProfile.id),
+                            (showDeleteModal2 = false)
                         "
                       >
                         Delete

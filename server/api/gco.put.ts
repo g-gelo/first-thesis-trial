@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
 
   let updatedGco;
 
-  if (id && title && description)
+  if (id && description)
     updatedGco = await prisma.gCOProfile.update({
       where: {
         id,

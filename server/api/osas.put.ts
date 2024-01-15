@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
 
   let updatedOsas;
 
-  if (id && title && description)
+  if (id && description)
     updatedOsas = await prisma.oSASProfile.update({
       where: {
         id,
