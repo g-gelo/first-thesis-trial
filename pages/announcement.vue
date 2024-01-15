@@ -17,9 +17,9 @@
         <h1 class="main-title">Announcement and Events</h1>
         <p class="subtitle">
           Stay informed about the upcoming seminars, memos, and important
-          announcements. Get ready to experience a mobile application that can
-          still help you whenever you need help. Empowering you with knowledge
-          and opportunities for growth.
+          announcements. Get ready to experience an application that can still
+          help you whenever you need help. Empowering you with knowledge and
+          opportunities for growth.
         </p>
       </div>
     </v-container>

@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
     const status = body.status;
     const cancelReason = body.cancel_reason;
 
-    if (id && isArchive && status && cancelReason) {
+    if (id && isArchive && status) {
       try {
         updatedAppointment = await prisma.appointment.update({
           where: {

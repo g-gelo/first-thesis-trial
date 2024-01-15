@@ -514,7 +514,7 @@
               class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
               @click="
                 () => {
-                  cancelAppointment(cancel_Appointment.id, editedAppointment);
+                  cancelAppointment(cancel_Appointment.id);
                   editedAppointment = initializeEditedAppointment();
                   showCancelAppointment = false;
                 }
@@ -705,7 +705,7 @@ const archivingAppointment = async (id) => {
   }
 };
 
-const cancelAppointment = async (id, editedAppointment) => {
+const cancelAppointment = async (id) => {
   let response = null;
   try {
     if (id) {
