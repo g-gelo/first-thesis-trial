@@ -165,7 +165,7 @@
             <tr>
               <th class="py-2 px-4 border-b">Title</th>
               <th class="py-2 px-4 border-b">Description</th>
-              <th class="py-2 px-4 border-b">Edit & Delete</th>
+              <th class="py-2 px-4 border-b">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -421,7 +421,7 @@
           <thead class="bg-green-800 text-white">
             <tr>
               <th class="py-2 px-4 border-b">Service</th>
-              <th class="py-2 px-4 border-b">Edit & Delete</th>
+              <th class="py-2 px-4 border-b">Action</th>
             </tr>
           </thead>
           <tbody>

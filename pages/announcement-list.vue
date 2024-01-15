@@ -25,13 +25,13 @@
         </div>
       </div>
     </div>
-    <!-- Table For Job Vacancy -->
+    <!-- Table For Job Career -->
     <div>
       <div class="mt-5 rounded-xl bg-slate-300">
         <h2
           class="text-xl font-bold mb-4 border-b-2 border-white mb-4 text-sm font-semibold p-4"
         >
-          Job Vacancy
+          Job Career
         </h2>
         <div>
           <CareerForm />

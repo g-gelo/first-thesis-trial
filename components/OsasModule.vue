@@ -167,7 +167,7 @@
             <tr>
               <th class="w-1/4 py-2 px-4 border-b">Title</th>
               <th class="w-1/4 py-2 px-4 border-b">Description</th>
-              <th class="w-1/4 py-2 px-4 border-b">Edit & Delete</th>
+              <th class="w-1/4 py-2 px-4 border-b">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -224,7 +224,8 @@
                         v-if="data?.user?.role == 'SUPERADMIN'"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
-                          deleteOsas(Delete_OsasModule.id), (showDeleteModal1 = false)
+                          deleteOsas(Delete_OsasModule.id),
+                            (showDeleteModal1 = false)
                         "
                       >
                         Delete
@@ -385,7 +386,7 @@
           <thead class="bg-green-800 text-white">
             <tr>
               <th class="w-1/4 py-2 px-4 border-b">Function</th>
-              <th class="w-1/4 py-2 px-4 border-b">Edit & Delete</th>
+              <th class="w-1/4 py-2 px-4 border-b">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -442,7 +443,8 @@
                         v-if="data?.user?.role == 'SUPERADMIN'"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
-                          deleteFunction(Delete_OsasFunction.id), (showDeleteModal2 = false)
+                          deleteFunction(Delete_OsasFunction.id),
+                            (showDeleteModal2 = false)
                         "
                       >
                         Delete

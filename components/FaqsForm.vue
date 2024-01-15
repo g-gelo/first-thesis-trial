@@ -202,7 +202,7 @@
             <tr>
               <th class="py-2 px-4 border-b">Keyword</th>
               <th class="py-2 px-4 border-b">Answer</th>
-              <th class="py-2 px-4 border-b">Edit & Delete</th>
+              <th class="py-2 px-4 border-b">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -256,7 +256,8 @@
                         v-if="data?.user?.role == 'SUPERADMIN'"
                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
                         @click="
-                          deleteFaqs(Delete_Faqs.id), (showDeleteFaqsForm = false)
+                          deleteFaqs(Delete_Faqs.id),
+                            (showDeleteFaqsForm = false)
                         "
                       >
                         Delete
