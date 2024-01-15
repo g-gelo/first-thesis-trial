@@ -309,7 +309,7 @@
       <!-- Edit/Reschedule Modal -->
       <div v-if="showReschedule" class="modal2 h-screen w-full">
         <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-          <h2 class="text-xl font-bold mb-4">Edit Appointment</h2>
+          <h2 class="text-xl font-bold mb-4">Reschedule Appointment</h2>
           <div>
             <input
               v-model="editedAppointment.date"
@@ -325,109 +325,6 @@
               placeholder="Time"
               required
             />
-            <div class="relative mt-1">
-              <textarea
-                v-if="!showWarningModal"
-                id="reason"
-                v-model="editedAppointment.reason"
-                name="reason"
-                rows="2"
-                class="p-2 block w-full rounded-md border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Reason for Counseling"
-                required
-              ></textarea>
-              <!-- Helper button -->
-              <button
-                v-if="!showWarningModal"
-                type="button"
-                class="absolute inset-y-0 right-0 px-2 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none"
-                @click="toggleReasonsList"
-              >
-                ?
-              </button>
-              <!-- Display reasons list -->
-              <div
-                v-show="showReasonsList"
-                class="absolute z-10 right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-md"
-              >
-                <ul class="py-1">
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="selectReason('Academic Concern')"
-                  >
-                    Academic Concern
-                  </li>
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="selectReason('Behavior Maladjustments')"
-                  >
-                    Behavior Maladjustments
-                  </li>
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="
-                      selectReason('Violation to school Rules, specifically...')
-                    "
-                  >
-                    Violation to school Rules, specifically...
-                  </li>
-                  <li
-                    class="px-4 py-2 cursor-pointer"
-                    @click="selectReason('Other Concern, Specify...')"
-                  >
-                    Other Concern, Specify.
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <label for="course" class="block text-sm font-medium text-gray-700"
-              >Course:</label
-            >
-            <select
-              id="course"
-              v-model="editedAppointment.course"
-              name="course"
-              class="w-full p-2 border rounded mb-4"
-              required
-            >
-              <option value="Information Technology">
-                BS in Information Technology
-              </option>
-              <option value="Computer Science">BS in Computer Science</option>
-              <option value="Office Administration">
-                BS in Office Administration
-              </option>
-              <option value="Journalism">BA Journalism</option>
-              <option value="Early Childhood Education">
-                Bachelor of Early Childhood Education
-              </option>
-              <option value="Business Management">
-                BS in Business Management
-              </option>
-              <option value="Entrepreneur">BS in Entrepreneur</option>
-              <option value="Hospital Management">
-                BS in Hospital Management
-              </option>
-              <option value="BS in Psychology">BS in Pyschology</option>
-              <option value="Secondary Education">
-                Bachelor of Secondary Education
-              </option>
-            </select>
-            <label for="year" class="block text-sm font-medium text-gray-700"
-              >Year:</label
-            >
-            <select
-              id="year"
-              v-model="editedAppointment.year"
-              name="year"
-              class="w-full p-2 border rounded mb-4"
-              required
-            >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-            </select>
           </div>
           <div class="flex justify-end">
             <button
