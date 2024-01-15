@@ -211,10 +211,18 @@
                 }
               "
             >
+              <span
+                class="flex justify-end"
+                :class="computedStatusColorClass(report.status)"
+                >{{ report.status }}</span
+              >
               <p class="line-clamp-3">Description: {{ report.description }}</p>
             </div>
             <button
-              class="text-red-500 font-semibold col-start-2"
+              v-if="
+                report.status === 'Rejected' || report.status === 'Resolved'
+              "
+              class="text-red-500 font-semibold col-start-4"
               variant="tonal"
               @click="
                 ($event) => {
@@ -226,7 +234,8 @@
               Delete
             </button>
             <button
-              class="text-blue-500 font-semibold col-start-3"
+              v-if="report.status === 'Pending' || report.status === 'Accepted'"
+              class="text-blue-500 font-semibold col-start-4"
               @click="
                 ($event) => {
                   editedReport.id = report.id;
@@ -239,11 +248,6 @@
             >
               Edit
             </button>
-            <span
-              class="col-start-4"
-              :class="computedStatusColorClass(report.status)"
-              >{{ report.status }}</span
-            >
           </div>
         </div>
       </div>
