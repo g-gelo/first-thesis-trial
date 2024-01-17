@@ -26,7 +26,7 @@
         <h1 class="font-bold text-lg mb-4 mt-2">Book Your Appointment</h1>
         <form
           class="space-y-4"
-          @submit.prevent="addAppointment(appointment, data?.user?.id)"
+          @submit.prevent="addAppointment(appointment, data?.user?.id, data?.user?.name)"
         >
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="col-span-1 md:col-span-1">
@@ -429,6 +429,7 @@
         </div>
       </div>
     </div>
+    <pre>{{  }}</pre>
   </div>
 </template>
 
@@ -437,6 +438,7 @@ const showDeleteModal = ref(false);
 const Delete_Appointment = ref(null);
 const cancel_Appointment = ref(null);
 
+const mail = useMail();
 const { data } = useAuth();
 
 // Status color of the Appointment
@@ -493,7 +495,7 @@ const appointment = ref({
   year: "",
 });
 
-const addAppointment = async (appointment, userId) => {
+const addAppointment = async (appointment, userId, userName) => {
   try {
     const addedAppointment = await $fetch("/api/appointment", {
       method: "POST",
@@ -509,6 +511,8 @@ const addAppointment = async (appointment, userId) => {
         userId: userId,
       }),
     });
+    sendAppointmentConfirmationEmail(appointment, userName);
+
     if (addedAppointment) {
       // Reset form fields
       appointment.date = "";
@@ -529,6 +533,21 @@ const addAppointment = async (appointment, userId) => {
     // Handle any other errors that might occur
   }
 };
+// Function to send an email confirmation for the appointment
+const sendAppointmentConfirmationEmail = async (appointment, userName) => {
+  console.log("Inside sendAppointmentConfirmationEmail:", appointment.date, appointment.time);
+    try {
+      await mail.send({
+        subject: "Appointment Confirmation",
+        text: `${userName} made an appointment on ${appointment.date} at ${appointment.time}.`,
+      });
+
+      console.log("Email sent successfully!");
+    } catch (error) {
+      console.error("Error sending email:", error);
+      // Handle the error appropriately, e.g., log it or show a user-friendly message
+    }
+  };
 // Editing / Reschedule of the Appointment
 const editedAppointment = ref({
   id: null,
