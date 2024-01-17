@@ -5,25 +5,7 @@ export default defineNuxtConfig({
         "@sidebase/nuxt-auth",
         "@kevinmarrec/nuxt-pwa",
         "@nuxtjs/tailwindcss",
-        "nuxt-mail"
     ],
-    mail: {
-        message:{
-            to: process.env.EMAIL_USER,
-            cc: process.env.EMAIL_USER,
-            bcc: process.env.EMAIL_USER
-        },
-        smtp: {
-            service: "gmail",
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: true,
-            auth: {
-                user: process.env.EMAIL_USER, // Sender gmail address
-                pass: process.env.EMAIL_PASSWORD, // Password from Gmail of the User
-            }
-        },
-    },
     pwa: {
         manifest: {
             name: "Guidance Connect",

@@ -436,7 +436,6 @@
         </div>
       </div>
     </div>
-    <pre>{{}}</pre>
   </div>
 </template>
 
@@ -445,7 +444,6 @@ const showDeleteModal = ref(false);
 const Delete_Appointment = ref(null);
 const cancel_Appointment = ref(null);
 
-const mail = useMail();
 const { data } = useAuth();
 
 // Status color of the Appointment

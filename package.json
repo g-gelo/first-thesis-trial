@@ -44,7 +44,6 @@
     "next-auth": "^4.21.1",
     "node-fetch-native": "^1.6.1",
     "nodemailer": "^6.9.8",
-    "nuxt-mail": "^4.0.2",
     "sass": "^1.69.7",
     "vue-chartjs": "^5.3.0",
     "vuetify": "^3.4.9"
