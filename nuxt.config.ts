@@ -9,7 +9,9 @@ export default defineNuxtConfig({
     ],
     mail: {
         message:{
-            to: process.env.EMAIL_USER
+            to: process.env.EMAIL_USER,
+            cc: process.env.EMAIL_USER,
+            bcc: process.env.EMAIL_USER
         },
         smtp: {
             service: "gmail",
