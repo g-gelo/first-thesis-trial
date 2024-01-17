@@ -1,5 +1,7 @@
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
+  console.log("Request Body:", await readBody(event));
+  console.log("Email User:", process.env.EMAIL_USER);
 
   try {
     // Check if required properties are present in the request body
@@ -25,7 +27,7 @@ export default defineEventHandler(async (event) => {
         },
       });
 
-      event.context.transport.sendMail({
+      await event.context.transport.sendMail({
         from: process.env.EMAIL_USER,
         to: body.email,
         subject: "Appointment Confirmation: You made an appointment!",
