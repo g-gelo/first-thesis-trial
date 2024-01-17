@@ -4,6 +4,7 @@ export default defineEventHandler(async (event) => {
       user: {
         select: {
           name: true,
+          email: true,
           image: true,
         },
       },
