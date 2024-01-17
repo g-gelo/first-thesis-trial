@@ -25,6 +25,9 @@ export default defineEventHandler(async (event) => {
         },
       });
 
+      console.log("Before sending email");
+      console.log("Email user:", process.env.EMAIL_USER);
+
       try {
         await event.context.transport.sendMail({
           from: process.env.EMAIL_USER,
@@ -44,6 +47,7 @@ export default defineEventHandler(async (event) => {
         Best regards,
           Guidance and Counseling Office`,
         });
+        console.log("After sending email");
 
         // Rest of your code
         return {
