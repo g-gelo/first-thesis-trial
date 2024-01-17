@@ -6,7 +6,7 @@
       }"
       class="scrollable-content"
     >
-      <template v-if="isStandalonePWA">
+      <template v-if="!isLargeScreen">
         <v-app-bar fixed app color="bg100">
           <v-img
             src="/img/GuidanceConnectName.png"
