@@ -25,14 +25,12 @@ export default defineEventHandler(async (event) => {
         },
       });
 
-      await event.context.transport.sendMail({
-        from: {
-          name: "Guidance and Counseling Office",
-          address: "angelogabriel.evangelista@cvsu.edu.ph",
-        },
-        to: body.email,
-        subject: "Appointment Confirmation: You made an appointment!",
-        text: `Dear ${body.name},
+      try {
+        await event.context.transport.sendMail({
+          from: process.env.EMAIL_USER,
+          to: body.email,
+          subject: "Appointment Confirmation: You made an appointment!",
+          text: `Dear ${body.name},
 
               This is to confirm that you have successfully made an appointment for the following details:
               - Date: ${body.date}
@@ -45,12 +43,16 @@ export default defineEventHandler(async (event) => {
 
         Best regards,
           Guidance and Counseling Office`,
-      });
+        });
 
-      // Return the created appointment
-      return {
-        appointment,
-      };
+        // Rest of your code
+        return {
+          appointment,
+        };
+      } catch (error) {
+        console.error("Error sending email:", error);
+        throw new Error("Failed to send email");
+      }
     } else {
       // Return an error response if any required property is missing
       throw new Error("Missing required data in the request body.");
