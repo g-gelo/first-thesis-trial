@@ -26,7 +26,7 @@
         <h1 class="font-bold text-lg mb-4 mt-2">Book Your Appointment</h1>
         <form
           class="space-y-4"
-          @submit.prevent="addAppointment(appointment, data?.user?.id, data?.user?.name)"
+          @submit.prevent="addAppointment(appointment, data?.user?.id, data?.user?.name, data?.user?.email)"
         >
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="col-span-1 md:col-span-1">
@@ -495,7 +495,7 @@ const appointment = ref({
   year: "",
 });
 
-const addAppointment = async (appointment, userId, userName) => {
+const addAppointment = async (appointment, userId, userName, userEmail) => {
   try {
     const addedAppointment = await $fetch("/api/appointment", {
       method: "POST",
@@ -511,7 +511,7 @@ const addAppointment = async (appointment, userId, userName) => {
         userId: userId,
       }),
     });
-    sendAppointmentConfirmationEmail(appointment, userName);
+    sendAppointmentConfirmationEmail(appointment, userName, userEmail);
 
     if (addedAppointment) {
       // Reset form fields
@@ -534,10 +534,11 @@ const addAppointment = async (appointment, userId, userName) => {
   }
 };
 // Function to send an email confirmation for the appointment
-const sendAppointmentConfirmationEmail = async (appointment, userName) => {
+const sendAppointmentConfirmationEmail = async (appointment, userName, userEmail) => {
   console.log("Inside sendAppointmentConfirmationEmail:", appointment.date, appointment.time);
     try {
       await mail.send({
+        to: userEmail,
         subject: "Appointment Confirmation",
         text: `${userName} made an appointment on ${appointment.date} at ${appointment.time}.`,
       });
