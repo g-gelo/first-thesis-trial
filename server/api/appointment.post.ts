@@ -24,20 +24,8 @@ export default defineEventHandler(async (event) => {
           userId: body.userId,
         },
       });
-      await new Promise((resolve, reject) => {
-        // verify connection configuration
-        event.context.transport.verify(function (error, success) {
-          if (error) {
-            console.log(error);
-            reject(error);
-          } else {
-            console.log("Server is ready to take our messages");
-            resolve(success);
-          }
-        });
-      });
 
-      const mailData = event.context.transport.sendMail({
+      await event.context.transport.sendMail({
         from: {
           name: "Guidance and Counseling Office",
           address: "angelogabriel.evangelista@cvsu.edu.ph",
@@ -57,18 +45,6 @@ export default defineEventHandler(async (event) => {
 
         Best regards,
           Guidance and Counseling Office`,
-      });
-      await new Promise((resolve, reject) => {
-        // send mail
-        event.context.transport.sendMail(mailData, (err, info) => {
-          if (err) {
-            console.error(err);
-            reject(err);
-          } else {
-            console.log(info);
-            resolve(info);
-          }
-        });
       });
 
       // Return the created appointment
