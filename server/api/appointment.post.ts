@@ -9,6 +9,8 @@ export default defineEventHandler(async (event) => {
       body.reason &&
       body.course &&
       body.year &&
+      body.email &&
+      body.name &&
       body.userId
     ) {
       // create an appointment
@@ -21,6 +23,25 @@ export default defineEventHandler(async (event) => {
           year: body.year,
           userId: body.userId,
         },
+      });
+
+      event.context.transport.sendMail({
+        from: process.env.EMAIL_USER,
+        to: body.email,
+        subject: "Appointment Confirmation: You made an appointment!",
+        text: `Dear ${body.name},
+
+              This is to confirm that you have successfully made an appointment for the following details:
+              - Date: ${body.date}
+              - Time: ${body.time}
+              - Reason: ${body.reason}
+              - Course: ${body.course}
+              - Year: ${body.year}
+
+            Thank you for scheduling your appointment. If you have any questions or need to make changes, please feel free to contact us.
+
+        Best regards,
+          Guidance and Counseling Office`,
       });
 
       // Return the created appointment
