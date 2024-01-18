@@ -25,7 +25,7 @@
   </div>
   <div v-if="showGcoForm" class="shadow-lg p-3 mb-4 rounded-xl">
     <h1>GCO Profile Form</h1>
-    <form class="space-y-4" @submit.prevent="addGco(gco)">
+    <form class="space-y-4" @submit.prevent="addGco(gco, data?.user?.name)">
       <div>
         <label for="title" class="block mb-2 text-sm font-medium text-gray-900"
           >Title</label
@@ -90,7 +90,9 @@
       <div class="flex justify-end">
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-          @click="($event) => editGcoProfile(editedGcoProfile)"
+          @click="
+            ($event) => editGcoProfile(editedGcoProfile, data?.user?.name)
+          "
         >
           Save
         </button>
@@ -106,8 +108,8 @@
   <div>
     <div v-for="guidance in gcoProfile" :key="guidance.id" class="mt-10">
       <div
-        class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg"
         v-if="guidance.isArchive == false"
+        class="flex flex-col bg-bg100 mt-4 shadow-lg rounded-t-lg"
       >
         <div class="px-4 py-2 bg-secondary-100">
           <h2 class="text-2xl font-medium ma-2 h-5">
@@ -280,13 +282,14 @@ const gco = ref({
   description: "",
 });
 
-const addGco = async (gco) => {
+const addGco = async (gco, userName) => {
   let addedGco = null;
   addedGco = await $fetch("/api/gco", {
     method: "POST",
     body: {
       title: gco.title,
       description: gco.description,
+      name: userName,
     },
   });
   if (addedGco) {
@@ -304,7 +307,7 @@ const editedGcoProfile = ref({
   isArchive: null,
 });
 
-const editGcoProfile = async (editedGcoProfile) => {
+const editGcoProfile = async (editedGcoProfile, userName) => {
   let gcoProfiles = null;
 
   if (editedGcoProfile.id)
@@ -315,6 +318,7 @@ const editGcoProfile = async (editedGcoProfile) => {
         title: editedGcoProfile.title,
         description: editedGcoProfile.description,
         isArchive: editedGcoProfile.isArchive,
+        name: userName,
       },
     });
   gcoProfile.value = await $fetch("/api/gco");
