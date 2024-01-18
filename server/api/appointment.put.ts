@@ -44,14 +44,17 @@ export default defineEventHandler(async (event) => {
             subject: "Appointment Confirmation: You made a Reschedule!",
             text: `Dear ${userName},
 
-                    This is to confirm that you have successfully made a Reschedule for the following details:
-                    - Date: ${date}
-                    - Time: ${time}
+              This is to confirm that you have successfully made a Reschedule for the following details:
+                - Date: ${date}
+                - Time: ${time}
+                - Reason: ${reason}
+                - Course: ${course}
+                - Year: ${year}
 
-                    Thank you for scheduling your appointment. If you have any questions or need to make changes, please feel free to contact us.
+                Thank you for scheduling your appointment. If you have any questions or need to make changes, please feel free to contact us.
 
-                    Best regards,
-                    Guidance and Counseling Office`,
+                Best regards,
+                Guidance and Counseling Office`,
           });
 
           console.log("After sending email");
