@@ -336,7 +336,14 @@
           <div class="flex justify-end">
             <button
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-              @click="($event) => editAppointment(editedAppointment)"
+              @click="
+                ($event) =>
+                  editAppointment(
+                    editedAppointment,
+                    data?.user?.name,
+                    data?.user?.email
+                  )
+              "
             >
               Save
             </button>
@@ -552,7 +559,7 @@ const editedAppointment = ref({
   isArchive: false,
 });
 
-const editAppointment = async (editedAppointment) => {
+const editAppointment = async (editedAppointment, userName, userEmail) => {
   let appointment = null;
   try {
     if (editedAppointment.id) {
@@ -567,6 +574,8 @@ const editAppointment = async (editedAppointment) => {
           year: editedAppointment.year,
           status: editedAppointment.status,
           isArchive: editedAppointment.isArchive,
+          name: userName,
+          email: userEmail,
         },
       });
 

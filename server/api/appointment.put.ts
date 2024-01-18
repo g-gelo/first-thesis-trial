@@ -14,6 +14,8 @@ export default defineEventHandler(async (event) => {
     const course = body.course;
     const year = body.year;
     const isArchive = body.isArchive;
+    const userName = body.name;
+    const userEmail = body.email;
 
     if (id && date && time && reason && course && year) {
       try {
@@ -31,6 +33,31 @@ export default defineEventHandler(async (event) => {
             isArchive,
           },
         });
+
+        console.log("Before sending email");
+        console.log("Email user:", process.env.EMAIL_USER);
+
+        try {
+          await event.context.transport.sendMail({
+            from: process.env.EMAIL_USER,
+            to: userEmail,
+            subject: "Appointment Confirmation: You made a Reschedule!",
+            text: `Dear ${userName},
+
+                    This is to confirm that you have successfully made a Reschedule for the following details:
+                    - Date: ${date}
+                    - Time: ${time}
+
+                    Thank you for scheduling your appointment. If you have any questions or need to make changes, please feel free to contact us.
+
+                    Best regards,
+                    Guidance and Counseling Office`,
+          });
+
+          console.log("After sending email");
+        } catch (error) {
+          console.error("Error sending email:", error);
+        }
       } catch (error) {
         console.error("Error updating appointment:", error);
       }

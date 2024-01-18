@@ -138,7 +138,10 @@
                     @change="
                       updateStatusAppointment(
                         detailedAppointment.id,
-                        $event.target.value
+                        detailedAppointment,
+                        $event.target.value,
+                        data?.user?.name,
+                        data?.user?.email
                       )
                     "
                   >
@@ -323,7 +326,13 @@ const filteredAppointment = computed(() => {
 });
 
 // Changing Status of the Appointment
-const updateStatusAppointment = async (appointmentId, newStatus) => {
+const updateStatusAppointment = async (
+  appointmentId,
+  detailedAppointment,
+  newStatus,
+  userName,
+  userEmail
+) => {
   try {
     // Make an API request to update the appointment status
     const response = await fetch(`/api/appointmentAction`, {
@@ -334,6 +343,13 @@ const updateStatusAppointment = async (appointmentId, newStatus) => {
       body: JSON.stringify({
         id: appointmentId, // Include the appointmentId in the request body
         newStatus,
+        date: detailedAppointment.date,
+        time: detailedAppointment.time,
+        reason: detailedAppointment.reason,
+        course: detailedAppointment.course,
+        year: detailedAppointment.year,
+        name: userName,
+        email: userEmail,
       }),
     });
 
