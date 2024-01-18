@@ -52,10 +52,25 @@
               <!-- Warning Modal -->
               <div v-if="showWarningModal" class="modal2 h-screen w-full z-999">
                 <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-                  <h2 class="text-xl font-bold mb-4">Warning</h2>
-                  <p class="text-red-500 font-semibold mb-4">
-                    Please choose a date that is not in the past and not on a
-                    Friday, Saturday, or Sunday.
+                  <h2 class="text-xl font-bold mb-4">Booking Constraints</h2>
+                  <p class="font-semibold mb-4">
+                    We regret to inform you that your booking cannot be
+                    processed for the following reasons:
+                  </p>
+                  <ol class="list-decimal ml-6">
+                    <li>
+                      Booking appointments on Fridays, Saturdays, and Sundays is
+                      currently unavailable.
+                    </li>
+                    <li>Please select a date that is not in the past.</li>
+                    <li>
+                      You already have appointment scheduled for the selected
+                      day.
+                    </li>
+                  </ol>
+                  <p class="font-semibold mb-4">
+                    Kindly address these concerns to proceed with your booking.
+                    Thank you for your understanding.
                   </p>
                   <div class="flex justify-end">
                     <button
@@ -222,6 +237,24 @@
             </button>
           </div>
         </form>
+        <!-- Confirm Appointment Modal -->
+        <div v-if="showConfirmAppointment" class="modal2 h-screen w-full z-999">
+          <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+            <h2 class="text-xl font-bold mb-4">Confirm Appointment</h2>
+            <p class="font-semibold mb-4">
+              Hi, your booking has been recorded. Please expect a response
+              within 24 hours. Thank you”
+            </p>
+            <div class="flex justify-end">
+              <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                @click="showConfirmAppointment = false"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- Appointment List Card -->
@@ -470,6 +503,7 @@ const showReasonsList = ref(false);
 const showReschedule = ref(false);
 const showWarningModal = ref(false);
 const showCancelAppointment = ref(false);
+const showConfirmAppointment = ref(false);
 const selectedReason = ref("");
 
 // Function to toggle the display of the reasons list
@@ -485,6 +519,7 @@ const selectReason = (reason) => {
   showReasonsList.value = false; // Hide the reasons list
 };
 
+// <!-- Inside the validateDate function -->
 const validateDate = () => {
   const selectedDate = new Date(appointment.value.date);
   const today = new Date();
@@ -501,7 +536,19 @@ const validateDate = () => {
       showWarningModal.value = true; // Display the warning modal
       appointment.value.date = ""; // Clear the input value
     } else {
-      showWarningModal.value = false; // Reset the warning modal if all conditions are met
+      // Check if the user already has an appointment on the selected date
+      const hasExistingAppointment = appointments.value.some(
+        (existingAppointment) =>
+          existingAppointment.user.id === data?.user?.id &&
+          existingAppointment.date === appointment.value.date
+      );
+
+      if (hasExistingAppointment) {
+        showWarningModal.value = true;
+        appointment.value.date = ""; // Clear the input value
+      } else {
+        showWarningModal.value = false; // Reset the warning modal if all conditions are met
+      }
     }
   }
 };
@@ -547,6 +594,7 @@ const addAppointment = async (appointment, userId, userName, userEmail) => {
 
       // Update the list of appointments
       appointments.value = await $fetch("/api/appointment");
+      showConfirmAppointment.value = true;
     } else {
       console.error("Error adding appointment:", addedAppointment);
       // Handle the case where the appointment was not added successfully
