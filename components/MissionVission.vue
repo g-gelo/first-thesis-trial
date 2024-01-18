@@ -44,7 +44,7 @@
           <button
             v-if="data?.user?.role == `SUPERADMIN`"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-            @click="($event) => editMisnVis(editedMisnVis)"
+            @click="($event) => editMisnVis(editedMisnVis, data?.user?.name)"
           >
             Save
           </button>
@@ -160,7 +160,7 @@ const editedMisnVis = ref({
   description: null,
 });
 
-const editMisnVis = async (editedMisnVis) => {
+const editMisnVis = async (editedMisnVis, userName) => {
   let missionNVision = null;
 
   if (editedMisnVis.id && editedMisnVis.title && editedMisnVis.description)
@@ -170,6 +170,7 @@ const editMisnVis = async (editedMisnVis) => {
         id: editedMisnVis.id,
         title: editedMisnVis.title,
         description: editedMisnVis.description,
+        name: userName,
       },
     });
   missionvision.value = await $fetch("/api/missionvision");
