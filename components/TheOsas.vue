@@ -33,7 +33,7 @@
     </div>
     <div v-if="showOsasForm" class="shadow-lg p-3 mb-4 rounded-lg">
       <h1>Osas Form</h1>
-      <form class="space-y-4" @submit.prevent="addOsas(osas)">
+      <form class="space-y-4" @submit.prevent="addOsas(osas, data?.user?.name)">
         <div>
           <label
             for="title"
@@ -104,7 +104,9 @@
         <div class="flex justify-end">
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-            @click="($event) => editOsasModule(editedOsasModule)"
+            @click="
+              ($event) => editOsasModule(editedOsasModule, data?.user?.name)
+            "
           >
             Save
           </button>
@@ -177,7 +179,10 @@
     <div v-if="showFunctionForm" class="ma-2">
       <div class="bg-white shadow-lg rounded-lg pa-2">
         <h1 class="m-2">Function Form</h1>
-        <form class="space-y-4" @submit.prevent="addOsasFunction(oFunction)">
+        <form
+          class="space-y-4"
+          @submit.prevent="addOsasFunction(oFunction, data?.user?.name)"
+        >
           <div>
             <label
               for="function"
@@ -225,7 +230,9 @@
         <div class="flex justify-end">
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-            @click="($event) => editOsasFunction(editedOsasFunction)"
+            @click="
+              ($event) => editOsasFunction(editedOsasFunction, data?.user?.name)
+            "
           >
             Save
           </button>
@@ -250,8 +257,8 @@
         class="px-4 py-2 bg-slate-50 rounded-b-lg"
       >
         <p
-          class="text-justify leading-normal"
           v-if="functions.isArchive == false"
+          class="text-justify leading-normal"
         >
           <button
             v-if="!showFunctionEdit"
@@ -294,13 +301,14 @@ const osas = ref({
   description: "",
 });
 
-const addOsas = async (osas) => {
+const addOsas = async (osas, userName) => {
   let addedOsas = null;
   addedOsas = await $fetch("/api/osas", {
     method: "POST",
     body: {
       title: osas.title,
       description: osas.description,
+      name: userName,
     },
   });
   if (addedOsas) {
@@ -318,7 +326,7 @@ const editedOsasModule = ref({
   isArchive: false,
 });
 
-const editOsasModule = async (editedOsasModule) => {
+const editOsasModule = async (editedOsasModule, userName) => {
   let osasModule = null;
 
   if (editedOsasModule.id)
@@ -329,6 +337,7 @@ const editOsasModule = async (editedOsasModule) => {
         title: editedOsasModule.title,
         description: editedOsasModule.description,
         isArchive: editedOsasModule.isArchive,
+        name: userName,
       },
     });
   osasAll.value = await $fetch("/api/osas");
@@ -340,13 +349,14 @@ const oFunction = ref({
   osasFunction: "",
 });
 
-const addOsasFunction = async (oFunction) => {
+const addOsasFunction = async (oFunction, userName) => {
   let addedFunction = null;
 
   addedFunction = await $fetch("/api/osasfunction", {
     method: "POST",
     body: {
       osasFunction: oFunction.osasFunction,
+      name: userName,
     },
   });
   if (addedFunction) {
@@ -362,7 +372,7 @@ const editedOsasFunction = ref({
   isArchive: null,
 });
 
-const editOsasFunction = async (editedOsasFunction) => {
+const editOsasFunction = async (editedOsasFunction, userName) => {
   let osasFunctions = null;
 
   if (editedOsasFunction.id && editedOsasFunction.osasFunction)
@@ -372,6 +382,7 @@ const editOsasFunction = async (editedOsasFunction) => {
         id: editedOsasFunction.id,
         osasFunction: editedOsasFunction.osasFunction,
         isArchive: editedOsasFunction.isArchive,
+        name: userName,
       },
     });
   osasFunction.value = await $fetch("/api/osasfunction");
