@@ -54,7 +54,8 @@
                 <div class="bg-white shadow-lg rounded-lg p-6 w-80">
                   <h2 class="text-xl font-bold mb-4">Warning</h2>
                   <p class="text-red-500 font-semibold mb-4">
-                    Please choose a date other than Friday, Saturday, or Sunday.
+                    Please choose a date that is not in the past and not on a
+                    Friday, Saturday, or Sunday.
                   </p>
                   <div class="flex justify-end">
                     <button
@@ -486,12 +487,22 @@ const selectReason = (reason) => {
 
 const validateDate = () => {
   const selectedDate = new Date(appointment.value.date);
-  const dayOfWeek = selectedDate.getDay();
+  const today = new Date();
 
-  // Check if the selected day is Friday (5), Saturday (6), or Sunday (0)
-  if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) {
+  // Check if the selected date is before today
+  if (selectedDate < today) {
     showWarningModal.value = true; // Display the warning modal
     appointment.value.date = ""; // Clear the input value
+  } else {
+    const dayOfWeek = selectedDate.getDay();
+
+    // Check if the selected day is Friday (5), Saturday (6), or Sunday (0)
+    if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) {
+      showWarningModal.value = true; // Display the warning modal
+      appointment.value.date = ""; // Clear the input value
+    } else {
+      showWarningModal.value = false; // Reset the warning modal if all conditions are met
+    }
   }
 };
 
