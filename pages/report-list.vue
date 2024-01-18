@@ -151,7 +151,10 @@
                     @change="
                       updateStatusReport(
                         detailedIncident.id,
-                        $event.target.value
+                        detailedIncident,
+                        $event.target.value,
+                        data?.user?.name,
+                        data?.user?.email
                       )
                     "
                   >
@@ -424,7 +427,13 @@ const filteredIncident = computed(() => {
   );
 });
 // Changing Status of the Report Incident
-const updateStatusReport = async (reportId, newStatus) => {
+const updateStatusReport = async (
+  reportId,
+  detailedIncident,
+  newStatus,
+  userName,
+  userEmail
+) => {
   try {
     // Make an API request to update the incident status
     const response = await fetch(`/api/reportAction`, {
@@ -434,7 +443,11 @@ const updateStatusReport = async (reportId, newStatus) => {
       },
       body: JSON.stringify({
         id: reportId, // Include the reportId in the request body
+        incident: detailedIncident.incident,
+        description: detailedIncident.description,
         newStatus,
+        name: userName,
+        email: userEmail,
       }),
     });
 

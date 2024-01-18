@@ -23,7 +23,14 @@
         <h1 class="font-bold text-lg mb-4 mt-2">Report an Incident</h1>
         <form
           class="space-y-4"
-          @submit.prevent="addReport(report, data?.user?.id)"
+          @submit.prevent="
+            addReport(
+              report,
+              data?.user?.id,
+              data?.user?.email,
+              data?.user?.name
+            )
+          "
         >
           <div>
             <label
@@ -123,7 +130,10 @@
         <div class="flex justify-end">
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
-            @click="($event) => editReport(editedReport)"
+            @click="
+              ($event) =>
+                editReport(editedReport, data?.user?.name, data?.user?.email)
+            "
           >
             Save
           </button>
@@ -322,7 +332,7 @@ const report = ref({
   description: "",
 });
 
-const addReport = async (report, userId) => {
+const addReport = async (report, userId, userEmail, userName) => {
   try {
     const addedReport = await $fetch("/api/report", {
       method: "POST",
@@ -332,7 +342,9 @@ const addReport = async (report, userId) => {
       body: JSON.stringify({
         incident: report.incident,
         description: report.description,
-        userId: userId,
+        email: userEmail,
+        name: userName,
+        userId,
       }),
     });
     if (addedReport) {
@@ -359,7 +371,7 @@ const editedReport = ref({
   isArchive: false,
 });
 
-const editReport = async (editedReport) => {
+const editReport = async (editedReport, userName, userEmail) => {
   let incident = null;
   try {
     if (editedReport.id) {
@@ -370,6 +382,8 @@ const editReport = async (editedReport) => {
           incident: editedReport.incident,
           description: editedReport.description,
           isArchive: editedReport.isArchive,
+          name: userName,
+          email: userEmail,
         },
       });
 
