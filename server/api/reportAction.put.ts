@@ -40,6 +40,7 @@ We are pleased to inform you that your incident report has been accepted. Here a
 - Incident: ${incident}
 - Description: ${description}
 - Status: ${newStatus}
+- Feedback: Check your application to see what the admin's feedback is.
 
 Thank you for reporting the incident. If you have any questions or concerns, please feel free to contact us.
 
