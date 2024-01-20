@@ -5,6 +5,7 @@ export default defineNuxtConfig({
         "@sidebase/nuxt-auth",
         "@kevinmarrec/nuxt-pwa",
         "@nuxtjs/tailwindcss",
+        "@nuxtjs/cloudinary"
     ],
     pwa: {
         manifest: {
