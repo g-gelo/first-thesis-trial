@@ -4,7 +4,7 @@
       backgroundColor: $vuetify.theme.themes.myCustomLightTheme.colors.bg200,
     }"
   >
-    <template v-if="!isLargeScreen">
+    <template v-if="isStandalonePWA">
       <slot />
     </template>
     <template v-else>

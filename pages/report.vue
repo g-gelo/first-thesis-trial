@@ -17,6 +17,24 @@
         </button>
       </div>
     </div>
+    <!-- Confirm Appointment Modal -->
+    <div v-if="showConfirmReport" class="modal2 h-screen w-full z-999">
+      <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+        <h2 class="text-xl font-bold mb-4">Confirm Appointment</h2>
+        <p class="font-semibold mb-4">
+          Hi, your report has been recorded. Please expect a response within 24
+          hours. Thank you
+        </p>
+        <div class="flex justify-end">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            @click="showConfirmReport = false"
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
     <!-- Form Modal -->
     <div v-if="showReportIncidentForm" class="modal h-screen w-full">
       <div class="modal-wrapper bg-white p-4 rounded-lg w-10/12">
@@ -303,6 +321,7 @@ const showReportIncidentForm = ref(false);
 const showReportIncidentEditForm = ref(false);
 const showReportIncidentDeleteModal = ref(false);
 const showReportIncidentFullDetail = ref(false);
+const showConfirmReport = ref(false);
 const detailedReportIncident = ref(null);
 
 // Status color of the Report
@@ -354,6 +373,8 @@ const addReport = async (report, userId, userEmail, userName) => {
 
       // Update the list of report
       incidents.value = await $fetch("/api/report");
+      showReportIncidentForm.value = false;
+      showConfirmReport.value = true;
     } else {
       console.error("Error adding report:", addedReport);
       // Handle the case where the report was not added successfully

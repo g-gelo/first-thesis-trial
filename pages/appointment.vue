@@ -20,6 +20,24 @@
         </button>
       </div>
     </div>
+    <!-- Confirm Appointment Modal -->
+    <div v-if="showConfirmAppointment" class="modal2 h-screen w-full z-999">
+      <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+        <h2 class="text-xl font-bold mb-4">Confirm Appointment</h2>
+        <p class="font-semibold mb-4">
+          Hi, your booking has been recorded. Please expect a response within 24
+          hours. Thank you
+        </p>
+        <div class="flex justify-end">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            @click="showConfirmAppointment = false"
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    </div>
     <!-- Form Modal -->
     <div v-if="showAppointmentForm" class="modal h-screen w-full">
       <div class="modal-wrapper bg-white p-4 rounded-lg w-10/12">
@@ -237,24 +255,6 @@
             </button>
           </div>
         </form>
-        <!-- Confirm Appointment Modal -->
-        <div v-if="showConfirmAppointment" class="modal2 h-screen w-full z-999">
-          <div class="bg-white shadow-lg rounded-lg p-6 w-80">
-            <h2 class="text-xl font-bold mb-4">Confirm Appointment</h2>
-            <p class="font-semibold mb-4">
-              Hi, your booking has been recorded. Please expect a response
-              within 24 hours. Thank you”
-            </p>
-            <div class="flex justify-end">
-              <button
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                @click="showConfirmAppointment = false"
-              >
-                OK
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <!-- Appointment List Card -->
@@ -594,6 +594,7 @@ const addAppointment = async (appointment, userId, userName, userEmail) => {
 
       // Update the list of appointments
       appointments.value = await $fetch("/api/appointment");
+      showAppointmentForm.value = false;
       showConfirmAppointment.value = true;
     } else {
       console.error("Error adding appointment:", addedAppointment);

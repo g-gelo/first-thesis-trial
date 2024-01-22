@@ -217,7 +217,7 @@
                         class="px-4 py-2 cursor-pointer"
                         @click="
                           selectReason(
-                            'Thank you! Your report has been reviewed. You are invited to visit the guidance counselor within the next 3 to 5 days to discuss this matter further.'
+                            'Thank you! Your report has been reviewed. You are invited to visit the guidance and counseling office within the next 3 to 5 days to discuss this matter further.'
                           )
                         "
                       >
@@ -227,7 +227,7 @@
                         class="px-4 py-2 cursor-pointer"
                         @click="
                           selectReason(
-                            'Congratulations! Your reported incident has been successfully resolved. If you have any further concerns, feel free to reach out to the guidance counselor.'
+                            'Congratulations! Your reported incident has been successfully resolved. If you have any further concerns, feel free to reach out to the guidance and counseling office.'
                           )
                         "
                       >
@@ -237,7 +237,7 @@
                         class="px-4 py-2 cursor-pointer"
                         @click="
                           selectReason(
-                            'We appreciate your concern, but after careful review, your report has been rejected. If you have additional information or questions, please contact the guidance counselor for clarification.'
+                            'We appreciate your concern, but after careful review, your report has been rejected. If you have additional information or questions, please contact the guidance and counseling office for clarification.'
                           )
                         "
                       >
