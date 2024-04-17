@@ -89,8 +89,8 @@
           </div>
         </v-navigation-drawer>
       </template>
-      <template v-else>
-        <!-- Alternative Content for Large Screens -->
+      <!-- <template v-else>
+        Alternative Content for Large Screens
         <div class="alternative-content">
           <h1 class="text-2xl font-bold m-4">Welcome to our Application!</h1>
           <p>
@@ -99,14 +99,14 @@
             access the main content and receive guidance and counseling more
             effectively.
           </p>
-          <!-- Button to open installation instructions modal on Android -->
+          Button to open installation instructions modal on Android
           <button
             class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mb-4"
             @click="openInstallInstructionsAndroid"
           >
             How to install with Android
           </button>
-          <!-- Modal for installation instructions on Android -->
+          Modal for installation instructions on Android
           <v-dialog
             v-model="showInstallInstructionsModalAndroid"
             max-width="600"
@@ -123,14 +123,14 @@
             </v-card>
           </v-dialog>
 
-          <!-- Button to open installation instructions modal on iPhone -->
+          Button to open installation instructions modal on iPhone
           <button
             class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mb-4"
             @click="openInstallInstructionsiPhone"
           >
             How to install with iPhone
           </button>
-          <!-- Modal for installation instructions on iPhone -->
+          Modal for installation instructions on iPhone
           <v-dialog
             v-model="showInstallInstructionsModaliPhone"
             max-width="600"
@@ -147,7 +147,7 @@
             </v-card>
           </v-dialog>
         </div>
-      </template>
+      </template> -->
     </v-main>
   </v-app>
 </template>
