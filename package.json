@@ -6,7 +6,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "prisma generate",
     "studio": "prisma studio",
     "db:push": "prisma db push --accept-data-loss",
     "db:seed": "prisma db seed",
