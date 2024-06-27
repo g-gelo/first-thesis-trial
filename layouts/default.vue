@@ -6,7 +6,7 @@
       }"
       class="scrollable-content"
     >
-      <template v-if="!isStandalonePWA">
+      <div>
         <v-app-bar fixed app color="bg100">
           <v-img
             src="/img/GuidanceConnectName.png"
@@ -88,7 +88,7 @@
             </button>
           </div>
         </v-navigation-drawer>
-      </template>
+      </div>
       <!-- <template v-else>
         Alternative Content for Large Screens
         <div class="alternative-content">
@@ -153,34 +153,32 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-
 const { data } = useAuth();
 const { signOut } = useAuth();
 
-const installationScreenshotsAndroid = [
-  "/img/step-1-Android.jpg",
-  "/img/step-2-Android.jpg",
-  "/img/step-3-Android.jpg",
-];
+// const installationScreenshotsAndroid = [
+//   "/img/step-1-Android.jpg",
+//   "/img/step-2-Android.jpg",
+//   "/img/step-3-Android.jpg",
+// ];
 
-const showInstallInstructionsModalAndroid = ref(false);
+// const showInstallInstructionsModalAndroid = ref(false);
 
-const openInstallInstructionsAndroid = () => {
-  showInstallInstructionsModalAndroid.value = true;
-};
+// const openInstallInstructionsAndroid = () => {
+//   showInstallInstructionsModalAndroid.value = true;
+// };
 
-const installationScreenshotsiPhone = [
-  "/img/step-1-iPhone.jpg",
-  "/img/step-2-iPhone.jpg",
-  "/img/step-3-iPhone.jpg",
-];
+// const installationScreenshotsiPhone = [
+//   "/img/step-1-iPhone.jpg",
+//   "/img/step-2-iPhone.jpg",
+//   "/img/step-3-iPhone.jpg",
+// ];
 
-const showInstallInstructionsModaliPhone = ref(false);
+// const showInstallInstructionsModaliPhone = ref(false);
 
-const openInstallInstructionsiPhone = () => {
-  showInstallInstructionsModaliPhone.value = true;
-};
+// const openInstallInstructionsiPhone = () => {
+//   showInstallInstructionsModaliPhone.value = true;
+// };
 
 const createNavigationButton = (route) => {
   if (typeof route === "function") {
@@ -212,7 +210,7 @@ const navItem = ref([
 ]);
 
 const drawer = ref(false);
-const isLargeScreen = ref(false);
+// const isLargeScreen = ref(false);
 const activeIndex = ref(false);
 
 const toggleActive = (index) => {
@@ -225,22 +223,22 @@ const toggleActive = (index) => {
 
 const isActive = (index) => activeIndex.value === index;
 
-const checkScreenSize = () => {
-  isLargeScreen.value = window.innerWidth >= 960; // Adjust the breakpoint as needed
-};
+// const checkScreenSize = () => {
+//   isLargeScreen.value = window.innerWidth >= 960; // Adjust the breakpoint as needed
+// };
 
-onMounted(() => {
-  checkScreenSize();
-  window.addEventListener("resize", checkScreenSize);
-});
-const isStandalonePWA = ref(false);
+// onMounted(() => {
+//   checkScreenSize();
+//   window.addEventListener("resize", checkScreenSize);
+// });
+// const isStandalonePWA = ref(false);
 
-onMounted(() => {
-  // Check if the app is running in standalone mode (PWA)
-  if (window.matchMedia("(display-mode: standalone)").matches) {
-    isStandalonePWA.value = true;
-  }
-});
+// onMounted(() => {
+//   // Check if the app is running in standalone mode (PWA)
+//   if (window.matchMedia("(display-mode: standalone)").matches) {
+//     isStandalonePWA.value = true;
+//   }
+// });
 </script>
 
 <style scoped>

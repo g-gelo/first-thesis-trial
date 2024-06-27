@@ -4,9 +4,7 @@
       backgroundColor: $vuetify.theme.themes.myCustomLightTheme.colors.bg200,
     }"
   >
-    <template v-if="!isStandalonePWA">
-      <slot />
-    </template>
+    <slot />
     <!-- <template v-else>
       Alternative Content for Large Screens
       <div class="alternative-content">
@@ -63,49 +61,47 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+// const isStandalonePWA = ref(false);
+// const installationScreenshotsAndroid = [
+//   "/img/step-1-Android.jpg",
+//   "/img/step-2-Android.jpg",
+//   "/img/step-3-Android.jpg",
+// ];
 
-const isStandalonePWA = ref(false);
-const installationScreenshotsAndroid = [
-  "/img/step-1-Android.jpg",
-  "/img/step-2-Android.jpg",
-  "/img/step-3-Android.jpg",
-];
+// const showInstallInstructionsModalAndroid = ref(false);
 
-const showInstallInstructionsModalAndroid = ref(false);
+// const openInstallInstructionsAndroid = () => {
+//   showInstallInstructionsModalAndroid.value = true;
+// };
 
-const openInstallInstructionsAndroid = () => {
-  showInstallInstructionsModalAndroid.value = true;
-};
+// const installationScreenshotsiPhone = [
+//   "/img/step-1-iPhone.jpg",
+//   "/img/step-2-iPhone.jpg",
+//   "/img/step-3-iPhone.jpg",
+// ];
 
-const installationScreenshotsiPhone = [
-  "/img/step-1-iPhone.jpg",
-  "/img/step-2-iPhone.jpg",
-  "/img/step-3-iPhone.jpg",
-];
+// const showInstallInstructionsModaliPhone = ref(false);
 
-const showInstallInstructionsModaliPhone = ref(false);
+// const openInstallInstructionsiPhone = () => {
+//   showInstallInstructionsModaliPhone.value = true;
+// };
 
-const openInstallInstructionsiPhone = () => {
-  showInstallInstructionsModaliPhone.value = true;
-};
+// onMounted(() => {
+//   // Check if the app is running in standalone mode (PWA)
+//   if (window.matchMedia("(display-mode: standalone)").matches) {
+//     isStandalonePWA.value = true;
+//   }
+// });
+// const isLargeScreen = ref(false);
 
-onMounted(() => {
-  // Check if the app is running in standalone mode (PWA)
-  if (window.matchMedia("(display-mode: standalone)").matches) {
-    isStandalonePWA.value = true;
-  }
-});
-const isLargeScreen = ref(false);
+// const checkScreenSize = () => {
+//   isLargeScreen.value = window.innerWidth >= 960; // Adjust the breakpoint as needed
+// };
 
-const checkScreenSize = () => {
-  isLargeScreen.value = window.innerWidth >= 960; // Adjust the breakpoint as needed
-};
-
-onMounted(() => {
-  checkScreenSize();
-  window.addEventListener("resize", checkScreenSize);
-});
+// onMounted(() => {
+//   checkScreenSize();
+//   window.addEventListener("resize", checkScreenSize);
+// });
 </script>
 
 <style scoped>
